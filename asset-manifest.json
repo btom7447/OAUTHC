@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/OAUTHC-WEBSITE/static/css/main.484c6224.css",
+    "main.css": "/OAUTHC-WEBSITE/static/css/main.cf78ba48.css",
     "main.js": "/OAUTHC-WEBSITE/static/js/main.62c1c397.js",
     "static/js/453.1f036fe8.chunk.js": "/OAUTHC-WEBSITE/static/js/453.1f036fe8.chunk.js",
-    "static/media/booking-appointment-image.png": "/OAUTHC-WEBSITE/static/media/booking-appointment-image.8edce3efeffbc4bb804c.png",
-    "static/media/Hero Carousel Image 1.png": "/OAUTHC-WEBSITE/static/media/Hero Carousel Image 1.8520cad0215f9d630a6f.png",
-    "static/media/Hero Carousel Image 2.png": "/OAUTHC-WEBSITE/static/media/Hero Carousel Image 2.33da9c9f339b5912a849.png",
-    "static/media/welcome-section-poster.png": "/OAUTHC-WEBSITE/static/media/welcome-section-poster.e637c15b226a2425644c.png",
-    "static/media/welcome-poster-mobile.png": "/OAUTHC-WEBSITE/static/media/welcome-poster-mobile.db36c07e04b7a3dc4005.png",
+    "static/media/booking-appointment-image.png": "/OAUTHC-WEBSITE/static/media/booking-appointment-image.bc04e82b6d81a8e90723.png",
+    "static/media/Hero Carousel Image 2.png": "/OAUTHC-WEBSITE/static/media/Hero Carousel Image 2.563b447cccc60b3cb66e.png",
+    "static/media/Hero Carousel Image 1.png": "/OAUTHC-WEBSITE/static/media/Hero Carousel Image 1.e6ce35986740a42d9785.png",
+    "static/media/welcome-section-poster.png": "/OAUTHC-WEBSITE/static/media/welcome-section-poster.6e9bfa51aa0521948852.png",
+    "static/media/welcome-poster-mobile.png": "/OAUTHC-WEBSITE/static/media/welcome-poster-mobile.554de20f56de1a2b0cb6.png",
     "index.html": "/OAUTHC-WEBSITE/index.html",
-    "main.484c6224.css.map": "/OAUTHC-WEBSITE/static/css/main.484c6224.css.map",
+    "main.cf78ba48.css.map": "/OAUTHC-WEBSITE/static/css/main.cf78ba48.css.map",
     "main.62c1c397.js.map": "/OAUTHC-WEBSITE/static/js/main.62c1c397.js.map",
     "453.1f036fe8.chunk.js.map": "/OAUTHC-WEBSITE/static/js/453.1f036fe8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.484c6224.css",
+    "static/css/main.cf78ba48.css",
     "static/js/main.62c1c397.js"
   ]
 }
