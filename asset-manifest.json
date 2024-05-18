@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/OAUTHC-WEBSITE/static/css/main.1013d9f8.css",
+    "main.css": "/OAUTHC-WEBSITE/static/css/main.642b6ee8.css",
     "main.js": "/OAUTHC-WEBSITE/static/js/main.0b548f97.js",
     "static/js/453.1f036fe8.chunk.js": "/OAUTHC-WEBSITE/static/js/453.1f036fe8.chunk.js",
     "static/media/booking-appointment-image.png": "/OAUTHC-WEBSITE/static/media/booking-appointment-image.8edce3efeffbc4bb804c.png",
@@ -9,12 +9,12 @@
     "static/media/welcome-section-poster.png": "/OAUTHC-WEBSITE/static/media/welcome-section-poster.e637c15b226a2425644c.png",
     "static/media/welcome-poster-mobile.png": "/OAUTHC-WEBSITE/static/media/welcome-poster-mobile.db36c07e04b7a3dc4005.png",
     "index.html": "/OAUTHC-WEBSITE/index.html",
-    "main.1013d9f8.css.map": "/OAUTHC-WEBSITE/static/css/main.1013d9f8.css.map",
+    "main.642b6ee8.css.map": "/OAUTHC-WEBSITE/static/css/main.642b6ee8.css.map",
     "main.0b548f97.js.map": "/OAUTHC-WEBSITE/static/js/main.0b548f97.js.map",
     "453.1f036fe8.chunk.js.map": "/OAUTHC-WEBSITE/static/js/453.1f036fe8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1013d9f8.css",
+    "static/css/main.642b6ee8.css",
     "static/js/main.0b548f97.js"
   ]
 }
