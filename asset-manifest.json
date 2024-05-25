@@ -1,20 +1,24 @@
 {
   "files": {
-    "main.css": "/OAUTHC-WEBSITE/static/css/main.16ca9623.css",
-    "main.js": "/OAUTHC-WEBSITE/static/js/main.f6247d1b.js",
+    "main.css": "/OAUTHC-WEBSITE/static/css/main.22484077.css",
+    "main.js": "/OAUTHC-WEBSITE/static/js/main.db5879d7.js",
     "static/js/453.1f036fe8.chunk.js": "/OAUTHC-WEBSITE/static/js/453.1f036fe8.chunk.js",
+    "static/media/about-oauthc-poster.png": "/OAUTHC-WEBSITE/static/media/about-oauthc-poster.8f81ada746549463cfba.png",
+    "static/media/about-us-poster.png": "/OAUTHC-WEBSITE/static/media/about-us-poster.3d451bcafeb03baf7dd9.png",
     "static/media/booking-appointment-image.png": "/OAUTHC-WEBSITE/static/media/booking-appointment-image.bc04e82b6d81a8e90723.png",
     "static/media/Hero Carousel Image 2.png": "/OAUTHC-WEBSITE/static/media/Hero Carousel Image 2.563b447cccc60b3cb66e.png",
+    "static/media/people-culture-poster-desktop.png": "/OAUTHC-WEBSITE/static/media/people-culture-poster-desktop.52b39f8f67182a2650ba.png",
     "static/media/Hero Carousel Image 1.png": "/OAUTHC-WEBSITE/static/media/Hero Carousel Image 1.e6ce35986740a42d9785.png",
+    "static/media/people-culture-poster.png": "/OAUTHC-WEBSITE/static/media/people-culture-poster.668d57ad9b534e00fd91.png",
     "static/media/welcome-section-poster.png": "/OAUTHC-WEBSITE/static/media/welcome-section-poster.6e9bfa51aa0521948852.png",
     "static/media/welcome-poster-mobile.png": "/OAUTHC-WEBSITE/static/media/welcome-poster-mobile.554de20f56de1a2b0cb6.png",
     "index.html": "/OAUTHC-WEBSITE/index.html",
-    "main.16ca9623.css.map": "/OAUTHC-WEBSITE/static/css/main.16ca9623.css.map",
-    "main.f6247d1b.js.map": "/OAUTHC-WEBSITE/static/js/main.f6247d1b.js.map",
+    "main.22484077.css.map": "/OAUTHC-WEBSITE/static/css/main.22484077.css.map",
+    "main.db5879d7.js.map": "/OAUTHC-WEBSITE/static/js/main.db5879d7.js.map",
     "453.1f036fe8.chunk.js.map": "/OAUTHC-WEBSITE/static/js/453.1f036fe8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.16ca9623.css",
-    "static/js/main.f6247d1b.js"
+    "static/css/main.22484077.css",
+    "static/js/main.db5879d7.js"
   ]
 }
