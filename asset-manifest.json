@@ -1,11 +1,13 @@
 {
   "files": {
-    "main.css": "/OAUTHC-WEBSITE/static/css/main.605533c4.css",
-    "main.js": "/OAUTHC-WEBSITE/static/js/main.55c316c7.js",
+    "main.css": "/OAUTHC-WEBSITE/static/css/main.1b4f2c55.css",
+    "main.js": "/OAUTHC-WEBSITE/static/js/main.c68c2bd7.js",
     "static/js/453.02b52e96.chunk.js": "/OAUTHC-WEBSITE/static/js/453.02b52e96.chunk.js",
     "static/media/about-oauthc-poster.png": "/OAUTHC-WEBSITE/static/media/about-oauthc-poster.8f81ada746549463cfba.png",
     "static/media/about-us-poster.png": "/OAUTHC-WEBSITE/static/media/about-us-poster.3d451bcafeb03baf7dd9.png",
+    "static/media/departments-caption.png": "/OAUTHC-WEBSITE/static/media/departments-caption.40b9c95021112a97a2d0.png",
     "static/media/booking-appointment-image.png": "/OAUTHC-WEBSITE/static/media/booking-appointment-image.bc04e82b6d81a8e90723.png",
+    "static/media/school-caption.png": "/OAUTHC-WEBSITE/static/media/school-caption.a0b19a02063bad751542.png",
     "static/media/appointment-poster.png": "/OAUTHC-WEBSITE/static/media/appointment-poster.19f5bb920a981e85347f.png",
     "static/media/Hero Carousel Image 2.png": "/OAUTHC-WEBSITE/static/media/Hero Carousel Image 2.563b447cccc60b3cb66e.png",
     "static/media/people-culture-poster-desktop.png": "/OAUTHC-WEBSITE/static/media/people-culture-poster-desktop.52b39f8f67182a2650ba.png",
@@ -14,12 +16,12 @@
     "static/media/welcome-section-poster.png": "/OAUTHC-WEBSITE/static/media/welcome-section-poster.6e9bfa51aa0521948852.png",
     "static/media/welcome-poster-mobile.png": "/OAUTHC-WEBSITE/static/media/welcome-poster-mobile.554de20f56de1a2b0cb6.png",
     "index.html": "/OAUTHC-WEBSITE/index.html",
-    "main.605533c4.css.map": "/OAUTHC-WEBSITE/static/css/main.605533c4.css.map",
-    "main.55c316c7.js.map": "/OAUTHC-WEBSITE/static/js/main.55c316c7.js.map",
+    "main.1b4f2c55.css.map": "/OAUTHC-WEBSITE/static/css/main.1b4f2c55.css.map",
+    "main.c68c2bd7.js.map": "/OAUTHC-WEBSITE/static/js/main.c68c2bd7.js.map",
     "453.02b52e96.chunk.js.map": "/OAUTHC-WEBSITE/static/js/453.02b52e96.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.605533c4.css",
-    "static/js/main.55c316c7.js"
+    "static/css/main.1b4f2c55.css",
+    "static/js/main.c68c2bd7.js"
   ]
 }
