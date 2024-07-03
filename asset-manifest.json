@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/OAUTHC-WEBSITE/static/css/main.fc1e35a2.css",
+    "main.css": "/OAUTHC-WEBSITE/static/css/main.353f8a50.css",
     "main.js": "/OAUTHC-WEBSITE/static/js/main.49c4d7af.js",
     "static/js/453.02b52e96.chunk.js": "/OAUTHC-WEBSITE/static/js/453.02b52e96.chunk.js",
     "static/media/contact-us-caption.png": "/OAUTHC-WEBSITE/static/media/contact-us-caption.96013fe09657a93d9855.png",
@@ -18,12 +18,12 @@
     "static/media/welcome-section-poster.png": "/OAUTHC-WEBSITE/static/media/welcome-section-poster.6e9bfa51aa0521948852.png",
     "static/media/welcome-poster-mobile.png": "/OAUTHC-WEBSITE/static/media/welcome-poster-mobile.554de20f56de1a2b0cb6.png",
     "index.html": "/OAUTHC-WEBSITE/index.html",
-    "main.fc1e35a2.css.map": "/OAUTHC-WEBSITE/static/css/main.fc1e35a2.css.map",
+    "main.353f8a50.css.map": "/OAUTHC-WEBSITE/static/css/main.353f8a50.css.map",
     "main.49c4d7af.js.map": "/OAUTHC-WEBSITE/static/js/main.49c4d7af.js.map",
     "453.02b52e96.chunk.js.map": "/OAUTHC-WEBSITE/static/js/453.02b52e96.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fc1e35a2.css",
+    "static/css/main.353f8a50.css",
     "static/js/main.49c4d7af.js"
   ]
 }
