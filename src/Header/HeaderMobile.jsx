@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function MobileHeader() {
     useEffect(() => {
@@ -25,7 +26,9 @@ function MobileHeader() {
 
     return (
         <div className="mobile-header">
-            <img src="/oauthc-logo 2.png" alt="OAUTHC Logo" />
+            <Link to="/Home">
+                <img src="https://btom7447.github.io/OAUTH/images/oauthc-logo.png" alt="OAUTHC Logo" />
+            </Link>            
             <h4>
                 Obafemi Awolowo University <br />
                 Teaching Hospitals Complex

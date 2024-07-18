@@ -29,7 +29,9 @@ const Header = ({ searchQuery, setSearchQuery }) => {
     <header>
       <div className="first-header">
         <div className="f-header-left">
-          <img src="/oauthc-logo.png" alt="OAUTHC Logo" />
+          <Link to="/Home">
+            <img src="https://btom7447.github.io/OAUTH/images/oauthc-logo.png" alt="OAUTHC Logo" />
+          </Link>
           <h4>
             Obafemi Awolowo University <br />
             Teaching Hospitals Complex
@@ -43,9 +45,10 @@ const Header = ({ searchQuery, setSearchQuery }) => {
               <path d="M35.8156 23.9621C36.9804 19.4989 36.3314 14.7346 34.0113 10.716C31.6911 6.69743 27.8896 3.75324 23.442 2.53032M29.1022 22.12C29.4492 20.7945 29.5325 19.4104 29.3472 18.0469C29.162 16.6835 28.712 15.3672 28.0227 14.1735C27.3335 12.9798 26.4187 11.9319 25.3305 11.0897C24.2423 10.2476 23.002 9.62766 21.6806 9.26539M22.4248 20.2645C22.6577 19.3714 22.5278 18.4181 22.0635 17.6141C21.5993 16.81 20.8387 16.2208 19.9488 15.9759" stroke="#D34A4A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <div>
-              <h5>Emergency</h5>
-              <p>+234 805 500 2432</p>
-              <p>+234 805 501 3100</p>
+              <h5>Inquiries</h5>
+              <p>+234 815 209 2751</p>
+              <p>+234 815 209 2755</p>
+              <p>+234 815 209 2753</p>
             </div>
           </div>
           {/* LOCATION */}
@@ -56,7 +59,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
             </svg>
             <div>
               <h5>Location</h5>
-              <p>Ilesha Road, Ife,</p>
+              <p>Ilesa Road, Ife,</p>
               <p>Osun, Nigeria</p>
             </div>
           </div>

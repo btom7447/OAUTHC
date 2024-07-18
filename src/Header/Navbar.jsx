@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav>
       <ul className='navlinks'>
         <li>
-          <NavLink exact to="/" activeClassName="active" className="navLink">
+          <NavLink to="/Home" activeclassname="active" className="navLink">
             Home
           </NavLink>
         </li>
@@ -15,10 +15,11 @@ const Navbar = () => {
           <NavbarDropdown
             title="About Us"
             items={[
-              { label: "Departments & Centers", url: "/about/DepartmentsCenters" },
-              { label: "Find a Doctor", url: "/about/FindDoctor" },
-              { label: "Locations", url: "/about/Locations"}, 
-              { label: "Patient & Visitor Guide", url: "/about/PatientVisitorGuide"}
+              { label: "About OAUTHC", url: "/About/About-OAUTHC" },
+              { label: "Departments & Centers", url: "/About/Departments-Centers" },
+              { label: "Find a Doctor", url: "/About/Find-Doctor" },
+              { label: "Locations", url: "/About/locations" },
+              { label: "Our Schools", url: "/About/our-schools"},
             ]}
           />
         </li>
@@ -26,17 +27,16 @@ const Navbar = () => {
           <NavbarDropdown
             title="Services"
             items={[
-              { label: "Research & Ethics", url: "/services/service-1" },
-              { label: "Diseases & Symptoms", url: "/services/service-2" },
-              { label: "Tests & Procedures", url: "/services/service-3"}, 
-              { label: "Healthy Lifestyle", url: "/services/service-4"}, 
-              { label: "Drugs & Supplements", url: "/services/service-5"}
-              // Add more dropdown items as needed
+              { label: "Our Services", url: "/Services/Health-Services" },
+              { label: "Research and Ethics", url: "/Services/Research-Ethics" },
+              { label: "Diseases & Symptoms", url: "/Services/Diseases-Symptoms" },
+              { label: "Tests & Imaging", url: "/Services/Tests-Procedures" },
             ]}
           />
         </li>
+        <li className='navLink'><a href="https://www.theoauthcblog.online/" target="_blank" rel="noreferrer">Blog</a></li>
         <li>
-          <NavLink to="/contact" activeClassName="active" className="navLink">
+          <NavLink to="/Contact" className="navLink">
             Contact
           </NavLink>
         </li>

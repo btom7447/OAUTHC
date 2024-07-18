@@ -18,7 +18,7 @@ const HeroCarousel = () => {
             >
                 <SplideSlide>
                     <div className="hero-carousel-one">
-                        <Link to="/services">
+                        <Link to="/Services/Health-Services">
                             <button type="button">
                                 Our Services
                             </button>
@@ -27,7 +27,7 @@ const HeroCarousel = () => {
                 </SplideSlide>
                 <SplideSlide>
                     <div className="hero-carousel-two">
-                        <Link to="/about">
+                        <Link to="/About/About-OAUTHC">
                             <button type="button">
                                 About Us
                             </button>

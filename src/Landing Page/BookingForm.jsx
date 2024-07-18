@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 function BookingForm({ fileIcon }) {
   const [formData, setFormData] = useState({
@@ -53,22 +55,26 @@ function BookingForm({ fileIcon }) {
 
 
   return (
-    <form onSubmit={handleSubmit} className="booking-form">
+    <form onSubmit={handleSubmit} className="booking-form" id='bookAppointmentSection'>
         {/* PATIENT TYPE */}
         <div className="form-group patient-type-group">
             <label htmlFor="patientTypeInput" className={errors.patientType ? 'error' : ''}>Patient type</label>
-            <select
-                name="patientType"
-                id="patientTypeInput"
-                className="patient-type-input"
-                required
-                value={formData.patientType}
-                onChange={handleChange}
-            >
-                <option value="" disabled>Select Patient Type</option>
-                <option value="male">Referred Patients</option>
-                <option value="female">Female</option>
-            </select>
+            <div className="select-container">
+                <select
+                    name="patientType"
+                    id="patientTypeInput"
+                    className="patient-type-input"
+                    required
+                    value={formData.patientType}
+                    onChange={handleChange}
+                >
+                    <option value="" disabled>Select Patient Type</option>
+                    <option value="referred patient">Referred Patient</option>
+                    <option value="new patient">New Patient</option>
+                    <option value="returning patient">Returning Patient</option>
+                </select>
+                <FontAwesomeIcon icon={faChevronDown} className="custom-arrow" />
+            </div>
         </div>
         {/* PHONE NUMBER */}
         <div className="form-group phone-number-group">

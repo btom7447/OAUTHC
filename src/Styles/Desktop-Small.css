@@ -1,0 +1,269 @@
+@media screen and (min-width: 801px) and (max-width: 980px) {
+    /* HEADER */
+    header .first-header {
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+    
+    }
+    header .first-header .f-header-left {
+        display: none;
+    }
+    /* NAVLINKS */
+    header .second-header {
+        width: 100%;
+        padding: 30px;
+    }
+    header nav .navlinks {
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 30px;
+        list-style-type: none;
+    }
+    /* SEARCHBOX */
+    header .nav-search {
+        gap: 20px;
+        width: 300px;
+    }
+
+    /* FOOTER  */
+    footer {
+        padding: 50px 30px;
+    }
+    footer .footer-top {
+        width: 100%;
+        height: fit-content;
+        gap: 30px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    footer .footer-top h6 {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+    footer .footer-top .f-top-one {
+        height: fit-content;
+    }
+    footer .footer-top .f-top-four .subscribe-container input {
+        width: 300px;
+    }
+
+      
+    /* LANDING PAGE */
+    .landing-page .hero-carousel button {
+        padding: 20px 50px;
+        top: 50%;
+        left: 10%;
+    }
+    .landing-page .hero-carousel .hero-carousel-one {
+        width: 100%;
+        height: 500px;
+    }
+    .landing-page .hero-carousel .hero-carousel-two {
+        width: 100%;
+        height: 500px;
+    }
+    .landing-page .hero-carousel-caption {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        transform: translateY(20%);
+    }
+    .landing-page .hero-carousel-caption h5 {
+        font-size: 18px;
+    }
+    .landing-page .hero-carousel-caption h1 {
+        font-size: 48px;
+    }
+    .landing-page .carousel-nested-buttons {
+        bottom: -120px;
+    }
+    .landing-page .carousel-nested-buttons button {
+        width: 240px;
+        height: 100px;
+    }
+    
+    /* ANNOUNCEMENT SECTION */
+    .landing-page .announcement-container {
+        margin-top: -100px;
+        padding: 100px 30px;
+    }
+    .landing-page .announcement-box {
+        width: 80%;
+    }
+    /* WELCOME SECTION */
+    .landing-page .welcome-section {
+        padding: 50px 30px;
+
+    }
+    .landing-page .welcome-section .welcome-section-caption {
+        width: fit-content;
+    }
+    .landing-page .welcome-section .welcome-section-poster {
+        margin-top: 30px;
+        width: 100vw;
+        height: 200px;
+    }
+    /* ABOUT US SECTION */
+    .landing-page .about-us-section {
+        padding: 50px 30px;
+    }
+    .landing-page .about-us-section .about-us-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .landing-page .about-us-section .toggle-display-container {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .landing-page .toggle-display-container .display-section {
+        width: calc(100% - 150px);
+        height: fit-content;
+        padding: 0;
+    }
+    .landing-page .display-section .about-us-display {
+        flex-wrap:  wrap;
+        justify-content: flex-start;
+    }
+    .landing-page .about-us-display .about-left h5 {
+        width: 100%;
+        font-size: 26px;
+        text-align: center;
+    }
+    .landing-page .about-us-display .about-left p {
+        font-size: 16px;
+    }
+    .landing-page .about-us-display .about-right {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .landing-page .about-us-display .about-right img {
+        width: 100%;
+        height: 100%;
+    }
+    /* DEPARTMENTS AND FOCUS AREA */
+    .landing-page .departments-f-areas-section {
+         padding: 50px 30px;
+    }
+    .landing-page .departments-f-areas-section .d-f-caption h5 {
+        font-size: 18px;
+    }
+    .landing-page .departments-f-areas-section .d-f-caption h3 {
+        font-size: 32px;
+    }
+    .landing-page .departments-f-areas-section .departments-container {
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .landing-page .departments-container .departments {
+        padding: 30px 20px;
+    }
+    /* BOOK APPOINTMENT */
+    .landing-page .book-appointment {
+        overflow-y: auto; 
+        padding: 80px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .landing-page .book-appointment .book-appointment-caption {
+        width: 100%;
+    }
+    .landing-page .book-appointment .book-appointment-caption h3 {
+        width: 100%;
+        text-align: center;
+        font-size: 32px;
+    }
+    .landing-page .book-appointment .book-appointment-caption p {
+        font-size: 16px;
+    }
+    .landing-page .book-appointment .book-appointment-caption span {
+        font-size: 20px;
+    }
+    .landing-page .book-appointment .book-appointment-caption .red-bold {
+        font-size: 20px;
+    }
+    .landing-page .book-appointment .booking-form {
+        width: 100%;
+    }
+    /* OUR PROFESSIONALS */
+    .landing-page .professionals-container {
+      padding: 100px 30px;
+    }
+    .landing-page .professionals-container .our-professionals-caption h5 {
+      font-size: 18px;
+    }
+    .landing-page .professionals-container .our-professionals-caption h3 {
+      font-size: 32px;
+    }
+    .landing-page .professionals-box .professionals-image img {
+      width: 100%;
+      height: 300px;
+    }
+    .landing-page .professionals-box .professionals-caption h5 {
+      font-size: 18px;
+    }
+    .landing-page .professionals-box .professionals-caption h6 {
+      font-size: 18px;
+    }
+    /* TESTIMONIALS */
+    .landing-page .testimonial-container {
+      padding: 100px 30px;
+    }
+    .landing-page .testimonial-container .testimonial-caption h5 {
+      font-size: 18px;
+    }
+    .landing-page .testimonial-container .testimonial-caption h3 {
+      font-size: 32px;
+    }
+    .landing-page .testimonial-container .testimonial-splide {
+      width: 80%;
+      margin: 30px auto;
+    }
+    .landing-page .testimonial-container .testimonial-splide p {
+      font-size: 16px;
+    }
+    .landing-page .testimonial-container .testimonial-splide h5 {
+      font-size: 16px;
+    }
+    /* PLACES WE CAN BE FOUND */
+    .landing-page .locations-section {
+      padding: 30px;
+    }
+    .landing-page .locations-section .locations-caption h5 {
+      font-size: 18px;
+    }
+    .landing-page .locations-section .locations-caption h3 {
+      font-size: 32px;
+    }
+    .landing-page .locations-section .locations-container {
+        width: 100%;
+        height: fit-content;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        justify-items: start;
+        align-items: start;
+    }
+    .landing-page .locations-section .locations-container .locations-box {
+        width: 100%; 
+        height: 180px;
+        padding: 20px;
+    }
+    
+    
+}

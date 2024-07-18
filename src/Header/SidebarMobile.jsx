@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import AccordionItem from "./AccordionItem";
 
@@ -16,30 +16,42 @@ function SidebarMobile() {
                     <li><Link to="/">Home</Link></li>
                     <AccordionItem
                         title="About"
-                        items={["Departments & Centers", "Find a Doctor", "Locations", "Patient & Visitor Guide"]}
+                        items={[
+                            { label: "About OAUTHC", url: "/About/About-OAUTHC" },
+                            { label: "Departments & Centers", url: "/About/Departments-Centers" },
+                            { label: "Find a Doctor", url: "/About/Find-Doctor" },
+                            { label: "Locations", url: "/About/locations" },
+                            { label: "Our Schools", url: "/About/our-schools"},
+                        ]}
                         isOpen={openAccordionIndex === 0}
                         onClick={() => handleAccordionClick(0)}
                     />
                     <AccordionItem
                         title="Services"
-                        items={["Research & Ethics", "Diseases & Symptoms", "Tests & Procedures", "Healthy Lifestyle", "Drugs & Supplements"]}
+                        items={[
+                            { label: "Our Services", url: "/Services/Health-Services" },
+                            { label: "Research and Ethics", url: "/Services/Research-Ethics" },
+                            { label: "Diseases & Symptoms", url: "/Services/Diseases-Symptoms" },
+                            { label: "Tests & Imaging", url: "/Services/Tests-Procedures" },
+                        ]}
                         isOpen={openAccordionIndex === 1}
                         onClick={() => handleAccordionClick(1)}
                     />
-                    <li><Link to="/blog">Blog</Link></li>
+                    <li><a href="https://www.theoauthcblog.online/" target="_blank" rel="noreferrer">Blog</a></li>
                     <li><Link to="/contact">Contact Us</Link></li>
+                    <li><Link to="/contact">Sign In/Sign Up</Link></li>
                 </ul>
                 <div className="sidebar-buttons">
-                    <Link to="/book-appointment">
+                    <Link href="/Home#bookAppointmentSection">
                         <button type="button" className="book-appointment-button">
                             Book an Appointment
-                        </button>  
-                    </Link> 
+                        </button>
+                    </Link>
+
                     <button type="button" className="student-portal-button">
-                       <a href="#" target="_blank">
-                            Log in to Student Portal
-                       </a>
+                        <Link to="/Student-Portal">Log in to Student Portal</Link>
                     </button>
+
                 </div>
             </div>
         </div>
