@@ -11,6 +11,7 @@ import './Styles/Tab-Small.css';
 import './Styles/Tab-Medium.css';
 import './Styles/Tab-Large.css';
 import './Styles/Desktop-Small.css';
+import './Styles/user-admin.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

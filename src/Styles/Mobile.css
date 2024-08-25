@@ -929,7 +929,7 @@
         width: 100%;
         min-width: 100%;
         max-width: 100%;
-      }
+    }
     .find-doctor .doctor-card .doctor-card-caption {
         gap: 10px;
     }
@@ -1294,4 +1294,82 @@
         padding: 10px;
         font-size: 14px;
     }
+    /* RESEARCH AND ETHICS */
+    .research-ethics {
+        width: 100%;
+        padding: 20px;
+    }
+    .research-ethics h1 {
+        font-size: 20px;
+    }
+    .research-ethics .research-carousel {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        margin-bottom: 50px;
+    }
+    .research-carousel .research-button {
+        padding: 10px;
+        width: 90%; 
+        top: 0;
+        right: 0;
+    }
+    .research-carousel .research-button h4 {
+        font-size: 20px;
+    }
+    .research-carousel .research-carousel-one {
+        height: 300px;
+    }
+    .research-carousel .research-carousel-two {
+        height: 300px;
+    }
+    .research-carousel .research-carousel-three {
+        height: 300px;
+    }
+    .research-ethics .research-application-rules {
+        width: 100%;
+        height: fit-content;
+        padding: 0px;
+    }
+    .research-ethics .research-application-rules h3 {
+        text-align: left;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .research-ethics .research-application-rules h6 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .research-ethics .research-application-rules ol {
+        margin-left: 20px;
+        text-align: left;
+    }
+    .research-ethics .research-application-rules li {
+        margin-bottom: 10px;
+    }
+    .research-ethics .research-form {
+        padding: 10px; 
+    }
+    .research-ethics form .name-email-inputs {
+        flex-wrap: wrap;
+        gap: 10px;
+    } 
+    .research-ethics form .name-email-inputs input {
+        min-width: 100%;
+        padding: 20px;
+        border-radius: 4px;
+    } 
+    .research-ethics form ol {
+        margin-left: 30px;
+        text-align: left;
+        font-size: 16px;
+    }
+    .research-ethics form ol span {
+        margin-right: 10px; 
+        width: 100%;
+    }
+    .research-ethics .research-submit-button { 
+        margin-top: 20px;
+    }
+  
 }

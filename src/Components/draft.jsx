@@ -23,6 +23,7 @@ import PrivacyPolicy from './Components/PrivacyPolicy';
 import StudentPortal from './Pages/StudentPortal';
 import TeamMemberDetails from './Components/TeamMemberDetails';
 import UserAdmin from './Pages/UserAdmin';
+import AdminLogin from './Pages/AdminLogin';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,6 +31,9 @@ const App = () => {
 
   // Check if the current route starts with "/admin"
   const isAdminRoute = location.pathname.startsWith('/admin');
+
+  // Replace this with actual authentication check
+  const isAuthenticated = false; // Adjust based on actual auth logic
 
   return (
     <DepartmentProvider>
@@ -65,8 +69,11 @@ const App = () => {
               <Route path="/Test-Procedures/:name" element={<TestDetails />} />
               <Route path="/management/:name" element={<TeamMemberDetails />} /> 
               
-              {/* ADMIN DASHBOARD ROUTE */}
-              <Route path="/admin/*" element={<UserAdmin />} />
+              {/* ADMIN ROUTES */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/*" element={
+                isAuthenticated ? <UserAdmin /> : <Navigate to="/admin/login" />
+              } />
             </Routes>
 
             {/* Conditionally render Footer */}

@@ -1,0 +1,645 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  transition: all 0.3s ease;
+}
+
+a, h1, h2, h3, h4, h5, h6, p {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ROOT COLORS */
+:root {
+  --primary-green: #005046;
+  --secondary-green: #056F62;
+  --primary-red: #bb2f31e3;
+  --primary-gold: #ffc107;
+  --secondary-red: #F9C4D7;
+  --gray: #ddd;
+  --grascale: #8C8C8C;
+  --white: #FFF;
+  --black: #000;
+  --ash: #F0F4F1;
+}
+
+/* ADMIN USER LOGIN */
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-green);
+    padding: 20px;
+}
+.login-form {
+    padding: 50px;
+    background: var(--white);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-form > div {
+    display: flex;
+    align-items: center;
+}
+.login-form > div img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.login-form > div h2 {
+    font-family: "Work Sans";
+    font-size: 20px;
+    font-style: normal;
+    line-height: normal; 
+}
+.login-form input {
+    margin: 10px auto;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-green);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+.login-form button:hover {
+    background-color: var(--secondary-green);
+}
+.login-form a {
+    text-align: center;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--primary-red);
+}
+.login-form a:hover {
+    text-decoration: underline;
+}
+  
+/* USER ADMIN */
+.user-admin {
+    display: grid;
+    grid-template-columns: 250px 1fr; 
+    grid-template-rows: 80px 1fr; 
+    height: 100vh; 
+    overflow: hidden;
+}
+.admin-header {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2; 
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    padding: 10px 50px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px var(--gray);
+    background-color: var(--white);
+    z-index: 1000; 
+}
+.admin-header .header-logo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 20px;
+}
+.admin-header .header-logo img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    object-position: center;
+}
+.admin-header .header-logo h3 {
+    font-family: "Work Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    color: var(--primary-green);
+}
+.admin-header .header-profile {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 30px;
+    align-items: center;
+}
+.admin-header .admin-profile {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+}
+.admin-header .admin-profile img {
+   width: 50px;
+   height: 50px;
+   object-fit: cover;
+   object-position: center;
+   border-radius: 50%;
+}
+.admin-header .admin-profile h6 {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    color: var(--black);
+}
+.admin-header .admin-profile p {
+    font-family: Montserrat;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    color: var(--grascale);
+}
+.admin-sidebar {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3; 
+    height: calc(100vh - 80px); 
+    background-color: var(--gray);
+    position: fixed;
+    top: 80px; 
+    left: 0;
+    width: 250px;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: var(--primary-green); 
+}
+.admin-sidebar ul {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.admin-sidebar ul li {
+    width: 100%; 
+    background-color: var(--primary-green);
+    color: var(--white);
+}
+.admin-sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%; 
+    padding: 10px;
+    color: inherit;
+    text-decoration: none;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    background-color: var(--primary-green);
+}
+.admin-sidebar ul li svg path {
+    fill: var(--white); 
+}
+.admin-sidebar ul li a.active-link {
+    background-color: var(--white);
+    color: var(--primary-green);
+    border-radius: 4px;
+}
+.admin-sidebar ul li a.active-link svg path {
+    fill: var(--primary-green);
+}
+.admin-sidebar .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+.admin-sidebar .accordion-header > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+.admin-sidebar .accordion-content {
+    padding-left: 20px;
+}
+.admin-content {
+    grid-column: 2 / 3; 
+    grid-row: 2 / 3; 
+    overflow-y: auto; 
+    background-color: var(--ash);
+}
+/* ADMIN DASHBOARD */
+.dashboard {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.dashboard .dashboard-overview {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+    padding-top: 100px;
+}
+.dashboard .dashboard-overview .dashboard-caption {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--white);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.dashboard .dashboard-overview .dashboard-caption h1 {
+    color: var(--black);
+    font-family: "Work Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.dashboard .dashboard-metrics {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); 
+}
+.dashboard .metrics-box {
+    padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--white);
+    border: solid 1px var(--gray);
+}
+.dashboard .metrics-box h6 {
+    color: var(--grascale);
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 20px;
+}
+.dashboard .metrics-box .metric-value {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-align: right;
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #14CC26;
+}
+.dashboard .metrics-box .metric-value > div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.dashboard .metrics-box h3 {
+    color: var(--black);
+    font-family: "Work Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 10px;
+}
+/* PATIENT VISIT CHART */
+.patient-visit {
+    margin-top: 20px;
+    width: 100%;
+    padding: 20px;
+    border: solid 1px var(--gray);
+    background-color: var(--white);
+    border-radius: 4px;
+}
+.dashboard h4 {
+    color: var(--black);
+    font-family: "Work Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.patient-visit .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.patient-visit .dropdown-container select {
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--gray);
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Work Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--grascale);
+}
+.patient-visit .dropdown-container option {
+    padding: 20px;
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--grascale);
+    border-radius: 4px;
+}
+.patient-visit .dropdown-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Work Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+/* PATIENT DATA */
+.admin-patient-data {
+    margin-top: 20px;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    background-color: var(--white);
+    border: solid 1px var(--gray);
+    border-radius: 4px;
+}
+.admin-patient-data table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
+}
+.admin-patient-data td {
+    padding: 10px;
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.admin-patient-data th {
+    padding: 10px;
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--grascale);
+}
+.admin-patient-data button {
+    margin: auto 10px ;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+.admin-patient-data .patient-profile {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.admin-patient-data .patient-gender {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--ash);
+    border-radius: 4px;
+}
+.admin-patient-data .patient-gender img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* DASHBOARD STATS */
+.dashboard .dashboard-stats h4 {
+    color: var(--black);
+    font-family: "Work Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.dashboard .dashboard-stats {
+    padding: 20px;
+    border: solid 1px var(--gray);
+    border-top: none;
+    border-right: none;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.dashboard .dashboard-stats .logo {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    font-family: "Work Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.dashboard .dashboard-stats .logo img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+.dashboard-stats .stats-metrics {
+    margin-top: 20px; 
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+}
+.dashboard-stats .stats-metrics .stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.dashboard-stats .stats-metrics .stats p {
+    text-align: center;
+    font-family: "Work Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--grascale);
+}
+.dashboard-stats .stats-metrics .stats h6 {
+    text-align: center;
+    font-family: "Work Sans";
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--black);
+}
+/* UPCOMING APPOINTMENTS */
+.dashboard-stats .upcoming-appointments {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 200px;
+}
+.dashboard-stats .upcoming-appointment-box .no-appointments {
+    margin: 20px auto;
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    color: var(--grascale);
+}
+.upcoming-appointments .current-date {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dashboard-stats .current-date h6 {
+    color: #3371EB;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+}
+.dashboard-stats .current-date hr {
+    border: solid 1px #3371EB;
+    width: calc(100% - 200px);
+}
+.dashboard-stats .upcoming-appointment-box ul li {
+    position: relative;
+    margin-top: 10px;
+    list-style: none; 
+    padding-bottom: 10px; 
+    padding-left: 30px;
+    border-bottom: solid 1px var(--gray);
+}
+.dashboard-stats .upcoming-appointment-box ul li::before {
+    content: ''; 
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 10px; 
+    height: 10px; 
+    background-color: var(--grascale); 
+    border-radius: 50%; 
+}
+.dashboard-stats .upcoming-appointment-box ul li p {
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    color: var(--grascale);
+}
+.dashboard-stats .upcoming-appointment-box ul li h5 {
+    margin: 10px auto;
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+/* REVIEW CHART */
+.review-chart {
+    margin-top: 20px;
+}
+.review-chart h6 {
+    text-align: left;
+    font-family: Poppins;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: #3371EB;
+}
+.review-chart h6 span {
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--grascale);
+}
+.chartjs-legend {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* * {
+    outline: red solid 1px;
+}  */

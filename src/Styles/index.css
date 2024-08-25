@@ -1714,6 +1714,7 @@ footer .footer-bottom .footer-links {
   font-weight: 400;
   line-height: 140%;
   color: var(--white);
+  text-align: center;
 }
 .professionals-caption .professionals-links {
   display: flex;
@@ -2035,7 +2036,7 @@ footer .footer-bottom .footer-links {
 }
 
 .our-values-container {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   width: 100%;
   height: fit-content;
   padding: 50px;
@@ -2497,7 +2498,7 @@ footer .footer-bottom .footer-links {
   font-family: "Work Sans";
   font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400; 
   line-height: normal;
   text-transform: capitalize;
 }
@@ -2505,13 +2506,12 @@ footer .footer-bottom .footer-links {
   width: 80%;
   height: fit-content;
   display: grid;
-  gap: 50px 50px;
+  gap: 50px !important;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 .find-doctor .doctors-log .doctor-card {
   width: fit-content;
-  min-width: 400px;
-  max-width: 100%;
+  max-width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -3895,4 +3895,8 @@ PRIVACY POLICY */
   font-weight: 300;
   line-height: normal;
   color: var(--black);
+}
+
+.team-members-details {
+  padding-top: 200px;
 }
