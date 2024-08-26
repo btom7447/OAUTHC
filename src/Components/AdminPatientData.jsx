@@ -14,7 +14,6 @@ const AdminPatientData = () => {
                         <th>Date In</th>
                         <th>Department</th>
                         <th>Status</th>
-                        <th></th> {/* Column for buttons, no header text */}
                     </tr>
                 </thead>
                 <tbody>
