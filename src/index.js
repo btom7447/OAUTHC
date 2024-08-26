@@ -1,3 +1,7 @@
+/* eslint-disable import/first */
+
+require('dotenv').config();
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -11,9 +15,10 @@ import './Styles/user-admin.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// Dynamically set basename based on the environment
+const basename = process.env.NODE_ENV === 'production' ? '/OAUTHC-WEBSITE' : '';
 
-const basename = process.env.NODE_ENV === 'production' ? '/OAUTHC-WEBSITE' : '/';
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
