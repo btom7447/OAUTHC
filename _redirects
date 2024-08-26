@@ -1,4 +1,5 @@
-/*    /OAUTHC-WEBSITE/index.html   200
-/OAUTHC-WEBSITE/static/js/*    /OAUTHC-WEBSITE/static/js/:splat   200
-/OAUTHC-WEBSITE/static/css/*   /OAUTHC-WEBSITE/static/css/:splat  200
-/OAUTHC-WEBSITE/static/media/* /OAUTHC-WEBSITE/static/media/:splat 200
+/*    /index.html   200
+/static/js/*    /static/js/:splat   200
+/static/css/*   /static/css/:splat  200
+/static/media/* /static/media/:splat 200
+
