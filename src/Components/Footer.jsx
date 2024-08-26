@@ -19,9 +19,9 @@ const Footer = () => {
                     <div className="f-top-two">
                         <h6>Important Links</h6>
                         <ul className="footer-links">
-                            <li>
+                            {/* <li>
                                 <Link to="/Home" anchor="bookAppointmentSection">Book Appointment </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link to="/About/Find-Doctor">Find Doctor</Link>
                             </li>
