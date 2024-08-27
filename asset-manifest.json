@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.3d316823.css",
-    "main.js": "/static/js/main.9ddd1b67.js",
+    "main.js": "/static/js/main.4fa45854.js",
     "static/js/453.02b52e96.chunk.js": "/static/js/453.02b52e96.chunk.js",
     "static/media/student-portal.png": "/static/media/student-portal.d3ca76d16a5ac9d3cc5b.png",
     "static/media/HeroCarousel.png": "/static/media/HeroCarousel.a6f49f56f3556849d598.png",
@@ -21,11 +21,11 @@
     "static/media/welcome-poster-mobile.png": "/static/media/welcome-poster-mobile.554de20f56de1a2b0cb6.png",
     "index.html": "/index.html",
     "main.3d316823.css.map": "/static/css/main.3d316823.css.map",
-    "main.9ddd1b67.js.map": "/static/js/main.9ddd1b67.js.map",
+    "main.4fa45854.js.map": "/static/js/main.4fa45854.js.map",
     "453.02b52e96.chunk.js.map": "/static/js/453.02b52e96.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d316823.css",
-    "static/js/main.9ddd1b67.js"
+    "static/js/main.4fa45854.js"
   ]
 }
