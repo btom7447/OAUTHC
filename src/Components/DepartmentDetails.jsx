@@ -31,7 +31,7 @@ const DepartmentDetails = () => {
                     <div className="departments-overview">
                         <h5>{department.departmentName} Department</h5>
                         <h6>{department.overviewText}</h6>
-                        <p>{department.team}</p>
+                        <p>{department.text}</p>
                     </div>
                     <div className="departments-poster">
                         <img src={department.departmentImage} alt={department.departmentName} />

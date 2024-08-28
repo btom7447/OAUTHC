@@ -41,7 +41,7 @@ const AdminSidebar = () => {
                         <ul className="accordion-content">
                             <li>
                                 <NavLink
-                                    to="/admin/role-manage/all-admin"
+                                    to="/admin/all-admins"
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                 >
                                     All Admin
@@ -49,7 +49,7 @@ const AdminSidebar = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/admin/role-manage/add-admin"
+                                    to="/admin/add-admin"
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                 >
                                     Add New Admin
@@ -91,17 +91,38 @@ const AdminSidebar = () => {
                             </li>
                         </ul>
                     )}
-                </li><li>
-                    <NavLink
-                        to="/admin/pages"
-                        className={({ isActive }) => (isActive ? "active-link" : "")}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M16.5 19.5H12V15H15V13.5H12V12H16.5V16.5H13.5V18H16.5V19.5Z" fill="white"/>
-                            <path d="M19.275 6.97499L14.025 1.72499C13.9593 1.65139 13.8782 1.5931 13.7875 1.55423C13.6968 1.51535 13.5986 1.49684 13.5 1.49999H6C5.60254 1.50118 5.2217 1.6596 4.94065 1.94065C4.6596 2.22169 4.50119 2.60253 4.5 2.99999V21C4.50119 21.3975 4.6596 21.7783 4.94065 22.0593C5.2217 22.3404 5.60254 22.4988 6 22.5H18C18.3975 22.4988 18.7783 22.3404 19.0593 22.0593C19.3404 21.7783 19.4988 21.3975 19.5 21V7.49999C19.5032 7.40136 19.4846 7.30323 19.4458 7.21252C19.4069 7.12181 19.3486 7.04073 19.275 6.97499ZM13.5 3.29999L17.7 7.49999H13.5V3.29999ZM18 21H6V2.99999H12V7.49999C12.0012 7.89745 12.1596 8.2783 12.4407 8.55934C12.7217 8.84039 13.1025 8.99881 13.5 8.99999H18V21Z" fill="white"/>
-                        </svg>
-                        Pages
-                    </NavLink>
+                </li>
+                <li className="accordion">
+                    <div onClick={() => handleAccordionClick('pages')} className="accordion-header">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M16.5 19.5H12V15H15V13.5H12V12H16.5V16.5H13.5V18H16.5V19.5Z" fill="white"/>
+                                <path d="M19.275 6.97499L14.025 1.72499C13.9593 1.65139 13.8782 1.5931 13.7875 1.55423C13.6968 1.51535 13.5986 1.49684 13.5 1.49999H6C5.60254 1.50118 5.2217 1.6596 4.94065 1.94065C4.6596 2.22169 4.50119 2.60253 4.5 2.99999V21C4.50119 21.3975 4.6596 21.7783 4.94065 22.0593C5.2217 22.3404 5.60254 22.4988 6 22.5H18C18.3975 22.4988 18.7783 22.3404 19.0593 22.0593C19.3404 21.7783 19.4988 21.3975 19.5 21V7.49999C19.5032 7.40136 19.4846 7.30323 19.4458 7.21252C19.4069 7.12181 19.3486 7.04073 19.275 6.97499ZM13.5 3.29999L17.7 7.49999H13.5V3.29999ZM18 21H6V2.99999H12V7.49999C12.0012 7.89745 12.1596 8.2783 12.4407 8.55934C12.7217 8.84039 13.1025 8.99881 13.5 8.99999H18V21Z" fill="white"/>
+                            </svg>
+                                <span>Pages</span>
+                            </div>
+                        <FontAwesomeIcon icon={openAccordion === 'pages' ? faChevronDown : faChevronRight} />
+                    </div>
+                    {openAccordion === 'pages' && (
+                        <ul className="accordion-content">
+                            <li>
+                                <NavLink
+                                    to="/admin/departments"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Departments
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/doctors"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Doctors
+                                </NavLink>
+                            </li>
+                        </ul>
+                    )}
                 </li>
                 <li>
                     <NavLink

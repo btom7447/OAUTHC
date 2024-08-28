@@ -571,7 +571,7 @@ export const DepartmentProvider = ({ children }) => {
             twitter: "" 
         },
         { 
-            doctorName: 'Prof. Oyedeji olusola Adetunji', 
+            doctorName: 'Prof. Oyedeji Olusola Adetunji', 
             gender: 'Male',
             department: ["Paediatrics", "Child Health"],
             qualification: ['MBChB', 'FWACP (Paed)', 'MSc', 'Trop Paed'],
@@ -843,7 +843,7 @@ export const DepartmentProvider = ({ children }) => {
             twitter: "" 
         },
         { 
-            doctorName: 'Dr. Samuel titilola Oladejo', 
+            doctorName: 'Dr. Samuel itilola Oladejo', 
             gender: 'Male',
             department: ["Radiology"],
             qualification: ['MBBS', 'FWACS (Orthopedics)', 'ACSCoT ATLS Provider'],
