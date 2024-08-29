@@ -162,11 +162,11 @@ header .first-header .f-header-right .header-icons p {
 header .second-header {
   width: 100%;
   height: fit-content;
-  padding: 20px 50px;
+  padding: 20px 70px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   background-color: var(--primary-green);
 }
@@ -1494,7 +1494,7 @@ footer .footer-bottom .footer-links {
   color: var(--black);
 }
 .landing-page .book-appointment .booking-form .patient-type-group {
-  width: 60%;
+  width: 65%;
 }
 .landing-page .book-appointment .booking-form .phone-number-group,
 .landing-page .book-appointment .booking-form .name-group, 
@@ -1533,8 +1533,15 @@ footer .footer-bottom .footer-links {
 .landing-page .book-appointment .booking-form .upload-file-group input {
   width: 30%;
 }
-.landing-page .book-appointment .booking-form input, 
-.landing-page .book-appointment .booking-form select, 
+.landing-page .book-appointment .booking-form input {
+  width: 100% !important;
+  height: 60px;
+  padding: 20px !important;
+  border-radius: 4px; 
+  border: solid 1px var(--primary-green);
+  outline: solid 1px var(--primary-green);
+  color: var(--black);
+}
 .landing-page .book-appointment .booking-form textarea {
   width: 100% !important;
   height: fit-content;
@@ -1545,17 +1552,12 @@ footer .footer-bottom .footer-links {
   color: var(--black);
 }
 .landing-page .book-appointment .booking-form input, 
-.landing-page .book-appointment .booking-form select, 
 .landing-page .book-appointment .booking-form textarea:placeholder-shown {
   font-family: "Work Sans";
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   background-color: var(--white);
-}
-.select-container {
-  position: relative;
-  width: 100%;
 }
 .patient-type-input {
   -webkit-appearance: none; 
@@ -1572,14 +1574,7 @@ footer .footer-bottom .footer-links {
 .patient-type-input::-ms-expand {
   display: none;
 }
-.custom-arrow {
-  position: absolute;
-  right: 20px; 
-  top: 50%;
-  transform: translateY(-50%); 
-  pointer-events: none;
-  color: #888; 
-}
+
 .landing-page .booking-form .file-input-wrapper {
   width: 30%;
   display: flex;
@@ -1621,6 +1616,14 @@ footer .footer-bottom .footer-links {
   cursor: pointer;
   color: var(--white);
   background-color: var(--primary-green);
+}
+.select-container {
+  position: relative;
+  width: 100%;
+}
+.booking-form .doctor-select .react-select__control {
+  height: 60px;
+  
 }
 
 
@@ -2493,12 +2496,21 @@ footer .footer-bottom .footer-links {
   justify-content: center;
   align-items: center;
 }
-.find-doctor .search-filters select, 
 .find-doctor .search-filters input {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 13px 10px;
+  border-radius: 4px;
   border: solid 1px var(--black);
   outline: solid 1px var(--black);
+  font-family: "Work Sans";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400; 
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+/* REACT SELECT  */
+.doctor-select {
   font-family: "Work Sans";
   font-size: 16px;
   font-style: normal;
@@ -2506,6 +2518,68 @@ footer .footer-bottom .footer-links {
   line-height: normal;
   text-transform: capitalize;
 }
+.doctor-select .react-select__control {
+  border: 2px solid var(--primary-green) !important;
+  border-radius: 4px;
+  padding: 5px;
+  box-shadow: none;
+  background-color: var(--white);
+  font-family: "Work Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  outline: none !important;
+  cursor: pointer !important;
+}
+.doctor-select .react-select__control:hover {
+  outline: none !important;
+  box-shadow: none !important;
+  border: solid 2px var(--primary-green) !important;
+}
+.doctor-select .react-select__option {
+  padding: 5px 10px;
+  background-color: white !important;
+  color: var(--black) !important;
+  font-family: "Work Sans";
+  font-size: 14px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  outline: none;
+  cursor: pointer;
+}
+.doctor-select.react-select__option:hover {
+ background-color: var(--gray) !important;
+}
+.doctor-select .react-select__multi-value {
+  background-color: var(--ash) !important;
+  border-radius: 2px;
+  margin: 3px;
+  padding: 2px;
+  cursor: pointer;
+}
+.doctor-select .react-select__multi-value__remove {
+  color: var(--grascale);
+  cursor: pointer;
+}
+.doctor-select .react-select__placeholder {
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  color: var(--grascale);
+}
+.doctor-select .react-select__dropdown-indicator {
+  padding: 0 8px;
+  color: var(--grascale);
+}
+.css-1u9des2-indicatorSeparator {
+  display: none;
+}
+
+
 .find-doctor .doctors-log .doctors-container {
   width: 80%;
   height: fit-content;

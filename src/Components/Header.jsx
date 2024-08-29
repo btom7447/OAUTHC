@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar'; 
-import SearchBox from './SearchBox';
 
 const Header = ({ searchQuery, setSearchQuery }) => {
 
@@ -62,9 +61,6 @@ const Header = ({ searchQuery, setSearchQuery }) => {
       </div>
       <div className="second-header">
         <Navbar />
-        <div className="nav-search">
-          <SearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        </div>
       </div>
     </header>
   );

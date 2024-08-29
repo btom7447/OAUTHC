@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Select from 'react-select';
 import { useDoctors } from './DepartmentProvider';
 
 const DoctorList = () => {
@@ -9,14 +10,13 @@ const DoctorList = () => {
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [fade, setFade] = useState(false);
-  // eslint-disable-next-line
   const [selectedDoctor, setSelectedDoctor] = useState(null);
 
   // Search state variables
   const [searchName, setSearchName] = useState("");
-  const [searchSpecialty, setSearchSpecialty] = useState("");
-  const [searchGender, setSearchGender] = useState("");
-  const [searchUnit, setSearchUnit] = useState("");
+  const [searchSpecialty, setSearchSpecialty] = useState(null);
+  const [searchGender, setSearchGender] = useState(null);
+  const [searchUnit, setSearchUnit] = useState(null);
 
   const totalPages = Math.ceil(doctors.length / itemsPerPage);
 
@@ -33,15 +33,28 @@ const DoctorList = () => {
     }
   };
 
+  // Prepare options for react-select
+  const specialtyOptions = [...new Set(doctors.flatMap(doctor => Array.isArray(doctor.specialty) ? doctor.specialty : []))]
+    .sort((a, b) => a.localeCompare(b))
+    .map(specialty => ({ value: specialty, label: specialty }));
+
+  const genderOptions = [
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+  ];
+
+  const unitOptions = [...new Set(doctors.map(doctor => doctor.unit))]
+    .sort((a, b) => a.localeCompare(b))
+    .map(unit => ({ value: unit, label: unit }));
+
   // Filter doctors based on search criteria
   const filteredDoctors = doctors.filter(doctor => {
     const matchName = searchName === "" || (doctor.doctorName && doctor.doctorName.toLowerCase().includes(searchName.toLowerCase()));
-    const matchSpecialty = searchSpecialty === "" || (Array.isArray(doctor.specialty) && doctor.specialty.some(specialty => specialty.toLowerCase() === searchSpecialty.toLowerCase()));
-    const matchGender = searchGender === "" || (doctor.gender && doctor.gender.toLowerCase() === searchGender.toLowerCase());
-    const matchUnit = searchUnit === "" || (doctor.unit && doctor.unit.toLowerCase().includes(searchUnit.toLowerCase()));
+    const matchSpecialty = searchSpecialty === null || (Array.isArray(doctor.specialty) && doctor.specialty.some(specialty => specialty.toLowerCase() === searchSpecialty.value.toLowerCase()));
+    const matchGender = searchGender === null || (doctor.gender && doctor.gender.toLowerCase() === searchGender.value.toLowerCase());
+    const matchUnit = searchUnit === null || (doctor.unit && doctor.unit.toLowerCase().includes(searchUnit.value.toLowerCase()));
     return matchName && matchSpecialty && matchGender && matchUnit;
   });
-  
 
   const sortedDoctors = filteredDoctors.sort((a, b) => a.doctorName.localeCompare(b.doctorName));
 
@@ -59,31 +72,65 @@ const DoctorList = () => {
           onChange={(e) => setSearchName(e.target.value)}
         />
         {/* SPECIALTY SEARCH */}
-        <select value={searchSpecialty} onChange={(e) => setSearchSpecialty(e.target.value)}>
-          <option value="">Select specialty</option>
-          {[...new Set(doctors.flatMap(doctor => Array.isArray(doctor.specialty) ? doctor.specialty : []))]
-            .sort((a, b) => a.localeCompare(b))
-            .map(specialty => (
-              <option key={specialty} value={specialty}>{specialty}</option>
-            ))
-          }
-        </select>
+        <Select
+          value={searchSpecialty}
+          onChange={setSearchSpecialty}
+          options={specialtyOptions}
+          placeholder="Select specialty"
+          isClearable
+          className="doctor-select"
+            classNames={{
+                control: () => 'react-select__control',
+                option: () => 'react-select__option',
+                menu: () => 'react-select__menu',
+                menuList: () => 'react-select__menu-list',
+                multiValue: () => 'react-select__multi-value',
+                multiValueLabel: () => 'react-select__multi-value__label',
+                multiValueRemove: () => 'react-select__multi-value__remove',
+                placeholder: () => 'react-select__placeholder',
+                dropdownIndicator: () => 'react-select__dropdown-indicator',
+            }}
+        />
         {/* GENDER SEARCH */}
-        <select value={searchGender} onChange={(e) => setSearchGender(e.target.value)}>
-          <option value="">Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
+        <Select
+          value={searchGender}
+          onChange={setSearchGender}
+          options={genderOptions}
+          placeholder="Select Gender"
+          isClearable
+          className="doctor-select"
+          classNames={{
+              control: () => 'react-select__control',
+              option: () => 'react-select__option',
+              menu: () => 'react-select__menu',
+              menuList: () => 'react-select__menu-list',
+              multiValue: () => 'react-select__multi-value',
+              multiValueLabel: () => 'react-select__multi-value__label',
+              multiValueRemove: () => 'react-select__multi-value__remove',
+              placeholder: () => 'react-select__placeholder',
+              dropdownIndicator: () => 'react-select__dropdown-indicator',
+          }}
+        />
         {/* UNIT SEARCH */}
-        <select value={searchUnit} onChange={(e) => setSearchUnit(e.target.value)}>
-          <option value="">Select Unit</option>
-          {[...new Set(doctors.map(doctor => doctor.unit))] 
-            .sort((a, b) => a.localeCompare(b)) 
-            .map(unit => (
-              <option key={unit} value={unit}>{unit}</option>
-            ))
-          }
-        </select>
+        <Select
+          value={searchUnit}
+          onChange={setSearchUnit}
+          options={unitOptions}
+          placeholder="Select Unit"
+          isClearable
+          className="doctor-select"
+          classNames={{
+          control: () => 'react-select__control',
+          option: () => 'react-select__option',
+          menu: () => 'react-select__menu',
+          menuList: () => 'react-select__menu-list',
+          multiValue: () => 'react-select__multi-value',
+          multiValueLabel: () => 'react-select__multi-value__label',
+          multiValueRemove: () => 'react-select__multi-value__remove',
+          placeholder: () => 'react-select__placeholder',
+          dropdownIndicator: () => 'react-select__dropdown-indicator',
+      }}
+        />
       </div>
 
       <div className={`doctors-container ${fade ? 'fade-enter' : 'fade-enter-active'}`}>
