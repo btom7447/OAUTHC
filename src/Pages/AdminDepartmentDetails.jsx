@@ -58,15 +58,29 @@ const AdminDepartmentDetails = () => {
         }));
     };
 
-    const handleSave = () => {
-        const updatedData = {
-            ...formData,
-            facilities: formData.facilities.map(facility => facility.value),
-            services: formData.services.map(service => service.value),
-        };
-        updateDepartment(departmentTitle, updatedData);
+    const handleSave = async () => {
+        try {
+            const response = await fetch('https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department', {
+                method: 'PUT', // or 'PUT' if updating existing data
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData), // or the data you need to send
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const result = await response.json();
+            console.log('Save successful:', result);
+            // Optionally handle the successful save here
+        } catch (error) {
+            console.error('Error saving data:', error);
+            // Optionally handle errors here
+        }
     };
-
+    
     const handleDrop = (acceptedFiles) => {
         if (acceptedFiles.length + formData.images.length <= 2) {
             setFormData(prevData => {

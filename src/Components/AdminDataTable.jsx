@@ -11,7 +11,7 @@ const formatTitleForURL = (title) => {
     return title.toLowerCase().replace(/\s+/g, '-');
 };
 
-const AdminDataTable = ({ data, basePath, entityType }) => {
+const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage }) => {
     if (!data || data.length === 0) {
         return <div>No items available</div>;
     }
@@ -33,7 +33,7 @@ const AdminDataTable = ({ data, basePath, entityType }) => {
             <tbody>
                 {sortedData.map((item, index) => (
                     <tr key={item.id}>
-                        <td>{index + 1}</td>
+                        <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                         <td>
                             <Link to={`${basePath}/${formatTitleForURL(item.title)}`}>
                                 {item.title}

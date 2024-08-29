@@ -64,7 +64,7 @@ const DepartmentsDetailsPublish = ({
                 </div>
                 <div className="image-previews">
                     <div className="image-preview">
-                    <img src={departmentImage} alt="Department" style={{ display: departmentImage ? 'block' : 'none' }} />
+                    <img src={imageToDisplay} alt="Department" style={{ display: departmentImage ? 'block' : 'none' }} />
                         {departmentImage && (
                             <button onClick={handleRemoveImage} className="remove-image-btn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 22 26" fill="none">
