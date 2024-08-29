@@ -31,7 +31,9 @@ const UserAdmin = () => {
                         <Route path="/sections" element={<AdminSections />} />
                         <Route path="/departments" element={<AdminDepartments />} />
                         <Route path="/departments/:departmentTitle" element={<AdminDepartmentDetails />} />
+                        <Route path="/departments/new" element={<AdminDepartmentDetails />} />
                         <Route path="/doctors/:doctorName" element={<AdminDoctorsDetail />} />
+                        <Route path="/doctors/new" element={<AdminDoctorsDetail />} />
                         <Route path="/doctors" element={<AdminDoctors />} />
                         <Route path="/appointments" element={<AdminAppointments />} />
                         <Route path="/services" element={<AdminServices />} />

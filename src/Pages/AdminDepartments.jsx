@@ -19,6 +19,7 @@ const AdminDepartments = () => {
                 TableComponent={DepartmentTable}
                 itemName="departments"
                 basePath="/admin/departments"
+                newItemPath="new"
             />
         </div>
     );

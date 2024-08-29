@@ -19,6 +19,7 @@ const AdminDoctors = () => {
                 TableComponent={AdminDataTable} 
                 itemName="doctors"
                 basePath="/admin/doctors" 
+                newItemPath="new"
             />
         </div>
     );

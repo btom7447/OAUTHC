@@ -45,8 +45,8 @@ export const UserProvider = ({ children }) => {
         }
     };
 
-    const updateDepartment = async (departmentTitle, updatedData) => {
-        const url = `https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department/${departmentTitle}`;
+    const updateDepartment = async (departmentId, updatedData) => {
+        const url = `https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department/${departmentId}`;
         try {
             const response = await fetch(url, {
                 method: 'PUT',

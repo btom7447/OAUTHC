@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath }) => {
+const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, newItemPath }) => {
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -47,26 +48,33 @@ const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath }
 
     return (
         <div className="admin-data-display">
-            <label>
-                Show
-                <Select
-                    value={options.find(option => option.value === itemsPerPage)}
-                    onChange={handleItemsPerPageChange}
-                    options={options}
-                    className="react-select-container"
-                    classNames={{
-                        control: () => 'react-select__control',
-                        option: () => 'react-select__option',
-                        menu: () => 'react-select__menu',
-                        menuList: () => 'react-select__menu-list',
-                        multiValue: () => 'react-select__multi-value',
-                        multiValueLabel: () => 'react-select__multi-value__label',
-                        multiValueRemove: () => 'react-select__multi-value__remove',
-                        placeholder: () => 'react-select__placeholder',
-                        dropdownIndicator: () => 'react-select__dropdown-indicator',
-                    }}
-                />
-            </label>
+            <div className="data-table-functions">
+                <label>
+                    Show
+                    <Select
+                        value={options.find(option => option.value === itemsPerPage)}
+                        onChange={handleItemsPerPageChange}
+                        options={options}
+                        className="react-select-container"
+                        classNames={{
+                            control: () => 'react-select__control',
+                            option: () => 'react-select__option',
+                            menu: () => 'react-select__menu',
+                            menuList: () => 'react-select__menu-list',
+                            multiValue: () => 'react-select__multi-value',
+                            multiValueLabel: () => 'react-select__multi-value__label',
+                            multiValueRemove: () => 'react-select__multi-value__remove',
+                            placeholder: () => 'react-select__placeholder',
+                            dropdownIndicator: () => 'react-select__dropdown-indicator',
+                        }}
+                    />
+                </label>
+                <button type="button" className="add-new-button">
+                    <Link to={`${basePath}/${newItemPath}`}>
+                        Add New
+                    </Link>
+                </button>
+            </div>
             <TableComponent
                 data={itemsToDisplay}
                 basePath={basePath}

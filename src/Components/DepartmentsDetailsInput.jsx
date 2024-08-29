@@ -1,7 +1,13 @@
 import React from "react";
 import Creatable from 'react-select/creatable';
 
-const DepartmentsDetailsInputs = ({ formData, handleInputChange, handleSelectChange, defaultFacilitiesOptions, defaultServicesOptions }) => {
+const DepartmentsDetailsInputs = ({
+    formData, 
+    handleInputChange, 
+    handleSelectChange, 
+    defaultFacilitiesOptions, 
+    defaultServicesOptions 
+}) => {
     return (
         <div className="details-inputs">
             {/* DEPARTMENT NAME */}
@@ -10,7 +16,7 @@ const DepartmentsDetailsInputs = ({ formData, handleInputChange, handleSelectCha
                 <input
                     type="text"
                     name="title"
-                    value={formData.title}
+                    value={formData.title || ''}
                     onChange={handleInputChange}
                 />
             </label>
@@ -19,7 +25,7 @@ const DepartmentsDetailsInputs = ({ formData, handleInputChange, handleSelectCha
                 Overview Text:
                 <textarea
                     name="overviewText"
-                    value={formData.overviewText}
+                    value={formData.overviewText || ''}
                     onChange={handleInputChange}
                 ></textarea>
             </label>
@@ -28,7 +34,7 @@ const DepartmentsDetailsInputs = ({ formData, handleInputChange, handleSelectCha
                 Text:
                 <textarea
                     name="text"
-                    value={formData.text}
+                    value={formData.text || ''}
                     onChange={handleInputChange}
                 ></textarea>
             </label>
@@ -37,9 +43,9 @@ const DepartmentsDetailsInputs = ({ formData, handleInputChange, handleSelectCha
                 Facilities:
                 <Creatable
                     isMulti
-                    value={formData.facilities}
+                    value={formData.facilities || []}
                     onChange={(newValue) => handleSelectChange(newValue, 'facilities')}
-                    options={[...defaultFacilitiesOptions, ...formData.facilities]}
+                    options={defaultFacilitiesOptions}
                     placeholder="Add and select facilities"
                     className="react-select-container"
                     classNames={{
@@ -60,9 +66,9 @@ const DepartmentsDetailsInputs = ({ formData, handleInputChange, handleSelectCha
                 Services:
                 <Creatable
                     isMulti
-                    value={formData.services}
+                    value={formData.services || []}
                     onChange={(newValue) => handleSelectChange(newValue, 'services')}
-                    options={[...defaultServicesOptions, ...formData.services]}
+                    options={defaultServicesOptions}
                     placeholder="Add and select services"
                     className="react-select-container"
                     classNames={{
@@ -84,7 +90,7 @@ const DepartmentsDetailsInputs = ({ formData, handleInputChange, handleSelectCha
                 <input
                     type="text"
                     name="phone"
-                    value={formData.phone}
+                    value={formData.phone || ''}
                     onChange={handleInputChange}
                 />
             </label>
