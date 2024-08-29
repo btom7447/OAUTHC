@@ -828,14 +828,7 @@ a {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-}
-.details-inputs label {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    color: var(--Grey-9, #1A1A1A);
+    color: var(--black);
     font-family: "Work Sans";
     font-size: 16px;
     font-style: normal;
@@ -879,6 +872,21 @@ a {
     font-weight: 400;
     line-height: normal;
 }
+.details-inputs p {
+    color: var(--black);
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; 
+}
+.details-inputs .social-links {
+    width: 100%;
+    padding: 20px;
+    border-radius: 4px;
+    border: solid 1px var(--gray);
+}
+
 /* REACT SELECT  */
 .details-inputs .react-select-container {
     width: 100%;

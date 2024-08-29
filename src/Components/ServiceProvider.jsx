@@ -3003,7 +3003,6 @@ export const ServiceProvider = ({ children }) => {
           "The healthcare provider will consider these limitations when interpreting the results."
         ]
       },
-      
       {
         name: "Fluorescein Angiography",
         overview: [
@@ -3037,7 +3036,6 @@ export const ServiceProvider = ({ children }) => {
           "The healthcare provider will consider these limitations when interpreting the results."
         ]
       },
-      
       {
         name: "Fine Needle Aspiration (FNA) Biopsy",
         overview: [

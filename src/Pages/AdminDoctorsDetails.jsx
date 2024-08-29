@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from 'react-router-dom';
 import { useUser } from "../Components/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,14 +9,49 @@ import DoctorsDetailsPublish from "../Components/DoctorDetailsPublish";
 
 const AdminDoctorsDetails = () => {
     const { doctorName } = useParams();
-    console.log(`Doctor name from URL: ${doctorName}`);
     const { doctorsData, updateDoctor } = useUser();
 
+    // Find the specific doctor based on URL params
     const doctor = doctorsData.find(doc => doc.doctorName && doc.doctorName.toLowerCase().replace(/\s+/g, '-') === doctorName);
 
-    const defaultSpecialtiesOptions = [
-        // your default specialties options
-    ];
+    // Extract unique specialties from doctorsData
+    const specialtiesFromDoctorsData = [...new Set(
+        doctorsData.flatMap(doctor => 
+            Array.isArray(doctor.specialty) ? doctor.specialty : []
+        )
+    )].sort((a, b) => a.localeCompare(b));
+
+    // Populate defaultSpecialtiesOptions with specialties from doctorsData
+    const defaultSpecialtiesOptions = specialtiesFromDoctorsData.map(specialty => ({
+        value: specialty,
+        label: specialty
+    })) || [];
+
+    // Extract unique departments from doctorsData
+    const departmentFromDoctorsData = [...new Set(
+        doctorsData.flatMap(doctor => 
+            Array.isArray(doctor.department) ? doctor.department : []
+        )
+    )].sort((a, b) => a.localeCompare(b));
+
+    // Populate defaultSpecialtiesOptions with specialties from doctorsData
+    const defaultDepartmentOptions = departmentFromDoctorsData.map(department => ({
+        value: department,
+        label: department
+    })) || [];
+
+    // Extract unique qualifications from doctorsData
+    const qualificationsFromDoctorsData = [...new Set(
+        doctorsData.flatMap(doctor => 
+            Array.isArray(doctor.qualification) ? doctor.qualification : []
+        )
+    )].sort((a, b) => a.localeCompare(b));
+
+    // Populate defaultQualificationsOptions with qualifications from doctorsData
+    const defaultQualificationsOptions = qualificationsFromDoctorsData.map(qualification => ({
+        value: qualification,
+        label: qualification
+    })) || [];
 
     const statusOptions = [
         { value: 'publish', label: 'Publish' },
@@ -24,15 +59,41 @@ const AdminDoctorsDetails = () => {
     ];
 
     const [formData, setFormData] = useState({
-        name: doctor?.doctorName || '',
-        specialty: doctor?.specialty || '',
-        phone: doctor?.phone || '',
-        email: doctor?.email || '',
-        status: doctor?.status ? { value: doctor.status.toLowerCase(), label: doctor.status.charAt(0).toUpperCase() + doctor.status.slice(1) } : null,
-        doctorImage: doctor?.doctorImage || '',  // Initialize doctorImage
-        images: doctor?.images || [],
+        name: '',
+        overviewText: '',
+        accomplishments: '',
+        specialties: [],
+        phone: '',
+        email: '',
+        status: null,
+        doctorImage: '',
+        images: [],
+        departments: [],
+        qualifications: []
     });
 
+    useEffect(() => {
+        if (doctor) {
+            setFormData({
+                name: doctor.doctorName || '',
+                overviewText: doctor.overviewText || '',
+                accomplishments: doctor.accomplishments || '',
+                specialties: doctor.specialty ? doctor.specialty.map(spec => ({ value: spec, label: spec })) : [],
+                phone: doctor.phone || '',
+                facebook: doctor.facebook || '', 
+                linkedIn: doctor.linkedIn || '', 
+                twitter: doctor.twitter || '', 
+                instagram: doctor.instagram || '',
+                email: doctor.email || '',
+                status: doctor.status ? { value: doctor.status.toLowerCase(), label: doctor.status.charAt(0).toUpperCase() + doctor.status.slice(1) } : null,
+                doctorImage: doctor.doctorImage || '',
+                images: doctor.images || [],
+                departments: doctor.department ? doctor.department.map(dep => ({ value: dep, label: dep })) : [],
+                qualifications: doctor.qualification ? doctor.qualification.map(qual => ({ value: qual, label: qual })) : []
+            });
+        }
+    }, [doctor]);
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevData => ({
@@ -50,8 +111,7 @@ const AdminDoctorsDetails = () => {
 
     const handleSave = () => {
         const updatedData = {
-            ...formData,
-            // Assuming doctor data does not have arrays like facilities or services
+            ...formData
         };
         updateDoctor(doctorName, updatedData);
     };
@@ -115,9 +175,11 @@ const AdminDoctorsDetails = () => {
                         handleInputChange={handleInputChange}
                         handleSelectChange={handleSelectChange}
                         defaultSpecialtiesOptions={defaultSpecialtiesOptions}
+                        defaultDepartmentOptions={defaultDepartmentOptions}
+                        defaultQualificationsOptions={defaultQualificationsOptions}
                     />
                     <DoctorsDetailsPublish
-                        doctorImage={formData.doctorImage}  // Pass doctorImage prop
+                        doctorImage={formData.doctorImage}
                         formData={formData}
                         handleSave={handleSave}
                         handleDrop={handleDrop}

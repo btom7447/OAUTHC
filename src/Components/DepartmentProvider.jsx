@@ -13,213 +13,6 @@ export const DepartmentProvider = ({ children }) => {
             services: ["Diagnostic Imaging: X-rays, CT scans, MRI, ultrasound, and nuclear medicine.", "Image Interpretation: Analysis of images to diagnose conditions.", "Interventional Radiology: Minimally invasive procedures guided by imaging.", "Radiation Therapy: Radiation treatments for cancer.", "Research and Development: Advancing imaging technologies and techniques."],
             phone:  "+ (123) 456-7890"
         },
-        {
-            overviewText: "The Internal Medicine department at OAUTHC focuses on the prevention, diagnosis, and treatment of adult diseases. Our team provides comprehensive care for a wide range of medical conditions.", 
-            departmentImage: 'https://img.freepik.com/free-photo/side-view-patient-undergoing-physical-evaluation_23-2150165460.jpg?t=st=1719775379~exp=1719778979~hmac=249a1cef02f0bdb9014fed754d40fc6ae2087c12ecb387b3a12549208505e65c&w=996',
-            departmentName: "Internal Medicine",
-            team: "our internal medicine team includes board-certified internists, specialists and support staff.",
-            facilities: ["Comprehensive diagnostic labs", "Advanced imaging facilities", "Specialized treatment units" ],
-            services: ["General Medicine: Comprehensive care for adult patients.", "Endocrinology: Management of diabetes, thyroid disorders, and other endocrine conditions", "Gastroenterology: Treatement for digestive system disorders.", "Pulmonology: Care for respiratory diseases", "Neurology", "Dermatology"],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The haematology department at OAUTHC specializes in the study and treatment of blood disorders. We provide diagnostic and therapeutic services for a wide range of haematological conditions", 
-            departmentImage: 'https://img.freepik.com/free-photo/coronavirus-blood-samples-arrangement-lab_23-2149107259.jpg?t=st=1719776325~exp=1719779925~hmac=2dfd1611fc21e5f5372c61ed940e75adbe52c2a297bd53d92016b48ce94d9c8c&w=1380',
-            departmentName: "Haematology",
-            team: "Our haematology team includes haematologists, lab technicians, and support staff with expertise in blood disorders.",
-            facilities: ["State-of-the-art diagnostic labs", "Blood bank and transfusion services", "Advanced treatment units for haematological disorders." ],
-            services: ["Diagnostic haematology: Blood tests and bone marrow examinations.", "Blood Disorders: Treatement for anaemia, clotting disorders, and haemophilia.", "Leukaemia and Lymphoma: Comprehensive care for blood cancers.", "Tranfusion Medicine: Blood transfusion service and management.", "Hematopoietic Stem Cell Transplantation: Stem cell and bone marrow transplants."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Chemical Pathology department at OAUTHC focuses on the biochemical analysis of body fluids to diagnose and monitor diseases. Our laboratory is equipped with advanced technology for accurate and timely results.", 
-            departmentImage: 'https://img.freepik.com/free-photo/scientist-works-with-microscope-laboratory-conducting-experiments-formulas_146671-18289.jpg?t=st=1719776934~exp=1719780534~hmac=528e073a8e1bafc27c2b0f1f6e1fe7e939713c934c289cdb319df7fecd7eac52&w=1380',
-            departmentName: "Chemical Pathology",
-            team: "Our chemical pathology team includes clinical chemists, lab technicians, and support staff.",
-            facilities: ["Advanced biochemical analyzers", "Automated lab systems", "Specialized testing units"],
-            services: ["Clinical Chemistry: Analysis of blood and other body fluids", "Endocrinology: Hormone testing and management of endocrine disorders.", "Toxicology: Detection and management of toxins and poisons.", "Metabolic Disorders: Diagnosis and monitoring of metabolic diseases.", "Nutritional Biochemistry: Assessment of nutritional status and related disorders."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Microbiology and Parasitology department at OAUTHC is dedicated to the diagnosis and treatment of infectious diseases caused by bacteria, viruses, fungi and parasites. Our laboratory provides comprehensive testing and analysis.", 
-            departmentImage: 'https://img.freepik.com/free-photo/3d-medical-background-with-abstract-virus-cells_1048-6296.jpg?t=st=1719777500~exp=1719781100~hmac=de656335f8e968af987597be1842bb313e4c52436f6c25e0a21c597df4b7b2f0&w=900',
-            departmentName: "Microbiology & Parasitology",
-            team: "Our microbiology and parasitology team includes microbiologists, parasitologists, lab technicians, and support staff.",
-            facilities: ["Advanced microbiology labs", "Molecular diagnositic tools", "Specialized testing equipment." ],
-            services: ["Bacteriology: Culture and sensitivity testing for bacterial infections.", "Virology: Detection and treatent of viral infections.", "Mycology: Diagnosis and treatment of fungal infections.", "Parasitology: Identification and management of parasitic diseases.", "Infection Control: Guidance on infection prevention and control measures."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Morbid Anatomy department at OAUTHC focuses on the study of diseases through the examination of organs, tissues and cells. We provide diagnostic services and support for clinical and research activities.", 
-            departmentImage: 'https://img.freepik.com/free-photo/surgical-procedure-made-by-doctor_23-2148962519.jpg?t=st=1719777977~exp=1719781577~hmac=ebad8c927e926fd633137b065a61bc68ad23a538c0e6e18e1b1b23d5718d42af&w=900',
-            departmentName: "Morbid Anatomy",
-            team: "Our morbid anatomy team includes pathologists, lab technicians and support staff.",
-            facilities: ["Advanced histopathology labs", "Automated staining and imaging systems", "State-of-the-art autopsy suite" ],
-            services: ["Histopathology: Examination tissue samples to diagnose diseases.", "Cytopathology: Analysis of cells to detect cancer and other conditions.", "Autopsy Services: Post-mortem examinations to determine cause of death.", "Immunohistochemistry: Specialized staining techniques for precise diagnosis.", "Research Support: Histological service for research studies."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Family Medicine department at OAUTHC offers comprehensive health care for individuals and families across all ages, genders, and diseases. Our approach is patient-centered, focusing on continuous and integrated care.", 
-            departmentImage: 'https://img.freepik.com/free-photo/family-shape-figure-with-heart-stethoscope_23-2148488214.jpg?w=1380&t=st=1719826374~exp=1719826974~hmac=7309d5e5a1509b78f085023cd271d7b566e05a51d7ee62692d57b688c0be054c',
-            departmentName: "Family Medicine",
-            team: "Our family medicine team includes board-certified family physicians, nurse practitioners and pysician asistants dedicated to providing holistic care.",
-            facilities: ["Fully equipped examination rooms", "On-site laboratory and diagnostic services.", "Electronic medical records for coordinated care." ],
-            services: ["Preventive Care: Regular check-ups, immunizations, and health screenings.", "Chronic Disease Management: Ongoing care for conditions like diabetes, hypertension, and asthma.", "Women's Health", "Men's Health: Prostate exams, cardiovascular screenings"],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "TheAnaesthesia department at OAUTHC provides anaesthesia services for surgical and diagnostic procedures, ensuring patient comfort and safety. We specialize in perioperative care, pain management and critical care.", 
-            departmentImage: 'https://img.freepik.com/free-photo/female-patient-undergoing-surgery_7502-8404.jpg?t=st=1719835957~exp=1719839557~hmac=77f2a09dd975c470079cdbe46818d4bf9a2d50370d224c51ca1c6e5511de4e05&w=1380',
-            departmentName: "Anaesthesia",
-            team: "Our microbiology and parasitology team includes microbiologists, parasitologists, lab technicians, and support staff.",
-            facilities: ["Advanced microbiology labs", "Molecular diagnositic tools", "Specialized testing equipment." ],
-            services: ["General Anaestehsia: For major surgeries requiring complete unconsciousness.", "Regional Anaesthesia: Nerve blocks and spinal/epidural anaesthesia for localised pain control", "Sedation: Conscious sedation for minor procedures.", "Pain Management: Acute and chronic pain management services.", "Critical Care: Intensive care services for critically ill patients."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The orthopaedics and Traumatology department at OAUTHC provides specialized care for musculoskeletal conditions. Our team focuses on the diagnosis, treatment, and rehabilitation of bone, joint and msucle disorders.", 
-            departmentImage: 'https://img.freepik.com/free-photo/physician-examining-human-skeleton-cabinet-checkup-visit-explaining-anatomy-bones-diagnosis-elderly-patient-specialist-analyzing-spinal-cord-help-with-orthopedic-treatment_482257-50443.jpg?t=st=1719836418~exp=1719840018~hmac=d1d5ced56f9a55ecbc395382bbf54ba3da7d13ddfb01a9b756ad7aa237d01028&w=1380',
-            departmentName: "Orthopaedics & Traumatology",
-            team: "Our orthopaedics team includes orthopaedic surgeons, sports medicine specialists, physioterapists, and nursing staff.",
-            facilities: ["Modern operating theatres with advacned surgical equipment.", "Rehabilitation and physiotherapy center", "Diagnostic imaging (X-ray, MRI, CT)"],
-            services: ["Fracture Care: Treatment of broken bones, including surgical and non-surgical options.", "Joint Replacement: Total hip, knee and shoulder replacement surgeries", "Sports Medicine: Management of sports injuries, including arthroscopy.", "Spine Surgery: Treatment for spinal disorders and injuries.", "Paediatric Orthopaedics: Specialized care for children with musculoskeletal issues."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Physiotherapy department at OAUTHC provides rehabilitation services to help patients recover from injuries, surgeries and medical conditions. Our team uses a variety of techniques to restore function and improve quality of life.", 
-            departmentImage: 'https://img.freepik.com/free-photo/injured-man-doing-physiotherapy-exercises-walking_23-2149071497.jpg?w=1380&t=st=1719836747~exp=1719837347~hmac=232e4c1a8bc5194dd777cafef4318f00901dce4bcc57e5af64a6eca7127520a3',
-            departmentName: "Physiotherapy",
-            team: "Our Physiotherapy team includes licensed physiotherapists, rehabilitation specialists and support staff.",
-            facilities: ["Fully equipped rehabilitation gym", "Hydrotherapy pool", "Advanced therapeutic equipment" ],
-            services: ["Orthopaedic Rehabilitation: Post-surgical and injury recovery for musculoskeletal conditions.", "Neurological Rehabilitation: Therapy for patients with stroke, spinal cord injuries, and other neurological disorders.", "Cadiopulmonary Rehabilitation: Programs for heart and lung conditions.", "Paediatric Physiotherapy: Specialised care for children with developmental and physical challenges.", "Sports Rehabilitation: Treatment and prevention of sports-related injuries."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Accident and Emergency department at OAUTHC provides immediate and critical care to patients with acute illnesses or injuries. Our team is dedicated to delivering timely and effective treatment in emergency situations.", 
-            departmentImage: 'https://img.freepik.com/free-photo/side-view-patient-with-oxygen-mask_23-2149478555.jpg?t=st=1719837202~exp=1719840802~hmac=76c1f59a0feb32fbf9865744d573b3bb8a4d44b7fc9bdaa7266cc38f9a1596eb&w=1380',
-            departmentName: "Emergency Medicine",
-            team: "Our emergency medicine team includes board-certified emergency physcians, trauma surgeons, nurses and support staff trained in emergency care.",
-            facilities: ["Advanced ambulances", "Standard emergency department with resuscitation rooms", "Rapid diagnostic services (X-ray, CT scan, MRI"],
-            services: ["Trauma Care: Treatment for patients with severe injuries", "Cardiac Emergencies: Management of heart attacks, arrhythmias, and other cardiac conditions", "Paediatric Emergencies: Specialised emergency care for children.", "Poisoning and Overdose Management: Treatment for toxic exposures.", "Acute Medical Conditions: Care for acute illnesses such as asthma attacks, infections and allergic reactions."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The General Surgery department at OAUTHC provides surgical treatment for a wide range of conditions. Our skilled surgeons and advanced facilities ensure high-quality care and sucessful outcomes.", 
-            departmentImage: 'https://img.freepik.com/free-photo/doctors-doing-surgical-procedure-patient_23-2148962500.jpg?t=st=1719837513~exp=1719841113~hmac=61eba947e3d6df0fd06ab0a6be506c5dc3c937300edd24af0bedbce50e0fb71a&w=1060',
-            departmentName: "General Surgery",
-            team: "Our general surgery team includes board-certified surgeons, anesthesiolgists and specialized nursing staff.",
-            facilities: ["Modern operating theatres", "Advanced laparoscopic and robotic surgery equipment", "Comprehensive preoperative and postoperative care units" ],
-            services: ["Abdominal Surgery: Procedures for conditions affecting the stomach, intestines, livera nd other abdominal organs.", "Breast Surgery: Treatment for breast cancer and other breast conditions", "Endocrine Surgery: Surgery for thyroid, parathyroid and adrenal gland conditions.", "Minimally Invasive Surgery: Laparoscopic and robotic-assisted surgeries.", "Emergency Surgery: Urgent surgical interventions for acute conditions."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Paediatrics department at OAUTHC provides comprehensive healthcare for children from birth to adolescence. Our team is dedicated to ensuring the health and well-being of young patients through a wide range of services.", 
-            departmentImage: 'https://img.freepik.com/free-photo/african-american-small-girl-receiving-covid19-vaccine-medical-clinic_637285-10541.jpg?t=st=1719838971~exp=1719842571~hmac=232e8b0bdc1cb56b1022e05def63062d783fb43aa9088d32660259455b3114ab&w=1380',
-            departmentName: "Paediatrics",
-            team: "Our paediatrics team includes paediatricians, neonatologists, paediatric nurses and support staff.",
-            facilities: ["Neonatal Intensive Care Unit (NICU)", "Paediatric Intensive Care Unit (PICU)", "Child-friendly examination rooms and play areas" ],
-            services: ["General Pediatrics: Routine check-ups, immunizations, and treatment for common childhool illnesses.", "Neonatology: Specialized care for newborns, including premature and critically ill infants", "Paediatric cardiology: Diagnosis and treatment of heart conditions in children.", "paediatric Neurology: Care for neurological disorders in children. ", "Paediatric Oncology: Treatment for childhool cancers."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Obstetrics and Gynaecology department at OAUTHC offers comprehensive care for women’s reproductive health. We provide a full range of services from prenatal care to advanced gynecological treatments.", 
-            departmentImage: 'https://img.freepik.com/free-photo/woman-with-pregnancy-discussing-with-specialist-about-medical-care-office-general-practitioner-talking-patient-expecting-child-about-healthcare-support-wearing-face-masks_482257-28804.jpg?w=1380&t=st=1719839740~exp=1719840340~hmac=4d981ac71943ba69c69155941b36c46c01255ec41562d5b5eb952f22764ec69c',
-            departmentName: "Obstetrics & Gynaecology",
-            team: "Our obstetrics and gynaecology team includes obstetricians, gynaecologists, midwives, and specialised nursing staff.",
-            facilities: ["Modern labour and delivery rooms", "Advanced surgical suites for gynaecological procedures", "Comprehensive prenatal and antenatal care facilities" ],
-            services: ["Prenatal and Antenatal Care: Monitoring and care throughout pregnancy.", "Labour and Delivery: Safe and supportive childbirth services", "Gynaecological Surgery: Procedures for reproductive systems conditions", "Fertility Services: Evaluation and treatment for infertility. ", "Menopausal Care: Management of menopausal symptoms and health."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Mental Health department at OAUTHC is dedicated to the diagnosis, treatment, and support of individuals with mental health conditions. Our multidisciplinary approach ensures comprehensive care for all patients.", 
-            departmentImage: 'https://img.freepik.com/free-photo/mental-health-care-sketch-diagram_53876-123900.jpg?t=st=1719840178~exp=1719843778~hmac=aaa18ffed36fd63def2ee0742f974a178b670bd3dc07e96144b56bdb61e97d90&w=826',
-            departmentName: "Mental Health",
-            team: "Our mental health team includes psychiatrists, psychologists, therapists, and psychiatric nurses.",
-            facilities: ["Outpatient and inpatient care units", "Therapy rooms for individual and group sessions", "Specialized facilities for substance abuse treatment"],
-            services: ["General Psychiatry: Diagnosis and treatment of common health disorders ", "Child and Adolescent Psychiatry: Specialized care for younger patients. ", "Psychotherapy: Individual, group and family therapy sessions", "Substance Abuse Treatment: Programs for addiction recovery.", "Crisis Intervention: Immediate support for acute mental health crises."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Otorhinolaryngology department at OAUTHC provides comprehensive care for ear, nose and throat disorders. Our experts are skilled in both medical and surgical treatments for ENT conditions.", 
-            departmentImage: 'https://img.freepik.com/free-photo/healthcare-facility-otologist-checking-internal-ear-infection-illness-using-otoscope-clinic-otology-specialist-consulting-sick-woman-ear-infection-prevent-otitis-other-health-complications_482257-37992.jpg?w=1380&t=st=1719841657~exp=1719842257~hmac=d67e861ebfb9d3b51ca9ddd48b054a6e94a12062689e06caa768f00987dd0c98',
-            departmentName: "Otorhinolaryngology ",
-            team: "Our ENT team includes otolaryngologists, audiologists, speech therapists and specialized nursing staff.",
-            facilities: ["Audiology lab for hearing tests", "Endoscopic equipment for minially invasive procedures", "Advanced surgical theatres for ENT surgeries." ],
-            services: ["General ENT Care: Treatment for common ENT conditions such as sinusitis, tonsilitis, and ear infections.", "Hearing and Balance: Audiology service and management of balance disorders.", "Voice and Swallowing: Diagnosis and treatment of voice and swallowing disorders."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Neurology department at OAUTHC specializes in diagnosing and treating disorders of the nervous system, including the brain, spinal cord, and peripheral nerves. Our multidisciplinary team is dedicated to providing comprehensive neurological care.", 
-            departmentImage: 'https://img.freepik.com/free-photo/back-view-man-patient-wearing-performant-brainwave-scanning-headset-sitting-neurological-research-laboratory-while-medical-researcher-adjusting-it-examining-nervous-system-typing-tablet_482257-16484.jpg?t=st=1719843310~exp=1719846910~hmac=b9b258da67bf891f3ced4f26ef207b2848e41c7110eba98915345908170046ef&w=1380',
-            departmentName: "Neurology",
-            team: "Our neurology team includes board-certified neurologiests, neurosurgeons, neurophysiologists and specialized nursing staff.",
-            facilities: ["Advanced neuroimaging (MRI, CT)", "Neurophysiology lab for EEG and EMG", "Stroke unit with dedicated care" ],
-            services: ["General Neurology: Evaluation and management of neurological disorders such as  headaches, epilepsy and movement disorders.", "Stroke Care: Acute management and rehabilitation for stroke patients.", "Neuroimmunology: Treatment for multiple sclerosis and other autoimmune neurological conditions.", "Neurophysiology: Diagnosticc testings such as EEG and EMG.", "Neuro-oncology: Treatment for brain and spinal cord tumors."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Ophthalmology department at OAUTHC offers comprehensive eye care services, including the diagnosis and treatment of eye diseases and conditions. We are committed to preserving and restoring vision through advanced medical and surgical care.", 
-            departmentImage: 'https://img.freepik.com/free-photo/ophthalmologist-doctor-consulting-patient_23-2150923356.jpg?t=st=1719843447~exp=1719847047~hmac=9554a349f46fb2e7aeb5c0df9a6fde7030687dff7a4988e3336f25067da880af&w=1380',
-            departmentName: "Ophthalmology",
-            team: "Our ophthalmology team includes board-certified ophthalmology team includes board-certified ophthalmologists, optometrists and trained ophthalmic technicians.",
-            facilities: ["Advanced diagnostic imaging (OCT, retinal photography)", "State-of-the-art surgical suites for eye procedures", "Laser treatment facilities" ],
-            services: ["General Eye Care: Routine eye exams, vision correction and management of common eye conditions", "Cataract Surgery: Removal and replacement of cataracts.", "Glaucoma Management: Diagnosis and treatment of glaucoma.", "Retina Services: Treatment for retinal disorders such as diabetic retinopathy and macular degeneration.", "Paediatric Ophthalmology: Specialized eye care for children."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Dermatology department at OAUTHC provides comprehensive care for skin, hair and nail disorders. Our specialists are dedicated to diagnosing and treating a wide range of dermatological conditions.", 
-            departmentImage: 'https://img.freepik.com/free-photo/person-getting-micro-needling-beauty-treatment_23-2149334294.jpg?w=740&t=st=1719843907~exp=1719844507~hmac=017c1d4dd6cf58948ad1384b7df30c58aa6160869c21e970f710b1049c39f9d9',
-            departmentName: "Dermatology & Venereology",
-            team: "Our dermatology team includes board-certified dermatologists, dermatologic surgeons and specialised nursing staff.",
-            facilities: ["Advanced laser and light therapy equipment", "State-of-the-art surgical suites for dermatologic procedures", "Comprehensive diagnostic labs" ],
-            services: ["General Dermatology: Treatment for acne, eczema, psoriasis and other common skin conditions.", "Skin Cancer: Diagnosis and treatment of skin cancer, including melanoma.", "Cosmetic Dermatology: Procedures such as chemical peels, laser therapy and Botox", "Dermatologic Surgery: Surgical treatment for skin lesions and tumors."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Oral and Maxillofacial Surgery department at OAUTHC provides surgical care for diseases, injuries, and defects of the head, neck, face, jaws, and oral cavity. Our team is skilled in both minor and major surgical procedures.", 
-            departmentImage: 'https://img.freepik.com/free-photo/medium-shot-doctor-checking-young-patient_23-2149352211.jpg?t=st=1719845124~exp=1719848724~hmac=4079f8ad21e0cc2ba698c18256053b52928650cb361405834a4e8e85a7ff41d3&w=740',
-            departmentName: "Oral & Maxillofacial Surgery",
-            team: "The Oral and Maxillofacial Surgery department at OAUTHC provides surgical care for diseases, injuries and defects of the head, neck, face, jaw and oral cavity. Our team is skilled in both minor and major surgical procedures.",
-            facilities: ["Modern operating theatres with advanced surgical equipment", "Outpatient clinics for minor procedures", "Inpatient facilities for complex surgeris" ],
-            services: ["Dental Implants: Surgical placement of dental implants", "Orthognathic Surgery: Corrective jaw surgery", "Facial Trauma: Treatment for facial fractures and injuries", "Oral Pathology: Diagnosis and treatment of oral diseases.", "Reconstructive Surgery: Reconstruction of facial and oral structures after injury or disease."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Restorative Dentistry department at OAUTHC focuses on restoring the function and appearance of the teeth. Our services includes a range of treatments from fillings to complex dental restorations.", 
-            departmentImage: 'https://img.freepik.com/free-photo/view-from-side-female-doctor-process-doing-filling_651396-1703.jpg?w=1380&t=st=1719844566~exp=1719845166~hmac=5e9b4be4a1d7396f3df2179a4e56bca0f229a6f1c5c379e68034cae54cb1bfee',
-            departmentName: "Restorative Dentistry",
-            team: "Our restorative dentistry team includes board-certified dentists, dental hygienists and lab technicians.",
-            facilities: ["Advanced dental chairs and equipment", "Digitial radiography for precise diagnosis", "On-site dental lab for custom restorations" ],
-            services: ["Dental Fillings: Repairing caviities and restoring tooth structure", "Crowns and Bridges: Restoring damaged or missing teeth", "Dentures: Creating and fitting partial or complete dentures", "Root Canal Therapy: Treating infected or damaged tooth pulp", "Cosmetic Dentistry: Enhancing the appearance of teeth through veneers, bonding and whitening."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Child Dental Health department at OAUTHC provides comprehensive dental care for children from infancy through adolescence. Our goal is to promote good oral health and prevent dental problems.", 
-            departmentImage: 'https://img.freepik.com/free-photo/happy-afro-kid-regular-check-up-teeth-dental-clinic_651396-1411.jpg?t=st=1719845300~exp=1719848900~hmac=6e9dca5bd8834570debba446078afcb4faf42e7d4ad290a7bd79a55efd962960&w=1380',
-            departmentName: "Child Dental Health",
-            team: "Our child health team includes paediatric dentists, dental hygienists and support staff trained in child-friendly care.",
-            facilities: ["Child-friendly examination rooms", "Specialized paediatric dental equipment", "Educational programs on oral hygiene" ],
-            services: ["Paediatric Dental Exams: Routine check-ups and cleanings.", "Fluoride Treatments: Preventing tooth decay.", "Sealants: Protecting teeth from caviities. ", "Orthodontics: Early assessment and treatment for misaligned teeth. ", "Emergency Dental Care: Managing dental injuries and acute conditions."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Preventive and Community Dentistry department at OAUTHC focuses on promoting oral health and preventing dental diseases within the community. Our programs and services aim to improve overall dental health through education and preventive care.", 
-            departmentImage: 'https://img.freepik.com/free-photo/young-african-american-man-guy-visiting-dentist-s-office-prevention-oral-cavity-man-famale-doctor-while-checkup-teeth_1157-42081.jpg?t=st=1719846000~exp=1719849600~hmac=3b34e135b940742e11b6eee6a77cc67c3e4a4854941a2a5cb6df630cdf59fd25&w=1380',
-            departmentName: "Preventive & Community Dentistry",
-            team: "Our preventive and community dentistry team includes dentists, dental hygienists and public health specialists. ",
-            facilities: ["Mobile dental units for community outreach", "On-site clinics for preventive care", "Educational materials and resources" ],
-            services: ["Community Dental Programs: Outreach and education on oral health. ", "Preventive Care: Cleanings, fluoride treatments and sealants", "School Dental Programs: Dental screenings and treatments for schoolchildren.", "Oral Health Education: Workshops and seminars on maintaining oral hygiene. ", "Research: Studies on preventive measures and community dental health."],
-            phone:  "+ (123) 456-7890"
-        },
-        {
-            overviewText: "The Virology department at OAUTHC specialises in the study and treatment of viral infections. Our laboratory provides comprehensive diagnostic services and supports clinical management of viral diseases.", 
-            departmentImage: 'https://img.freepik.com/free-photo/scientist-wearing-coverall-equipped-medical-laboratory-examining-drug-discovery-with-micropipette-biochemists-analysing-virus-evolution-using-high-tech-researching-vaccine-against-covid19_482257-3798.jpg?t=st=1719847146~exp=1719850746~hmac=2f0b415097596794ef7e746ecf887444c0e636bcb9a4822b96812ffed75ed508&w=1380',
-            departmentName: "Virology",
-            team: "Our virology team includes viorlogists, lab technicians and support staff with expertise in viral diagnositics and treatment.",
-            facilities: ["Advanced molecular diagnostic labs", "Auomated PCR systems for rapid testing", "Specialised equipment for viral culture and analysis" ],
-            services: ["Diagnostic Virology: Detection and identification of viruses", "Viral Load Testing: Monitoring of viral infections such as HIV and Hepatitis.", "Antiviral Therapy: Treatment for viral infections ", "Vaccine Research: Development and testing of vaccines", "Outbreak Management: Response and control of viral outbreaks"],
-            phone:  "+ (123) 456-7890"
-        }
         
     ];
 
@@ -341,7 +134,7 @@ export const DepartmentProvider = ({ children }) => {
           unit: 'Dental Hospital',
           clinicDay: ['Tuesday: 8am - 4pm', 'Thursday: 8am - 4pm', 'Friday: 8am - 4pm'],
           overviewText: "Dr. Emily Wilson is a compassionate dermatologist with over 9 years of experience. She is committed to providing high-quality care and treatment plans to her patients.",
-          accomplishment: "Dr. Wilson is a highly respected dermatologist known for her expertise and empathy. She possesses a unique ability to understand the emotional impact of skin conditions on her patients, and she works tirelessly to develop personalized treatment plans that address both the physical and emotional aspects of their care. Dr. Wilson's commitment to excellence has earned her a reputation as one of the top dermatologists in her field, and her patients appreciate her warm and caring approach to medicine.",
+          accomplishments: "Dr. Wilson is a highly respected dermatologist known for her expertise and empathy. She possesses a unique ability to understand the emotional impact of skin conditions on her patients, and she works tirelessly to develop personalized treatment plans that address both the physical and emotional aspects of their care. Dr. Wilson's commitment to excellence has earned her a reputation as one of the top dermatologists in her field, and her patients appreciate her warm and caring approach to medicine.",
           doctorImage: 'https://img.freepik.com/free-photo/doctor-white-coat-using-digital-tablet-reading-medical-data-gadget-working-hospital-standin_1258-88112.jpg?t=st=1719220474~exp=1719224074~hmac=19cc44dc4ef14ffb9b4224e8fa0a46351985395e55b694d1478dffdb741f3c07&w=1380', 
           email: "eoyetola@oauife.edu.ng",
           linkedIn: "", 
@@ -571,7 +364,7 @@ export const DepartmentProvider = ({ children }) => {
             twitter: "" 
         },
         { 
-            doctorName: 'Prof. Oyedeji Olusola Adetunji', 
+            doctorName: 'Prof. Oyedeji olusola Adetunji', 
             gender: 'Male',
             department: ["Paediatrics", "Child Health"],
             qualification: ['MBChB', 'FWACP (Paed)', 'MSc', 'Trop Paed'],
@@ -830,7 +623,7 @@ export const DepartmentProvider = ({ children }) => {
             gender: 'Female',
             department: ["Family Medicine"],
             qualification: ['MBBS', 'FWACS', 'FMCR', 'M.Sc'],
-            specialty: ['Brest and Interventional Radiology'], 
+            specialty: ['Breast and Interventional Radiology'], 
             unit: 'Ife Hospital Unit',
             clinicDay: ['Monday: 9am - 4pm', 'Wednesday: 9am - 4pm'],
             overviewText: "Dr. Sarah Adams is a dedicated gynecologist with over 7 years of experience. She is committed to providing compassionate and personalized care to her patients",
@@ -843,7 +636,7 @@ export const DepartmentProvider = ({ children }) => {
             twitter: "" 
         },
         { 
-            doctorName: 'Dr. Samuel itilola Oladejo', 
+            doctorName: 'Dr. Samuel titilola Oladejo', 
             gender: 'Male',
             department: ["Radiology"],
             qualification: ['MBBS', 'FWACS (Orthopedics)', 'ACSCoT ATLS Provider'],

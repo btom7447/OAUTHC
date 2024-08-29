@@ -633,7 +633,7 @@ export const UserProvider = ({ children }) => {
             },
             { 
                 id: 9,
-                title: "Dr. Oke Olulwasola Julius",
+                title: "Dr. Oke Oluwasola Julius",
                 status: "Published",
                 dateCreated: "2024-01-15",
                 doctorName: 'Dr. Oke Oluwasola Julius', 

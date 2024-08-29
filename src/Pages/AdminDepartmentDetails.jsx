@@ -13,13 +13,18 @@ const AdminDepartmentDetails = () => {
 
     const department = departmentsData.find(dep => dep.title.toLowerCase().replace(/\s+/g, '-') === departmentTitle);
 
-    const defaultFacilitiesOptions = [
-        // your default facilities options
-    ];
+    // Extract and sort all facilities and services
+    const allFacilities = Array.from(
+        new Set(departmentsData.flatMap(dep => dep.facilities || []))
+    ).sort();
 
-    const defaultServicesOptions = [
-        // your default services options
-    ];
+    const allServices = Array.from(
+        new Set(departmentsData.flatMap(dep => dep.services || []))
+    ).sort();
+
+    // Map to options format for select inputs
+    const defaultFacilitiesOptions = allFacilities.map(facility => ({ label: facility, value: facility }));
+    const defaultServicesOptions = allServices.map(service => ({ label: service, value: service }));
 
     const statusOptions = [
         { value: 'publish', label: 'Publish' },
@@ -34,7 +39,7 @@ const AdminDepartmentDetails = () => {
         services: department?.services.map(service => ({ label: service, value: service })) || [],
         phone: department?.phone || '',
         status: department?.status ? { value: department.status, label: department.status.charAt(0).toUpperCase() + department.status.slice(1) } : null,
-        departmentImage: department?.departmentImage || '',  // Initialize departmentImage
+        departmentImage: department?.departmentImage || '',
         images: department?.images || [],
     });
 
@@ -82,7 +87,6 @@ const AdminDepartmentDetails = () => {
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop: handleDrop,
-        // accept: 'image/*',
         maxFiles: 2
     });
 
@@ -125,7 +129,7 @@ const AdminDepartmentDetails = () => {
                         defaultServicesOptions={defaultServicesOptions}
                     />
                     <DepartmentsDetailsPublish
-                        departmentImage={formData.departmentImage}  // Pass departmentImage prop
+                        departmentImage={formData.departmentImage}
                         formData={formData}
                         handleSave={handleSave}
                         handleDrop={handleDrop}
@@ -141,4 +145,4 @@ const AdminDepartmentDetails = () => {
     );
 };
 
-export default AdminDepartmentDetails;
+export default AdminDepartmentDetails; 
