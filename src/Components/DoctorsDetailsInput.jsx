@@ -13,24 +13,6 @@ const DoctorsDetailsInputs = ({
     const departments = Array.isArray(formData.departments) ? formData.departments : [];
     const qualifications = Array.isArray(formData.qualifications) ? formData.qualifications : [];
 
-    const specialtyOptions = defaultSpecialtiesOptions.map(option => ({
-        ...option,
-        label: option.label,
-        value: option.value
-    }));
-
-    const qualificationOptions = defaultQualificationsOptions.map(option => ({
-        ...option,
-        label: option.label,
-        value: option.value
-    }));
-
-    const departmentOptions = defaultDepartmentOptions.map(option => ({
-        ...option,
-        label: option.label,
-        value: option.value
-    }));
-
     return (
         <div className="details-inputs">
             {/* DOCTOR NAME */}
@@ -61,7 +43,6 @@ const DoctorsDetailsInputs = ({
                     onChange={handleInputChange}
                 ></textarea>
             </label>
-
             {/* SPECIALTIES */}
             <label>
                 Specialties:
@@ -69,22 +50,10 @@ const DoctorsDetailsInputs = ({
                     isMulti
                     value={specialties}
                     onChange={(newValue) => handleSelectChange(newValue, 'specialties')}
-                    options={specialtyOptions}
+                    options={defaultSpecialtiesOptions}
                     className="react-select-container"
-                    classNames={{
-                        control: () => 'react-select__control',
-                        option: () => 'react-select__option',
-                        menu: () => 'react-select__menu',
-                        menuList: () => 'react-select__menu-list',
-                        multiValue: () => 'react-select__multi-value',
-                        multiValueLabel: () => 'react-select__multi-value__label',
-                        multiValueRemove: () => 'react-select__multi-value__remove',
-                        placeholder: () => 'react-select__placeholder',
-                        dropdownIndicator: () => 'react-select__dropdown-indicator',
-                    }}
                 />
             </label>
-
             {/* QUALIFICATIONS */}
             <label>
                 Qualifications:
@@ -92,22 +61,10 @@ const DoctorsDetailsInputs = ({
                     isMulti
                     value={qualifications}
                     onChange={(newValue) => handleSelectChange(newValue, 'qualifications')}
-                    options={qualificationOptions} // Use mapped options
+                    options={defaultQualificationsOptions}
                     className="react-select-container"
-                    classNames={{
-                        control: () => 'react-select__control',
-                        option: () => 'react-select__option',
-                        menu: () => 'react-select__menu',
-                        menuList: () => 'react-select__menu-list',
-                        multiValue: () => 'react-select__multi-value',
-                        multiValueLabel: () => 'react-select__multi-value__label',
-                        multiValueRemove: () => 'react-select__multi-value__remove',
-                        placeholder: () => 'react-select__placeholder',
-                        dropdownIndicator: () => 'react-select__dropdown-indicator',
-                    }}
                 />
             </label>
-
             {/* DEPARTMENTS */}
             <label>
                 Departments:
@@ -115,25 +72,12 @@ const DoctorsDetailsInputs = ({
                     isMulti
                     value={departments}
                     onChange={(newValue) => handleSelectChange(newValue, 'departments')}
-                    options={departmentOptions}
+                    options={defaultDepartmentOptions}
                     className="react-select-container"
-                    classNames={{
-                        control: () => 'react-select__control',
-                        option: () => 'react-select__option',
-                        menu: () => 'react-select__menu',
-                        menuList: () => 'react-select__menu-list',
-                        multiValue: () => 'react-select__multi-value',
-                        multiValueLabel: () => 'react-select__multi-value__label',
-                        multiValueRemove: () => 'react-select__multi-value__remove',
-                        placeholder: () => 'react-select__placeholder',
-                        dropdownIndicator: () => 'react-select__dropdown-indicator',
-                    }}
                 />
             </label>
-
             <p>Social links</p>
             <div className="social-links">
-                {/* FACEBOOK */}
                 <label>
                     Facebook:
                     <input
@@ -143,30 +87,15 @@ const DoctorsDetailsInputs = ({
                         onChange={handleInputChange}
                     />
                 </label>
-            
-                {/* LINKEDIN */}
                 <label>
                     LinkedIn:
                     <input
                         type="text"
-                        name="linkedin"
+                        name="linkedIn"
                         value={formData.linkedIn || ''}
                         onChange={handleInputChange}
                     />
                 </label>
-
-                {/* INSTAGRAM */}
-                <label>
-                    Instagram:
-                    <input
-                        type="text"
-                        name="instagram"
-                        value={formData.instagram || ''}
-                        onChange={handleInputChange}
-                    />
-                </label>
-
-                {/* TWITTER */}
                 <label>
                     Twitter:
                     <input
@@ -176,18 +105,36 @@ const DoctorsDetailsInputs = ({
                         onChange={handleInputChange}
                     />
                 </label>
-
-                {/* EMAIL */}
                 <label>
-                    Email:
+                    Instagram:
                     <input
-                        type="email"
-                        name="email"
-                        value={formData.email || ''}
+                        type="text"
+                        name="instagram"
+                        value={formData.instagram || ''}
                         onChange={handleInputChange}
                     />
                 </label>
             </div>
+            {/* PHONE */}
+            <label>
+                Phone:
+                <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone || ''}
+                    onChange={handleInputChange}
+                />
+            </label>
+            {/* EMAIL */}
+            <label>
+                Email:
+                <input
+                    type="text"
+                    name="email"
+                    value={formData.email || ''}
+                    onChange={handleInputChange}
+                />
+            </label>
         </div>
     );
 };

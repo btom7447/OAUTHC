@@ -3,51 +3,44 @@ import { useParams, Link } from 'react-router-dom';
 import { useUser } from "../Components/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { useDropzone } from 'react-dropzone'; 
-import DoctorsDetailsInputs from "../Components/DoctorsDetailsInput"; 
+import { useDropzone } from 'react-dropzone';
+import DoctorsDetailsInputs from "../Components/DoctorsDetailsInput"
 import DoctorsDetailsPublish from "../Components/DoctorDetailsPublish";
 
 const AdminDoctorsDetails = () => {
     const { doctorName } = useParams();
     const { doctorsData, updateDoctor } = useUser();
 
-    // Find the specific doctor based on URL params
     const doctor = doctorsData.find(doc => doc.doctorName && doc.doctorName.toLowerCase().replace(/\s+/g, '-') === doctorName);
 
-    // Extract unique specialties from doctorsData
     const specialtiesFromDoctorsData = [...new Set(
         doctorsData.flatMap(doctor => 
             Array.isArray(doctor.specialty) ? doctor.specialty : []
         )
     )].sort((a, b) => a.localeCompare(b));
 
-    // Populate defaultSpecialtiesOptions with specialties from doctorsData
     const defaultSpecialtiesOptions = specialtiesFromDoctorsData.map(specialty => ({
         value: specialty,
         label: specialty
     })) || [];
 
-    // Extract unique departments from doctorsData
     const departmentFromDoctorsData = [...new Set(
         doctorsData.flatMap(doctor => 
             Array.isArray(doctor.department) ? doctor.department : []
         )
     )].sort((a, b) => a.localeCompare(b));
 
-    // Populate defaultSpecialtiesOptions with specialties from doctorsData
     const defaultDepartmentOptions = departmentFromDoctorsData.map(department => ({
         value: department,
         label: department
     })) || [];
 
-    // Extract unique qualifications from doctorsData
     const qualificationsFromDoctorsData = [...new Set(
         doctorsData.flatMap(doctor => 
             Array.isArray(doctor.qualification) ? doctor.qualification : []
         )
     )].sort((a, b) => a.localeCompare(b));
 
-    // Populate defaultQualificationsOptions with qualifications from doctorsData
     const defaultQualificationsOptions = qualificationsFromDoctorsData.map(qualification => ({
         value: qualification,
         label: qualification
@@ -93,7 +86,7 @@ const AdminDoctorsDetails = () => {
             });
         }
     }, [doctor]);
-    
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevData => ({
@@ -109,7 +102,8 @@ const AdminDoctorsDetails = () => {
         }));
     };
 
-    const handleSave = () => {
+    const handleSave = (e) => {
+        e.preventDefault();
         const updatedData = {
             ...formData
         };
@@ -150,12 +144,8 @@ const AdminDoctorsDetails = () => {
         });
     };
 
-    if (!doctor) {
-        return <div>Doctor not found</div>;
-    }
-
     return (
-        <>
+        <form onSubmit={handleSave} encType="multipart/form-data">
             <div className="pages-caption">
                 <h1>Pages</h1>
             </div>
@@ -166,7 +156,7 @@ const AdminDoctorsDetails = () => {
                 </Link>
             </div>
             <div className="admin-pages-caption">
-                <h2>Edit "{doctor.doctorName}"</h2>
+                <h2>{doctor ? `Edit "${doctor.doctorName}"` : "Create New Doctor"}</h2>
             </div>
             <div className="doctor-details-page">
                 <div className="details-page-section">
@@ -191,7 +181,7 @@ const AdminDoctorsDetails = () => {
                     />
                 </div>
             </div>
-        </>
+        </form>
     );
 };
 
