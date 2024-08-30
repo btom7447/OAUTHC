@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
-import { useSchools } from './DepartmentProvider';
-import SchoolsCaption from './SchoolsCaption';
-import DoctorsContainer from './DoctorsContainer';
+import { useSchools } from '../Components/DepartmentProvider';
+import SchoolsCaption from '../Components/SchoolsCaption';
+import DoctorsContainer from '../Components/DoctorsContainer';
 
 const SchoolDetails = () => {
     const { schoolName } = useParams();
@@ -41,19 +41,24 @@ const SchoolDetails = () => {
                 </div>
                 <div className="departments-facilities">
                     <h5>{school.schoolName} Facilities</h5>
-                    <p>{school.facilities}</p>
+                    <p>{school.facilitiesText}</p>
                     <ul>
-                        {school.services.map((service, index) => (
+                        {school.facilities.map((facility, index) => (
                             <li key={index}>
                                 <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
-                                {service}
+                                {facility}
                             </li>
                         ))}
                     </ul>
-                </div>
-                <div className="departments-contacts">
-                    <h5>{school.schoolName} Faculties</h5>
-                    <p>{school.contactInfo}</p>
+                    <h5>Faculties of {school.schoolName} </h5>
+                    <ul>
+                        {school.faculties.map((faculty, index) => (
+                            <li key={index}>
+                                <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
+                                {faculty}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
             <DoctorsContainer />

@@ -1,8 +1,8 @@
 import React from "react";
 import Select from 'react-select';
 
-const DepartmentsDetailsPublish = ({
-    departmentImage,  // Pass the department image as a prop
+const SchoolsDetailsPublish = ({
+    schoolImage,  // Pass the department image as a prop
     formData, 
     handleSave, 
     handleDrop, 
@@ -14,7 +14,7 @@ const DepartmentsDetailsPublish = ({
 }) => {
 
     // Determine which image to display
-    const imageToDisplay = departmentImage || ''; // Default to an empty string if no image
+    const imageToDisplay = schoolImage || ''; // Default to an empty string if no image
 
     return (
         <div className="details-publish">
@@ -93,4 +93,4 @@ const DepartmentsDetailsPublish = ({
     );
 };
 
-export default DepartmentsDetailsPublish;
+export default SchoolsDetailsPublish;

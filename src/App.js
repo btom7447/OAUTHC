@@ -11,7 +11,7 @@ import Footer from './Components/Footer';
 import DepartmentDetails from './Components/DepartmentDetails'; 
 import { DepartmentProvider } from './Components/DepartmentProvider';
 import { SectionProvider } from './Components/SectionProvider';
-import SchoolDetails from './Components/SchoolDetails';
+import SchoolDetails from './Pages/SchoolDetails';
 import DoctorsProfile from './Pages/DoctorsProfile';
 import { ServiceProvider } from './Components/ServiceProvider';
 import ServicesDetails from './Components/ServicesDetails';
@@ -23,10 +23,13 @@ import PrivacyPolicy from './Components/PrivacyPolicy';
 import StudentPortal from './Pages/StudentPortal';
 import TeamMemberDetails from './Components/TeamMemberDetails';
 import UserAdmin from './Pages/UserAdmin';
+import LoginPage from './Pages/LoginPage';
+import { AuthProvider, useAuth } from './Components/AuthContext';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const { isAuthenticated, login } = useAuth();
 
   // Check if the current route starts with "/admin"
   const isAdminRoute = location.pathname.startsWith('/admin');
@@ -66,7 +69,11 @@ const App = () => {
               <Route path="/management/:name" element={<TeamMemberDetails />} /> 
               
               {/* ADMIN DASHBOARD ROUTE */}
-              <Route path="/admin/*" element={<UserAdmin />} />
+              <Route path="/admin/login" element={<LoginPage onLogin={login} />} />
+              <Route 
+                path="/admin/*" 
+                element={isAuthenticated ? <UserAdmin /> : <Navigate to="/admin/login" replace />} 
+              />
             </Routes>
 
             {/* Conditionally render Footer */}
@@ -78,4 +85,11 @@ const App = () => {
   );
 };
 
-export default App;
+// Wrap the App component with AuthProvider
+const AppWithAuth = () => (
+  <AuthProvider>
+    <App />
+  </AuthProvider>
+);
+
+export default AppWithAuth;

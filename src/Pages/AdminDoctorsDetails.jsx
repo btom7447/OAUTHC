@@ -13,6 +13,9 @@ const AdminDoctorsDetails = () => {
 
     const doctor = doctorsData.find(doc => doc.name && doc.name.toLowerCase().replace(/\s+/g, '-') === name);
 
+    // Extract doctorId if doctor is found
+    const doctorId = doctor ? doctor.id : null;
+    
     const specialtiesFromDoctorsData = [...new Set(
         doctorsData.flatMap(doctor => 
             Array.isArray(doctor.specialty) ? doctor.specialty : []
@@ -102,12 +105,18 @@ const AdminDoctorsDetails = () => {
         }));
     };
 
+    
     const handleSave = (e) => {
         e.preventDefault();
-        const updatedData = {
-            ...formData
-        };
-        updateDoctor(name, updatedData);
+        if (doctorId) {
+            const updatedData = {
+                ...formData,
+                specialties: formData.specialties.map(spec => spec.value),
+                departments: formData.departments.map(dep => dep.value),
+                qualifications: formData.qualifications.map(qual => qual.value)
+            };
+            updateDoctor(doctorId, updatedData);
+        }
     };
 
     const handleDrop = (acceptedFiles) => {

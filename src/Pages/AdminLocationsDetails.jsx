@@ -25,7 +25,7 @@ const AdminLocationsDetails = () => {
         state: location?.state || '',
         phone: location?.phone || '',
         status: location?.status ? { value: location.status, label: location.status.charAt(0).toUpperCase() + location.status.slice(1) } : null,
-        locationImage: location?.locationImage || '',
+        unitImage: location?.unitImage || '',
         images: location?.images || [],
     });
 
@@ -37,7 +37,7 @@ const AdminLocationsDetails = () => {
                 state: location.state || '',
                 phone: location.phone || '',
                 status: location.status ? { value: location.status, label: location.status.charAt(0).toUpperCase() + location.status.slice(1) } : null,
-                locationImage: location.locationImage || '',
+                unitImage: location.unitImage || '',
                 images: location.images || [],
             });
         }
@@ -82,8 +82,8 @@ const AdminLocationsDetails = () => {
                     formDataToSend.append(`images[${index}]`, image);
                 });
             }
-            if (formData.locationImage) {
-                formDataToSend.append('locationImage', formData.locationImage);
+            if (formData.unitImage) {
+                formDataToSend.append('unitImage', formData.unitImage);
             }
     
             const response = await fetch(url, {
@@ -120,7 +120,7 @@ const AdminLocationsDetails = () => {
                 return {
                     ...prevData,
                     images: newImages,
-                    locationImage: newImages[0] ? newImages[0].preview : prevData.locationImage
+                    unitImage: newImages[0] ? newImages[0].preview : prevData.unitImage
                 };
             });
         }
@@ -137,7 +137,7 @@ const AdminLocationsDetails = () => {
             return {
                 ...prevData,
                 images: newImages,
-                locationImage: newImages.length > 0 ? newImages[0].preview : ''
+                unitImage: newImages.length > 0 ? newImages[0].preview : ''
             };
         });
     };
@@ -169,7 +169,7 @@ const AdminLocationsDetails = () => {
                             handleSelectChange={handleSelectChange}
                         />
                         <LocationsDetailsPublish
-                            locationImage={formData.locationImage}
+                            unitImage={formData.unitImage}
                             formData={formData}
                             handleSave={handleSave}
                             handleDrop={handleDrop}

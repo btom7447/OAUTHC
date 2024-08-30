@@ -77,7 +77,7 @@ import Select from 'react-select';
                     <div className="image-preview">
                         <img src={imageToDisplay} alt="Doctor" style={{ display: imageToDisplay ? 'block' : 'none' }} />                        {doctorImage && (
                             <button onClick={() => handleRemoveImage(0)} className="remove-image-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="26" viewBox="0 0 22 26" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 22 26" fill="none">
                                     <path d="M7.33301 9.16663H9.16634V20.1666H7.33301V9.16663ZM12.833 9.16663H14.6663V20.1666H12.833V9.16663Z" fill="#D34A4A"/>
                                     <path d="M0 3.66667V5.5H1.83333V23.8333C1.83333 24.3196 2.02649 24.7859 2.3703 25.1297C2.71412 25.4735 3.18044 25.6667 3.66667 25.6667H18.3333C18.8196 25.6667 19.2859 25.4735 19.6297 25.1297C19.9735 24.7859 20.1667 24.3196 20.1667 23.8333V5.5H22V3.66667H0ZM3.66667 23.8333V5.5H18.3333V23.8333H3.66667ZM7.33333 0H14.6667V1.83333H7.33333V0Z" fill="#D34A4A"/>
                                 </svg>

@@ -1,11 +1,11 @@
 import React from 'react';
-import { CurrentSectionProvider } from './CurrentSectionContent';
-import PageCaption from './PageCaption';
-import SectionWrapper from './SectionWrapper';
-import TestimonialCarousel from './TestimonialCarousel';
-import GetInTouch from './GetInTouch';
-import DepartmentList from './DepartmentList';
-import { useDepartments } from './DepartmentProvider';
+import { CurrentSectionProvider } from '../Components/CurrentSectionContent';
+import PageCaption from '../Components/PageCaption';
+import SectionWrapper from '../Components/SectionWrapper';
+import TestimonialCarousel from '../Components/TestimonialCarousel';
+import GetInTouch from '../Components/GetInTouch';
+import DepartmentList from '../Components/DepartmentList';
+import { useDepartments } from '../Components/DepartmentProvider';
 
 const DepartmentCenter = () => {
     const departments = useDepartments();

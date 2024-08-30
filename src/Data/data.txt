@@ -1518,6 +1518,44 @@ departmentData: [
     }
 ], 
 
+unitsData: [
+    {
+        unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/ife-unit.png?raw=true",
+        name: "Ife Hospital Unit",
+        state: "Ile-Ife, Osun State",
+        address: "Ilesa Road, Ile-Ife.", 
+        dateCreated: "Aug 30, 2024",
+    },
+    {
+        unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%201.png?raw=true",
+        name: "Ijeshaland Geriatric Centre",
+        state: "Ilesa, Osun State",
+        address: "Ijebu-Jesa Road, Ilesa.",
+        dateCreated: "Aug 30, 2024",
+    },
+    {
+        unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%204.jpg?raw=true",
+        name: "Rural Comprehensive Health Centre",
+        state: "Imesi-Ile, Osun State",
+        address: "Imesi-Ile",
+        dateCreated: "Aug 30, 2024",
+    },
+    {
+        unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%205.jpg?raw=true",
+        name: "urban Comprehensive Health Centre",
+        state: "Ile-Ife, Osun State",
+        address: "Eleyele Street, Ile-Ife.",
+        dateCreated: "Aug 30, 2024",
+    },
+    {
+        unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/wesley-guild-unit.png?raw=true",
+        name: "Wesley Guild Hospital Unit",
+        state: "Ilsea, Osun State",
+        address: "Ijofi Road, Ilesa.",
+        dateCreated: "Aug 30, 2024",
+    },
+],
+
 healthServices: [
     {
         name: "Cardiology",

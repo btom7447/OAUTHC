@@ -5,41 +5,26 @@ const DepartmentContext = createContext();
 export const DepartmentProvider = ({ children }) => {
     const [departments, setDepartments] = useState([]);
     const [doctors, setDoctors] = useState([]);
+    const [units, setUnits] = useState([]);
     const [schools] = useState([
         {
-            overviewText: "The School of Nursing Ife, dedicated to educating students to become compassionate and skilled nurses, equipped to provide exceptional patient care in a variety of settings",
+            overviewText: "The School of Nursing Ife, dedicated to educating students to become compassionate and skilled nurses, equipped to provide exceptional patient care in a variety of settings", 
             schoolImage: "https://img.freepik.com/free-photo/group-african-medical-students-posed-outdoor_627829-380.jpg?t=st=1719490292~exp=1719493892~hmac=5275ddb66ebf23cb36174e8c484c3e88b622c0bda49e0caa3b5c663a681ce6d1&w=1380",
             schoolName: "School of Nursing, Ife",
-            description: "The school's comprehensive curriculum emphasizes evidence-based practice, critical thinking, and effective communication...",
-            facilities: "Equipped with state of the art facilities to support student learning and success...",
-            services: ["Simulation labs with high-fidelity mannequins", "Skills labs for hands-on practice", "Advanced audiovisual equipment for interactive learning"],
-            facultiesNames: ["Faculty of a", "Faculty of b", "Faculty of c"]
+            description: "The school's comprehensive curriculum emphasizes evidence-based practice, critical thinking, and effective communication. Students gain hands-on experience in state-of-the-art simulation labs and clinical settings, preparing them for a successful nursing career. Graduates of the School of Nursing are highly sought after for their expertise and commitment to delivering high-quality patient care. They go on to work in hospitals, clinics, and communities, making a positive impact on the healthcare landscape.",
+            facilitiesText: "Equipped with state of the art facilities to support student learning and success. Our simulation labs, skills labs and classrooms are equipped with the latest technology and equipment, simulating real-world healthcare settings.",
+            facilities: ["Simulation labs with high-fidelity mannequins", "Skills labs for hands-on practice", "Advanced audiovisual equipment for interactive learning"],
+            faculties: ["Faculty of a", "Faculty of b", "Faculty of c"]
         },
-    ]);
-
-    const [units] = useState([
-        {
-            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/ife-unit.png?raw=true",
-            unitName: "Ife Hospital Unit",
-            unitLocation: "Ile-Ife, Osun State",
-            unitAddress: "Ilesa Road, Ile-Ife."
-        },
-        {
-            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%201.png?raw=true",
-            unitName: "Ijeshaland Geriatric Centre",
-            unitLocation: "Ilesa, Osun State",
-            unitAddress: "Ijebu-Jesa Road, Ilesa."
-        },
-        // Add other units here...
+        // Additional static school data here...
     ]);
 
     const fetchData = async () => {
-        // Fetch departments
         const departmentUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department';
         const doctorUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctors';
+        const unitUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/unit';
 
         try {
-            // Fetch departments
             const departmentResponse = await fetch(departmentUrl, {
                 method: 'GET',
                 headers: {
@@ -56,12 +41,21 @@ export const DepartmentProvider = ({ children }) => {
                 }
             });
 
-            if (!departmentResponse.ok || !doctorResponse.ok) {
-                throw new Error(`HTTP error! Department status: ${departmentResponse.status}, Doctor status: ${doctorResponse.status}`);
+            const unitResponse = await fetch(unitUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+                }
+            });
+
+            if (!departmentResponse.ok || !doctorResponse.ok || !unitResponse.ok) {
+                throw new Error(`HTTP error! Department status: ${departmentResponse.status}, Doctor status: ${doctorResponse.status}, Unit status: ${unitResponse.status}`);
             }
 
             const departmentData = await departmentResponse.json();
             const doctorData = await doctorResponse.json();
+            const unitData = await unitResponse.json();
 
             if (departmentData && departmentData.data) {
                 const transformedDepartments = departmentData.data.map(department => ({
@@ -73,8 +67,8 @@ export const DepartmentProvider = ({ children }) => {
                     departmentImage: department.image_url || '',
                     departmentName: department.name,
                     text: department.text,
-                    facilities: department.facilities,
-                    services: department.services,
+                    facilitiesText: department.facilities,
+                    facilities: department.services,
                     phone: department.phone
                 }));
                 setDepartments(transformedDepartments);
@@ -102,12 +96,23 @@ export const DepartmentProvider = ({ children }) => {
                 }));
                 setDoctors(transformedDoctors);
             }
+
+            if (unitData && unitData.data) {
+                const transformedUnits = unitData.data.map(unit => ({
+                    id: unit.id,
+                    unitName: unit.name,
+                    unitAddress: unit.address,
+                    unitLocation: unit.state,
+                    unitImage: unit.unitImage,
+                    // Add other properties as needed
+                }));
+                setUnits(transformedUnits);
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
 
-    // Fetch data when the component mounts
     useEffect(() => {
         fetchData();
     }, []);

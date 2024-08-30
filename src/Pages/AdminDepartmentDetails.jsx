@@ -19,7 +19,7 @@ const AdminDepartmentDetails = () => {
         ? departmentsData.find(dep => dep.name.toLowerCase().replace(/\s+/g, '-') === name) 
         : null;
 
-    const [formData, setFormData] = useState({
+        const [formData, setFormData] = useState({
         name: department?.name || '',
         overviewText: department?.overviewText || '',
         text: department?.text || '',
@@ -80,53 +80,58 @@ const AdminDepartmentDetails = () => {
 
     const handleSave = async () => {
         try {
-            const method = isCreating ? 'POST' : 'PUT';
-            const url = isCreating
-                ? 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department'
-                : `https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department/${department.id}`;
+            const isUpdate = !isCreating; 
+            const url = isUpdate
+                ? `https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-department/${department.id}`
+                : 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department'; 
     
-            // Create FormData instance
+            // FormData instance
             const formDataToSend = new FormData();
-            formDataToSend.append('name', formData.name);
-            formDataToSend.append('overviewText', formData.overviewText);
-            formDataToSend.append('text', formData.text);
-            formDataToSend.append('phone', formData.phone);
-            formDataToSend.append('status', formData.status?.value || '');
+            formDataToSend.append('name', formData.name || '');
+            formDataToSend.append('over_view_text', formData.overviewText || '');
+            formDataToSend.append('text', formData.text || '');
+            formDataToSend.append('phone', formData.phone || '');
     
-            formData.facilities.forEach(facility => formDataToSend.append('facilities[]', facility.value));
-            formData.services.forEach(service => formDataToSend.append('services[]', service.value));
-    
-            if (formData.images.length > 0) {
-                formData.images.forEach((image, index) => {
-                    formDataToSend.append(`images[${index}]`, image);
-                });
-            }
+            // Append image
             if (formData.departmentImage) {
-                formDataToSend.append('departmentImage', formData.departmentImage);
+                formDataToSend.append('image', formData.departmentImage);
             }
     
+            // Append services
+            formData.services.forEach((service, index) => {
+                formDataToSend.append(`services[${index}]`, service.value);
+            });
+    
+            // Append facilities
+            formData.facilities.forEach((facility, index) => {
+                formDataToSend.append(`facilities[${index}]`, facility.value);
+            });
+    
+            for (let [key, value] of formDataToSend.entries()) {
+                console.log(`${key}:`, value);
+            }
+    
+            // Send request
             const response = await fetch(url, {
-                method,
+                method: isUpdate ? 'PUT' : 'POST',
                 body: formDataToSend,
             });
     
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                const errorData = await response.json();
+                throw new Error(`Error: ${errorData.message || 'Network response was not ok'}`);
             }
     
             const result = await response.json();
             console.log('Save successful:', result);
-    
-            // Call updateDepartment to update the context state with the new department data
-            if (!isCreating) {
-                updateDepartment(department.id, result); // Assuming result contains the updated department data
-            }
-    
-            navigate('/admin/departments');
+            navigate('/admin/departments'); 
         } catch (error) {
             console.error('Error saving data:', error);
         }
     };
+    
+    
+    
     
 
     const handleDrop = (acceptedFiles) => {

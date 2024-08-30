@@ -33,88 +33,77 @@ a {
 
 /* ADMIN USER LOGIN */
 .login-container {
-    width: 100vw;
-    height: 100vh;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--secondary-green);
-    padding: 20px;
+    display: grid;
+    place-items: center;
+    height: 100vh; 
+    background-color: var(--ash);
 }
 .login-form {
-    padding: 50px;
+    display: grid;
+    gap: 1rem;
+    max-width: 450px; 
+    width: 100%; 
+    padding: 3rem;
     background: var(--white);
     border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 1000px;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .login-form > div {
-    display: flex;
-    align-items: center;
+    display: grid;
+    place-items: center;
 }
-.login-form > div img {
-    width: 100px;
-    height: 100px;
+.login-form img {
+    max-width: 150px;
     object-fit: cover;
 }
-.login-form > div h2 {
-    font-family: "Work Sans";
-    font-size: 20px;
-    font-style: normal;
-    line-height: normal; 
+.login-form h2 {
+    margin: 1rem 0;
 }
 .login-form input {
-    margin: 10px auto;
-    width: 100%;
+    width: 100%; 
     padding: 10px;
     outline: none;
-    border: 1px solid var(--primary-green);
+    border: 1px solid var(--primary-green); 
+    border-radius: 4px; 
+    font-family: worksan;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+.login-form > button {
+    padding: 10px;
+    border: none;
     border-radius: 4px;
-    font-family: Montserrat;
+    background-color: var(--primary-green); 
+    color: white;
+    cursor: pointer; 
+    font-family: worksan;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
 }
-.login-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--primary-green);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: center;
-    font-family: "Work Sans";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    transition: background-color 0.3s ease-in-out;
-    margin-bottom: 20px;
-}
-.login-form button:hover {
+.login-form > button:hover {
     background-color: var(--secondary-green);
 }
-.login-form a {
-    text-align: center;
-    font-family: "Work Sans";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    color: var(--primary-red);
+.password-container {
+    position: relative;
 }
-.login-form a:hover {
-    text-decoration: underline;
+.password-container input {
+    padding-right: 40px;
+}
+.password-toggle {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.password-toggle svg {
+    font-size: 14px; 
 }
   
 /* USER ADMIN */
@@ -1223,6 +1212,14 @@ a {
 .details-publish .image-box .image-preview img {
     width: 100%;
     height: 250px;
+    object-fit: cover;
+    object-position: center;
+    display: flex;
+    border-radius: 4px;
+}
+.details-publish .image-box .image-preview .units-image-preview {
+    width: 100%;
+    height: 150px;
     object-fit: cover;
     object-position: center;
     display: flex;

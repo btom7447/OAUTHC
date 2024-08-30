@@ -123,6 +123,14 @@ const AdminSidebar = () => {
                             </li>
                             <li>
                                 <NavLink
+                                    to="/admin/schools"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Schools
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
                                     to="/admin/units"
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                 >
