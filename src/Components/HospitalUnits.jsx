@@ -6,11 +6,11 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 const HospitalUnits = ({ unitData }) => {
     return (
         <div className="oauthc-location-container">
-            {unitData.map(({ unitPoster, unitName, unitLocation, exactLocation }, index) => (
+            {unitData.map(({ unitImage, unitName, unitLocation, unitAddress }, index) => (
                 <div className="oauthc-location-log" key={index}>
                     <div className="hospital-units">
                         <div className="hospital-units-poster">
-                            <img src={unitPoster} alt={unitName} />
+                            <img src={unitImage} alt={unitName} />
                         </div>
                         <div className="hospital-units-caption">
                             <h4>{unitName}</h4>
@@ -25,7 +25,7 @@ const HospitalUnits = ({ unitData }) => {
                                     <path d="M14.9552 15.5005C15.6237 15.5005 16.1961 15.2624 16.6722 14.7863C17.1483 14.3102 17.3863 13.7379 17.3863 13.0693C17.3863 12.4007 17.1483 11.8284 16.6722 11.3523C16.1961 10.8762 15.6237 10.6381 14.9552 10.6381C14.2866 10.6381 13.7143 10.8762 13.2381 11.3523C12.762 11.8284 12.524 12.4007 12.524 13.0693C12.524 13.7379 12.762 14.3102 13.2381 14.7863C13.7143 15.2624 14.2866 15.5005 14.9552 15.5005ZM14.9552 24.435C17.4269 22.1659 19.2604 20.1045 20.4557 18.2507C21.651 16.397 22.2487 14.7509 22.2487 13.3124C22.2487 11.1041 21.5447 9.29592 20.1366 7.88786C18.7285 6.47981 17.0014 5.77578 14.9552 5.77578C12.9089 5.77578 11.1818 6.47981 9.77373 7.88786C8.36567 9.29592 7.66164 11.1041 7.66164 13.3124C7.66164 14.7509 8.25931 16.397 9.45463 18.2507C10.65 20.1045 12.4835 22.1659 14.9552 24.435ZM14.9552 27.6563C11.6933 24.8808 9.2571 22.3027 7.64645 19.9222C6.0358 17.5416 5.23047 15.3384 5.23047 13.3124C5.23047 10.2735 6.208 7.85241 8.16307 6.04929C10.1181 4.24617 12.3822 3.3446 14.9552 3.3446C17.5282 3.3446 19.7922 4.24617 21.7473 6.04929C23.7023 7.85241 24.6799 10.2735 24.6799 13.3124C24.6799 15.3384 23.8745 17.5416 22.2639 19.9222C20.6532 22.3027 18.217 24.8808 14.9552 27.6563Z" fill="#006B5D"/>
                                     </g>
                                 </svg>
-                                <p>{exactLocation}</p>
+                                <p>{unitAddress}</p>
                             </div>
                             {/* CONTACT US */}
                             <div className="unit-icons">

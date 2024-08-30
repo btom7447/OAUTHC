@@ -7,8 +7,8 @@ const formatDate = (dateString) => {
     return date.toLocaleDateString(undefined, options);
 };
 
-const formatTitleForURL = (title) => {
-    return title.toLowerCase().replace(/\s+/g, '-');
+const formatNameForURL = (name) => {
+    return name.toLowerCase().replace(/\s+/g, '-');
 };
 
 const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage, setData }) => {
@@ -16,8 +16,8 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
         return <div className="loading">Loading Items ....</div>;
     }
 
-    // Sort data alphabetically by title
-    const sortedData = [...data].sort((a, b) => a.title.localeCompare(b.title));
+    // Sort data alphabetically by name
+    const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
 
     const handleDelete = async (id) => {
         try {
@@ -46,7 +46,7 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
+                    <th>Name</th>
                     <th>Status</th>
                     <th>Date Created</th>
                     <th>Action</th>
@@ -57,14 +57,14 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                     <tr key={item.id}>
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                         <td>
-                            <Link to={`${basePath}/${formatTitleForURL(item.title)}`}>
-                                {item.title}
+                            <Link to={`${basePath}/${formatNameForURL(item.name)}`}>
+                                {item.name}
                             </Link>
                         </td>
                         <td>{item.status}</td>
                         <td>{formatDate(item.dateCreated)}</td>
                         <td>
-                            <Link to={`${basePath}/${formatTitleForURL(item.title)}`}>
+                            <Link to={`${basePath}/${formatNameForURL(item.name)}`}>
                                 <button>
                                     {/* Edit button */}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none">

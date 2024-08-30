@@ -8,12 +8,12 @@ const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, 
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
 
-    if (!data) return <div>Loading...</div>;
+    if (!data) return <div className="loading">Loading...</div>;
 
     // Sort data alphabetically by title or name (adjust the key if necessary)
     const sortedData = [...data].sort((a, b) => {
-        const aName = a.title || a.name; // Adjust these properties based on your data structure
-        const bName = b.title || b.name;
+        const aName = a.name || ""; 
+        const bName = b.name || "";
         return aName.localeCompare(bName);
     });
 

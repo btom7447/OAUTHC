@@ -15,6 +15,8 @@ import AdminDoctors from "./AdminDoctors";
 import AdminDepartments from "./AdminDepartments"; 
 import AdminDoctorsDetail from "./AdminDoctorsDetails";
 import AdminDepartmentDetails from "./AdminDepartmentDetails";
+import AdminLocations from "./AdminLocations";
+import AdminLocationsDetails from "./AdminLocationsDetails";
 
 const UserAdmin = () => {
     return (
@@ -30,11 +32,14 @@ const UserAdmin = () => {
                         <Route path="/add-admin" element={<AddAdmin />} />
                         <Route path="/sections" element={<AdminSections />} />
                         <Route path="/departments" element={<AdminDepartments />} />
-                        <Route path="/departments/:departmentTitle" element={<AdminDepartmentDetails />} />
+                        <Route path="/departments/:name" element={<AdminDepartmentDetails />} />
                         <Route path="/departments/new" element={<AdminDepartmentDetails />} />
-                        <Route path="/doctors/:doctorName" element={<AdminDoctorsDetail />} />
+                        <Route path="/doctors/:name" element={<AdminDoctorsDetail />} />
                         <Route path="/doctors/new" element={<AdminDoctorsDetail />} />
                         <Route path="/doctors" element={<AdminDoctors />} />
+                        <Route path="/units" element={<AdminLocations />} />
+                        <Route path="/units/:name" element={<AdminLocationsDetails />} />
+                        <Route path="/units/new" element={<AdminLocationsDetails />} />
                         <Route path="/appointments" element={<AdminAppointments />} />
                         <Route path="/services" element={<AdminServices />} />
                         <Route path="/patients" element={<AdminPatients />} />

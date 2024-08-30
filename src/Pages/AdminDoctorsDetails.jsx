@@ -8,10 +8,10 @@ import DoctorsDetailsInputs from "../Components/DoctorsDetailsInput"
 import DoctorsDetailsPublish from "../Components/DoctorDetailsPublish";
 
 const AdminDoctorsDetails = () => {
-    const { doctorName } = useParams();
+    const { name } = useParams();
     const { doctorsData, updateDoctor } = useUser();
 
-    const doctor = doctorsData.find(doc => doc.doctorName && doc.doctorName.toLowerCase().replace(/\s+/g, '-') === doctorName);
+    const doctor = doctorsData.find(doc => doc.name && doc.name.toLowerCase().replace(/\s+/g, '-') === name);
 
     const specialtiesFromDoctorsData = [...new Set(
         doctorsData.flatMap(doctor => 
@@ -68,7 +68,7 @@ const AdminDoctorsDetails = () => {
     useEffect(() => {
         if (doctor) {
             setFormData({
-                name: doctor.doctorName || '',
+                name: doctor.name || '',
                 overviewText: doctor.overviewText || '',
                 accomplishments: doctor.accomplishments || '',
                 specialties: doctor.specialty ? doctor.specialty.map(spec => ({ value: spec, label: spec })) : [],
@@ -107,7 +107,7 @@ const AdminDoctorsDetails = () => {
         const updatedData = {
             ...formData
         };
-        updateDoctor(doctorName, updatedData);
+        updateDoctor(name, updatedData);
     };
 
     const handleDrop = (acceptedFiles) => {
@@ -156,7 +156,7 @@ const AdminDoctorsDetails = () => {
                 </Link>
             </div>
             <div className="admin-pages-caption">
-                <h2>{doctor ? `Edit "${doctor.doctorName}"` : "Create New Doctor"}</h2>
+                <h2>{doctor ? `Edit "${doctor.name}"` : "Create New Doctor"}</h2>
             </div>
             <div className="doctor-details-page">
                 <div className="details-page-section">

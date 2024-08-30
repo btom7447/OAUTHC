@@ -15,7 +15,8 @@ export const DepartmentProvider = ({ children }) => {
             facultiesNames: ["Faculty of a", "Faculty of b", "Faculty of c"]
         },
     ]);
-    const [doctorsData] = useState([
+
+    const [doctors] = useState([
         { 
             doctorName: 'Prof. Josephine Adetinuola Eniola Eziyi', 
             gender: 'Female',
@@ -32,6 +33,43 @@ export const DepartmentProvider = ({ children }) => {
             facebook: "",
             instagram: "", 
             twitter: ""
+        },
+    ]);
+
+    const [units] = useState([
+        {
+            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/ife-unit.png?raw=true", 
+            unitName: "Ife Hospital Unit", 
+            unitLocation: "Ile-Ife, Osun State", 
+            unitAddress: "Ilesa Road, Ile-Ife."
+        },
+        {
+            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%201.png?raw=true", 
+            unitName: "Ijeshaland Geriatric Centre", 
+            unitLocation: "Ilesa, Osun State", 
+            unitAddress: "Ijebu-Jesa Road, Ilesa."
+    
+        },
+        {
+            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%204.jpg?raw=true", 
+            unitName: "Rural Comprehensie Health Centre", 
+            unitLocation: "Imesi-Ile, Osun State", 
+            unitAddress: "Imesi-Ile"
+    
+        },
+        {
+            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%205.jpg?raw=true", 
+            unitName: "Urban Comprehensive Health Centre", 
+            unitLocation: "Ile-Ife, Osun State", 
+            unitAddress: "Eleyele Street, Ile-Ife"
+    
+        },
+        {
+            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/wesley-guild-unit.png?raw=true", 
+            unitName: "Wesley Guild Hospital Unit", 
+            unitLocation: "Ilesa, Osun State", 
+            unitAddress: "Ijofi Road, Ilesa."
+    
         },
     ]);
 
@@ -88,7 +126,8 @@ export const DepartmentProvider = ({ children }) => {
     const contextValue = {
         departments,
         schools,
-        doctorsData
+        doctors, 
+        units
     };
 
     return (
@@ -98,7 +137,7 @@ export const DepartmentProvider = ({ children }) => {
     );
 };
 
-// Custom hook to access departments data
+// Export the context and custom hooks
 export const useDepartments = () => {
     const context = useContext(DepartmentContext);
     if (!context) {
@@ -107,7 +146,6 @@ export const useDepartments = () => {
     return context.departments;
 };
 
-// Custom hook to access schools data
 export const useSchools = () => {
     const context = useContext(DepartmentContext);
     if (!context) {
@@ -116,11 +154,21 @@ export const useSchools = () => {
     return context.schools;
 };
 
-// Custom hook to access doctors data
 export const useDoctors = () => {
     const context = useContext(DepartmentContext);
     if (!context) {
         throw new Error("useDoctors must be used within a DepartmentProvider");
     }
-    return context.doctorsData;
+    return context.doctors;
 };
+
+export const useUnits = () => {
+    const context = useContext(DepartmentContext);
+    if (!context) {
+        throw new Error("useUnits must be used within a DepartmentProvider");
+    }
+    return context.locations;
+};
+
+// Export the context itself
+export { DepartmentContext };

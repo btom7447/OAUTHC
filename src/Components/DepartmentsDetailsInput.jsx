@@ -15,8 +15,8 @@ const DepartmentsDetailsInputs = ({
                 Department Name:
                 <input
                     type="text"
-                    name="title"
-                    value={formData.title || ''}
+                    name="name"
+                    value={formData.name || ''}
                     onChange={handleInputChange}
                 />
             </label>
