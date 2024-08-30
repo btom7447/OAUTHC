@@ -33,30 +33,39 @@ const DoctorList = () => {
     }
   };
 
-  // Prepare options for react-select
-  const specialtyOptions = [...new Set(doctors.flatMap(doctor => Array.isArray(doctor.specialty) ? doctor.specialty : []))]
-    .sort((a, b) => a.localeCompare(b))
-    .map(specialty => ({ value: specialty, label: specialty }));
+  // Generate options for react-select
+  const generateOptions = (items) => {
+    if (!items || !Array.isArray(items)) return [];
+    const uniqueItems = [...new Set(items.flat())]; // Flatten and get unique items
+    return uniqueItems
+      .filter(item => typeof item === 'string') // Ensure items are strings
+      .sort((a, b) => a.localeCompare(b))
+      .map(item => ({ value: item, label: item }));
+  };
 
+  // Create options
+  const specialtyOptions = generateOptions(doctors.map(doctor => doctor.specialty).flat());
   const genderOptions = [
     { value: 'Male', label: 'Male' },
     { value: 'Female', label: 'Female' },
   ];
-
-  const unitOptions = [...new Set(doctors.map(doctor => doctor.unit))]
-    .sort((a, b) => a.localeCompare(b))
-    .map(unit => ({ value: unit, label: unit }));
+  const unitOptions = generateOptions(doctors.map(doctor => doctor.unit).flat());
 
   // Filter doctors based on search criteria
   const filteredDoctors = doctors.filter(doctor => {
     const matchName = searchName === "" || (doctor.doctorName && doctor.doctorName.toLowerCase().includes(searchName.toLowerCase()));
     const matchSpecialty = searchSpecialty === null || (Array.isArray(doctor.specialty) && doctor.specialty.some(specialty => specialty.toLowerCase() === searchSpecialty.value.toLowerCase()));
     const matchGender = searchGender === null || (doctor.gender && doctor.gender.toLowerCase() === searchGender.value.toLowerCase());
-    const matchUnit = searchUnit === null || (doctor.unit && doctor.unit.toLowerCase().includes(searchUnit.value.toLowerCase()));
+    const matchUnit = searchUnit === null || (Array.isArray(doctor.unit) && doctor.unit.some(unit => unit.toLowerCase().includes(searchUnit.value.toLowerCase())));
     return matchName && matchSpecialty && matchGender && matchUnit;
   });
 
-  const sortedDoctors = filteredDoctors.sort((a, b) => a.doctorName.localeCompare(b.doctorName));
+  const sortedDoctors = filteredDoctors.sort((a, b) => {
+    if (typeof a.doctorName === 'string' && typeof b.doctorName === 'string') {
+      return a.doctorName.localeCompare(b.doctorName);
+    }
+    return 0;
+  });
 
   // Paginate the sorted doctors
   const displayedDoctors = sortedDoctors.slice(startIndex, endIndex);

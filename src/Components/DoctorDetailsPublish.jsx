@@ -46,6 +46,18 @@ import Select from 'react-select';
                         onChange={(selectedOption) => handleSelectChange(selectedOption, 'status')}
                         options={statusOptions}
                         placeholder="Select status"
+                        className="admin-select"
+                        classNames={{
+                            control: () => 'react-select__control',
+                            option: () => 'react-select__option',
+                            menu: () => 'react-select__menu',
+                            menuList: () => 'react-select__menu-list',
+                            multiValue: () => 'react-select__multi-value',
+                            multiValueLabel: () => 'react-select__multi-value__label',
+                            multiValueRemove: () => 'react-select__multi-value__remove',
+                            placeholder: () => 'react-select__placeholder',
+                            dropdownIndicator: () => 'react-select__dropdown-indicator',
+                        }}
                     />
                 </div>
             </div>

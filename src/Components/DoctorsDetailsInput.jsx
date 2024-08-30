@@ -51,7 +51,18 @@ const DoctorsDetailsInputs = ({
                     value={specialties}
                     onChange={(newValue) => handleSelectChange(newValue, 'specialties')}
                     options={defaultSpecialtiesOptions}
-                    className="react-select-container"
+                    className="admin-select"
+                    classNames={{
+                        control: () => 'react-select__control',
+                        option: () => 'react-select__option',
+                        menu: () => 'react-select__menu',
+                        menuList: () => 'react-select__menu-list',
+                        multiValue: () => 'react-select__multi-value',
+                        multiValueLabel: () => 'react-select__multi-value__label',
+                        multiValueRemove: () => 'react-select__multi-value__remove',
+                        placeholder: () => 'react-select__placeholder',
+                        dropdownIndicator: () => 'react-select__dropdown-indicator',
+                    }}
                 />
             </label>
             {/* QUALIFICATIONS */}
@@ -62,7 +73,18 @@ const DoctorsDetailsInputs = ({
                     value={qualifications}
                     onChange={(newValue) => handleSelectChange(newValue, 'qualifications')}
                     options={defaultQualificationsOptions}
-                    className="react-select-container"
+                    className="admin-select"
+                    classNames={{
+                        control: () => 'react-select__control',
+                        option: () => 'react-select__option',
+                        menu: () => 'react-select__menu',
+                        menuList: () => 'react-select__menu-list',
+                        multiValue: () => 'react-select__multi-value',
+                        multiValueLabel: () => 'react-select__multi-value__label',
+                        multiValueRemove: () => 'react-select__multi-value__remove',
+                        placeholder: () => 'react-select__placeholder',
+                        dropdownIndicator: () => 'react-select__dropdown-indicator',
+                    }}
                 />
             </label>
             {/* DEPARTMENTS */}
@@ -73,7 +95,18 @@ const DoctorsDetailsInputs = ({
                     value={departments}
                     onChange={(newValue) => handleSelectChange(newValue, 'departments')}
                     options={defaultDepartmentOptions}
-                    className="react-select-container"
+                    className="admin-select"
+                    classNames={{
+                        control: () => 'react-select__control',
+                        option: () => 'react-select__option',
+                        menu: () => 'react-select__menu',
+                        menuList: () => 'react-select__menu-list',
+                        multiValue: () => 'react-select__multi-value',
+                        multiValueLabel: () => 'react-select__multi-value__label',
+                        multiValueRemove: () => 'react-select__multi-value__remove',
+                        placeholder: () => 'react-select__placeholder',
+                        dropdownIndicator: () => 'react-select__dropdown-indicator',
+                    }}
                 />
             </label>
             <p>Social links</p>
@@ -87,6 +120,7 @@ const DoctorsDetailsInputs = ({
                         name="facebook"
                         value={formData.facebook || ''}
                         onChange={handleInputChange}
+                        placeholder="https://www.facebook.com/"
                     />
                 </label>
                 <label>
@@ -98,6 +132,7 @@ const DoctorsDetailsInputs = ({
                         name="linkedIn"
                         value={formData.linkedIn || ''}
                         onChange={handleInputChange}
+                        placeholder="https://www.linkedin.com/"
                     />
                 </label>
                 <label>
@@ -110,6 +145,7 @@ const DoctorsDetailsInputs = ({
                         name="twitter"
                         value={formData.twitter || ''}
                         onChange={handleInputChange}
+                        placeholder="https://www.twitter.com/"
                     />
                 </label>
                 <label>
@@ -124,6 +160,7 @@ const DoctorsDetailsInputs = ({
                         name="instagram"
                         value={formData.instagram || ''}
                         onChange={handleInputChange}
+                        placeholder="https://www.instagram.com/"
                     />
                 </label>
             </div>

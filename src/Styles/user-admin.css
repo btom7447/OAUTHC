@@ -972,11 +972,16 @@ a {
     margin-bottom: 10px;
 }
 /* REACT SELECT  */
-.react-select-container {
+.admin-select {
     width: 100%;
-    margin-bottom: 20px;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400; 
+    line-height: normal;
+    text-transform: capitalize;
 }
-.react-select__control {
+.admin-select .react-select__control {
     border: 1px solid var(--gray) !important;
     border-radius: 4px;
     padding: 5px;
@@ -990,12 +995,12 @@ a {
     outline: none !important;
     cursor: pointer !important;
 }
-.react-select__control:hover {
+.admin-select .react-select__control:hover {
     outline: none !important;
     box-shadow: none !important;
     border: solid 1px var(--gray) !important;
 }
-.react-select__option {
+.admin-select .react-select__option {
     padding: 5px 10px;
     background-color: white !important;
     color: var(--black) !important;
@@ -1007,21 +1012,21 @@ a {
     outline: none;
     cursor: pointer;
 }
-.react-select__option:hover {
+.admin-select .react-select__option:hover {
    background-color: var(--gray) !important;
 }
-.react-select__multi-value {
+.admin-select .react-select__multi-value {
     background-color: var(--ash) !important;
     border-radius: 2px;
     margin: 3px;
     padding: 2px;
     cursor: pointer;
 }
-.react-select__multi-value__remove {
+.admin-select .react-select__multi-value__remove {
     color: var(--grascale);
     cursor: pointer;
 }
-.react-select__placeholder {
+.admin-select .react-select__placeholder {
     font-family: "Work Sans";
     font-size: 14px;
     font-style: normal;
@@ -1029,7 +1034,7 @@ a {
     line-height: 150%;
     color: var(--grascale);
 }
-.react-select__dropdown-indicator {
+.admin-select .react-select__dropdown-indicator {
     padding: 0 8px;
     color: var(--grascale);
 }

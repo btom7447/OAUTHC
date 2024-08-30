@@ -2549,7 +2549,7 @@ footer .footer-bottom .footer-links {
   outline: none;
   cursor: pointer;
 }
-.doctor-select.react-select__option:hover {
+.doctor-select .react-select__option:hover {
  background-color: var(--gray) !important;
 }
 .doctor-select .react-select__multi-value {

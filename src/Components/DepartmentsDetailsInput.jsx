@@ -47,7 +47,7 @@ const DepartmentsDetailsInputs = ({
                     onChange={(newValue) => handleSelectChange(newValue, 'facilities')}
                     options={defaultFacilitiesOptions}
                     placeholder="Add and select facilities"
-                    className="react-select-container"
+                    className="admin-select"
                     classNames={{
                         control: () => 'react-select__control',
                         option: () => 'react-select__option',
@@ -70,7 +70,7 @@ const DepartmentsDetailsInputs = ({
                     onChange={(newValue) => handleSelectChange(newValue, 'services')}
                     options={defaultServicesOptions}
                     placeholder="Add and select services"
-                    className="react-select-container"
+                    className="admin-select"
                     classNames={{
                         control: () => 'react-select__control',
                         option: () => 'react-select__option',

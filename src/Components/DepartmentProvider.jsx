@@ -4,9 +4,10 @@ const DepartmentContext = createContext();
 
 export const DepartmentProvider = ({ children }) => {
     const [departments, setDepartments] = useState([]);
+    const [doctors, setDoctors] = useState([]);
     const [schools] = useState([
         {
-            overviewText: "The School of Nursing Ife, dedicated to educating students to become compassionate and skilled nurses, equipped to provide exceptional patient care in a variety of settings", 
+            overviewText: "The School of Nursing Ife, dedicated to educating students to become compassionate and skilled nurses, equipped to provide exceptional patient care in a variety of settings",
             schoolImage: "https://img.freepik.com/free-photo/group-african-medical-students-posed-outdoor_627829-380.jpg?t=st=1719490292~exp=1719493892~hmac=5275ddb66ebf23cb36174e8c484c3e88b622c0bda49e0caa3b5c663a681ce6d1&w=1380",
             schoolName: "School of Nursing, Ife",
             description: "The school's comprehensive curriculum emphasizes evidence-based practice, critical thinking, and effective communication...",
@@ -16,117 +17,105 @@ export const DepartmentProvider = ({ children }) => {
         },
     ]);
 
-    const [doctors] = useState([
-        { 
-            doctorName: 'Prof. Josephine Adetinuola Eniola Eziyi', 
-            gender: 'Female',
-            department: ["Otorhinolaryngology - Head & Neck Surgery"],
-            qualification: ['M.B.Ch.B(Ogun)', 'MS.C (imm)', 'LiMH', 'Cert (ME)', 'FWACS (ORL)', 'FMCORL', 'FICS', 'PGF (aud)'],
-            specialty: ['Rhinology & Allergy', 'Paediatric ORL', 'Audiology'], 
-            unit: 'Ife Hospital Unit',
-            clinicDay: ['Wednesday: 8am - 2pm', 'Friday: 10am - 2pm'],
-            doctorImage: 'https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg...',
-            overviewText: "Dr. John Doe is a highly experienced cardiologist, pediatrician, and dermatologist with over 10 years of experience...",
-            accomplishments: "Dr. Doe is an exceptional physician who possesses a unique blend of medical expertise and interpersonal skills...",
-            email: "jeziyi@oauthc.gov.ng",
-            linkedIn: "", 
-            facebook: "",
-            instagram: "", 
-            twitter: ""
-        },
-    ]);
-
     const [units] = useState([
         {
-            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/ife-unit.png?raw=true", 
-            unitName: "Ife Hospital Unit", 
-            unitLocation: "Ile-Ife, Osun State", 
+            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/ife-unit.png?raw=true",
+            unitName: "Ife Hospital Unit",
+            unitLocation: "Ile-Ife, Osun State",
             unitAddress: "Ilesa Road, Ile-Ife."
         },
         {
-            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%201.png?raw=true", 
-            unitName: "Ijeshaland Geriatric Centre", 
-            unitLocation: "Ilesa, Osun State", 
+            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%201.png?raw=true",
+            unitName: "Ijeshaland Geriatric Centre",
+            unitLocation: "Ilesa, Osun State",
             unitAddress: "Ijebu-Jesa Road, Ilesa."
-    
         },
-        {
-            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%204.jpg?raw=true", 
-            unitName: "Rural Comprehensie Health Centre", 
-            unitLocation: "Imesi-Ile, Osun State", 
-            unitAddress: "Imesi-Ile"
-    
-        },
-        {
-            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%205.jpg?raw=true", 
-            unitName: "Urban Comprehensive Health Centre", 
-            unitLocation: "Ile-Ife, Osun State", 
-            unitAddress: "Eleyele Street, Ile-Ife"
-    
-        },
-        {
-            unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/wesley-guild-unit.png?raw=true", 
-            unitName: "Wesley Guild Hospital Unit", 
-            unitLocation: "Ilesa, Osun State", 
-            unitAddress: "Ijofi Road, Ilesa."
-    
-        },
+        // Add other units here...
     ]);
 
-    // Function to fetch departments from the API
-    const fetchDepartments = async () => {
-        const url = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department';
+    const fetchData = async () => {
+        // Fetch departments
+        const departmentUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department';
+        const doctorUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctors';
+
         try {
-            const response = await fetch(url, {
+            // Fetch departments
+            const departmentResponse = await fetch(departmentUrl, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    // Include the authorization header if required
                     // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
                 }
             });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const doctorResponse = await fetch(doctorUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+                }
+            });
+
+            if (!departmentResponse.ok || !doctorResponse.ok) {
+                throw new Error(`HTTP error! Department status: ${departmentResponse.status}, Doctor status: ${doctorResponse.status}`);
             }
-    
-            const responseData = await response.json(); // Parse the JSON from the response
-    
-            // Check if the response has the expected "data" structure
-            if (responseData && responseData.data) {
-                // Transform the data to match the expected format
-                const transformedData = responseData.data.map(department => ({
+
+            const departmentData = await departmentResponse.json();
+            const doctorData = await doctorResponse.json();
+
+            if (departmentData && departmentData.data) {
+                const transformedDepartments = departmentData.data.map(department => ({
                     id: department.id,
                     title: department.name,
                     status: department.status,
                     dateCreated: department.created_at,
-                    overviewText: department.over_view_text, 
-                    departmentImage: '', // Add the logic to handle the department image if available
+                    overviewText: department.over_view_text,
+                    departmentImage: department.image_url || '',
                     departmentName: department.name,
                     text: department.text,
                     facilities: department.facilities,
                     services: department.services,
                     phone: department.phone
                 }));
-    
-                setDepartments(transformedData); // Set only the transformed "data" to the departments state
-            } else {
-                console.error('Failed to retrieve departments:', responseData.message || 'Unexpected response structure');
+                setDepartments(transformedDepartments);
+            }
+
+            if (doctorData && doctorData.data) {
+                const transformedDoctors = doctorData.data.map(doctor => ({
+                    id: doctor.id,
+                    doctorName: doctor.name,
+                    dateCreated: doctor.created_at,
+                    gender: doctor.gender,
+                    department: doctor.departments.map(dep => dep.name),
+                    qualification: doctor.qualifications,
+                    specialty: doctor.specialties,
+                    unit: doctor.units,
+                    clinicDay: doctor.clinic_day,
+                    doctorImage: doctor.image_url,
+                    overviewText: doctor.text_desc,
+                    accomplishments: doctor.accomplishment,
+                    email: doctor.email,
+                    linkedIn: doctor.social_links[0],
+                    facebook: doctor.social_links[1],
+                    instagram: doctor.social_links[2],
+                    twitter: doctor.social_links[3]
+                }));
+                setDoctors(transformedDoctors);
             }
         } catch (error) {
-            console.error('Error fetching departments:', error);
+            console.error('Error fetching data:', error);
         }
     };
 
-    // Fetch departments when the component mounts
+    // Fetch data when the component mounts
     useEffect(() => {
-        fetchDepartments();
+        fetchData();
     }, []);
 
     const contextValue = {
         departments,
         schools,
-        doctors, 
+        doctors,
         units
     };
 
@@ -137,38 +126,10 @@ export const DepartmentProvider = ({ children }) => {
     );
 };
 
-// Export the context and custom hooks
-export const useDepartments = () => {
-    const context = useContext(DepartmentContext);
-    if (!context) {
-        throw new Error("useDepartments must be used within a DepartmentProvider");
-    }
-    return context.departments;
-};
+// Custom hooks for context
+export const useDepartments = () => useContext(DepartmentContext).departments;
+export const useSchools = () => useContext(DepartmentContext).schools;
+export const useDoctors = () => useContext(DepartmentContext).doctors;
+export const useUnits = () => useContext(DepartmentContext).units;
 
-export const useSchools = () => {
-    const context = useContext(DepartmentContext);
-    if (!context) {
-        throw new Error("useSchools must be used within a DepartmentProvider");
-    }
-    return context.schools;
-};
-
-export const useDoctors = () => {
-    const context = useContext(DepartmentContext);
-    if (!context) {
-        throw new Error("useDoctors must be used within a DepartmentProvider");
-    }
-    return context.doctors;
-};
-
-export const useUnits = () => {
-    const context = useContext(DepartmentContext);
-    if (!context) {
-        throw new Error("useUnits must be used within a DepartmentProvider");
-    }
-    return context.locations;
-};
-
-// Export the context itself
 export { DepartmentContext };
