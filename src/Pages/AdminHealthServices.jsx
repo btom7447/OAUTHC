@@ -3,8 +3,8 @@ import { useUser } from "../Components/UserContext";
 import AdminDataDisplay from "../Components/AdminDataDisplay";
 import DepartmentTable from "../Components/AdminDataTable";
 
-const AdminSchools = () => {
-    const { schoolsData } = useUser();
+const AdminHealthServices = () => {
+    const { healthServicesData } = useUser();
 
     return (
         <div className="admin-departments-section">
@@ -12,17 +12,17 @@ const AdminSchools = () => {
                 <h1>Pages</h1>
             </div>
             <div className="admin-pages-caption">
-                <h2>Edit "Our Schools"</h2>
+                <h2>Edit "Health Services"</h2>
             </div>
             <AdminDataDisplay
-                data={schoolsData}
+                data={healthServicesData}
                 TableComponent={DepartmentTable}
-                itemName="schools"
-                basePath="/admin/schools"
+                itemName="health-services"
+                basePath="/admin/health-services"
                 newItemPath="new"
             />
         </div>
     );
 };
 
-export default AdminSchools;
+export default AdminHealthServices;

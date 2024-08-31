@@ -19,6 +19,8 @@ import AdminLocations from "./AdminLocations";
 import AdminLocationsDetails from "./AdminLocationsDetails";
 import AdminSchools from "./AdminSchools";
 import AdminSchoolsDetails from "./AdminSchoolsDetails";
+import AdminHealthServiceDetails from "./AdminHealthServicesDetails";
+import AdminHealthServices from "./AdminHealthServices";
 
 const UserAdmin = () => {
     return (
@@ -45,6 +47,9 @@ const UserAdmin = () => {
                         <Route path="/units" element={<AdminLocations />} />
                         <Route path="/units/:name" element={<AdminLocationsDetails />} />
                         <Route path="/units/new" element={<AdminLocationsDetails />} />
+                        <Route path="/health-services" element={<AdminHealthServices />} />
+                        <Route path="/health-services/:name" element={<AdminHealthServiceDetails />} />
+                        <Route path="/health-services/new" element={<AdminHealthServiceDetails />} />
                         <Route path="/appointments" element={<AdminAppointments />} />
                         <Route path="/services" element={<AdminServices />} />
                         <Route path="/patients" element={<AdminPatients />} />

@@ -154,7 +154,7 @@ const AdminSchoolsDetails = () => {
                 </Link>
             </div>
             <div className="admin-pages-caption">
-            <h2>{isCreating ? 'Create New School' : `Edit "${schoolsData.name}"`}</h2>
+            <h2>{isCreating ? 'Create New School' : `Edit "${school.name}"`}</h2>
             </div>
             <div className="department-details-page">
                 <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>

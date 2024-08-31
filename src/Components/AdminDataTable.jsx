@@ -47,7 +47,6 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Status</th>
                     <th>Date Created</th>
                     <th>Action</th>
                 </tr>
@@ -61,7 +60,6 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                                 {item.name}
                             </Link>
                         </td>
-                        <td>{item.status}</td>
                         <td>{formatDate(item.dateCreated)}</td>
                         <td>
                             <Link to={`${basePath}/${formatNameForURL(item.name)}`}>

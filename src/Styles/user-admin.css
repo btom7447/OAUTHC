@@ -197,9 +197,14 @@ a {
     top: 80px; 
     left: 0;
     width: 250px;
-    overflow-y: auto;
+    overflow-y: scroll;
     padding: 20px;
     background-color: var(--primary-green); 
+    padding-bottom: 80px;
+}
+.admin-sidebar::-webkit-scrollbar {
+    width: 0;
+    display: none;
 }
 .admin-sidebar ul {
     width: 100%;

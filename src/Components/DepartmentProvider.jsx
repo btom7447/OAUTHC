@@ -24,29 +24,36 @@ export const DepartmentProvider = ({ children }) => {
         const doctorUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctors';
         const unitUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/unit';
 
+        const token = localStorage.getItem('bearer_token');
+
+        if (!token) {
+            console.error('No token found. Please log in.');
+            return;
+        }
+
         try {
             const departmentResponse = await fetch(departmentUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
-                }
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`, // Include the token in the header
+              }
             });
-
+      
             const doctorResponse = await fetch(doctorUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
-                }
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              }
             });
-
+      
             const unitResponse = await fetch(unitUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
-                }
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              }
             });
 
             if (!departmentResponse.ok || !doctorResponse.ok || !unitResponse.ok) {
