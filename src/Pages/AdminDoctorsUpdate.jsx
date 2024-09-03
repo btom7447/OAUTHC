@@ -7,6 +7,7 @@ import Select from 'react-select';
 import Creatable from 'react-select/creatable';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from 'react-spinners';
 
 const AdminDoctorsUpdate = () => {
     const { id } = useParams();
@@ -278,7 +279,11 @@ const AdminDoctorsUpdate = () => {
     };
     
     if (!doctorsData || doctorsData.length === 0) {
-        return <div className="loading">Loading...</div>; 
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
     }
 
     return (
@@ -295,7 +300,7 @@ const AdminDoctorsUpdate = () => {
                     </Link>
                 </div>
                 <div className="admin-pages-caption">
-                    <h2>Update Doctor Profile</h2>
+                    <h2>Update "{formData.name}" Profile</h2>
                 </div>
             </div>
             <form onSubmit={handleSave} className='details-page-form'>

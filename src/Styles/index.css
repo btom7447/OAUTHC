@@ -1372,6 +1372,7 @@ footer .footer-bottom .footer-links {
 }
 .landing-page .departments-container .departments {
   display: flex;
+  gap: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -1383,7 +1384,7 @@ footer .footer-bottom .footer-links {
   font-weight: 400;
   line-height: normal;
   color: var(--black);
-  border: solid 1px var(--ash);
+  border: solid 1px var(--gray);
   background-color: var(--white); 
   border-radius: 5px;
   cursor: pointer;

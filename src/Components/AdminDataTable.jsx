@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from "react-spinners";
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -11,7 +12,11 @@ const formatDate = (dateString) => {
 
 const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage, setData }) => {
     if (!data || data.length === 0) {
-        return <div className="loading">Loading Items ....</div>;
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
     }
 
     // Sort data alphabetically by name

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { ClipLoader } from "react-spinners";
 
 const DepartmentList = ({ departments }) => {
     const itemsPerPage = 9; // Number of departments to display per page
@@ -10,7 +11,11 @@ const DepartmentList = ({ departments }) => {
 
     // Check if departments are still loading
     if (!departments || departments.length === 0) {
-        return <div className="loading">Loading Departments ...</div>; 
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
     }
 
     // Sort departments alphabetically by departmentName

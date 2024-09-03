@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Select from 'react-select';
 import { useDoctors } from './DepartmentProvider';
+import { ClipLoader } from 'react-spinners';
 
 const DoctorList = () => {
   const doctors = useDoctors();
@@ -19,7 +20,11 @@ const DoctorList = () => {
   const [searchUnit, setSearchUnit] = useState(null);
 
   if (!doctors || doctors.length === 0) {
-    return <div className="loading">Loading Doctors ...</div>; 
+    return (
+      <div className="loading-spinner loading">
+        <ClipLoader color="#005046" size={100} />
+      </div>
+  );
   }
 
   const totalPages = Math.ceil(doctors.length / itemsPerPage);
