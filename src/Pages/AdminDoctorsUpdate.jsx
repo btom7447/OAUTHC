@@ -40,7 +40,6 @@ const AdminDoctorsUpdate = () => {
     const [selectedQualification, setSelectedQualification] = useState([]);
     const [selectedDepartments, setSelectedDepartments] = useState([]);
     const [selectedUnits, setSelectedUnits] = useState([]);
-    const [setDoctorName] = useState('');
 
     // Transform data for select options
     const specialtiesFromDoctorsData = [...new Set(
@@ -356,7 +355,7 @@ const AdminDoctorsUpdate = () => {
                         />
                     </label>
                     <label>
-                        Units:
+                        Hospital Units:
                         <Select
                             isMulti
                             options={defaultUnitsOptions}
@@ -525,7 +524,7 @@ const AdminDoctorsUpdate = () => {
                    </div>
                     
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Saving...' : 'Save'}
+                        {loading ? 'Updating ...' : 'Update Profile'}
                     </button>
                 </div>
             </form>

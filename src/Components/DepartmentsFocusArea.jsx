@@ -25,7 +25,7 @@ const DepartmentsFocusArea = () => {
       {isLoading ? (
         <div className="preloader">
           {/* Display the ClipLoader spinner while loading */}
-          <ClipLoader color="#005046" size={50} />
+          <ClipLoader color="#005046" size={100} />
         </div>
       ) : (
         <>

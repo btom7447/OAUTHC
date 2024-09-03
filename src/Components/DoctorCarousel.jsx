@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import { useDoctors } from './DepartmentProvider';
+import { ClipLoader } from 'react-spinners';
 
 const DoctorsCarousel = () => {
   const doctors = useDoctors();
 
   if (!doctors || doctors.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-spinner loading">
+          <ClipLoader color="#005046" size={100} />
+      </div>
+    );
   }
 
   return (

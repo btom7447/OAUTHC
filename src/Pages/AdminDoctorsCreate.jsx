@@ -22,7 +22,6 @@ const AdminDoctorsCreate = () => {
     const [doctorDetails, setDoctorDetails] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [genderOptions] = useState([
         { value: 'male', label: 'Male' },
         { value: 'female', label: 'Female' }
@@ -156,7 +155,6 @@ const AdminDoctorsCreate = () => {
                         isLoading: false,
                         autoClose: 3000,
                     });
-                    setError(data.message);
                 }
             })
             .catch((error) => {
@@ -167,7 +165,6 @@ const AdminDoctorsCreate = () => {
                     autoClose: 3000,
                 });
                 console.error('Error:', error);
-                setError('An error occurred while creating the doctor profile.');
             });
     };
     
@@ -216,7 +213,7 @@ const AdminDoctorsCreate = () => {
                             options={genderOptions}
                             defaultValue={genderOptions.find(option => option.value === doctorDetails?.gender)}
                             required
-                            placeholder="Select Gender"
+                            placeholder="Select Doctor's Gender"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -229,17 +226,7 @@ const AdminDoctorsCreate = () => {
                             }}
                         />
                     </label>
-                    <label htmlFor="email">
-                        Email:
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            defaultValue={doctorDetails?.email || ''}
-                            required
-                            placeholder="john.doe@oauthc.com"
-                        />
-                    </label>
+                    
                     <label htmlFor="department">
                         Departments:
                         <Select
@@ -251,29 +238,6 @@ const AdminDoctorsCreate = () => {
                             onChange={handleDepartmentChange}
                             required
                             placeholder="Select Doctor's Department"
-                            className="admin-select"
-                            classNames={{
-                                control: () => 'react-select__control',
-                                option: () => 'react-select__option',
-                                menu: () => 'react-select__menu',
-                                menuList: () => 'react-select__menu-list',
-                                singleValue: () => 'react-select__single-value',
-                                placeholder: () => 'react-select__placeholder',
-                                dropdownIndicator: () => 'react-select__dropdown-indicator',
-                            }}
-                        />
-                    </label>
-                    <label htmlFor="specialty">
-                        Specialties:
-                        <CreatableSelect
-                            id="specialty"
-                            name="specialty"
-                            isMulti
-                            value={specialties}
-                            options={defaultSpecialtiesOptions}
-                            onChange={handleSpecialtyChange}
-                            required
-                            placeholder="Create or Select Doctor's Speciality"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -309,6 +273,30 @@ const AdminDoctorsCreate = () => {
                             }}
                         />
                     </label>
+                    <label htmlFor="specialty">
+                        Specialties:
+                        <CreatableSelect
+                            id="specialty"
+                            name="specialty"
+                            isMulti
+                            value={specialties}
+                            options={defaultSpecialtiesOptions}
+                            onChange={handleSpecialtyChange}
+                            required
+                            placeholder="Create or Select Doctor's Speciality"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    
                     <label htmlFor="qualification">
                         Qualifications:
                         <CreatableSelect
@@ -320,88 +308,122 @@ const AdminDoctorsCreate = () => {
                             onChange={handleQualificationChange}
                             required
                             placeholder="Create or Select Doctor's Qualification"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
                         />
                     </label>
-                    <label htmlFor="clinic_day">Clinic Day:</label>
-                    <input
-                        type="text"
-                        id="clinic_day"
-                        name="clinic_day"
-                        defaultValue={doctorDetails?.clinic_day || ''}
-                        required
-                    /><br />
-
-                    <label htmlFor="text_desc">Text Description:</label>
-                    <input
-                        type="text"
-                        id="text_desc"
-                        name="text_desc"
-                        defaultValue={doctorDetails?.text_desc || ''}
-                        required
-                    /><br />
-
-                    <label htmlFor="accomplishment">Accomplishment:</label>
-                    <input
-                        type="text"
-                        id="accomplishment"
-                        name="accomplishment"
-                        defaultValue={doctorDetails?.accomplishment || ''}
-                        required
-                    /><br />
-
-                    <label htmlFor="linkdin">LinkedIn:</label>
-                    <input
-                        type="url"
-                        id="linkdin"
-                        name="linkdin"
-                        defaultValue={doctorDetails?.linkdin || ''}
-                    /><br />
-
-                    <label htmlFor="instagram">Instagram:</label>
-                    <input
-                        type="url"
-                        id="instagram"
-                        name="instagram"
-                        defaultValue={doctorDetails?.instagram || ''}
-                    /><br />
-
-                    <label htmlFor="facebook">Facebook:</label>
-                    <input
-                        type="url"
-                        id="facebook"
-                        name="facebook"
-                        defaultValue={doctorDetails?.facebook || ''}
-                    /><br />
-
-                    <label htmlFor="twitter">Twitter:</label>
-                    <input
-                        type="url"
-                        id="twitter"
-                        name="twitter"
-                        defaultValue={doctorDetails?.twitter || ''}
-                    /><br />
-                </div>
-                <div className="submit">
-                    <div className="form-group">
-                        <label>Image</label>
+                    <label htmlFor="clinic_day">
+                        Clinic Day:
                         <input
-                            type="file"
-                            name="image"
-                            onChange={handleImageChange}
+                            type="text"
+                            id="clinic_day"
+                            name="clinic_day"
+                            defaultValue={doctorDetails?.clinic_day || ''}
+                            required
+                            placeholder="Doctor's Clinic days"
                         />
-                        {imagePreview && (
-                            <div className="image-preview">
-                                <img src={imagePreview} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
-                            </div>
-                        )}
+                    </label>
+                    <label htmlFor="text_desc">
+                        Profile:
+                        <textarea
+                            name="text_desc"
+                            defaultValue={doctorDetails?.text_desc || ''}
+                            required
+                            placeholder="Dr. John Doe's Profile ..."
+                        />
+                    </label>
+
+                    <label htmlFor="accomplishment">
+                        Accomplishment:
+                        <textarea
+                            name="accomplishment"
+                            defaultValue={doctorDetails?.accomplishment || ''}
+                            required
+                            placeholder="Dr. John Doe's Accomplishments ..."
+                        />
+                    </label>
+                    <label htmlFor="email">
+                        Email:
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            defaultValue={doctorDetails?.email || ''}
+                            required
+                            placeholder="john.doe@oauthc.com"
+                        />
+                    </label>
+
+                    <p>Social links</p>
+                    <div className="social-links">
+                        <label htmlFor="linkdin">
+                            LinkedIn:
+                            <input
+                                type="url"
+                                id="linkdin"
+                                name="linkdin"
+                                defaultValue={doctorDetails?.linkdin || ''}
+                            />
+                        </label>
+                        <label htmlFor="instagram">
+                            Instagram:
+                            <input
+                                type="url"
+                                id="instagram"
+                                name="instagram"
+                                defaultValue={doctorDetails?.instagram || ''}
+                            />
+                        </label>
+                        <label htmlFor="facebook">
+                            Facebook:
+                            <input
+                                type="url"
+                                id="facebook"
+                                name="facebook"
+                                defaultValue={doctorDetails?.facebook || ''}
+                            />
+                        </label>
+                        <label htmlFor="twitter">
+                            Twitter:
+                            <input
+                                type="url"
+                                id="twitter"
+                                name="twitter"
+                                defaultValue={doctorDetails?.twitter || ''}
+                            />
+                        </label>
                     </div>
-                    <button type="submit">Update Doctor</button>
                 </div>
-
-                
-
-
-                
+                <div className="details-publish">
+                    <div className="image-box">
+                        <h4>Doctor's Image <br /> <span className="image-spec">(237 x 300px)</span> <br />
+                        <span className="image-spec">2 Mb Max</span>
+                        </h4>
+                        <label>
+                            <input
+                                type="file"
+                                name="image"
+                                onChange={handleImageChange}
+                            />
+                            {imagePreview && (
+                                <div className="image-preview">
+                                    <img src={imagePreview} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                                </div>
+                            )}
+                        </label>
+                   </div>
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Creating ...' : 'Create Profile'}
+                    </button>
+                </div>
             </form>
         </div>
     );

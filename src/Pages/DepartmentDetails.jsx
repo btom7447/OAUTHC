@@ -5,6 +5,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { useDepartments } from '../Components/DepartmentProvider';
 import DepartmentCaption from '../Components/DepartmentCaption';
 import DepartmentDoctorsContainer from '../Components/DepartmentDoctorsContainer';
+import { ClipLoader } from 'react-spinners';
 
 const DepartmentDetails = () => {
     const { departmentName } = useParams();
@@ -18,7 +19,11 @@ const DepartmentDetails = () => {
 
     // If department is not found, display an error message
     if (!department) {
-        return <p className='loading'>Loading Department ...</p>;
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
     }
 
     return (
