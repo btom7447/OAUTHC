@@ -39,7 +39,7 @@ const AdminDoctorsUpdate = () => {
     const [selectedQualification, setSelectedQualification] = useState([]);
     const [selectedDepartments, setSelectedDepartments] = useState([]);
     const [selectedUnits, setSelectedUnits] = useState([]);
-    const [doctorName, setDoctorName] = useState('');
+    const [setDoctorName] = useState('');
 
     // Transform data for select options
     const specialtiesFromDoctorsData = [...new Set(
@@ -83,22 +83,20 @@ const AdminDoctorsUpdate = () => {
         if (doctorsData.length > 0 && id) {
             const doctorId = parseInt(id, 10);
             const doctor = doctorsData.find(doc => doc.id === doctorId);
-    
+
             if (doctor) {
-                console.log('Selected doctor data:', doctor);
-    
                 // Match department names to IDs
                 const transformedDepartments = doctor.department ? doctor.department.map(depName => {
                     const department = departmentsData.find(d => d.name === depName);
                     return department ? { value: department.id, label: department.name } : null;
                 }).filter(dep => dep !== null) : [];
-    
+
                 // Match unit names to IDs
                 const transformedUnits = doctor.unit ? doctor.unit.map(unitName => {
                     const unit = unitsData.find(u => u.name === unitName);
                     return unit ? { value: unit.id, label: unit.name } : null;
                 }).filter(unit => unit !== null) : [];
-    
+
                 // Set the form data and selected states
                 setFormData({
                     name: doctor.name || '',
@@ -118,18 +116,17 @@ const AdminDoctorsUpdate = () => {
                     twitter: doctor.twitter || '',
                     facebook: doctor.facebook || ''
                 });
-    
+
                 // Set image preview if available
                 if (doctor.doctorImage) {
                     setImagePreview(doctor.doctorImage);
                 }
-    
+
                 // Initialize selected states
                 setSelectedDepartments(transformedDepartments);
                 setSelectedUnits(transformedUnits);
                 setSelectedSpeciality(doctor.specialty ? doctor.specialty.map(spec => ({ value: spec, label: spec })) : []);
                 setSelectedQualification(doctor.qualification ? doctor.qualification.map(qual => ({ value: qual, label: qual })) : []);
-                setDoctorName(doctor.name || '');
             } else {
                 console.log('No doctor found with the given ID.');
             }
@@ -137,10 +134,17 @@ const AdminDoctorsUpdate = () => {
     }, [doctorsData, id, departmentsData, unitsData]);
 
     const handleSelectChange = (newValue, category) => {
-        setFormData(prevData => ({
-            ...prevData,
-            [category]: newValue // Update the appropriate field in formData
-        }));
+        if (category === 'gender') {
+            setFormData(prevData => ({
+                ...prevData,
+                gender: newValue ? newValue.value : '' 
+            }));
+        } else {
+            setFormData(prevData => ({
+                ...prevData,
+                [category]: newValue 
+            }));
+        }
     
         // Update the specific state for departments, units, specialities, and qualifications if they change
         if (category === 'departments') {
@@ -153,6 +157,7 @@ const AdminDoctorsUpdate = () => {
             setSelectedQualification(newValue);
         }
     };
+    
 
     const handleInputChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -166,18 +171,20 @@ const AdminDoctorsUpdate = () => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            // Set the form data
+            // Set the form data with the new file and update the preview
             setFormData(prevData => ({
                 ...prevData,
-                image: file // Assuming single file upload
+                image: file // Set the new file
             }));
-    
-            // Create a preview URL and set it
+            // Create a preview URL for the new file
             const previewUrl = URL.createObjectURL(file);
             setImagePreview(previewUrl);
+        } else {
+            // No file selected, keep the existing image and remove preview
+            setImagePreview(formData.image ? URL.createObjectURL(formData.image) : '');
         }
     };
-
+    
     const handleSave = async (e) => {
         e.preventDefault();
         if (!formData.name || !formData.gender) {
@@ -186,7 +193,7 @@ const AdminDoctorsUpdate = () => {
         }
     
         setLoading(true);
-        toast.info('Updating doctor\'s profile...', {
+        const loadingToastId = toast.loading("Updating doctor's profile...", {
             autoClose: false,
             toastId: 'loading-toast'
         });
@@ -219,8 +226,8 @@ const AdminDoctorsUpdate = () => {
     
             formDataToSend.append('clinic_day', formData.clinicDay);
     
-            // Append the single file directly
-            if (formData.image) {
+            // Append the image if a new one is selected
+            if (formData.image && formData.image instanceof File) {
                 formDataToSend.append('image', formData.image);
             }
     
@@ -243,30 +250,41 @@ const AdminDoctorsUpdate = () => {
             const result = await response.json();
     
             if (response.ok) {
-                toast.success('Doctor profile updated successfully!', {
-                    autoClose: 2000
+                toast.update(loadingToastId, {
+                    render: 'Doctor profile updated successfully!',
+                    type: 'success',
+                    autoClose: 2000,
+                    isLoading: false
                 });
     
                 setTimeout(() => {
                     navigate('/admin/doctors', { replace: true });
-                }, 2000); // Redirect after 2 seconds
+                    window.location.reload();
+                }, 2500);
             } else {
                 throw new Error(result.message || 'Update failed');
             }
         } catch (err) {
-            toast.error(`Error: ${err.message}`, {
-                autoClose: 5000
+            toast.update(loadingToastId, {
+                render: `Error: ${err.message}`,
+                type: 'error',
+                autoClose: 5000,
+                isLoading: false
             });
         } finally {
             setLoading(false);
             toast.dismiss('loading-toast');
         }
     };
+    
+    if (!doctorsData || doctorsData.length === 0) {
+        return <div className="loading">Loading...</div>; 
+    }
 
     return (
         <>
             <ToastContainer />
-            <form onSubmit={handleSave} className='doctor-update'>
+            <div>
                 <div className="pages-caption">
                     <h1>Pages</h1>
                 </div>
@@ -276,150 +294,235 @@ const AdminDoctorsUpdate = () => {
                         Back
                     </Link>
                 </div>
-                <div className="heading">
-                    <h2>Update Doctor</h2>
+                <div className="admin-pages-caption">
+                    <h2>Update Doctor Profile</h2>
                 </div>
+            </div>
+            <form onSubmit={handleSave} className='details-page-form'>
                 {error && <div className="error">{error}</div>}
-                <div className="form-group">
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                    />
+                <div className="details-inputs">
+                    <label>
+                        Name: 
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="Dr. John Doe"
+                        />
+                    </label>
+                    <label>
+                        Gender:
+                        <Select
+                            options={genderOptions}
+                            value={genderOptions.find(option => option.value === formData.gender)}
+                            onChange={(option) => handleSelectChange(option, 'gender')}
+                            placeholder="Select Doctor's Gender"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Departments:
+                        <Select
+                            isMulti
+                            options={defaultDepartmentOptions}
+                            value={selectedDepartments}
+                            onChange={(options) => handleSelectChange(options, 'departments')}
+                            placeholder="Select Doctor's Departments"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Units:
+                        <Select
+                            isMulti
+                            options={defaultUnitsOptions}
+                            value={selectedUnits}
+                            onChange={(options) => handleSelectChange(options, 'units')}
+                            placeholder="Select Doctor's Units"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Specialities:
+                        <Creatable
+                            isMulti
+                            options={defaultSpecialtiesOptions}
+                            value={selectedSpeciality}
+                            onChange={(options) => handleSelectChange(options, 'speciality')}
+                            placeholder="Doctor's Specialities"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Qualifications:
+                        <Creatable
+                            isMulti
+                            options={defaultQualificationsOptions}
+                            value={selectedQualification}
+                            onChange={(options) => handleSelectChange(options, 'qualification')}
+                            placeholder="Doctor's Qualifications"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Clinic Days:
+                        <input
+                            type="text"
+                            name="clinicDay"
+                            value={formData.clinicDay}
+                            onChange={handleInputChange}
+                            placholder="Doctors Clinic Days"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Profile:
+                        <textarea
+                            name="overviewText"
+                            value={formData.overviewText}
+                            onChange={handleInputChange}
+                            placholder="Dr. John Doe's profile ..."
+                        />
+                    </label>
+                    <label>
+                        Accomplishments:
+                        <textarea
+                            type="text"
+                            name="accomplishments"
+                            value={formData.accomplishments}
+                            onChange={handleInputChange}
+                            placeholder="Dr. John Doe's accomplishments ..."
+                        />
+                    </label>
+                    <label>
+                        Email:
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="john.doe@oauthc.com"
+                        />
+                    </label>
+                    <p>Social links</p>
+                    <div className="social-links">
+                        <label>
+                            Linkdin
+                            <input
+                                type="text"
+                                name="linkdin"
+                                value={formData.linkdin}
+                                onChange={handleInputChange}
+                                placeholder="https://www.linkedin.com/john-doe"
+                            />
+                        </label>
+                        <label>Instagram
+                            <input
+                                type="text"
+                                name="instagram"
+                                value={formData.instagram}
+                                onChange={handleInputChange}
+                                placeholder="https://www.instagram.com/john-doe"
+                            />
+                        </label>
+                        <label>Twitter
+                            <input
+                                type="text"
+                                name="twitter"
+                                value={formData.twitter}
+                                onChange={handleInputChange}
+                                placeholder="https://www.twitter.com/john-doe"
+                            />
+                        </label>
+                        <label>Facebook
+                            <input
+                                type="text"
+                                name="facebook"
+                                value={formData.facebook}
+                                onChange={handleInputChange}
+                                placeholder="https://www.facebook.com/john-doe"
+                            />
+                        </label>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label>Gender</label>
-                    <Select
-                        options={genderOptions}
-                        value={genderOptions.find(option => option.value === formData.gender)}
-                        onChange={(option) => handleSelectChange(option, 'gender')}
-                    />
+                <div className="details-publish">
+                    <div className="image-box">
+                        <h4>Doctor's Image <br /> <span className="image-spec">(237 x 300px)</span> <br />
+                        <span className="image-spec">2 Mb Max</span>
+                        </h4>
+                        <label>
+                            <input
+                                type="file"
+                                name="image"
+                                onChange={handleImageChange}
+                            />
+                            {imagePreview && (
+                                <div className="image-preview">
+                                    <img src={imagePreview} alt="Preview" />
+                                </div>
+                            )}
+                    </label>
+                   </div>
+                    
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Saving...' : 'Save'}
+                    </button>
                 </div>
-                <div className="form-group">
-                    <label>Departments</label>
-                    <Select
-                        isMulti
-                        options={defaultDepartmentOptions}
-                        value={selectedDepartments}
-                        onChange={(options) => handleSelectChange(options, 'departments')}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Units</label>
-                    <Select
-                        isMulti
-                        options={defaultUnitsOptions}
-                        value={selectedUnits}
-                        onChange={(options) => handleSelectChange(options, 'units')}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Speciality</label>
-                    <Creatable
-                        isMulti
-                        options={defaultSpecialtiesOptions}
-                        value={selectedSpeciality}
-                        onChange={(options) => handleSelectChange(options, 'speciality')}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Qualification</label>
-                    <Creatable
-                        isMulti
-                        options={defaultQualificationsOptions}
-                        value={selectedQualification}
-                        onChange={(options) => handleSelectChange(options, 'qualification')}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Clinic Day</label>
-                    <input
-                        type="text"
-                        name="clinicDay"
-                        value={formData.clinicDay}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Image</label>
-                    <input
-                        type="file"
-                        name="image"
-                        onChange={handleImageChange}
-                    />
-                    {imagePreview && (
-                        <div className="image-preview">
-                            <img src={imagePreview} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
-                        </div>
-                    )}
-                </div>
-                <div className="form-group">
-                    <label>Text Description</label>
-                    <textarea
-                        name="overviewText"
-                        value={formData.overviewText}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Accomplishment</label>
-                    <textarea
-                        type="text"
-                        name="accomplishments"
-                        value={formData.accomplishments}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Linkdin</label>
-                    <input
-                        type="text"
-                        name="linkdin"
-                        value={formData.linkdin}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Instagram</label>
-                    <input
-                        type="text"
-                        name="instagram"
-                        value={formData.instagram}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Twitter</label>
-                    <input
-                        type="text"
-                        name="twitter"
-                        value={formData.twitter}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Facebook</label>
-                    <input
-                        type="text"
-                        name="facebook"
-                        value={formData.facebook}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Saving...' : 'Save'}
-                </button>
             </form>
         </>
     );

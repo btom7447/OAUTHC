@@ -70,8 +70,8 @@ export const DepartmentProvider = ({ children }) => {
                     departmentImage: department.image,
                     departmentName: department.name,
                     text: department.text,
-                    facilitiesText: department.facilities,
-                    facilities: department.services,
+                    services: department.services,
+                    facilities: department.facilities,
                     phone: department.phone
                 }));
                 setDepartments(transformedDepartments);

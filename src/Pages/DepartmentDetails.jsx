@@ -40,7 +40,7 @@ const DepartmentDetails = () => {
                     </div>
                 </div>
                 <div className="departments-facilities">
-                    <h5>{department.departmentName} Department Facilities & Technology</h5>
+                    <h5>Facilities & Technology</h5>
                     <ul>
                         {/* Use optional chaining to safely access the map function */}
                         {department.facilities?.map((facility, index) => (

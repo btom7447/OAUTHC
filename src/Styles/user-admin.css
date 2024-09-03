@@ -861,22 +861,14 @@ a {
     font-weight: 500;
     line-height: 150%; 
 }
-.department-details-page {
+.details-page-form {
     padding: 20px;
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-.details-page-section {
     width: 100%;
     display: grid;
     grid-template-columns: 3fr 1fr; 
     gap: 20px; 
 }
-.details-inputs {
+.details-page-form .details-inputs {
     padding: 20px;
     padding-bottom: 100px;
     width: 100%;
@@ -889,7 +881,8 @@ a {
     border: solid 1px var(--gray);
     background-color: var(--white);
 }
-.details-inputs label {
+.details-page-form .details-inputs label {
+    margin-bottom: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -902,9 +895,7 @@ a {
     font-weight: 500;
     line-height: 150%; 
 }
-.details-inputs label input {
-    margin-top: 10px;
-    margin-bottom: 20px;
+.details-page-form .details-inputs label input {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
@@ -916,15 +907,7 @@ a {
     font-weight: 400;
     line-height: normal;
 }
-.details-inputs label ul {
-    width: 100%;
-    list-style: none;
-}
-.details-inputs label ul li {
-    margin-top: -10px;
-}
-
-.details-inputs label textarea {
+.details-page-form .details-inputs label textarea {
     margin-top: 10px;
     margin-bottom: 20px;
     width: 100%;
@@ -961,9 +944,6 @@ a {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-}
-.details-inputs .social-links label input {
-    margin-bottom: 10px;
 }
 /* REACT SELECT  */
 .admin-select {
@@ -1051,131 +1031,25 @@ a {
     font-weight: 600;
     line-height: normal;
     padding: 10px;
-    border-bottom: solid 1px var(--gray);
 }
-.details-publish .publish-box {
+.details-page-form .details-publish  input[type="file"] {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: var(--white);
+    padding: 10px;
+    border-radius: 4px;
     border: solid 1px var(--gray);
-    border-radius: 4px;
-}
-.details-publish .publish-box div {
-    width: 100%;
-    padding: 10px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.details-publish .publish-box div button {
-    height: 40px;
-    border-radius: 4px;
-    border: none;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    text-align: justify;
     font-family: "Work Sans";
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: normal;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s ease-in-out;
 }
-.details-publish .publish-box div button:nth-of-type(1) {
-    background-color: var(--primary-green);
-    color: var(--white);
-}
-.details-publish .publish-box div button:nth-of-type(1):hover {
-    background-color: var(--secondary-green);
-}
-.details-publish .publish-box div button:nth-of-type(2) {
-    background-color: var(--white);
-    border: solid 1px var(--gray);
-}
-.details-publish .publish-box div button:nth-of-type(2):hover {
-    background-color: var(--gray);
-    color: var(--white);
-}
-.details-publish .status-box {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: var(--white);
-    border: solid 1px var(--gray);
-    border-radius: 4px;
-}
-.details-publish .status-box > div {
-    padding: 20px;
-}
-.details-publish .react-select-container {
-    width: 100%;
-    margin-bottom: 20px;
-}
-.details-publish .react-select__control {
-    border: 1px solid var(--gray);
-    border-radius: 4px;
-    padding: 5px;
-    box-shadow: none;
-    background-color: var(--white);
-    font-family: "Work Sans";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    outline: none !important;
-}
-.details-publish .react-select__control:hover {
-    outline: none;
-    border: solid 1px var(--gray);
-}
-.details-publish .react-select__option {
-    padding: 5px 10px;
-    background-color: white;
-    color: var(--black) !important;
-    font-family: "Work Sans";
-    font-size: 14px !important;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    outline: none;
-    cursor: pointer;
-}
-.details-publish .react-select__option:hover {
-   background-color: var(--gray);
-}
-.details-publish .react-select__multi-value {
-    background-color: var(--ash) !important;
-    border-radius: 2px;
-    margin: 3px;
-    padding: 2px;
-    cursor: pointer;
-}
-.react-select__multi-value__remove {
-    color: var(--grascale);
-    cursor: pointer;
-}
-.details-publish  .react-select__placeholder {
-    font-family: "Work Sans";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%;
-    color: var(--grascale);
-}
-.details-publish .react-select__dropdown-indicator {
-    padding: 0 8px;
-    color: var(--grascale);
-}
-.details-publish .css-1u9des2-indicatorSeparator {
-    display: none;
+.details-page-form .details-publish .image-preview {
+    margin-top: 20px;
 }
 .details-publish .image-box {
+    padding: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -1191,117 +1065,34 @@ a {
     font-weight: 300;
     line-height: normal;
 }
-.details-publish .image-box .dropzone {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-.details-publish .image-box .image-previews {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 .details-publish .image-box .image-preview {
     width: 100%;
     padding: 0px;
-    position: relative;
 }
 .details-publish .image-box .image-preview img {
     width: 100%;
     height: 250px;
     object-fit: cover;
     object-position: center;
-    display: flex;
     border-radius: 4px;
 }
-.details-publish .image-box .image-preview .units-image-preview {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    object-position: center;
-    display: flex;
-    border-radius: 4px;
-}
-.details-publish .image-box .image-preview button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    font-size: 18px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    color: var(--white);
-    background-color: var(--secondary-red);
-}
-
-/* Basic styling for the form container */
-.doctor-create, 
-.doctor-update {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Basic styling for form elements */
-.doctor-create label, 
-.doctor-update label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-.doctor-create input[type="email"],
-.doctor-update input[type="email"], 
-.doctor-create input[type="text"],
-.doctor-update input[type="text"], 
-.doctor-create    input[type="email"],
-.doctor-update input [type="email"], 
-.doctor-create    input[type="url"],
-.doctor-update input[type="url"], 
-.doctor-create    input[type="file"],
-.doctor-update input[type="file"]
-.doctor-create    select, 
-.doctor-update select, 
-.doctor-create    textarea, 
-.doctor-update textarea {
+.details-publish button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* Styling for multi-select dropdown */
-.doctor-create select[multiple] {
-    height: auto;
-    min-height: 100px;
-}
-
-/* Styling for buttons */
-.doctor-create button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
+    font-family: "Work Sans";
     font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    color: var(--white);
+    background-color: var(--primary-green);
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
-.doctor-create button:hover {
-    background-color: #0056b3;
+.details-publish button:hover {
+    background-color: var(--secondary-green);
 }
 
 

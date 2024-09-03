@@ -4,9 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const DepartmentList = ({ departments }) => {
-    const itemsPerPage = 6; // Number of departments to display per page
+    const itemsPerPage = 9; // Number of departments to display per page
     const [currentPage, setCurrentPage] = useState(1);
     const [fade, setFade] = useState(false);
+
+    // Check if departments are still loading
+    if (!departments || departments.length === 0) {
+        return <div className="loading">Loading Departments ...</div>; 
+    }
 
     // Sort departments alphabetically by departmentName
     const sortedDepartments = [...departments].sort((a, b) => {

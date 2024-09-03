@@ -2610,11 +2610,12 @@ footer .footer-bottom .footer-links {
   align-items: center;
 }
 .find-doctor .doctor-card .doctor-card-caption img {
-  width: 80px !important;
-  height: 80px;
+  width: 100px !important;
+  height: 100px !important;
   border-radius: 50%;
   object-fit: cover;
   object-position: top center;
+  margin-right: 5px;
 }
 .find-doctor .doctor-card .doctor-card-text {
   height: fit-content;

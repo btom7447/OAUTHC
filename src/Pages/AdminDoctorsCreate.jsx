@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../Components/UserContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AdminDoctorsCreate = () => {
     const { doctorId } = useParams();  
+    const { doctorsData, departmentsData, unitsData } = useUser();
     const token = localStorage.getItem('bearer_token');
 
     const [departments, setDepartments] = useState([]);
@@ -16,6 +20,7 @@ const AdminDoctorsCreate = () => {
     const [selectedDepartments, setSelectedDepartments] = useState([]);
     const [selectedUnits, setSelectedUnits] = useState([]);
     const [doctorDetails, setDoctorDetails] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [genderOptions] = useState([
@@ -23,70 +28,47 @@ const AdminDoctorsCreate = () => {
         { value: 'female', label: 'Female' }
     ]);
 
+    const navigate = useNavigate();
+
+    const specialtiesFromDoctorsData = [...new Set(
+        doctorsData.flatMap(doctor => 
+            Array.isArray(doctor.specialty) ? doctor.specialty : []
+        )
+    )].sort((a, b) => a.localeCompare(b));
+
+    const qualificationsFromDoctorsData = [...new Set(
+        doctorsData.flatMap(doctor =>
+            Array.isArray(doctor.qualification) ? doctor.qualification : []
+        )
+    )].sort((a, b) => a.localeCompare(b));
+
+    const defaultSpecialtiesOptions = specialtiesFromDoctorsData.map(specialty => ({
+        value: specialty,
+        label: specialty
+    }));
+
+    const defaultQualificationsOptions = qualificationsFromDoctorsData.map(qualification => ({
+        value: qualification,
+        label: qualification
+    }));
+
     useEffect(() => {
-        const fetchDepartments = async () => {
-            try {
-                const response = await fetch('https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const data = await response.json();
-                setDepartments(data.data.map(dep => ({ value: dep.id, label: dep.name })));
-            } catch (error) {
-                console.error('Error fetching departments:', error);
-                setError('Error fetching departments');
+        if (departmentsData && unitsData) {
+            setDepartments(departmentsData.map(dep => ({ value: dep.id, label: dep.name })));
+            setUnits(unitsData.map(unit => ({ value: unit.id, label: unit.name })));
+        }
+        if (doctorId && doctorsData) {
+            const doctor = doctorsData.find(doc => doc.id === parseInt(doctorId, 10));
+            if (doctor) {
+                setDoctorDetails(doctor);
+                setSpecialties(doctor.specialties || []);
+                setQualifications(doctor.qualifications || []);
+                setSelectedDepartments(doctor.departments.map(dep => ({ value: dep.id, label: dep.name })) || []);
+                setSelectedUnits(doctor.units.map(unit => ({ value: unit.id, label: unit.name })) || []);
             }
-        };
-    
-        const fetchUnits = async () => {
-            try {
-                const response = await fetch('https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/unit', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const data = await response.json();
-                setUnits(data.data.map(unit => ({ value: unit.id, label: unit.name })));
-            } catch (error) {
-                console.error('Error fetching units:', error);
-                setError('Error fetching units');
-            }
-        };
-    
-        const fetchDoctorDetails = async () => {
-            if (doctorId) {
-                try {
-                    const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctor/${doctorId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-                    const data = await response.json();
-                    setDoctorDetails(data.data);
-                    setSpecialties(data.data.specialties || []);
-                    setQualifications(data.data.qualifications || []);
-    
-                    // Pre-populate the selected departments and units
-                    setSelectedDepartments(data.data.departments.map(dep => ({ value: dep.id, label: dep.name })) || []);
-                    setSelectedUnits(data.data.units.map(unit => ({ value: unit.id, label: unit.name })) || []);
-    
-                } catch (error) {
-                    console.error('Error fetching doctor details:', error);
-                    setError('Error fetching doctor details');
-                }
-            }
-        };
-    
-        fetchDepartments();
-        fetchUnits();
-        fetchDoctorDetails();
+        }
         setLoading(false);
-    }, [doctorId, token]);
-    
+    }, [doctorId, departmentsData, unitsData, doctorsData]);
 
     const handleSpecialtyChange = (newSpecialties) => {
         setSpecialties(newSpecialties || []);
@@ -104,6 +86,14 @@ const AdminDoctorsCreate = () => {
         setSelectedUnits(selectedOptions || []); 
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const previewUrl = URL.createObjectURL(file);
+            setImagePreview(previewUrl);
+        }
+    };
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -127,8 +117,13 @@ const AdminDoctorsCreate = () => {
         selectedUnits.forEach((unit, index) => {
             formData.append(`unit[${index}]`, unit.value);
         });
-    
-        // Show loading toast
+
+        const imageInput = event.target.querySelector('input[name="image"]');
+            if (imageInput && imageInput.files[0]) {
+                formData.append('image', imageInput.files[0]);
+            }
+
+            // Show loading toast
         const toastId = toast.loading("Creating Doctor Profile...");
     
         // Make a POST request to create a new doctor profile
@@ -148,6 +143,12 @@ const AdminDoctorsCreate = () => {
                         isLoading: false,
                         autoClose: 3000,
                     });
+
+                    setTimeout(() => {
+                        navigate('/admin/doctors', { replace: true });
+                        window.location.reload();
+                    }, 2500);
+
                 } else {
                     toast.update(toastId, {
                         render: `Error: ${data.message}`,
@@ -178,148 +179,231 @@ const AdminDoctorsCreate = () => {
     }
 
     return (
-        <>
+        <div className=''>
             <ToastContainer />
-            <form onSubmit={handleSubmit} className='doctor-create'>
-                <label htmlFor="name">Name:</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    defaultValue={doctorDetails?.name || ''}
-                    required
-                /><br />
+            <div>
+                <div className="pages-caption">
+                    <h1>Pages</h1>
+                </div>
+                <div className="back">
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                    <Link to="/admin/doctors">
+                        Back
+                    </Link>
+                </div>
+                <div className="admin-pages-caption">
+                    <h2>Create New Doctor Profile</h2>
+                </div>
+            </div>
+            <form onSubmit={handleSubmit} className='details-page-form'>
+                <div className="details-inputs">
+                    <label htmlFor="name">
+                        Name:
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            defaultValue={doctorDetails?.name || ''}
+                            required
+                            placeholder="Dr. John Doe"
+                        />
+                    </label>
+                    <label htmlFor="gender">
+                        Gender:
+                        <Select
+                            id="gender"
+                            name="gender"
+                            options={genderOptions}
+                            defaultValue={genderOptions.find(option => option.value === doctorDetails?.gender)}
+                            required
+                            placeholder="Select Gender"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label htmlFor="email">
+                        Email:
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            defaultValue={doctorDetails?.email || ''}
+                            required
+                            placeholder="john.doe@oauthc.com"
+                        />
+                    </label>
+                    <label htmlFor="department">
+                        Departments:
+                        <Select
+                            id="department"
+                            name="department"
+                            options={departments}
+                            isMulti
+                            value={selectedDepartments}
+                            onChange={handleDepartmentChange}
+                            required
+                            placeholder="Select Doctor's Department"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label htmlFor="specialty">
+                        Specialties:
+                        <CreatableSelect
+                            id="specialty"
+                            name="specialty"
+                            isMulti
+                            value={specialties}
+                            options={defaultSpecialtiesOptions}
+                            onChange={handleSpecialtyChange}
+                            required
+                            placeholder="Create or Select Doctor's Speciality"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label htmlFor="unit">
+                        Hospital Units:
+                        <Select
+                            id="unit"
+                            name="unit"
+                            options={units}
+                            isMulti
+                            value={selectedUnits}
+                            onChange={handleUnitChange}
+                            required
+                            placeholder="Select Doctor's Unit"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label htmlFor="qualification">
+                        Qualifications:
+                        <CreatableSelect
+                            id="qualification"
+                            name="qualification"
+                            isMulti
+                            value={qualifications}
+                            options={defaultQualificationsOptions}
+                            onChange={handleQualificationChange}
+                            required
+                            placeholder="Create or Select Doctor's Qualification"
+                        />
+                    </label>
+                    <label htmlFor="clinic_day">Clinic Day:</label>
+                    <input
+                        type="text"
+                        id="clinic_day"
+                        name="clinic_day"
+                        defaultValue={doctorDetails?.clinic_day || ''}
+                        required
+                    /><br />
 
-                <label htmlFor="gender">Gender:</label>
-                <Select
-                    id="gender"
-                    name="gender"
-                    options={genderOptions}
-                    defaultValue={genderOptions.find(option => option.value === doctorDetails?.gender)}
-                    required
-                /><br />
+                    <label htmlFor="text_desc">Text Description:</label>
+                    <input
+                        type="text"
+                        id="text_desc"
+                        name="text_desc"
+                        defaultValue={doctorDetails?.text_desc || ''}
+                        required
+                    /><br />
 
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    defaultValue={doctorDetails?.email || ''}
-                    required
-                /><br />
+                    <label htmlFor="accomplishment">Accomplishment:</label>
+                    <input
+                        type="text"
+                        id="accomplishment"
+                        name="accomplishment"
+                        defaultValue={doctorDetails?.accomplishment || ''}
+                        required
+                    /><br />
 
-                <label htmlFor="department">Department:</label>
-                <Select
-                    id="department"
-                    name="department"
-                    options={departments}
-                    isMulti
-                    value={selectedDepartments}
-                    onChange={handleDepartmentChange}
-                    required
-                /><br />
+                    <label htmlFor="linkdin">LinkedIn:</label>
+                    <input
+                        type="url"
+                        id="linkdin"
+                        name="linkdin"
+                        defaultValue={doctorDetails?.linkdin || ''}
+                    /><br />
 
-                <label htmlFor="specialty">Specialty:</label>
-                <CreatableSelect
-                    id="specialty"
-                    name="specialty"
-                    isMulti
-                    value={specialties}
-                    onChange={handleSpecialtyChange}
-                    required
-                /><br />
+                    <label htmlFor="instagram">Instagram:</label>
+                    <input
+                        type="url"
+                        id="instagram"
+                        name="instagram"
+                        defaultValue={doctorDetails?.instagram || ''}
+                    /><br />
 
-                <label htmlFor="unit">Unit:</label>
-                <Select
-                    id="unit"
-                    name="unit"
-                    options={units}
-                    isMulti
-                    value={selectedUnits}
-                    onChange={handleUnitChange}
-                    required
-                /><br />
+                    <label htmlFor="facebook">Facebook:</label>
+                    <input
+                        type="url"
+                        id="facebook"
+                        name="facebook"
+                        defaultValue={doctorDetails?.facebook || ''}
+                    /><br />
 
-                <label htmlFor="qualification">Qualification:</label>
-                <CreatableSelect
-                    id="qualification"
-                    name="qualification"
-                    isMulti
-                    value={qualifications}
-                    onChange={handleQualificationChange}
-                    required
-                /><br />
+                    <label htmlFor="twitter">Twitter:</label>
+                    <input
+                        type="url"
+                        id="twitter"
+                        name="twitter"
+                        defaultValue={doctorDetails?.twitter || ''}
+                    /><br />
+                </div>
+                <div className="submit">
+                    <div className="form-group">
+                        <label>Image</label>
+                        <input
+                            type="file"
+                            name="image"
+                            onChange={handleImageChange}
+                        />
+                        {imagePreview && (
+                            <div className="image-preview">
+                                <img src={imagePreview} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
+                            </div>
+                        )}
+                    </div>
+                    <button type="submit">Update Doctor</button>
+                </div>
 
-                <label htmlFor="clinic_day">Clinic Day:</label>
-                <input
-                    type="text"
-                    id="clinic_day"
-                    name="clinic_day"
-                    defaultValue={doctorDetails?.clinic_day || ''}
-                    required
-                /><br />
+                
 
-                <label htmlFor="text_desc">Text Description:</label>
-                <input
-                    type="text"
-                    id="text_desc"
-                    name="text_desc"
-                    defaultValue={doctorDetails?.text_desc || ''}
-                    required
-                /><br />
 
-                <label htmlFor="accomplishment">Accomplishment:</label>
-                <input
-                    type="text"
-                    id="accomplishment"
-                    name="accomplishment"
-                    defaultValue={doctorDetails?.accomplishment || ''}
-                    required
-                /><br />
-
-                <label htmlFor="linkdin">LinkedIn:</label>
-                <input
-                    type="url"
-                    id="linkdin"
-                    name="linkdin"
-                    defaultValue={doctorDetails?.linkdin || ''}
-                /><br />
-
-                <label htmlFor="instagram">Instagram:</label>
-                <input
-                    type="url"
-                    id="instagram"
-                    name="instagram"
-                    defaultValue={doctorDetails?.instagram || ''}
-                /><br />
-
-                <label htmlFor="facebook">Facebook:</label>
-                <input
-                    type="url"
-                    id="facebook"
-                    name="facebook"
-                    defaultValue={doctorDetails?.facebook || ''}
-                /><br />
-
-                <label htmlFor="twitter">Twitter:</label>
-                <input
-                    type="url"
-                    id="twitter"
-                    name="twitter"
-                    defaultValue={doctorDetails?.twitter || ''}
-                /><br />
-
-                <label htmlFor="image">Upload Image:</label>
-                <input
-                    type="file"
-                    id="image"
-                    name="image"
-                    required
-                /><br /><br />
-
-                <button type="submit">Update Doctor</button>
+                
             </form>
-        </>
+        </div>
     );
 };
 

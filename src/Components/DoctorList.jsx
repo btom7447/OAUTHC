@@ -10,7 +10,7 @@ const DoctorList = () => {
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [fade, setFade] = useState(false);
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  // const [selectedDoctor, setSelectedDoctor] = useState(null);
 
   // Search state variables
   const [searchName, setSearchName] = useState("");
@@ -18,8 +18,11 @@ const DoctorList = () => {
   const [searchGender, setSearchGender] = useState(null);
   const [searchUnit, setSearchUnit] = useState(null);
 
-  const totalPages = Math.ceil(doctors.length / itemsPerPage);
+  if (!doctors || doctors.length === 0) {
+    return <div className="loading">Loading Doctors ...</div>; 
+  }
 
+  const totalPages = Math.ceil(doctors.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -177,7 +180,7 @@ const DoctorList = () => {
               <Link
                 className='doctor-profile-button'
                 to={`/About/Find-Doctor/${encodeURIComponent(doctor.doctorName)}`}
-                onClick={() => setSelectedDoctor(doctor)} 
+                // onClick={() => setSelectedDoctor(doctor)} 
               >
                 View Profile
               </Link>
