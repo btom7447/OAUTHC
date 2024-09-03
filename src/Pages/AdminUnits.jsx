@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useUser } from "../Components/UserContext";
 import AdminDataDisplay from "../Components/AdminDataDisplay";
 import AdminDataTable from "../Components/AdminDataTable"; 
 
-const AdminLocations = () => {
+const AdminUnits = () => {
     const { unitsData } = useUser();
+    const [data, setData] = useState(unitsData);
+
+    const handleDeleteSuccess = (id) => {
+        setData((prevData) => prevData.filter((item) => item.id !== id));
+    };
 
     return (
         <div className="admin-doctors-section">
@@ -12,7 +17,7 @@ const AdminLocations = () => {
                 <h1>Pages</h1>
             </div>
             <div className="admin-pages-caption">
-                <h2>Edit "Location"</h2>
+                <h2>Edit "Locations"</h2>
             </div>
             <AdminDataDisplay
                 data={unitsData}
@@ -20,9 +25,11 @@ const AdminLocations = () => {
                 itemName="units"
                 basePath="/admin/units" 
                 newItemPath="new"
+                entityType="doctor"
+                setData={handleDeleteSuccess}
             />
         </div>
     );
 };
 
-export default AdminLocations;
+export default AdminUnits;

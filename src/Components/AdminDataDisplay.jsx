@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, newItemPath, entityType, setData }) => {
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    // Load the initial itemsPerPage from local storage or default to 10
+    const initialItemsPerPage = parseInt(localStorage.getItem("itemsPerPage")) || 10;
+    const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
     const [currentPage, setCurrentPage] = useState(1);
 
     if (!data) return <div className="loading">Loading...</div>;
@@ -37,13 +39,17 @@ const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, 
         { value: 5, label: '5' },
         { value: 10, label: '10' },
         { value: 20, label: '20' },
-        { value: 30, label: '30' }
+        { value: 30, label: '30' },
+        { value: 40, label: '40' }, // Added option for 40
+        { value: 50, label: '50' }  // Added option for 50
     ];
 
     // Handle change in items per page
     const handleItemsPerPageChange = (selectedOption) => {
-        setItemsPerPage(selectedOption.value);
+        const newItemsPerPage = selectedOption.value;
+        setItemsPerPage(newItemsPerPage);
         setCurrentPage(1); // Reset to first page when changing items per page
+        localStorage.setItem("itemsPerPage", newItemsPerPage); // Save to local storage
     };
 
     return (

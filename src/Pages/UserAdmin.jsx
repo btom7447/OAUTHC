@@ -14,8 +14,7 @@ import AllAdmins from "./AllAdmins";
 import AddAdmin from "./AddAdmin";
 import AdminDoctors from "./AdminDoctors";
 import AdminDepartments from "./AdminDepartments"; 
-import AdminDepartmentDetails from "./AdminDepartmentDetails";
-import AdminLocations from "./AdminLocations";
+import AdminUnits from "./AdminUnits";
 import AdminLocationsDetails from "./AdminLocationsDetails";
 import AdminSchools from "./AdminSchools";
 import AdminSchoolsDetails from "./AdminSchoolsDetails";
@@ -23,6 +22,9 @@ import AdminHealthServiceDetails from "./AdminHealthServicesDetails";
 import AdminHealthServices from "./AdminHealthServices";
 import AdminDoctorsCreate from "./AdminDoctorsCreate";
 import AdminDoctorsUpdate from "./AdminDoctorsUpdate";
+import AdminDepartmentUpdate from "./AdminDepartmentUpdate";
+import AdminDepartmentCreate from "./AdminDepartmentCreate";
+import AdminUnitsUpdate from "./AdminUnitsUpdate";
 
 const UserAdmin = () => {
     return (
@@ -39,16 +41,16 @@ const UserAdmin = () => {
                         <Route path="/add-admin" element={<AddAdmin />} />
                         <Route path="/sections" element={<AdminSections />} />
                         <Route path="/departments" element={<AdminDepartments />} />
-                        <Route path="/departments/:name" element={<AdminDepartmentDetails />} />
-                        <Route path="/departments/new" element={<AdminDepartmentDetails />} />
+                        <Route path="/departments/:id" element={<AdminDepartmentUpdate />} />
+                        <Route path="/departments/new" element={<AdminDepartmentCreate />} />
                         <Route path="/doctors" element={<AdminDoctors />} />
                         <Route path="/doctors/:id" element={<AdminDoctorsUpdate />} />
                         <Route path="/doctors/new" element={<AdminDoctorsCreate />} />
                         <Route path="/schools" element={<AdminSchools />} />
                         <Route path="/schools/:name" element={<AdminSchoolsDetails />} />
                         <Route path="/shools/new" element={<AdminSchoolsDetails />} />
-                        <Route path="/units" element={<AdminLocations />} />
-                        <Route path="/units/:name" element={<AdminLocationsDetails />} />
+                        <Route path="/units" element={<AdminUnits />} />
+                        <Route path="/units/:id" element={<AdminUnitsUpdate />} />
                         <Route path="/units/new" element={<AdminLocationsDetails />} />
                         <Route path="/health-services" element={<AdminHealthServices />} />
                         <Route path="/health-services/:name" element={<AdminHealthServiceDetails />} />

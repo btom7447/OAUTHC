@@ -107,7 +107,7 @@ const AdminDoctorsUpdate = () => {
                     qualification: doctor.qualification ? doctor.qualification.map(qual => ({ value: qual, label: qual })) : [],
                     unit: doctor.unit ? doctor.unit.map(unit => ({ value: unit, label: unit })) : [],
                     clinicDay: doctor.clinicDay || '',
-                    image: doctor.doctorImage ? [doctor.doctorImage] : [], // Assuming doctorImage is a URL or file object
+                    image: doctor.doctorImage ? [doctor.doctorImage] : [],
                     overviewText: doctor.overviewText || '',
                     accomplishments: doctor.accomplishments || '',
                     email: doctor.email || '',
@@ -422,16 +422,6 @@ const AdminDoctorsUpdate = () => {
                             value={formData.clinicDay}
                             onChange={handleInputChange}
                             placholder="Doctors Clinic Days"
-                            className="admin-select"
-                            classNames={{
-                                control: () => 'react-select__control',
-                                option: () => 'react-select__option',
-                                menu: () => 'react-select__menu',
-                                menuList: () => 'react-select__menu-list',
-                                singleValue: () => 'react-select__single-value',
-                                placeholder: () => 'react-select__placeholder',
-                                dropdownIndicator: () => 'react-select__dropdown-indicator',
-                            }}
                         />
                     </label>
                     <label>
