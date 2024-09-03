@@ -1,14 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString(undefined, options);
-};
-
-const formatNameForURL = (name) => {
-    return name.toLowerCase().replace(/\s+/g, '-');
 };
 
 const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage, setData }) => {
@@ -20,26 +18,53 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
     const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
 
     const handleDelete = async (id) => {
+        const token = localStorage.getItem('bearer_token');
+        
+        if (!token) {
+            console.error('No token found. Please log in.');
+            return;
+        }
+    
+        if (!entityType) {
+            console.error('Entity type is not defined.');
+            return;
+        }
+    
+        // Show loading toast
+        const toastId = toast.loading('Deleting item...', { autoClose: false });
+
         try {
-            const response = await fetch(`http://test.oauthec.test/v0.1/api/admin/${entityType}/${id}`, {
+            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/${entityType}/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
-                },
+                    "Authorization": `Bearer ${token}`
+                }
             });
-
+    
             if (!response.ok) {
-                throw new Error("Failed to delete the item.");
+                const errorText = await response.text();
+                throw new Error(`Failed to delete the item: ${errorText}`);
             }
+    
+            setData(id); // This should be a function to update the state in the parent component
 
-            // Update the state after successful deletion
-            setData((prevData) => prevData.filter((item) => item.id !== id));
-
+            // Show success toast
+            toast.update(toastId, { render: 'Item deleted successfully', type: 'success', isLoading: false, autoClose: 3000 });
+    
+            // Refresh the page after toast
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000); // Wait for the toast to finish
+    
         } catch (error) {
             console.error("Error deleting the item:", error);
-            alert("An error occurred while deleting the item.");
+            
+            // Show error toast
+            toast.update(toastId, { render: `Error deleting item: ${error.message}`, type: 'error', isLoading: false, autoClose: 5000 });
         }
     };
+    
 
     return (
         <table className="data-table">
@@ -56,13 +81,13 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                     <tr key={item.id}>
                         <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                         <td>
-                            <Link to={`${basePath}/${formatNameForURL(item.name)}`}>
+                            <Link to={`${basePath}/${item.id}`}>
                                 {item.name}
                             </Link>
                         </td>
                         <td>{formatDate(item.dateCreated)}</td>
                         <td>
-                            <Link to={`${basePath}/${formatNameForURL(item.name)}`}>
+                            <Link to={`${basePath}/${item.id}`}>
                                 <button>
                                     {/* Edit button */}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 22 22" fill="none">

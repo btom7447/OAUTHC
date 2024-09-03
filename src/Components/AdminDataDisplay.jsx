@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, newItemPath }) => {
+const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, newItemPath, entityType, setData }) => {
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -55,7 +55,7 @@ const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, 
                         value={options.find(option => option.value === itemsPerPage)}
                         onChange={handleItemsPerPageChange}
                         options={options}
-                        className="react-select-container"
+                        className="admin-select"
                         classNames={{
                             control: () => 'react-select__control',
                             option: () => 'react-select__option',
@@ -80,6 +80,8 @@ const AdminDataDisplay = ({ data, TableComponent, itemName = "items", basePath, 
                 basePath={basePath}
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}
+                entityType={entityType}
+                setData={setData}
             />
             <div className="admin-data-pagination">
                 <button

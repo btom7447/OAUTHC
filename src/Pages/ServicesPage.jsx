@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { CurrentSectionProvider } from '../Components/CurrentSectionContent';
 import { ServiceProvider } from '../Components/ServiceProvider';
 import HealthServices from './HealthServices';
-import DepartmentDetails from '../Components/DepartmentDetails';
+import DepartmentDetails from './DepartmentDetails';
 import DiseasesSymptoms from './DiseaseSymptoms';
 import TestProcedures from './TestProcedures';
 import DiseaseSymptomDetails from '../Components/DiseaseSymptomDetails';

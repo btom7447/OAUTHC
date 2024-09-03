@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { CurrentSectionProvider } from '../Components/CurrentSectionContent';
 import AboutOAUTHC from './AboutOAUTHC';
 import DepartmentCenter from './DepartmentCenter';
-import DepartmentDetails from '../Components/DepartmentDetails';
+import DepartmentDetails from './DepartmentDetails';
 import { DepartmentProvider } from '../Components/DepartmentProvider';
 import FindDoctor from './FindDoctor';
 import Location from './Location';

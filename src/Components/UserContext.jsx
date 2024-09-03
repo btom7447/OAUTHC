@@ -5,21 +5,23 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
     const [departmentsData, setDepartmentsData] = useState([]);
     const [doctorsData, setDoctorsData] = useState([]);
+    const [unitsData, setUnitsData] = useState([]);
 
     // Fetch Data Function
     const fetchData = async () => {
         const departmentsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department';
         const doctorsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctors';
-
+        const unitsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/unit';
+    
         const token = localStorage.getItem('bearer_token');
-
+    
         if (!token) {
             console.error('No token found. Please log in.');
             return;
         }
-
+    
         try {
-            const [departmentsResponse, doctorsResponse] = await Promise.all([
+            const [departmentsResponse, doctorsResponse, unitsResponse] = await Promise.all([
                 fetch(departmentsUrl, {
                     method: 'GET',
                     headers: {
@@ -33,18 +35,26 @@ export const UserProvider = ({ children }) => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
                     }
-                })
+                }),
+                fetch(unitsUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }),
             ]);
-
-            if (!departmentsResponse.ok || !doctorsResponse.ok) {
-                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status}`);
+    
+            if (!departmentsResponse.ok || !doctorsResponse.ok || !unitsResponse.ok) {
+                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status} or ${unitsResponse.status}`);
             }
-
-            const [departmentsData, doctorsData] = await Promise.all([
+    
+            const [departmentsData, doctorsData, unitsData] = await Promise.all([
                 departmentsResponse.json(),
-                doctorsResponse.json()
+                doctorsResponse.json(),
+                unitsResponse.json(),
             ]);
-
+    
             if (departmentsData && departmentsData.data) {
                 const transformedDepartments = departmentsData.data.map(department => ({
                     id: department.id,
@@ -52,7 +62,7 @@ export const UserProvider = ({ children }) => {
                     status: department.status,
                     dateCreated: department.created_at,
                     overviewText: department.over_view_text,
-                    departmentImage: '',
+                    departmentImage: department.image,
                     departmentName: department.name,
                     text: department.text,
                     facilities: department.facilities,
@@ -63,7 +73,7 @@ export const UserProvider = ({ children }) => {
             } else {
                 console.error('Failed to retrieve departments:', departmentsData.message || 'Unexpected response structure');
             }
-
+    
             if (doctorsData && doctorsData.data) {
                 const transformedDoctors = doctorsData.data.map(doctor => ({
                     id: doctor.id,
@@ -88,54 +98,26 @@ export const UserProvider = ({ children }) => {
             } else {
                 console.error('Failed to retrieve doctors:', doctorsData.message || 'Unexpected response structure');
             }
+    
+            if (unitsData && unitsData.data) {
+                const transformedUnits = unitsData.data.map(unit => ({
+                    id: unit.id,
+                    name: unit.name,
+                    dateCreated: unit.created_at,
+                    unitImage: unit.image,
+                    state: unit.state, 
+                    address: unit.address
+                }));
+                setUnitsData(transformedUnits);
+            } else {
+                console.error('Failed to retrieve Units:', unitsData.message || 'Unexpected response structure');
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
+    
 
-    // Update Department
-    const updateDepartment = async (departmentId, updatedData) => {
-        const url = `https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department/${departmentId}`;
-        try {
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData)
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            fetchData(); // Refresh data after update
-        } catch (error) {
-            console.error('Error updating department:', error);
-        }
-    };
-
-    // Update Doctor
-    const updateDoctor = async (doctorId, updatedData) => {
-        const url = `https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctor/${doctorId}`;
-        try {
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData)
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            fetchData(); // Refresh data after update
-        } catch (error) {
-            console.error('Error updating doctor:', error);
-        }
-    };
 
     useEffect(() => {
         fetchData();
@@ -282,49 +264,6 @@ export const UserProvider = ({ children }) => {
         ],
 
         adminData: [],
-
-        unitsData: [
-            {
-                id: 1,
-                unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/ife-unit.png?raw=true",
-                name: "Ife Hospital Unit",
-                state: "Ile-Ife, Osun State",
-                address: "Ilesa Road, Ile-Ife.", 
-                dateCreated: "Aug 30, 2024",
-            },
-            {
-                id: 2,
-                unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%201.png?raw=true",
-                name: "Ijeshaland Geriatric Centre",
-                state: "Ilesa, Osun State",
-                address: "Ijebu-Jesa Road, Ilesa.",
-                dateCreated: "Aug 30, 2024",
-            },
-            {
-                id: 3,
-                unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%204.jpg?raw=true",
-                name: "Rural Comprehensive Health Centre",
-                state: "Imesi-Ile, Osun State",
-                address: "Imesi-Ile",
-                dateCreated: "Aug 30, 2024",
-            },
-            {
-                id: 4,
-                unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/locationsPicture%205.jpg?raw=true",
-                name: "urban Comprehensive Health Centre",
-                state: "Ile-Ife, Osun State",
-                address: "Eleyele Street, Ile-Ife.",
-                dateCreated: "Aug 30, 2024",
-            },
-            {
-                id: 5,
-                unitImage: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/wesley-guild-unit.png?raw=true",
-                name: "Wesley Guild Hospital Unit",
-                state: "Ilsea, Osun State",
-                address: "Ijofi Road, Ilesa.",
-                dateCreated: "Aug 30, 2024",
-            },
-        ],
 
         schoolsData: [
             {
@@ -720,8 +659,7 @@ export const UserProvider = ({ children }) => {
 
         departmentsData,
         doctorsData,
-        updateDepartment,
-        updateDoctor,
+        unitsData,
 
         // Add more user data here if needed
     };

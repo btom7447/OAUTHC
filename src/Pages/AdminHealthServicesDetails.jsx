@@ -18,6 +18,8 @@ const AdminHealthServiceDetails = () => {
         ? healthServicesData.find(service => service.name && service.name.toLowerCase().replace(/\s+/g, '-') === name) 
         : null;
 
+    const healthServiceName = healthService ? healthService.name : "";
+
     const [formData, setFormData] = useState({
         name: healthService?.name || '',
         services: healthService?.services?.map(service => ({ label: service, value: service })) || [],
@@ -139,7 +141,7 @@ const AdminHealthServiceDetails = () => {
                 </Link>
             </div>
             <div className="admin-pages-caption">
-                <h2>{isCreating ? 'Create New Health Service' : `Edit "${healthService.name}"`}</h2>
+            <h2>{isCreating ? 'Create New Health Service' : `Edit "${healthServiceName}" Service`}</h2>
             </div>
             <div className="service-details-page">
                 <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>

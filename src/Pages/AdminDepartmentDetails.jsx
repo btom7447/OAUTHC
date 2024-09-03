@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useUser } from "../Components/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,15 +13,16 @@ const AdminDepartmentDetails = () => {
     const { name } = useParams();
     const { departmentsData, updateDepartment } = useUser();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [toastId, setToastId] = useState(null); // Track toast ID to prevent duplicates
 
     const isCreating = !name;
-    
-    // Add a conditional check to ensure departmentsData is not empty or undefined
     const department = !isCreating && departmentsData.length > 0 
         ? departmentsData.find(dep => dep.name.toLowerCase().replace(/\s+/g, '-') === name) 
         : null;
+    const departmentName = department ? department.name : "";
 
-        const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
         name: department?.name || '',
         overviewText: department?.overviewText || '',
         text: department?.text || '',
@@ -47,14 +50,8 @@ const AdminDepartmentDetails = () => {
         }
     }, [department, name]);
 
-    const allFacilities = Array.from(
-        new Set(departmentsData.flatMap(dep => dep.facilities || []))
-    ).sort();
-
-    const allServices = Array.from(
-        new Set(departmentsData.flatMap(dep => dep.services || []))
-    ).sort();
-
+    const allFacilities = Array.from(new Set(departmentsData.flatMap(dep => dep.facilities || []))).sort();
+    const allServices = Array.from(new Set(departmentsData.flatMap(dep => dep.services || []))).sort();
     const defaultFacilitiesOptions = allFacilities.map(facility => ({ label: facility, value: facility }));
     const defaultServicesOptions = allServices.map(service => ({ label: service, value: service }));
 
@@ -79,41 +76,49 @@ const AdminDepartmentDetails = () => {
     };
 
     const handleSave = async () => {
+        if (loading) return; // Prevent multiple submissions
+        setLoading(true);
+
+        // Show loading toast
+        const id = toast.loading('Saving data...', { autoClose: false });
+        setToastId(id);
+
         try {
-            const isUpdate = !isCreating; 
+            const isUpdate = !isCreating;
             const url = isUpdate
                 ? `https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-department/${department.id}`
-                : 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department'; 
+                : 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department';
     
-            // FormData instance
+            const token = localStorage.getItem('bearer_token');
+            if (!token) {
+                console.error('No token found. Please log in.');
+                return;
+            }
+    
             const formDataToSend = new FormData();
             formDataToSend.append('name', formData.name || '');
             formDataToSend.append('over_view_text', formData.overviewText || '');
             formDataToSend.append('text', formData.text || '');
             formDataToSend.append('phone', formData.phone || '');
     
-            // Append image
+            // Append image file if present
             if (formData.departmentImage) {
-                formDataToSend.append('image', formData.departmentImage);
+                const blob = await fetch(formData.departmentImage).then(res => res.blob());
+                formDataToSend.append('image', blob, 'department-image.jpg');
             }
     
-            // Append services
             formData.services.forEach((service, index) => {
                 formDataToSend.append(`services[${index}]`, service.value);
             });
-    
-            // Append facilities
             formData.facilities.forEach((facility, index) => {
                 formDataToSend.append(`facilities[${index}]`, facility.value);
             });
     
-            for (let [key, value] of formDataToSend.entries()) {
-                console.log(`${key}:`, value);
-            }
-    
-            // Send request
             const response = await fetch(url, {
-                method: isUpdate ? 'PUT' : 'POST',
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
                 body: formDataToSend,
             });
     
@@ -123,33 +128,37 @@ const AdminDepartmentDetails = () => {
             }
     
             const result = await response.json();
+            toast.update(id, { render: 'Department saved successfully', type: 'success', isLoading: false, autoClose: 3000 });
+
             console.log('Save successful:', result);
-            navigate('/admin/departments'); 
+
+            // Refresh or navigate after saving
+            setTimeout(() => {
+                navigate('/admin/departments');
+            }, 3000); 
         } catch (error) {
             console.error('Error saving data:', error);
+            toast.update(id, { render: `Error saving data: ${error.message}`, type: 'error', isLoading: false, autoClose: 5000 });
+        } finally {
+            setLoading(false);
+            setToastId(null); // Reset toast ID
         }
     };
     
-    
-    
-    
-
     const handleDrop = (acceptedFiles) => {
-        if (acceptedFiles.length + formData.images.length <= 2) {
-            setFormData(prevData => {
-                const newImages = [
-                    ...prevData.images,
-                    ...acceptedFiles.map(file => Object.assign(file, {
-                        preview: URL.createObjectURL(file)
-                    }))
-                ];
-                return {
-                    ...prevData,
-                    images: newImages,
-                    departmentImage: newImages[0] ? newImages[0].preview : prevData.departmentImage
-                };
-            });
+        const file = acceptedFiles[0];
+        if (!file) return; // If no file is selected
+    
+        if (!['image/png', 'image/jpeg', 'image/jpg'].includes(file.type)) {
+            console.error('The file must be a PNG or JPG image.');
+            return;
         }
+    
+        const reader = new FileReader();
+        reader.onload = () => {
+            setFormData((prev) => ({ ...prev, departmentImage: reader.result }));
+        };
+        reader.readAsDataURL(file);
     };
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -172,7 +181,6 @@ const AdminDepartmentDetails = () => {
         return <div className="loading">Loading...</div>; 
     }
 
-
     return (
         <>
             <div className="pages-caption">
@@ -185,7 +193,7 @@ const AdminDepartmentDetails = () => {
                 </Link>
             </div>
             <div className="admin-pages-caption">
-                <h2>{isCreating ? 'Create New Department' : `Edit "${department.name}"`}</h2>
+                <h2>{isCreating ? 'Create New Department' : `Edit "${departmentName}" Department`}</h2>
             </div>
             <div className="department-details-page">
                 <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
@@ -207,6 +215,7 @@ const AdminDepartmentDetails = () => {
                             handleRemoveImage={handleRemoveImage}
                             statusOptions={statusOptions}
                             handleSelectChange={handleSelectChange}
+                            loading={loading}
                         />
                     </div>
                 </form>

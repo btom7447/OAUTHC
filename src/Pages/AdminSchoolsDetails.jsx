@@ -18,6 +18,8 @@ const AdminSchoolsDetails = () => {
         ? schoolsData.find(sch => sch.name && sch.name.toLowerCase().replace(/\s+/g, '-') === name) 
         : null;
 
+    const schoolName = school ? school.name : "";
+
     const [formData, setFormData] = useState({
         name: school?.name || '',
         overviewText: school?.overviewText || '',
@@ -154,7 +156,8 @@ const AdminSchoolsDetails = () => {
                 </Link>
             </div>
             <div className="admin-pages-caption">
-            <h2>{isCreating ? 'Create New School' : `Edit "${school.name}"`}</h2>
+
+            <h2>{isCreating ? 'Create New School' : `Edit "${schoolName}" School`}</h2>
             </div>
             <div className="department-details-page">
                 <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>

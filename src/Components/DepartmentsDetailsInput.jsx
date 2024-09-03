@@ -16,6 +16,7 @@ const DepartmentsDetailsInputs = ({
                 <input
                     type="text"
                     name="name"
+                    placeholder="Department Name ..."
                     value={formData.name || ''}
                     onChange={handleInputChange}
                 />
@@ -27,15 +28,17 @@ const DepartmentsDetailsInputs = ({
                     name="overviewText"
                     value={formData.overviewText || ''}
                     onChange={handleInputChange}
+                    placeholder="Department Overview Text ..."
                 ></textarea>
             </label>
             {/* TEXT */}
             <label>
-                Text:
+                Description:
                 <textarea
                     name="text"
                     value={formData.text || ''}
                     onChange={handleInputChange}
+                    placeholder="Description of Department ..."
                 ></textarea>
             </label>
             {/* FACILITIES */}
@@ -92,6 +95,7 @@ const DepartmentsDetailsInputs = ({
                     name="phone"
                     value={formData.phone || ''}
                     onChange={handleInputChange}
+                    placeholder="Department Number ..."
                 />
             </label>
         </div>

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useUser } from "../Components/UserContext";
 import AdminDataDisplay from "../Components/AdminDataDisplay";
 import AdminDataTable from "../Components/AdminDataTable"; 
 
 const AdminDoctors = () => {
     const { doctorsData } = useUser();
+    const [data, setData] = useState(doctorsData);
+
+
+    const handleDeleteSuccess = (id) => {
+        setData((prevData) => prevData.filter((item) => item.id !== id));
+    };
 
     return (
         <div className="admin-doctors-section">
@@ -20,6 +26,8 @@ const AdminDoctors = () => {
                 itemName="doctors"
                 basePath="/admin/doctors" 
                 newItemPath="new"
+                entityType="doctor"
+                setData={handleDeleteSuccess}
             />
         </div>
     );

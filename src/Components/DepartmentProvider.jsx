@@ -20,23 +20,19 @@ export const DepartmentProvider = ({ children }) => {
     ]);
 
     const fetchData = async () => {
-        const departmentUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department';
-        const doctorUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctors';
-        const unitUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/unit';
+        const departmentUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/department';
+        const doctorUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/doctors';
+        const unitUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/unit';
 
         const token = localStorage.getItem('bearer_token');
 
-        if (!token) {
-            console.error('No token found. Please log in.');
-            return;
-        }
 
         try {
             const departmentResponse = await fetch(departmentUrl, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, // Include the token in the header
+                'Authorization': `Bearer ${token}`, 
               }
             });
       
@@ -44,7 +40,7 @@ export const DepartmentProvider = ({ children }) => {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                // 'Authorization': `Bearer ${token}`,
               }
             });
       
@@ -71,7 +67,7 @@ export const DepartmentProvider = ({ children }) => {
                     status: department.status,
                     dateCreated: department.created_at,
                     overviewText: department.over_view_text,
-                    departmentImage: department.image_url || '',
+                    departmentImage: department.image,
                     departmentName: department.name,
                     text: department.text,
                     facilitiesText: department.facilities,

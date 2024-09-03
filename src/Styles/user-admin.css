@@ -1243,6 +1243,67 @@ a {
     background-color: var(--secondary-red);
 }
 
+/* Basic styling for the form container */
+.doctor-create, 
+.doctor-update {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Basic styling for form elements */
+.doctor-create label, 
+.doctor-update label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+.doctor-create input[type="email"],
+.doctor-update input[type="email"], 
+.doctor-create input[type="text"],
+.doctor-update input[type="text"], 
+.doctor-create    input[type="email"],
+.doctor-update input [type="email"], 
+.doctor-create    input[type="url"],
+.doctor-update input[type="url"], 
+.doctor-create    input[type="file"],
+.doctor-update input[type="file"]
+.doctor-create    select, 
+.doctor-update select, 
+.doctor-create    textarea, 
+.doctor-update textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Styling for multi-select dropdown */
+.doctor-create select[multiple] {
+    height: auto;
+    min-height: 100px;
+}
+
+/* Styling for buttons */
+.doctor-create button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.doctor-create button:hover {
+    background-color: #0056b3;
+}
+
 
 
 /* * {

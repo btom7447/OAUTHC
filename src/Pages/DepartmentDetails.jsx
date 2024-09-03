@@ -2,21 +2,23 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { useDepartments } from './DepartmentProvider';
-import DepartmentCaption from './DepartmentCaption';
-import DepartmentDoctorsContainer from './DepartmentDoctorsContainer';
+import { useDepartments } from '../Components/DepartmentProvider';
+import DepartmentCaption from '../Components/DepartmentCaption';
+import DepartmentDoctorsContainer from '../Components/DepartmentDoctorsContainer';
 
 const DepartmentDetails = () => {
     const { departmentName } = useParams();
     const departments = useDepartments();
 
-    const department = departments.find(dep => {
+    // Safely find the department by name
+    const department = departments?.find(dep => {
         const formattedName = dep.departmentName.replace(/\s+/g, '-').toLowerCase();
         return formattedName === departmentName;
     });
 
+    // If department is not found, display an error message
     if (!department) {
-        return <p>Department not found.</p>;
+        return <p className='loading'>Loading Department ...</p>;
     }
 
     return (
@@ -40,7 +42,8 @@ const DepartmentDetails = () => {
                 <div className="departments-facilities">
                     <h5>{department.departmentName} Department Facilities & Technology</h5>
                     <ul>
-                        {department.facilities.map((facility, index) => (
+                        {/* Use optional chaining to safely access the map function */}
+                        {department.facilities?.map((facility, index) => (
                             <li key={index}>
                                 <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
                                 {facility}
@@ -49,7 +52,8 @@ const DepartmentDetails = () => {
                     </ul>
                     <h5>Services Offered</h5>
                     <ul>
-                        {department.services.map((service, index) => (
+                        {/* Use optional chaining to safely access the map function */}
+                        {department.services?.map((service, index) => (
                             <li key={index}>
                                 <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
                                 {service}
@@ -58,7 +62,7 @@ const DepartmentDetails = () => {
                     </ul>
                 </div>
                 <div className="departments-contacts">
-                    <h5> Contact Information</h5>
+                    <h5>Contact Information</h5>
                     <p>Department Phone: {department.phone}</p>
                 </div>
             </div>

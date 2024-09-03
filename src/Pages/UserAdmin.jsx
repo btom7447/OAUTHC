@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminSidebar from "../Components/AdminSidebar";
 import AdminDashboard from "./AdminDashboard";
@@ -13,7 +14,6 @@ import AllAdmins from "./AllAdmins";
 import AddAdmin from "./AddAdmin";
 import AdminDoctors from "./AdminDoctors";
 import AdminDepartments from "./AdminDepartments"; 
-import AdminDoctorsDetail from "./AdminDoctorsDetails";
 import AdminDepartmentDetails from "./AdminDepartmentDetails";
 import AdminLocations from "./AdminLocations";
 import AdminLocationsDetails from "./AdminLocationsDetails";
@@ -21,10 +21,13 @@ import AdminSchools from "./AdminSchools";
 import AdminSchoolsDetails from "./AdminSchoolsDetails";
 import AdminHealthServiceDetails from "./AdminHealthServicesDetails";
 import AdminHealthServices from "./AdminHealthServices";
+import AdminDoctorsCreate from "./AdminDoctorsCreate";
+import AdminDoctorsUpdate from "./AdminDoctorsUpdate";
 
 const UserAdmin = () => {
     return (
         <UserProvider>
+            <ToastContainer />
             <div className="user-admin">
                 <AdminHeader />
                 <AdminSidebar />
@@ -39,8 +42,8 @@ const UserAdmin = () => {
                         <Route path="/departments/:name" element={<AdminDepartmentDetails />} />
                         <Route path="/departments/new" element={<AdminDepartmentDetails />} />
                         <Route path="/doctors" element={<AdminDoctors />} />
-                        <Route path="/doctors/:name" element={<AdminDoctorsDetail />} />
-                        <Route path="/doctors/new" element={<AdminDoctorsDetail />} />
+                        <Route path="/doctors/:id" element={<AdminDoctorsUpdate />} />
+                        <Route path="/doctors/new" element={<AdminDoctorsCreate />} />
                         <Route path="/schools" element={<AdminSchools />} />
                         <Route path="/schools/:name" element={<AdminSchoolsDetails />} />
                         <Route path="/shools/new" element={<AdminSchoolsDetails />} />

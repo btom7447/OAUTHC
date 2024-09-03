@@ -8,7 +8,7 @@ import AboutUsPage from './Pages/AboutUsPage';
 import ServicesPage from './Pages/ServicesPage';
 import ContactUsPage from './Pages/ContactUsPage';
 import Footer from './Components/Footer';
-import DepartmentDetails from './Components/DepartmentDetails'; 
+import DepartmentDetails from './Pages/DepartmentDetails';
 import { DepartmentProvider } from './Components/DepartmentProvider';
 import { SectionProvider } from './Components/SectionProvider';
 import SchoolDetails from './Pages/SchoolDetails';
