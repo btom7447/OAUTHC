@@ -9,11 +9,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from "react-spinners";
 
 const AdminDepartmentUpdate = () => {
+
     const { id } = useParams();
     const { departmentsData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [error] = useState('');
+    const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({
         name: '',
@@ -242,6 +243,15 @@ const AdminDepartmentUpdate = () => {
                             onChange={(options) => handleSelectChange(options, 'facility')}
                             placeholder="Create or Add Department Facilities"
                             className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
                         />
                     </label>
                     <label>
@@ -253,6 +263,15 @@ const AdminDepartmentUpdate = () => {
                             onChange={(options) => handleSelectChange(options, 'service')}
                             placeholder="Create or Add Department Services"
                             className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
                         />
                     </label>
                     <label>
@@ -301,7 +320,7 @@ const AdminDepartmentUpdate = () => {
                                     <img src={imagePreview} alt="Preview" />
                                 </div>
                             )}
-                    </label>
+                        </label>
                    </div>
                     
                     <button type="submit" disabled={loading}>

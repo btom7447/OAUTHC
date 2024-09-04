@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../Components/UserContext";
 import AdminDataDisplay from "../Components/AdminDataDisplay";
-import DepartmentTable from "../Components/AdminDataTable";
+import AdminDataTable from "../Components/AdminDataTable";
 
 const AdminDepartments = () => {
     const { departmentsData } = useUser();
@@ -26,7 +26,7 @@ const AdminDepartments = () => {
             </div>
             <AdminDataDisplay
                 data={departmentsData}
-                TableComponent={DepartmentTable}
+                TableComponent={AdminDataTable}
                 itemName="departments"
                 basePath="/admin/departments"
                 newItemPath="new"

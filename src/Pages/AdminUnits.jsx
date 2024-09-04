@@ -7,6 +7,10 @@ const AdminUnits = () => {
     const { unitsData } = useUser();
     const [data, setData] = useState(unitsData);
 
+    useEffect(() => {
+        setData(unitsData);
+    }, [unitsData]);
+
     const handleDeleteSuccess = (id) => {
         setData((prevData) => prevData.filter((item) => item.id !== id));
     };
@@ -21,11 +25,11 @@ const AdminUnits = () => {
             </div>
             <AdminDataDisplay
                 data={unitsData}
-                TableComponent={AdminDataTable} 
+                TableComponent={AdminDataTable}
                 itemName="units"
-                basePath="/admin/units" 
+                basePath="/admin/units"
                 newItemPath="new"
-                entityType="doctor"
+                entityType="unit"
                 setData={handleDeleteSuccess}
             />
         </div>

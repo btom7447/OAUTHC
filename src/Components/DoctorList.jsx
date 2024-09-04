@@ -24,7 +24,7 @@ const DoctorList = () => {
       <div className="loading-spinner loading">
         <ClipLoader color="#005046" size={100} />
       </div>
-  );
+    );
   }
 
   const totalPages = Math.ceil(doctors.length / itemsPerPage);

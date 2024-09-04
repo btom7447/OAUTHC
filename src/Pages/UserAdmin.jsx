@@ -25,6 +25,7 @@ import AdminDoctorsUpdate from "./AdminDoctorsUpdate";
 import AdminDepartmentUpdate from "./AdminDepartmentUpdate";
 import AdminDepartmentCreate from "./AdminDepartmentCreate";
 import AdminUnitsUpdate from "./AdminUnitsUpdate";
+import AdminUnitsCreate from "./AdminUnitsCreate";
 
 const UserAdmin = () => {
     return (
@@ -51,7 +52,7 @@ const UserAdmin = () => {
                         <Route path="/shools/new" element={<AdminSchoolsDetails />} />
                         <Route path="/units" element={<AdminUnits />} />
                         <Route path="/units/:id" element={<AdminUnitsUpdate />} />
-                        <Route path="/units/new" element={<AdminLocationsDetails />} />
+                        <Route path="/units/new" element={<AdminUnitsCreate />} />
                         <Route path="/health-services" element={<AdminHealthServices />} />
                         <Route path="/health-services/:name" element={<AdminHealthServiceDetails />} />
                         <Route path="/health-services/new" element={<AdminHealthServiceDetails />} />

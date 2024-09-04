@@ -104,7 +104,7 @@ export const UserProvider = ({ children }) => {
                     id: unit.id,
                     name: unit.name,
                     dateCreated: unit.created_at,
-                    unitImage: unit.image,
+                    unitImage: unit.unitImage,
                     state: unit.state, 
                     address: unit.address
                 }));

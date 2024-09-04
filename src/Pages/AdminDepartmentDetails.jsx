@@ -135,7 +135,7 @@ const AdminDepartmentDetails = () => {
             // Refresh or navigate after saving
             setTimeout(() => {
                 navigate('/admin/departments');
-            }, 3000); 
+            }, 3000); // Wait for the toast to finish
         } catch (error) {
             console.error('Error saving data:', error);
             toast.update(id, { render: `Error saving data: ${error.message}`, type: 'error', isLoading: false, autoClose: 5000 });
