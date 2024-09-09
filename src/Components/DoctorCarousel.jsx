@@ -37,7 +37,7 @@ const DoctorsCarousel = () => {
       >
         {doctors.map((doctor, index) => (
           <SplideSlide key={doctor.id || index}>
-            <Link to={`/About/Find-Doctor/${encodeURIComponent(doctor.doctorName)}`}>
+            <Link to={`/about/find-doctor/${encodeURIComponent(doctor.doctorName)}`}>
               <div className="professionals-box">
                 <div className="professionals-image">
                   <img src={doctor.doctorImage} alt={doctor.doctorName} />

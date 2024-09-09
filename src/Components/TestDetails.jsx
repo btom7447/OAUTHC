@@ -23,7 +23,7 @@ const TestDetails = () => {
             <HealthServicesCaption />
             <div className="back-button">
                 <FontAwesomeIcon icon={faChevronLeft} className="list-icon" />
-                <Link to="/Services/Tests-Procedures">Back</Link>
+                <Link to="/services/tests-procedures">Back</Link>
             </div>
             <div className="tests-procedures-details">
                 <h4>{selectedTest.name} Overview</h4>

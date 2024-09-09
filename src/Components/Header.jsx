@@ -7,7 +7,7 @@ const Header = ({ searchQuery, setSearchQuery }) => {
     <header>
       <div className="first-header">
         <div className="f-header-left">
-          <Link to="/Home">
+          <Link to="/home">
             <img src="https://btom7447.github.io/OAUTH/images/oauthc-logo.png" alt="OAUTHC Logo" />
           </Link>
           <h4>

@@ -26,7 +26,7 @@ function MobileHeader() {
 
     return (
         <div className="mobile-header">
-            <Link to="/Home">
+            <Link to="/home">
                 <img src="https://btom7447.github.io/OAUTH/images/oauthc-logo.png" alt="OAUTHC Logo" />
             </Link>            
             <h4>

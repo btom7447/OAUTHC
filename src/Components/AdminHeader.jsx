@@ -8,7 +8,7 @@ const AdminHeader = () => {
     return (
         <div className="admin-header">
             <div className="header-logo">
-                <Link to="/Home">
+                <Link to="/home">
                     <img src="https://btom7447.github.io/OAUTH/images/oauthc-logo.png" alt="OAUTHC Logo" />
                 </Link>
                 <h3>

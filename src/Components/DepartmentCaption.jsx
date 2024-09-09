@@ -20,7 +20,7 @@ const DepartmentCaption = () => {
         <div className="departments-caption">
             <div className="page-caption-text">
                 <Link to="/">Home</Link> <span>/</span>
-                <Link to="/About/Departments-Centers">Departments & Centers</Link>
+                <Link to="/about/departments-centers">Departments & Centers</Link>
                 <h5>{department.departmentName}</h5>
             </div>
             <CaptionUnderline />

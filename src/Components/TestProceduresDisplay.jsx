@@ -11,7 +11,7 @@ const TestProceduresDisplay = ({ filteredTests, initialLetter }) => {
                     {filteredTests.length > 0 ? (
                         filteredTests.map((test, index) => (
                             <li key={index}>
-                                <Link to={`/Services/Tests-Procedures/${test.name.replace(/\s+/g, '-').toLowerCase()}`} className='disease-links'>
+                                <Link to={`/services/tests-procedures/${test.name.replace(/\s+/g, '-').toLowerCase()}`} className='disease-links'>
                                     <strong>{test.name}</strong>
                                 </Link>
                             </li>

@@ -36,7 +36,7 @@ const DepartmentsFocusArea = () => {
           <ul className="departments-container">
             {sortedDepartments.map((department) => (
               <Link
-                to={`/Department-Details/${department.departmentName.replace(
+                to={`/department-details/${department.departmentName.replace(
                   /\s+/g,
                   "-"
                 ).toLowerCase()}`}

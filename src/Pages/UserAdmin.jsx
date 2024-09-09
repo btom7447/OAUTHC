@@ -15,10 +15,7 @@ import AddAdmin from "./AddAdmin";
 import AdminDoctors from "./AdminDoctors";
 import AdminDepartments from "./AdminDepartments"; 
 import AdminUnits from "./AdminUnits";
-import AdminLocationsDetails from "./AdminLocationsDetails";
 import AdminSchools from "./AdminSchools";
-import AdminSchoolsDetails from "./AdminSchoolsDetails";
-import AdminHealthServiceDetails from "./AdminHealthServicesDetails";
 import AdminHealthServices from "./AdminHealthServices";
 import AdminDoctorsCreate from "./AdminDoctorsCreate";
 import AdminDoctorsUpdate from "./AdminDoctorsUpdate";
@@ -26,6 +23,10 @@ import AdminDepartmentUpdate from "./AdminDepartmentUpdate";
 import AdminDepartmentCreate from "./AdminDepartmentCreate";
 import AdminUnitsUpdate from "./AdminUnitsUpdate";
 import AdminUnitsCreate from "./AdminUnitsCreate";
+import AdminSchoolsUpdate from "./AdminSchoolsUpdate";
+import AdminSchoolsCreate from "./AdminSchoolsCreate";
+import AdminHealthServicesUpdate from "./AdminHealthServicesUpdate";
+import AdminHealthServicesCreate from "./AdminHealthServicesCreate";
 
 const UserAdmin = () => {
     return (
@@ -48,14 +49,14 @@ const UserAdmin = () => {
                         <Route path="/doctors/:id" element={<AdminDoctorsUpdate />} />
                         <Route path="/doctors/new" element={<AdminDoctorsCreate />} />
                         <Route path="/schools" element={<AdminSchools />} />
-                        <Route path="/schools/:name" element={<AdminSchoolsDetails />} />
-                        <Route path="/shools/new" element={<AdminSchoolsDetails />} />
+                        <Route path="/schools/:id" element={<AdminSchoolsUpdate />} />
+                        <Route path="/schools/new" element={<AdminSchoolsCreate />} />
                         <Route path="/units" element={<AdminUnits />} />
                         <Route path="/units/:id" element={<AdminUnitsUpdate />} />
                         <Route path="/units/new" element={<AdminUnitsCreate />} />
                         <Route path="/health-services" element={<AdminHealthServices />} />
-                        <Route path="/health-services/:name" element={<AdminHealthServiceDetails />} />
-                        <Route path="/health-services/new" element={<AdminHealthServiceDetails />} />
+                        <Route path="/health-services/:id" element={<AdminHealthServicesUpdate />} />
+                        <Route path="/health-services/new" element={<AdminHealthServicesCreate />} />
                         <Route path="/appointments" element={<AdminAppointments />} />
                         <Route path="/services" element={<AdminServices />} />
                         <Route path="/patients" element={<AdminPatients />} />

@@ -32,7 +32,7 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
     
         if (!entityType) {
             console.error('Entity type is not defined.');
-            return;
+            return; 
         }
     
         // Show loading toast

@@ -21,7 +21,7 @@ const HeroCarousel = () => {
                     >
                         <SplideSlide>
                             <div className="hero-carousel-one">
-                                <Link to="/Services/Health-Services">
+                                <Link to="/services/health-services">
                                     <button type="button">
                                         Our Services
                                     </button>
@@ -30,7 +30,7 @@ const HeroCarousel = () => {
                         </SplideSlide>
                         <SplideSlide>
                             <div className="hero-carousel-two">
-                                <Link to="/About/About-OAUTHC">
+                                <Link to="/about/about-oauthc">
                                     <button type="button">
                                         About Us
                                     </button>
@@ -74,7 +74,7 @@ const HeroCarousel = () => {
                     </button>
                 </a>
                 {/* DISEASES AND SYMPTOMS */}
-                <Link to="/Services/Diseases-Symptoms">
+                <Link to="/services/diseases-symptoms">
                     <button type="button">
                         Diseases and Symptoms
                         <svg xmlns="http://www.w3.org/2000/svg" width="53" height="45" viewBox="0 0 53 45" fill="none">
@@ -84,7 +84,7 @@ const HeroCarousel = () => {
                     </button>
                 </Link>
                 {/* STUDENT PORTAL */}
-                <Link to="/Student-Portal">
+                <Link to="/student-portal">
                     <button type="button">
                         Click here to log on to student portal
                     </button>

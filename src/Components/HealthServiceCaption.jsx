@@ -20,7 +20,7 @@ const HealthServicesCaption = () => {
         <div className="health-services-caption">
             <div className="page-caption-text">
                 <Link to="/">Home</Link> <span>/</span>
-                <Link to="/Services/Health-Services">Health Services</Link>
+                <Link to="/services/health-services">Health Services</Link>
                 <h5>{service.name}</h5>
             </div>
             <CaptionUnderline />

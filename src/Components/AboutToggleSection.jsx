@@ -112,7 +112,7 @@ const AboutToggleDisplay = () => {
                 </button>
 
               ))}
-              <Link className='learn-more-link' to="/About/About-OAUTHC">
+              <Link className='learn-more-link' to="/about/about-oauthc">
                 <button type="button">
                   Learn More
                 </button>

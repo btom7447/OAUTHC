@@ -30,7 +30,7 @@ const DoctorsProfile = () => {
       <div className="doctor-details">
         <div className="back-button">
           <FontAwesomeIcon icon={faChevronLeft} className="list-icon" />
-          <Link to="/About/Find-Doctor">Back</Link>
+          <Link to="/about/find-doctor">Back</Link>
         </div>
         <div className="doctor-overview-container">
           <div className="doctor-poster">

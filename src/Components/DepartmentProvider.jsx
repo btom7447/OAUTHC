@@ -23,43 +23,41 @@ export const DepartmentProvider = ({ children }) => {
         const departmentUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/department';
         const doctorUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/doctors';
         const unitUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/unit';
-
+    
         const token = localStorage.getItem('bearer_token');
-
-
+    
         try {
-            const departmentResponse = await fetch(departmentUrl, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, 
-              }
-            });
-      
-            const doctorResponse = await fetch(doctorUrl, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${token}`,
-              }
-            });
-      
-            const unitResponse = await fetch(unitUrl, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-              }
-            });
-
+            const [departmentResponse, doctorResponse, unitResponse, healthResponse] = await Promise.all([
+                fetch(departmentUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`, 
+                    }
+                }),
+                fetch(doctorUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }),
+                fetch(unitUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }),
+            ]);
+    
             if (!departmentResponse.ok || !doctorResponse.ok || !unitResponse.ok) {
                 throw new Error(`HTTP error! Department status: ${departmentResponse.status}, Doctor status: ${doctorResponse.status}, Unit status: ${unitResponse.status}`);
             }
-
+    
             const departmentData = await departmentResponse.json();
             const doctorData = await doctorResponse.json();
             const unitData = await unitResponse.json();
-
+    
             if (departmentData && departmentData.data) {
                 const transformedDepartments = departmentData.data.map(department => ({
                     id: department.id,
@@ -76,7 +74,7 @@ export const DepartmentProvider = ({ children }) => {
                 }));
                 setDepartments(transformedDepartments);
             }
-
+    
             if (doctorData && doctorData.data) {
                 const transformedDoctors = doctorData.data.map(doctor => ({
                     id: doctor.id,
@@ -99,7 +97,7 @@ export const DepartmentProvider = ({ children }) => {
                 }));
                 setDoctors(transformedDoctors);
             }
-
+    
             if (unitData && unitData.data) {
                 const transformedUnits = unitData.data.map(unit => ({
                     id: unit.id,
@@ -107,14 +105,15 @@ export const DepartmentProvider = ({ children }) => {
                     unitAddress: unit.address,
                     unitLocation: unit.state,
                     unitImage: unit.unitImage,
-                    // Add other properties as needed
                 }));
                 setUnits(transformedUnits);
             }
+    
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
+    
 
     useEffect(() => {
         fetchData();
@@ -124,7 +123,7 @@ export const DepartmentProvider = ({ children }) => {
         departments,
         schools,
         doctors,
-        units
+        units,
     };
 
     return (

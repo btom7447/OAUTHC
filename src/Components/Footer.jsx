@@ -23,19 +23,19 @@ const Footer = () => {
                                 <Link to="/Home" anchor="bookAppointmentSection">Book Appointment </Link>
                             </li> */}
                             <li>
-                                <Link to="/About/Find-Doctor">Find Doctor</Link>
+                                <Link to="/about/find-doctor">Find Doctor</Link>
                             </li>
                             <li>
-                                <Link to="/Services/Health-Services">Services</Link>
+                                <Link to="/services/health-services">Services</Link>
                             </li>
                             <li>
-                                <Link to="/About/About-OAUTHC">About Us</Link>
+                                <Link to="/about/about-oauthc">About Us</Link>
                             </li>
                             <li>
-                                <Link to="/Terms-of-Service">Terms of Service</Link>
+                                <Link to="/terms-of-service">Terms of Service</Link>
                             </li>
                             <li>
-                                <Link to="/Privacy-Policy">Privacy Policy</Link>
+                                <Link to="/privacy-policy">Privacy Policy</Link>
                             </li>
                         </ul>
                     </div>

@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav>
       <ul className='navlinks'>
         <li>
-          <NavLink to="/Home" activeclassname="active" className="navLink">
+          <NavLink to="/home" activeclassname="active" className="navLink">
             Home
           </NavLink>
         </li>
@@ -15,11 +15,11 @@ const Navbar = () => {
           <NavbarDropdown
             title="About Us"
             items={[
-              { label: "About OAUTHC", url: "/About/About-OAUTHC" },
-              { label: "Departments & Centers", url: "/About/Departments-Centers" },
-              { label: "Find a Doctor", url: "/About/Find-Doctor" },
-              { label: "Locations", url: "/About/locations" },
-              { label: "Our Schools", url: "/About/our-schools"},
+              { label: "About OAUTHC", url: "/about/about-oauthc" },
+              { label: "Departments & Centers", url: "/about/departments-centers" },
+              { label: "Find a Doctor", url: "/about/find-doctor" },
+              { label: "Locations", url: "/about/locations" },
+              { label: "Our Schools", url: "/about/our-schools"},
             ]}
           />
         </li>
@@ -27,16 +27,16 @@ const Navbar = () => {
           <NavbarDropdown
             title="Services"
             items={[
-              { label: "Our Services", url: "/Services/Health-Services" },
-              { label: "Research and Ethics", url: "/Services/Research-Ethics" },
-              { label: "Diseases & Symptoms", url: "/Services/Diseases-Symptoms" },
-              { label: "Tests & Imaging", url: "/Services/Tests-Procedures" },
+              { label: "Our Services", url: "/services/health-services" },
+              { label: "Research and Ethics", url: "/services/research-ethics" },
+              { label: "Diseases & Symptoms", url: "/services/diseases-symptoms" },
+              { label: "Tests & Imaging", url: "/services/tests-procedures" },
             ]}
           />
         </li>
         <li className='navLink'><a href="https://www.theoauthcblog.online/" target="_blank" rel="noreferrer">Blog</a></li>
         <li>
-          <NavLink to="/Contact" className="navLink">
+          <NavLink to="/contact" className="navLink">
             Contact
           </NavLink>
         </li>

@@ -7,7 +7,6 @@ const AdminDoctors = () => {
     const { doctorsData } = useUser();
     const [data, setData] = useState(doctorsData);
 
-
     const handleDeleteSuccess = (id) => {
         setData((prevData) => prevData.filter((item) => item.id !== id));
     };

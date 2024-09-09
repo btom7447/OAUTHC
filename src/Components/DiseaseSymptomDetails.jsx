@@ -26,7 +26,7 @@ const DiseaseSymptomDetails = () => {
             <DiseasesCaption />
             <div className="back-button">
                 <FontAwesomeIcon icon={faChevronLeft} className="list-icon" />
-                <Link to="/Services/Diseases-Symptoms">Back</Link>
+                <Link to="/services/diseases-symptoms">Back</Link>
             </div>
             <div className="department-details">
                 <div className="department-overview-container">

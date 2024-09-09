@@ -24,7 +24,7 @@ const DoctorsCaption = () => {
         <div className="doctors-caption">
             <div className="page-caption-text">
                 <Link to="/">Home</Link> <span>/</span>
-                <Link to="/About/Find-Doctor">Find a Doctor</Link> 
+                <Link to="/about/find-doctor">Find a Doctor</Link> 
                 <h5>{doctor.doctorName}</h5>
             </div>
             <CaptionUnderline />

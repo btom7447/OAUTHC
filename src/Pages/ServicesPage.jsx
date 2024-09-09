@@ -15,13 +15,13 @@ const ServicesPage = () => {
     <CurrentSectionProvider>
       <ServiceProvider>
         <Routes>
-          <Route path="Health-Services" element={<HealthServices />} />
-          <Route path="Health-Centers/:departmentName" element={<DepartmentDetails />} />
-          <Route path="Research-Ethics" element={<ResearchEthics />} />
-          <Route path="Diseases-Symptoms" element={<DiseasesSymptoms />} />
-          <Route path="Diseases-Symptoms/:departmentName" element={<DiseaseSymptomDetails />} />
-          <Route path="Tests-Procedures" element={<TestProcedures />} />
-          <Route path="Tests-Procedures/:name" element={<TestDetails />} />
+          <Route path="health-services" element={<HealthServices />} />
+          <Route path="health-centers/:departmentName" element={<DepartmentDetails />} />
+          <Route path="research-ethics" element={<ResearchEthics />} />
+          <Route path="diseases-symptoms" element={<DiseasesSymptoms />} />
+          <Route path="diseases-symptoms/:departmentName" element={<DiseaseSymptomDetails />} />
+          <Route path="tests-procedures" element={<TestProcedures />} />
+          <Route path="tests-procedures/:name" element={<TestDetails />} />
         </Routes>
       </ServiceProvider>
     </CurrentSectionProvider>

@@ -26,7 +26,7 @@ const SchoolDetails = () => {
             <SchoolsCaption />
             <div className="back-button">
                 <FontAwesomeIcon icon={faChevronLeft} className="list-icon" />
-                <Link to="/About/our-schools">Back</Link>
+                <Link to="/about/our-schools">Back</Link>
             </div>
             <div className="department-details">
                 <div className="department-overview-container">

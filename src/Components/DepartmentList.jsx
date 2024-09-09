@@ -44,7 +44,7 @@ const DepartmentList = ({ departments }) => {
             <div className={`departments-container ${fade ? 'fade-enter' : 'fade-enter-active'}`}>
                 {displayedDepartments.map(({ departmentImage, departmentName }, index) => (
                     <div key={index} className="department">
-                        <Link to={`/Department-Details/${departmentName.replace(/\s+/g, '-').toLowerCase()}`}>
+                        <Link to={`/department-details/${departmentName.replace(/\s+/g, '-').toLowerCase()}`}>
                             <img src={departmentImage} alt={departmentName} />
                             <div className="department-caption">
                                 <h5>{departmentName}</h5>

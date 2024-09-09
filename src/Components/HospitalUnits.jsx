@@ -2,8 +2,18 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { ClipLoader } from 'react-spinners';
 
 const HospitalUnits = ({ unitData }) => {
+
+    if (!unitData || unitData.length === 0) {
+        return (
+          <div className="loading-spinner loading">
+            <ClipLoader color="#005046" size={100} />
+          </div>
+        );
+    }
+
     return (
         <div className="oauthc-location-container">
             {unitData.map(({ unitImage, unitName, unitLocation, unitAddress }, index) => (
@@ -32,7 +42,7 @@ const HospitalUnits = ({ unitData }) => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
                                     <path d="M4.01562 6.88991C4.01562 6.24513 4.27177 5.62675 4.7277 5.17081C5.18363 4.71488 5.80201 4.45874 6.4468 4.45874H10.4339C10.6889 4.45893 10.9375 4.53933 11.1443 4.68855C11.3511 4.83776 11.5057 5.04825 11.5863 5.2902L13.4073 10.7518C13.4995 11.0294 13.4886 11.3309 13.3765 11.6011C13.2644 11.8713 13.0587 12.092 12.797 12.2227L10.0534 13.5963C11.3983 16.5727 13.7822 18.9567 16.7586 20.3015L18.1322 17.5579C18.263 17.2962 18.4837 17.0905 18.7538 16.9784C19.024 16.8663 19.3255 16.8554 19.6031 16.9477L25.0647 18.7686C25.3069 18.8493 25.5175 19.0041 25.6667 19.2112C25.816 19.4182 25.8963 19.667 25.8962 19.9222V23.9081C25.8962 24.5529 25.6401 25.1713 25.1841 25.6272C24.7282 26.0832 24.1098 26.3393 23.465 26.3393H22.2494C12.1795 26.3393 4.01562 18.1754 4.01562 8.1055V6.88991Z" stroke="#006B5D" strokeWidth="2.43117" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                <Link className="unit-links" to="/Contact">Contact Us</Link>
+                                <Link className="unit-links" to="/contact">Contact Us</Link>
                                 <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
                             </div>
                         </div>

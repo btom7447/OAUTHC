@@ -52,20 +52,20 @@ const App = () => {
 
             <Routes>
               <Route path="/" element={<Navigate to="/Home" replace />} />
-              <Route path="/Home" element={<LandingPage />} />
-              <Route path="/About/*" element={<AboutUsPage />} />
-              <Route path="/Services/*" element={<ServicesPage />} />
-              <Route path="/Contact" element={<ContactUsPage />} />
-              <Route path="/Terms-of-Service" element={<TermsService />} />
-              <Route path="/Privacy-Policy" element={<PrivacyPolicy />} />
-              <Route path="/Student-Portal" element={<StudentPortal />} />
-              <Route path="/Home#bookAppointmentSection" element={<LandingPage />} />
-              <Route path="/Department-Details/:departmentName" element={<DepartmentDetails />} />
-              <Route path="/Doctor-Profile/:doctorName" element={<DoctorsProfile />} />
-              <Route path="/School-Details/:schoolName" element={<SchoolDetails />} />
-              <Route path="/Services-Details/:name" element={<ServicesDetails />} /> 
-              <Route path="/Diseases-Symptoms/:name" element={<DiseaseSymptomDetails />} /> 
-              <Route path="/Test-Procedures/:name" element={<TestDetails />} />
+              <Route path="/home" element={<LandingPage />} />
+              <Route path="/about/*" element={<AboutUsPage />} />
+              <Route path="/services/*" element={<ServicesPage />} />
+              <Route path="/contact" element={<ContactUsPage />} />
+              <Route path="/terms-of-service" element={<TermsService />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/student-portal" element={<StudentPortal />} />
+              <Route path="/home#bookAppointmentSection" element={<LandingPage />} />
+              <Route path="/department-details/:departmentName" element={<DepartmentDetails />} />
+              <Route path="/doctor-profile/:doctorName" element={<DoctorsProfile />} />
+              <Route path="/school-details/:schoolName" element={<SchoolDetails />} />
+              <Route path="/services-details/:name" element={<ServicesDetails />} /> 
+              <Route path="/diseases-symptoms/:name" element={<DiseaseSymptomDetails />} /> 
+              <Route path="/test-procedures/:name" element={<TestDetails />} />
               <Route path="/management/:name" element={<TeamMemberDetails />} /> 
               
               {/* ADMIN DASHBOARD ROUTE */}

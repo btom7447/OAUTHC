@@ -31,7 +31,7 @@ const DepartmentDetails = () => {
             <DepartmentCaption />
             <div className="back-button">
                 <FontAwesomeIcon icon={faChevronLeft} className="list-icon" />
-                <Link to="/About/Departments-Centers">Back</Link>
+                <Link to="/about/departments-centers">Back</Link>
             </div>
             <div className="department-details">
                 <div className="department-overview-container">

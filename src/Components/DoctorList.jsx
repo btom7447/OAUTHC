@@ -184,8 +184,7 @@ const DoctorList = () => {
             <div className="doctor-card-buttons">
               <Link
                 className='doctor-profile-button'
-                to={`/About/Find-Doctor/${encodeURIComponent(doctor.doctorName)}`}
-                // onClick={() => setSelectedDoctor(doctor)} 
+                to={`/about/find-doctor/${encodeURIComponent(doctor.doctorName).replace(/%20/g, '-')}`}
               >
                 View Profile
               </Link>
