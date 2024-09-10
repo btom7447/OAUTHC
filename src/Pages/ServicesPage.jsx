@@ -6,8 +6,8 @@ import HealthServices from './HealthServices';
 import DepartmentDetails from './DepartmentDetails';
 import DiseasesSymptoms from './DiseaseSymptoms';
 import TestProcedures from './TestProcedures';
-import DiseaseSymptomDetails from '../Components/DiseaseSymptomDetails';
-import TestDetails from '../Components/TestDetails';
+import DiseaseSymptomDetails from './DiseaseSymptomDetails';
+import TestDetails from './TestDetails';
 import ResearchEthics from './ResearchEthics';
 
 const ServicesPage = () => {

@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
     const [schoolsData, setSchoolsData] = useState([]);
     const [healthServicesData, setHealthServicesData] = useState([]);
     const [testsData, setTestsData] = useState([]);
+    const [diseasesData, setDiseasesData] = useState([]);
 
     // Fetch Data Function
     const fetchData = async () => {
@@ -18,6 +19,7 @@ export const UserProvider = ({ children }) => {
         const schoolsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/schools';
         const healthServicesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/health';
         const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/tests';
+        const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/disease'
     
         const token = localStorage.getItem('bearer_token');
     
@@ -27,7 +29,7 @@ export const UserProvider = ({ children }) => {
         }
     
         try {
-            const [departmentsResponse, doctorsResponse, unitsResponse, schoolsResponse, healthServicesResponse, testsResponse,] = await Promise.all([
+            const [departmentsResponse, doctorsResponse, unitsResponse, schoolsResponse, healthServicesResponse, testsResponse, diseasesResponse] = await Promise.all([
                 fetch(departmentsUrl, {
                     method: 'GET',
                     headers: {
@@ -69,20 +71,28 @@ export const UserProvider = ({ children }) => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
                     }
+                }),
+                fetch(diseasesUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
                 })
             ]);
     
-            if (!departmentsResponse.ok || !doctorsResponse.ok || !unitsResponse.ok || !schoolsResponse.ok || !healthServicesResponse.ok || !testsResponse.ok) { 
-                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status} or ${unitsResponse.status} or ${schoolsResponse.status} or ${healthServicesResponse.status} or ${testsResponse.status}`);
+            if (!departmentsResponse.ok || !doctorsResponse.ok || !unitsResponse.ok || !schoolsResponse.ok || !healthServicesResponse.ok || !testsResponse.ok || !diseasesResponse.ok) { 
+                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status} or ${unitsResponse.status} or ${schoolsResponse.status} or ${healthServicesResponse.status} or ${testsResponse.status} or ${diseasesResponse.status}`);
             }
             
-            const [departmentsData, doctorsData, unitsData, schoolsData, healthServicesData, testsData] = await Promise.all([
+            const [departmentsData, doctorsData, unitsData, schoolsData, healthServicesData, testsData, diseasesData] = await Promise.all([
                 departmentsResponse.json(),
                 doctorsResponse.json(),
                 unitsResponse.json(),
                 schoolsResponse.json(),
                 healthServicesResponse.json(),
                 testsResponse.json(),
+                diseasesResponse.json(),
             ]);
     
             if (departmentsData && departmentsData.data) {
@@ -191,6 +201,22 @@ export const UserProvider = ({ children }) => {
             } else {
                 console.error('Failed to retrieve Tests:', testsData?.message || 'Unexpected response structure:', testsData);
             }
+            if (diseasesData && diseasesData.data) {
+                const transformedDiseases = diseasesData.data.map(disease => ({
+                    id: disease.id,
+                    dateCreated: disease.created_at,
+                    name: disease.name,
+                    overviewText: disease.overviewText, 
+                    description: disease.description,
+                    symptoms: disease.symptoms, 
+                    treatment: disease.treatment,
+                    images: disease.images,
+                }));
+                setDiseasesData(transformedDiseases);
+            } else {
+                console.error('Failed to retrieve Diseases:', diseasesData?.message || 'Unexpected response structure:', diseasesData);
+            }
+            
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -346,7 +372,8 @@ export const UserProvider = ({ children }) => {
         unitsData,
         schoolsData,
         healthServicesData, 
-        testsData
+        testsData, 
+        diseasesData
 
         // Add more user data here if needed
     };

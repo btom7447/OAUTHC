@@ -30,6 +30,9 @@ import AdminHealthServicesCreate from "./AdminHealthServicesCreate";
 import AdminTests from "./AdminTests";
 import AdminTestsUpdate from "./AdminTestsUpdate";
 import AdminTestsCreate from "./AdminTestsCreate";
+import AdminDiseases from "./AdminDiseases";
+import AdminDiseasesUpdate from "./AdminDiseasesUpdate";
+import AdminDiseasesCreate from "./AdminDiseasesCreate";
 
 const UserAdmin = () => {
     return (
@@ -48,6 +51,9 @@ const UserAdmin = () => {
                         <Route path="/departments" element={<AdminDepartments />} />
                         <Route path="/departments/:id" element={<AdminDepartmentUpdate />} />
                         <Route path="/departments/new" element={<AdminDepartmentCreate />} />
+                        <Route path="/diseases" element={<AdminDiseases />} />
+                        <Route path="/diseases/:id" element={<AdminDiseasesUpdate />} />
+                        <Route path="/diseases/new" element={<AdminDiseasesCreate />} />
                         <Route path="/doctors" element={<AdminDoctors />} />
                         <Route path="/doctors/:id" element={<AdminDoctorsUpdate />} />
                         <Route path="/doctors/new" element={<AdminDoctorsCreate />} />

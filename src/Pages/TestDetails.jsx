@@ -2,8 +2,9 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { useTestsData } from './ServiceProvider';
-import HealthServicesCaption from './HealthServiceCaption';
+import { useTestsData } from '../Components/ServiceProvider';
+import HealthServicesCaption from '../Components/HealthServiceCaption';
+import { ClipLoader } from 'react-spinners';
 
 const TestDetails = () => {
     const { name } = useParams();
@@ -15,7 +16,11 @@ const TestDetails = () => {
     });
 
     if (!selectedTest) {
-        return <p>Test not found.</p>;
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
     }
 
     return (

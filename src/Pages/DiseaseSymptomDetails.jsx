@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
-import { useDiseaseData } from './ServiceProvider';
-import DiseasesCaption from './DiseasesCaption';
-import DoctorsContainer from './DoctorsContainer';
+import { useDiseaseData } from '../Components/ServiceProvider';
+import DiseasesCaption from '../Components/DiseasesCaption';
+import DoctorsContainer from '../Components/DoctorsContainer';
+import { ClipLoader } from 'react-spinners';
 
 const DiseaseSymptomDetails = () => {
     const { name } = useParams();
@@ -18,8 +19,16 @@ const DiseaseSymptomDetails = () => {
     });
 
     if (!selectedDisease) {
-        return <p>Disease and Symptom not found.</p>;
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
     }
+
+    const images = Array.isArray(selectedDisease.images) ? selectedDisease.images : [];
+    const symptoms = Array.isArray(selectedDisease.symptoms) ? selectedDisease.symptoms : ["No symptom information available"];
+    const treatment = Array.isArray(selectedDisease.treatment) ? selectedDisease.treatment : ["No treatment information available"];
 
     return (
         <div>
@@ -33,24 +42,18 @@ const DiseaseSymptomDetails = () => {
                     <div className="departments-overview">
                         <h5>{selectedDisease.name} Overview</h5>
                         <h6>{selectedDisease.overviewText}</h6>
-                        {selectedDisease.description.map((description, index) => (
-                            <p key={index}>
-                                {description}
-                            </p>
-                        ))}
+                        <p>{selectedDisease.description}</p>
                     </div>
                     <div className="departments-poster">
-                        {selectedDisease.images.map((images, index) => (
-                            <img key={index} src={images} alt={selectedDisease.name}>
-                                
-                            </img>
-                        ))}                    </div>
+                        {images.map((image, index) => (
+                            <img key={index} src={image} alt={selectedDisease.name} />
+                        ))}
+                    </div>
                 </div>
                 <div className="departments-facilities">
-                    <h5>Symptoms</h5>
                     <p>Symptoms of {selectedDisease.name} may include:</p>
                     <ul>
-                        {selectedDisease.symptoms.map((symptom, index) => (
+                        {symptoms.map((symptom, index) => (
                             <li key={index}>
                                 <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
                                 {symptom}
@@ -60,16 +63,19 @@ const DiseaseSymptomDetails = () => {
                 </div>
                 <div className="departments-contacts">
                     <h5>Treatment</h5>
-                    {selectedDisease.treatment.map((treatment, index) => (
-                        <p key={index}>
-                            {treatment}
-                        </p>
-                    ))}
+                    {treatment.length > 0 ? (
+                        treatment.map((treat, index) => (
+                            <p key={index}>{treat}</p>
+                        ))
+                    ) : (
+                        <p>No treatment information available.</p>
+                    )}
                 </div>
             </div>
             <DoctorsContainer />
         </div>
     );
 };
+
 
 export default DiseaseSymptomDetails;
