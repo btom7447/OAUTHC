@@ -2,12 +2,35 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from "../Components/AuthContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const AdminSidebar = () => {
     const [openAccordion, setOpenAccordion] = useState(null);
 
     const handleAccordionClick = (accordionName) => {
         setOpenAccordion(openAccordion === accordionName ? null : accordionName);
+    };
+
+    const { logout } = useAuth();
+    const handleLogout = () => {
+        const toastId = toast.info('Logging out...', {
+            position: 'top-right',
+            autoClose: false,  // Disable auto-close
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            onClose: () => {
+                logout(); 
+            }
+        });
+
+        setTimeout(() => {
+            toast.dismiss(toastId);
+        }, 2000);  
     };
 
     return (
@@ -139,6 +162,14 @@ const AdminSidebar = () => {
                             </li>
                             <li>
                                 <NavLink
+                                    to="/admin/tests"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Tests & Imaging
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
                                     to="/admin/units"
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                 >
@@ -201,8 +232,8 @@ const AdminSidebar = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="/admin/logout"
-                        className={({ isActive }) => (isActive ? "active-link" : "")}
+                        onClick={logout}
+                        className=""
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M15.24 22.27H15.11C10.67 22.27 8.53002 20.52 8.16002 16.6C8.12002 16.19 8.42002 15.82 8.84002 15.78C9.25002 15.74 9.62002 16.05 9.66002 16.46C9.95002 19.6 11.43 20.77 15.12 20.77H15.25C19.32 20.77 20.76 19.33 20.76 15.26V8.74001C20.76 4.67001 19.32 3.23001 15.25 3.23001H15.12C11.41 3.23001 9.93002 4.42001 9.66002 7.62001C9.61002 8.03001 9.27002 8.34001 8.84002 8.30001C8.42002 8.27001 8.12001 7.90001 8.15001 7.49001C8.49001 3.51001 10.64 1.73001 15.11 1.73001H15.24C20.15 1.73001 22.25 3.83001 22.25 8.74001V15.26C22.25 20.17 20.15 22.27 15.24 22.27Z" fill="white"/>
@@ -213,6 +244,7 @@ const AdminSidebar = () => {
                     </NavLink>
                 </li>
             </ul>
+            <ToastContainer />
         </div>
     );
 };

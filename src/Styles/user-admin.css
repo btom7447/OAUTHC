@@ -848,56 +848,6 @@ a {
     margin: auto 10px;
     cursor: pointer;
 }
-    
-.ReactModal__Overlay {
-    padding-top: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.ReactModal__Content {
-    position: relative;
-    max-width: 500px;
-    max-height: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    background: var(--white);
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    outline: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-}
-
-.confirm, .cancel {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.confirm {
-    background-color: #d34a4a;
-    color: white;
-}
-
-.cancel {
-    background-color: #e0e0e0;
-}
-
 
 /* DETAILS PAGE */
 .back {
@@ -965,6 +915,7 @@ a {
     width: 100%;
     min-height: 150px;
     padding: 10px;
+    padding-bottom: 30px;
     border-radius: 4px;
     border: solid 1px var(--gray);
     text-align: left;
@@ -1146,7 +1097,40 @@ a {
 .details-publish button:hover {
     background-color: var(--secondary-green);
 }
-
+.test-image-form .details-inputs {
+    padding: 20px;
+    padding-bottom: 100px;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 4px;
+    border: solid 1px var(--gray);
+    background-color: var(--white);
+}
+.test-image-form .details-inputs label textarea {
+    min-height: 200px;
+}
+.test-image-form button {
+    width: 200px;
+    padding: 10px;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    color: var(--white);
+    background-color: var(--primary-green);
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.test-image-form button:hover {
+    background-color: var(--secondary-green);
+}
 
 /* * {
     outline: red solid 1px;

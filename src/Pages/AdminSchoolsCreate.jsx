@@ -12,140 +12,149 @@ const AdminSchoolsCreate = () => {
     const [formData, setFormData] = useState({
         name: '',
         overviewText: '',
-        description: '',
-        facilitiesText: '', 
-        facilities: [],
-        faculties: [],
+        vision: '',
+        mission: '',
+        location: '', 
+        function: '', 
+        services: '',
+        ruralPosting: [], 
+        clinicalPosting: [],
+        specialTraining: [],
         image: null, 
     });
 
     const [imagePreview, setImagePreview] = useState('');
-    const [selectedFacilities, setSelectedFacilities] = useState([]);
-    const [selectedFaculties, setSelectedFaculties] = useState([]);
+    const [selectedRuralPosting, setSelectedRuralPosting] = useState([]);
+    const [selectedClinicalPosting, setSelectedClinicalPosting] = useState([]);
+    const [selectedSpecialTraining, setSelectedSpecialTraining] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const transformedSchools = schoolsData.map(school => ({
         id: school.id,
-        name: school.name,
+        dateCreated: school.created_at,
+        name: school.schoolName,
         overviewText: school.overviewText,
-        facilitiesText: school.facilitiesText,
         schoolImage: school.schoolImage,
-        description: school.description,
-        facilities: school.facilities,
-        faculties: school.faculties,
+        vision: school.vision,
+        mission: school.mission,
+        location: school.location,
+        function: school.function,
+        services: school.services,
+        ruralPosting: school.ruralPosting, 
+        clinicalPosting: school.clinicalPosting, 
+        specialTraining: school.specialTraining,
     }));
 
-    const facilitiesFromSchoolsData = [...new Set(
+    // Generate unique and sorted options for clinical postings
+    const clinicalPostingFromSchoolsData = [...new Set(
         transformedSchools.flatMap(school =>
-            Array.isArray(school.facilities) ? school.facilities : []
+            Array.isArray(school.clinicalPosting) ? school.clinicalPosting : []
         )
     )].sort((a, b) => a.localeCompare(b));
-    
-    const facultiesFromSchoolsData = [...new Set(
+
+    // Generate unique and sorted options for rural postings
+    const ruralPostingFromSchoolsData = [...new Set(
         transformedSchools.flatMap(school =>
-            Array.isArray(school.faculties) ? school.faculties : []
+            Array.isArray(school.ruralPosting) ? school.ruralPosting : []
         )
     )].sort((a, b) => a.localeCompare(b));
-    
-    const defaultFacilitiesOptions = facilitiesFromSchoolsData.map(facility => ({
-        value: facility,
-        label: facility
+
+    // Generate unique and sorted options for special training
+    const specialTrainingFromSchoolsData = [...new Set(
+        transformedSchools.flatMap(school =>
+            Array.isArray(school.specialTraining) ? school.specialTraining : []
+        )
+    )].sort((a, b) => a.localeCompare(b));
+
+    // Define the options for the select inputs
+    const defaultClinicalPostingOptions = clinicalPostingFromSchoolsData.map(posting => ({
+        value: posting,
+        label: posting
     }));
-    
-    const defaultFacultiesOptions = facultiesFromSchoolsData.map(faculty => ({
-        value: faculty,
-        label: faculty
+
+    const defaultRuralPostingOptions = ruralPostingFromSchoolsData.map(posting => ({
+        value: posting,
+        label: posting
+    }));
+
+    const defaultSpecialTrainingOptions = specialTrainingFromSchoolsData.map(training => ({
+        value: training,
+        label: training
     }));
 
     const handleSave = async (e) => {
         e.preventDefault();
-    
         setLoading(true);
-        const loadingToastId = toast.loading("Creating School ...", {
-            autoClose: false,
-            toastId: 'loading-toast'
-        });
+        const loadingToastId = toast.loading("Updating School...", { autoClose: false, toastId: 'loading-toast' });
     
         try {
             const token = localStorage.getItem('bearer_token');
-            if (!token) {
-                throw new Error('No token found. Please log in.');
-            }
+            if (!token) throw new Error('No token found. Please log in.');
     
             const formDataToSend = new FormData();
-            formDataToSend.append('name', formData.name);
-            formDataToSend.append('over_view_text', formData.overviewText);
-            formDataToSend.append('description', formData.description);
-            formDataToSend.append('facilities_text', formData.facilitiesText);
+            formDataToSend.append('schoolName', formData.name);
+            formDataToSend.append('overviewText', formData.overviewText);
+            formDataToSend.append('vision', formData.vision);
+            formDataToSend.append('mission', formData.mission);
+            formDataToSend.append('location', formData.location);
     
+            // Handle image upload
             if (formData.image && formData.image instanceof File) {
-                formDataToSend.append('image', formData.image);
+                formDataToSend.append('schoolImage', formData.image);
             }
     
-            selectedFacilities.forEach((facility, index) => {
-                formDataToSend.append(`facilities[${index}]`, facility.value);
+            // Append each paragraph as a new string with index keys
+            formData.function.split('\n').forEach((item, index) => {
+                if (item.trim()) {
+                    formDataToSend.append(`function[${index}]`, item.trim());
+                }
             });
-            
-            selectedFaculties.forEach((faculty, index) => {
-                formDataToSend.append(`faculties[${index}]`, faculty.value);
+
+            formData.services.split('\n').forEach((item, index) => {
+                if (item.trim()) {
+                    formDataToSend.append(`services[${index}]`, item.trim());
+                }
             });
     
-            const response = await fetch("https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/school", {
+            selectedRuralPosting.forEach((posting, index) => {
+                formDataToSend.append(`ruralPosting[${index}]`, posting.value);
+            });
+    
+            selectedClinicalPosting.forEach((posting, index) => {
+                formDataToSend.append(`clinicalPosting[${index}]`, posting.value);
+            });
+    
+            selectedSpecialTraining.forEach((training, index) => {
+                formDataToSend.append(`specialTraining[${index}]`, training.value);
+            });
+    
+            // Proceed with form submission
+            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/create/school`, {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
+                headers: { 'Authorization': `Bearer ${token}` },
                 body: formDataToSend
             });
     
             const result = await response.json();
-    
             if (response.ok) {
-                toast.update(loadingToastId, {
-                    render: 'School created successfully!',
-                    type: 'success',
-                    autoClose: 2500,
-                    isLoading: false
-                });
-    
-                setTimeout(() => {
-                    navigate('/admin/schools', { replace: true });
-                    window.location.reload();
+                toast.update(loadingToastId, { render: 'School updated successfully!', type: 'success', autoClose: 2500, isLoading: false });
+                setTimeout(() => { 
+                    navigate('/admin/schools', { replace: true }); 
+                    window.location.reload(); 
                 }, 2500);
             } else {
-                throw new Error(result.message || 'Creation failed');
+                throw new Error(result.message || 'Update failed');
             }
+    
         } catch (err) {
-            toast.update(loadingToastId, {
-                render: `Error: ${err.message}`,
-                type: 'error',
-                autoClose: 5000,
-                isLoading: false
-            });
+            toast.update(loadingToastId, { render: `Error: ${err.message}`, type: 'error', autoClose: 5000, isLoading: false });
         } finally {
             setLoading(false);
-            toast.dismiss('loading-toast');
         }
     };
     
-    const handleSelectChange = (newValue, category) => {
-        if (category === 'facility') {
-            setSelectedFacilities(newValue);
-        } else if (category === 'faculty') { 
-            setSelectedFaculties(newValue);
-        }
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value, type, files } = e.target;
     
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: type === 'file' ? files[0] : value 
-        }));
-    };
-    
-    const handleImageChange = (e) => {
+     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
             setFormData(prevData => ({
@@ -156,6 +165,40 @@ const AdminSchoolsCreate = () => {
             setImagePreview(previewUrl);
         } else {
             setImagePreview('');
+        }
+    };
+
+    const handleSelectChange = (selectedOption, actionMeta) => {
+        switch (actionMeta.name) {
+          case 'ruralPosting':
+            setSelectedRuralPosting(selectedOption);
+            break;
+          case 'clinicalPosting':
+            setSelectedClinicalPosting(selectedOption);
+            break;
+          case 'specialTraining':
+            setSelectedSpecialTraining(selectedOption);
+            break;
+          default:
+            break;
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value, type, files } = e.target;
+
+        if (type === 'file') {
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: files[0]
+            }));
+            const previewUrl = URL.createObjectURL(files[0]);
+            setImagePreview(previewUrl);
+        } else {
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value
+            }));
         }
     };
 
@@ -173,7 +216,7 @@ const AdminSchoolsCreate = () => {
             <form onSubmit={handleSave} className='details-page-form'>
                 <div className="details-inputs">
                     <label>
-                        Name: 
+                        Name:
                         <input
                             type="text"
                             name="name"
@@ -192,23 +235,58 @@ const AdminSchoolsCreate = () => {
                         />
                     </label>
                     <label>
-                        School Description:
+                        Vision:
                         <textarea
-                            type="text"
-                            name="description"
-                            value={formData.description}
+                            name="vision"
+                            value={formData.vision}
                             onChange={handleInputChange}
-                            placeholder="School Description ..."
+                            placeholder="School Vision"
                         />
                     </label>
                     <label>
-                        Facilities:
+                        Mission:
+                        <textarea
+                            name="mission"
+                            value={formData.mission}
+                            onChange={handleInputChange}
+                            placeholder="School Mission"
+                        />
+                    </label>
+                    <label>
+                        Location:
+                        <textarea
+                            name="location"
+                            value={formData.location}
+                            onChange={handleInputChange}
+                            placeholder="School Location"
+                        />
+                    </label>
+                    <label>
+                        Function:
+                        <textarea
+                            name="function"
+                            value={formData.function}
+                            onChange={handleInputChange}
+                            placeholder="School Function (separate paragraphs with Enter)"
+                        />
+                    </label>
+                    <label>
+                        Services:
+                        <textarea
+                            name="services"
+                            value={formData.services}
+                            onChange={handleInputChange}
+                            placeholder="School Services (separate paragraphs with Enter)"
+                        />
+                    </label>
+                    <label>
+                        Clinical Posting:
                         <Creatable
                             isMulti
-                            options={defaultFacilitiesOptions}
-                            value={selectedFacilities}
-                            onChange={(options) => handleSelectChange(options, 'facility')}
-                            placeholder="Create or Add School Facilities"
+                            options={defaultClinicalPostingOptions}
+                            value={selectedClinicalPosting}
+                            onChange={(options) => setSelectedClinicalPosting(options)}
+                            placeholder="Create or Add Clinical Posting"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -222,13 +300,33 @@ const AdminSchoolsCreate = () => {
                         />
                     </label>
                     <label>
-                        Faculty:
+                        Rural Posting:
                         <Creatable
                             isMulti
-                            options={defaultFacultiesOptions}
-                            value={selectedFaculties}
-                            onChange={(options) => handleSelectChange(options, 'service')}
-                            placeholder="Create or Add School Faculties"
+                            options={defaultRuralPostingOptions}
+                            value={selectedRuralPosting}
+                            onChange={(options) => setSelectedRuralPosting(options)}
+                            placeholder="Create or Add Rural Posting"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Special Training:
+                        <Creatable
+                            isMulti
+                            options={defaultSpecialTrainingOptions}
+                            value={selectedSpecialTraining}
+                            onChange={(options) => setSelectedSpecialTraining(options)}
+                            placeholder="Create or Add Special Training"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -258,10 +356,11 @@ const AdminSchoolsCreate = () => {
                                     <img src={imagePreview} alt="Preview" />
                                 </div>
                             )}
-                    </label>
-                   </div>
+                        </label>
+                    </div>
+                    
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Creating ...' : 'Create School'}
+                        {loading ? 'Updating ...' : 'Update School'}
                     </button>
                 </div>
             </form>

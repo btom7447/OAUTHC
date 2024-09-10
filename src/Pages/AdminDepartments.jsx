@@ -7,7 +7,6 @@ const AdminDepartments = () => {
     const { departmentsData } = useUser();
     const [data, setData] = useState(departmentsData);
 
-    // Effect to synchronize data with context if it updates
     useEffect(() => {
         setData(departmentsData);
     }, [departmentsData]);

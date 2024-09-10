@@ -7,6 +7,10 @@ const AdminDoctors = () => {
     const { doctorsData } = useUser();
     const [data, setData] = useState(doctorsData);
 
+    useEffect(() => {
+        setData(doctorsData);
+    }, [doctorsData]);
+
     const handleDeleteSuccess = (id) => {
         setData((prevData) => prevData.filter((item) => item.id !== id));
     };

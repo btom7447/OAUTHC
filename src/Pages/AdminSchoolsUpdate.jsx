@@ -13,92 +13,92 @@ const AdminSchoolsUpdate = () => {
     const { schoolsData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({
         name: '',
         overviewText: '',
-        description: '',
-        facilitiesText: '', 
-        services: [],
-        faculties: [],
+        vision: '',
+        mission: '',
+        location: '', 
+        function: '', 
+        services: '',
+        ruralPosting: [], 
+        clinicalPosting: [],
+        specialTraining: [],
         image: [], 
     });
 
     const [imagePreview, setImagePreview] = useState('');
-    const [selectedFacilities, setSelectedFacilities] = useState([]);
-    const [selectedFaculties, setSelectedFaculties] = useState([]);
+    const [selectedRuralPosting, setSelectedRuralPosting] = useState([]);
+    const [selectedClinicalPosting, setSelectedClinicalPosting] = useState([]);
+    const [selectedSpecialTraining, setSelectedSpecialTraining] = useState([]);
+    
+    // Extract options from schoolsData
+    const clinicalPostingFromSchoolsData = schoolsData.flatMap(school => school.clinicalPosting || []);
+    const ruralPostingFromSchoolsData = schoolsData.flatMap(school => school.ruralPosting || []);
+    const specialTrainingFromSchoolsData = schoolsData.flatMap(school => school.specialTraining || []);
 
-    const transformedSchools = schoolsData.map(school => ({
-        id: school.id,
-        dateCreated: school.created_at,
-        name: school.schoolName,
-        overviewText: school.overviewText,
-        schoolImage: school.schoolImage,
-        description: school.description,
-        facilitiesText: school.facilities, 
-        services: school.services, 
-        faculties: school.faculties
+    // Define the options for the select inputs
+    const defaultClinicalPostingOptions = clinicalPostingFromSchoolsData.map(posting => ({
+        value: posting,
+        label: posting
     }));
 
-    const facilitiesFromSchoolsData = [...new Set(
-        transformedSchools.flatMap(school =>
-            Array.isArray(school.facilities) ? school.facilities : []
-        )
-    )].sort((a, b) => a.localeCompare(b));
-    
-    const facultiesFromSchoolsData = [...new Set(
-        transformedSchools.flatMap(school =>
-            Array.isArray(school.faculties) ? school.faculties : []
-        )
-    )].sort((a, b) => a.localeCompare(b));
-    
-    const defaultFacilitiesOptions = facilitiesFromSchoolsData.map(facility => ({
-        value: facility,
-        label: facility
+    const defaultRuralPostingOptions = ruralPostingFromSchoolsData.map(posting => ({
+        value: posting,
+        label: posting
     }));
-    
-    const defaultFacultiesOptions = facultiesFromSchoolsData.map(faculty => ({
-        value: faculty,
-        label: faculty
+
+    const defaultSpecialTrainingOptions = specialTrainingFromSchoolsData.map(training => ({
+        value: training,
+        label: training
     }));
 
     useEffect(() => {
         if (schoolsData.length > 0 && id) {
             const schoolId = parseInt(id, 10);
-            const school = schoolsData.find(sch => sch.id === schoolId);
+            const school = schoolsData.find(school => school.id === schoolId);
     
             if (school) {
+                // Ensure `services` is an array
+                const normalizeArray = (field) => Array.isArray(field) ? field : Object.values(field || {});
+    
                 setFormData({
                     name: school.name || '',
                     overviewText: school.overviewText || '',
-                    facilitiesText: school.facilitiesText || '',
-                    description: school.description || '',
+                    vision: school.vision || '',
+                    mission: school.mission || '',
+                    location: school.location || '',
+                    function: normalizeArray(school.function).join('\n'),
+                    services: normalizeArray(school.services).join('\n'),
+                    ruralPosting: normalizeArray(school.ruralPosting).join('\n'),
+                    clinicalPosting: normalizeArray(school.clinicalPosting).join('\n'),
+                    specialTraining: normalizeArray(school.specialTraining).join('\n'),
                     image: school.schoolImage ? [school.schoolImage] : [],
-                    facilities: Array.isArray(school.facilities)
-                        ? school.facilities.map(faci => ({ value: faci, label: faci }))
-                        : [], // Ensure facilities is an array before mapping
-                    faculties: Array.isArray(school.faculties)
-                        ? school.faculties.map(facu => ({ value: facu, label: facu }))
-                        : [], // Ensure faculties is an array before mapping
                 });
     
-                // Set the initial image preview
-                setImagePreview(school.schoolImage || '');
+                // Set the initial selected options for Creatable components
+                setSelectedRuralPosting(normalizeArray(school.ruralPosting).map(posting => ({
+                    value: posting,
+                    label: posting
+                })));
     
-                setSelectedFacilities(
-                    Array.isArray(school.facilities)
-                        ? school.facilities.map(faci => ({ value: faci, label: faci }))
-                        : [] // Ensure facilities is an array before mapping
-                );
+                setSelectedClinicalPosting(normalizeArray(school.clinicalPosting).map(posting => ({
+                    value: posting,
+                    label: posting
+                })));
     
-                setSelectedFaculties(
-                    Array.isArray(school.faculties)
-                        ? school.faculties.map(facu => ({ value: facu, label: facu }))
-                        : [] // Ensure faculties is an array before mapping
-                );
+                setSelectedSpecialTraining(normalizeArray(school.specialTraining).map(training => ({
+                    value: training,
+                    label: training
+                })));
+    
+                // Set initial image preview if there's an existing image
+                if (school.schoolImage) {
+                    setImagePreview(school.schoolImage);
+                }
             } else {
-                console.log('No School found with the given ID.');
+                console.log('No Schools found with the given ID.');
             }
         }
     }, [id, schoolsData]);
@@ -115,28 +115,50 @@ const AdminSchoolsUpdate = () => {
             const previewUrl = URL.createObjectURL(file);
             setImagePreview(previewUrl);
         } else {
-            // Maintain the existing image preview if no new image is selected
-            setImagePreview(formData.image[0] ? formData.image[0] : '');
+            setImagePreview('');
         }
     };
-    
-    const handleSelectChange = (newValue, category) => {
-        if (category === 'facility') {
-            setSelectedFacilities(newValue);
-        } else if (category === 'faculty') {
-            setSelectedFaculties(newValue);
+
+    const handleSelectChange = (selectedOption, actionMeta) => {
+        switch (actionMeta.name) {
+          case 'ruralPosting':
+            setSelectedRuralPosting(selectedOption);
+            break;
+          case 'clinicalPosting':
+            setSelectedClinicalPosting(selectedOption);
+            break;
+          case 'specialTraining':
+            setSelectedSpecialTraining(selectedOption);
+            break;
+          default:
+            break;
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value, type, files } = e.target;
     
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: type === 'file' ? files[0] : value 
-        }));
+        if (type === 'file') {
+            // Handle file input
+            if (files && files[0]) {
+                setFormData(prevData => ({
+                    ...prevData,
+                    [name]: files[0]
+                }));
+                const previewUrl = URL.createObjectURL(files[0]);
+                setImagePreview(previewUrl);
+            } else {
+                setImagePreview('');
+            }
+        } else if (type === 'textarea' || type === 'text') {
+            // Handle text input
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value
+            }));
+        }
     };
-
+    
     const handleSave = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -146,46 +168,68 @@ const AdminSchoolsUpdate = () => {
             const token = localStorage.getItem('bearer_token');
             if (!token) throw new Error('No token found. Please log in.');
     
+            // Prepare FormData
             const formDataToSend = new FormData();
-            formDataToSend.append('name', formData.name);
+            formDataToSend.append('schoolName', formData.name);
             formDataToSend.append('overviewText', formData.overviewText);
-            formDataToSend.append('description', formData.description);
-            formDataToSend.append('facilitiesText', formData.facilitiesText);
+            formDataToSend.append('vision', formData.vision);
+            formDataToSend.append('mission', formData.mission);
+            formDataToSend.append('location', formData.location);
     
+            // Handle image upload
             if (formData.image && formData.image instanceof File) {
-                formDataToSend.append('image', formData.image);
+                formDataToSend.append('schoolImage', formData.image);
             }
     
-            selectedFacilities.forEach((facility, index) => {
-                formDataToSend.append(`facilities[${index}]`, facility.value);
+            // Append array fields
+            const appendArrayField = (fieldName, string) => {
+                const array = string.split('\n').map(item => item.trim()).filter(item => item);
+                array.forEach((item, index) => {
+                    formDataToSend.append(`${fieldName}[${index}]`, item);
+                });
+            };
+    
+            appendArrayField('function', formData.function);
+            appendArrayField('services', formData.services);
+    
+            // Append selected options for Creatable components
+            selectedRuralPosting.forEach((posting, index) => {
+                formDataToSend.append(`ruralPosting[${index}]`, posting.value);
             });
     
-            selectedFaculties.forEach((faculty, index) => {
-                formDataToSend.append(`faculties[${index}]`, faculty.value);
+            selectedClinicalPosting.forEach((posting, index) => {
+                formDataToSend.append(`clinicalPosting[${index}]`, posting.value);
             });
     
-            // Proceed with form submission
+            selectedSpecialTraining.forEach((training, index) => {
+                formDataToSend.append(`specialTraining[${index}]`, training.value);
+            });
+    
+            // Make the API request
             const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-school/${id}`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formDataToSend
             });
     
-            // Handle response
             const result = await response.json();
             if (response.ok) {
                 toast.update(loadingToastId, { render: 'School updated successfully!', type: 'success', autoClose: 2500, isLoading: false });
-                setTimeout(() => { navigate('/admin/schools', { replace: true }); window.location.reload(); }, 2500);
-            } else throw new Error(result.message || 'Update failed');
+                setTimeout(() => {
+                    navigate('/admin/schools', { replace: true });
+                    window.location.reload();
+                }, 2500);
+            } else {
+                throw new Error(result.message || 'Update failed');
+            }
     
         } catch (err) {
             toast.update(loadingToastId, { render: `Error: ${err.message}`, type: 'error', autoClose: 5000, isLoading: false });
         } finally {
             setLoading(false);
-            toast.dismiss('loading-toast');
         }
     };
-    
+       
 
     if (!schoolsData || schoolsData.length === 0) {
         return (
@@ -194,7 +238,7 @@ const AdminSchoolsUpdate = () => {
             </div>
         );
     }
-
+    
     return (
         <>
             <ToastContainer />
@@ -213,54 +257,79 @@ const AdminSchoolsUpdate = () => {
                 </div>
             </div>
             <form onSubmit={handleSave} className='details-page-form'>
-                {error && <div className="error">{error}</div>}
                 <div className="details-inputs">
-                <label>
-                    Name:
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="School Name"
-                    />
-                </label>
-                <label>
-                    School Overview:
-                    <textarea
-                        name="overviewText"
-                        value={formData.overviewText}
-                        onChange={handleInputChange}
-                        placeholder="School Overview ..."
-                    />
-                </label>
-                <label>
-                    School Description:
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleInputChange}
-                        placeholder="School Description ..."
-                    />
-                </label>
-                <label>
-                    Facilities Text:
-                    <textarea
-                        name="facilitiesText"
-                        value={formData.facilitiesText}
-                        onChange={handleInputChange}
-                        placeholder="Details about school facilities..."
-                    />
-                </label>
-
                     <label>
-                        Facilities:
+                        Name:
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="School Name"
+                        />
+                    </label>
+                    <label>
+                        School Overview:
+                        <textarea
+                            name="overviewText"
+                            value={formData.overviewText}
+                            onChange={handleInputChange}
+                            placeholder="School Overview ..."
+                        />
+                    </label>
+                    <label>
+                        Vision:
+                        <textarea
+                            name="vision"
+                            value={formData.vision}
+                            onChange={handleInputChange}
+                            placeholder="School Vision"
+                        />
+                    </label>
+                    <label>
+                        Mission:
+                        <textarea
+                            name="mission"
+                            value={formData.mission}
+                            onChange={handleInputChange}
+                            placeholder="School Mission"
+                        />
+                    </label>
+                    <label>
+                        Location:
+                        <textarea
+                            name="location"
+                            value={formData.location}
+                            onChange={handleInputChange}
+                            placeholder="School Location"
+                        />
+                    </label>
+                    <label>
+                        Function of School/Programme:
+                        <textarea
+                            name="function"
+                            value={formData.function}
+                            onChange={handleInputChange}
+                            placeholder="Function of School/Programme ..."
+                        />
+                    </label>
+                    <label>
+                        Services Rendered
+                        <textarea
+                            name="services"
+                            value={formData.services}
+                            onChange={handleInputChange}
+                            placeholder="Services Rendered by School ..."
+                        />
+                    </label>
+                    <label>
+                        Clinical Posting:
                         <Creatable
                             isMulti
-                            options={defaultFacilitiesOptions}
-                            value={selectedFacilities}
-                            onChange={(options) => handleSelectChange(options, 'facility')}
-                            placeholder="Create or Add School Facilities"
+                            options={defaultClinicalPostingOptions}
+                            value={selectedClinicalPosting}
+                            onChange={(options) => setSelectedClinicalPosting(options)}
+                            placeholder="Create or Add Clinical Posting"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -273,15 +342,34 @@ const AdminSchoolsUpdate = () => {
                             }}
                         />
                     </label>
-
                     <label>
-                        Faculties:
+                        Rural Posting:
                         <Creatable
                             isMulti
-                            options={defaultFacultiesOptions}
-                            value={selectedFaculties}
-                            onChange={(options) => handleSelectChange(options, 'faculty')}
-                            placeholder="Create or Add School Faculties"
+                            options={defaultRuralPostingOptions}
+                            value={selectedRuralPosting}
+                            onChange={(options) => setSelectedRuralPosting(options)}
+                            placeholder="Create or Add Rural Posting"
+                            className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </label>
+                    <label>
+                        Special Training:
+                        <Creatable
+                            isMulti
+                            options={defaultSpecialTrainingOptions}
+                            value={selectedSpecialTraining}
+                            onChange={(options) => setSelectedSpecialTraining(options)}
+                            placeholder="Create or Add Special Training"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -312,7 +400,7 @@ const AdminSchoolsUpdate = () => {
                                 </div>
                             )}
                         </label>
-                </div>
+                    </div>
                     
                     <button type="submit" disabled={loading}>
                         {loading ? 'Updating ...' : 'Update School'}

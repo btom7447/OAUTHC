@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../Components/UserContext";
 import AdminDataDisplay from "../Components/AdminDataDisplay";
-import AdminDataTable from "../Components/AdminDataTable"; 
+import AdminDataTable from "../Components/AdminDataTable";
 
 const AdminUnits = () => {
     const { unitsData } = useUser();
@@ -24,7 +24,7 @@ const AdminUnits = () => {
                 <h2>Edit "Locations"</h2>
             </div>
             <AdminDataDisplay
-                data={unitsData}
+                data={data}
                 TableComponent={AdminDataTable}
                 itemName="units"
                 basePath="/admin/units"

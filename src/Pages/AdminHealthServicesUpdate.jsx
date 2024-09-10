@@ -13,7 +13,7 @@ const AdminHealthServicesUpdate = () => {
     const { healthServicesData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
 
     const [formData, setFormData] = useState({
         name: '',
@@ -178,7 +178,7 @@ const AdminHealthServicesUpdate = () => {
                 </div>
             </div>
             <form onSubmit={handleSave} className='details-page-form'>
-                {error && <div className="error">{error}</div>}
+                {/* {error && <div className="error">{error}</div>} */}
                 <div className="details-inputs">
                     <label>
                         Health Service Name: 

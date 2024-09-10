@@ -60,7 +60,7 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
             // Refresh the page after toast
             setTimeout(() => {
                 window.location.reload();
-            }, 3000); // Wait for the toast to finish
+            }, 3000); 
     
         } catch (error) {
             console.error("Error deleting the item:", error);

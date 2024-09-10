@@ -1244,6 +1244,19 @@ doctorData = [
     
 schoolData = [
     {
+        overviewText: "The School of Community Health is one of the multi – disciplinary schools run by the Management of Obafemi Awolowo University Teaching Hospitals Complex, Ile-Ife. The School is being regulated by the Community Health Practitioners’ Registration Board of Nigeria (CHPRBN) Abuja. This School is run on semester basis with Lecturers drawn from within and outside the institution to handle the courses based on the guidelines  from  the curriculum designed by  the CHPRBN Abuja. The school is currently running two programmes concurrently: 2 years, higher diploma in community health. 1 year special programme for holders of Bsc in relevant fields in community health.",
+        vision: "To be a School with a clear focus on production of relevant human resources for efficient Primary Healthcare Services in Nigeria."
+        mission: "To train competent Health Practitioners that will be efficient, self-reliant, productive and can stand the test of time.", 
+        location: "The School of Community Health is located in a well conducive area within the Obafemi Awolowo University Teaching Hospitals Complex, Ile-Ife.",
+        function: ["To provide efficient, effective, qualitative and holistic training designed to meet the needs of the students by well trained, motivated, courteous and dedicated staff of the school who can interpret the curriculum and apply various teaching methods to suit the needs of the students. To improve and maintain quality of the training through effective monitoring of students during weeks of teaching and periods of practical experiences within and outside the hospital. To ensure discipline among the students by enforcing the school rules and regulations within the school and hostel. To evaluate students who must take cognizance of the following areas: Punctuality, attendance ,attitude to work, interest in clinical practice areas, academic performance and technical competence which is  done objectively. To ensure excellent performance in all examinations both internal and external."], 
+        services: ["To impact knowledge to students to ensure the provision of integrated Primary Health Care Services. Indexing and Registration and coordination of Students for final qualifying examination with the Community Health Practitioners’ Registration Board of Nigeria Ensuring safety and welfare of the students Conducting Entrance Examination with Management team for new intakes into the school Training and supervision of students’ practical postings. Our students undergo practical postings at various training facilities within and outside the institution which includes:"], 
+        ruralPosting: ["urban comprehensive health center", "comprehensive health center", "rural comprehensive health center"],
+        clincalPosting: ["Adult casualty", "family planning clinic", "dental hospital"], 
+        specialTraining: ["the school of family health"] 
+
+
+    }
+    {
         overviewText: "The School of Nursing Ife, dedicated to educating students to become compassionate and skilled nurses, equipped to provide exceptional patient care in a variety of settings", 
         schoolImage: "https://img.freepik.com/free-photo/group-african-medical-students-posed-outdoor_627829-380.jpg?t=st=1719490292~exp=1719493892~hmac=5275ddb66ebf23cb36174e8c484c3e88b622c0bda49e0caa3b5c663a681ce6d1&w=1380",
         schoolName: "School of Nursing, Ife",

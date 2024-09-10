@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import { useSchools } from '../Components/DepartmentProvider';
 import SchoolsCaption from '../Components/SchoolsCaption';
 import DoctorsContainer from '../Components/DoctorsContainer';
+import { ClipLoader } from 'react-spinners';
 
 const SchoolDetails = () => {
     const { schoolName } = useParams();
@@ -18,8 +18,19 @@ const SchoolDetails = () => {
     });
 
     if (!school) {
-        return <p>School not found.</p>;
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
     }
+
+    // Ensure that these variables are arrays
+    const functions = Array.isArray(school.function) ? school.function : [];
+    const services = Array.isArray(school.services) ? school.services : [];
+    const ruralPosting = Array.isArray(school.ruralPosting) ? school.ruralPosting : ["Currently unavailable"];
+    const clinicalPosting = Array.isArray(school.clinicalPosting) ? school.clinicalPosting : ["Currently unavailable"];
+    const specialTraining = Array.isArray(school.specialTraining) ? school.specialTraining : ["Currently unavailable"];
 
     return (
         <div>
@@ -32,30 +43,67 @@ const SchoolDetails = () => {
                 <div className="department-overview-container">
                     <div className="departments-overview">
                         <h5>{school.schoolName} Overview</h5>
-                        <h6>{school.overviewText}</h6>
-                        <p>{school.description}</p>
+                        <p>{school.overviewText}</p>
                     </div>
                     <div className="departments-poster">
                         <img src={school.schoolImage} alt={school.schoolName} />
                     </div>
                 </div>
-                <div className="departments-facilities">
-                    <h5>{school.schoolName} Facilities</h5>
-                    <p>{school.facilitiesText}</p>
+                
+                <div className='departments-vision'>
+                    <h5>Major Function of {school.schoolName}</h5>
                     <ul>
-                        {school.facilities.map((facility, index) => (
+                        {functions.map((func, index) => (
+                            <p key={index}>
+                                {func}
+                            </p>
+                        ))}
+                    </ul>
+
+                    <h5>Location</h5>
+                    <p>{school.location}</p>
+
+                    <h5>Vision</h5>
+                    <p>{school.vision}</p>
+
+                    <h5>Mission</h5>
+                    <p>{school.mission}</p>
+                    
+                    <h5>Services Rendered by {school.schoolName}</h5>
+                    <ul>
+                        {services.map((service, index) => (
+                            <p key={index}>
+                                {service}
+                            </p>
+                        ))}
+                    </ul>
+                </div>
+                <div className="departments-facilities">
+                    <h5>Postings</h5>
+                    <h6>Rural/Urban Postings</h6>
+                    <ul>
+                        {ruralPosting.map((rural, index) => (
                             <li key={index}>
                                 <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
-                                {facility}
+                                {rural}
                             </li>
                         ))}
                     </ul>
-                    <h5>Faculties of {school.schoolName} </h5>
+                    <h6>Clinical Postings</h6>
                     <ul>
-                        {school.faculties.map((faculty, index) => (
+                        {clinicalPosting.map((clinical, index) => (
                             <li key={index}>
                                 <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
-                                {faculty}
+                                {clinical}
+                            </li>
+                        ))}
+                    </ul>
+                    <h6>Special Trainings</h6>
+                    <ul>
+                        {specialTraining.map((training, index) => (
+                            <li key={index}>
+                                <FontAwesomeIcon icon={faChevronRight} className="list-icon" />
+                                {training}
                             </li>
                         ))}
                     </ul>

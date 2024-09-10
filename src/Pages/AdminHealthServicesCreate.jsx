@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useUser } from "../Components/UserContext";
 import Creatable from 'react-select/creatable';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AdminHealthServicesCreate = () => {
     const navigate = useNavigate();
-    const { healthServicesData } = useUser();  // Correct usage
 
     const [formData, setFormData] = useState({
         name: '',
@@ -18,7 +16,6 @@ const AdminHealthServicesCreate = () => {
 
     const [imagePreview, setImagePreview] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(''); // Defined state for error
 
     // State for selected services and texts
     const [selectedServices, setSelectedServices] = useState([]);
@@ -135,7 +132,6 @@ const AdminHealthServicesCreate = () => {
                 </div>
             </div>
             <form onSubmit={handleSave} className='details-page-form'>
-                {error && <div className="error">{error}</div>}
                 <div className="details-inputs">
                     <label>
                         Health Service Name: 
@@ -155,6 +151,17 @@ const AdminHealthServicesCreate = () => {
                             onChange={(options) => handleSelectChange(options, 'service')}
                             placeholder="Create or Add Services"
                             className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                multiValue: () => 'react-select__multi-value',
+                                multiValueLabel: () => 'react-select__multi-value__label',
+                                multiValueRemove: () => 'react-select__multi-value__remove',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
                         />
                     </label>
                     <label>
@@ -165,6 +172,17 @@ const AdminHealthServicesCreate = () => {
                             onChange={(options) => handleSelectChange(options, 'text')}
                             placeholder="Create or Add Service Texts"
                             className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                multiValue: () => 'react-select__multi-value',
+                                multiValueLabel: () => 'react-select__multi-value__label',
+                                multiValueRemove: () => 'react-select__multi-value__remove',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
                         />
                     </label>
                 </div>
