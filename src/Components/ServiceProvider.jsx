@@ -3,19 +3,20 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const ServicesContext = createContext();
 
 export const ServiceProvider = ({ children }) => {
-    const [healthServices, setHealthServices] = useState([]);
-    const [diseasesData] = useState([
-      {
-        name: "Acne",
-        symptoms: ["Pimples", "Blackheads", "Whiteheads"],
-        overviewText: "A skin condition characterized by inflamed or infected sebaceous glands.",
-        images: ["https://th.bing.com/th/id/R.ff3326b5dfcfa1c5e8823d6e71c86cd0?rik=KHlbloxZBp%2brsg&pid=ImgRaw&r=0", "https://th.bing.com/th/id/OIP.WCwadokbDIF_mgH03vXgDgHaFj?rs=1&pid=ImgDetMain"],
-        description: [
-        "Acne occurs when the pores on the skin become clogged with dead skin cells, oil, and bacteria. It can affect people of all ages, but it is most common during puberty and early adulthood. Acne can range from mild to severe, and if left untreated, can lead to scarring and emotional distress.",
-        "The exact cause of acne is not fully understood, but it is thought to involve a combination of factors, including hormonal changes, stress, and genetics. Treatment options include topical creams and gels, oral antibiotics, and in severe cases, isotretinoin. Maintaining good hygiene, using non-comedogenic products, and avoiding picking or popping pimples can help manage acne.",
-        "In addition to physical symptoms, acne can also have emotional and psychological effects, such as low self-esteem, anxiety, and depression. If you are experiencing acne, it is important to seek medical attention to develop a treatment plan that works for you. With proper treatment and self-care, it is possible to manage acne and improve the appearance and health of your skin."
-        ],
-        treatment: ["Topical treatments are creams, gels, or lotions applied directly to the skin to reduce acne. They may contain ingredients like benzoyl peroxide, salicylic acid, or sulfur. These medications help unclog pores, reduce inflammation, and prevent new acne from forming. Topical treatments are available over-the-counter (OTC) or by prescription, depending on the strength and combination of ingredients.", "Oral antibiotics and retinoids are prescription medications used to treat moderate to severe acne. Antibiotics help clear up bacterial infections and reduce inflammation, while retinoids derived from vitamin A prevent clogged pores and promote cell turnover. For severe cases, isotretinoin may be prescribed, which requires close monitoring due to potential side effects. Hormonal therapies may also be used for acne related to hormonal imbalances.", "Blue light therapy and extractions are additional treatment options. Blue light targets bacteria that cause acne, reducing inflammation and preventing future breakouts. Extractions involve a professional removing blackheads and whiteheads to help unclog pores. In some cases, corticosteroid injections may be used to reduce inflammation. It's essential to work with a dermatologist to determine the best treatment plan for your individual skin concerns and acne severity." ]
+  const [healthServices, setHealthServices] = useState([]);
+  const [testsData, setTestsData] = useState([]);
+  const diseasesData = [
+    {
+      name: "Acne",
+      symptoms: ["Pimples", "Blackheads", "Whiteheads"],
+      overviewText: "A skin condition characterized by inflamed or infected sebaceous glands.",
+      images: ["https://th.bing.com/th/id/R.ff3326b5dfcfa1c5e8823d6e71c86cd0?rik=KHlbloxZBp%2brsg&pid=ImgRaw&r=0", "https://th.bing.com/th/id/OIP.WCwadokbDIF_mgH03vXgDgHaFj?rs=1&pid=ImgDetMain"],
+      description: [
+      "Acne occurs when the pores on the skin become clogged with dead skin cells, oil, and bacteria. It can affect people of all ages, but it is most common during puberty and early adulthood. Acne can range from mild to severe, and if left untreated, can lead to scarring and emotional distress.",
+      "The exact cause of acne is not fully understood, but it is thought to involve a combination of factors, including hormonal changes, stress, and genetics. Treatment options include topical creams and gels, oral antibiotics, and in severe cases, isotretinoin. Maintaining good hygiene, using non-comedogenic products, and avoiding picking or popping pimples can help manage acne.",
+      "In addition to physical symptoms, acne can also have emotional and psychological effects, such as low self-esteem, anxiety, and depression. If you are experiencing acne, it is important to seek medical attention to develop a treatment plan that works for you. With proper treatment and self-care, it is possible to manage acne and improve the appearance and health of your skin."
+      ],
+      treatment: ["Topical treatments are creams, gels, or lotions applied directly to the skin to reduce acne. They may contain ingredients like benzoyl peroxide, salicylic acid, or sulfur. These medications help unclog pores, reduce inflammation, and prevent new acne from forming. Topical treatments are available over-the-counter (OTC) or by prescription, depending on the strength and combination of ingredients.", "Oral antibiotics and retinoids are prescription medications used to treat moderate to severe acne. Antibiotics help clear up bacterial infections and reduce inflammation, while retinoids derived from vitamin A prevent clogged pores and promote cell turnover. For severe cases, isotretinoin may be prescribed, which requires close monitoring due to potential side effects. Hormonal therapies may also be used for acne related to hormonal imbalances.", "Blue light therapy and extractions are additional treatment options. Blue light targets bacteria that cause acne, reducing inflammation and preventing future breakouts. Extractions involve a professional removing blackheads and whiteheads to help unclog pores. In some cases, corticosteroid injections may be used to reduce inflammation. It's essential to work with a dermatologist to determine the best treatment plan for your individual skin concerns and acne severity." ]
     },
     {
         name: "AIDS",
@@ -2033,1199 +2034,127 @@ export const ServiceProvider = ({ children }) => {
         description: ["", "", ""], 
         treatment: ["", "", ""]
       }
-    ]);
-    const [testsData] = useState([
-      {
-        name: "A1C Test", 
-        overview: "The A1C test, also known as the glycated hemoglobin (HbA1c) test, is a simple blood test that measures your average blood sugar levels over the past two to three months. It's used to diagnose and monitor diabetes, as well as determine how well your diabetes treatment plan is working. The test results show your average blood sugar levels as a percentage, with higher percentages indicating higher blood sugar levels. By taking this test, you can get a better understanding of your blood sugar control and make informed decisions about your health.",
-        why: ["The A1C test is carried out to diagnose and monitor diabetes, a chronic condition characterized by high blood sugar levels. By measuring average blood sugar levels over a two- to three-month period, healthcare providers can determine if blood sugar levels are under control or if adjustments need to be made to a patient's treatment plan. Regular A1C testing helps identify potential complications and enables timely interventions to prevent long-term damage.", "The A1C test is also used to screen individuals at risk of developing type 2 diabetes, such as those with a family history, obesity, or other risk factors. Early detection and treatment can significantly improve outcomes and reduce the risk of complications. Additionally, the A1C test helps monitor the effectiveness of diabetes treatment plans, including lifestyle changes and medication, allowing healthcare providers to make informed decisions about adjustments to a patient's care.", "Furthermore, the A1C test provides valuable insights into blood sugar control over an extended period, helping healthcare providers identify patterns and trends that may not be apparent through single-point blood sugar measurements. This information enables healthcare providers to develop personalized treatment plans tailored to a patient's specific needs, promoting better disease management and improved quality of life for individuals with diabetes."],
-        preparation: ["Patients can prepare for the A1C test by following a few simple steps. No special preparation is required, but it's recommended to: (1) fast (avoid eating or drinking) for at least 8 hours before the test, (2) avoid alcohol and strenuous exercise for 24 hours before the test, (3) continue to take any prescribed medications as usual, and (4) inform your healthcare provider if you have any hemoglobin variants or anemia, as these conditions may affect test results. By following these guidelines, patients can ensure accurate and reliable results from their A1C test."], 
-        expectation: ["The A1C test is a quick and simple blood test that measures your average blood sugar levels over the past 2-3 months. During the test, a healthcare professional will prick your finger with a small needle to collect a small blood sample.", "The blood sample is then collected into a test strip or small tube and sent to a laboratory for analysis. The test results will show your average blood sugar levels as a percentage, with higher percentages indicating higher blood sugar levels.", "Your healthcare provider will discuss the results with you and use them to adjust your diabetes treatment plan as needed. The test results will also indicate if your blood sugar levels are within a healthy range, or if you need to make changes to your diet, exercise routine, or medication to better manage your diabetes."], 
-        result: ["Your A1C result is given as a percentage, with higher percentages indicating higher average blood sugar levels.", "The results are usually categorized as follows: Normal: Below 5.7%, Prediabetes: 5.7% to 6.4%, Diabetes: 6.5% or higher.", "Your healthcare provider will discuss the results with you and use them to confirm a diagnosis of diabetes or prediabetes, monitor how well your diabetes treatment plan is working, adjust your treatment plan as needed, and identify potential complications and take preventive measures.", "The A1C result provides a comprehensive picture of your average blood sugar control over the past 2-3 months, helping your healthcare provider make informed decisions about your care.", "By regularly monitoring your A1C levels, you and your healthcare provider can work together to manage your diabetes and reduce the risk of long-term complications, such as heart disease, kidney damage, and nerve damage."],
-        limitation: ["The A1C test is not perfect and has some limitations.", "It may not accurately reflect blood sugar control in certain individuals, such as those with anemia, vitamin deficiencies, or chronic diseases like kidney or liver disease.", "Pregnancy, recent blood transfusions, and certain medications can also affect A1C results.", "The test may not detect sudden changes in blood sugar levels, and results may be misleading if you have a hemoglobin variant or anemia.", "Your healthcare provider will consider these limitations when interpreting your A1C results and developing your diabetes management plan." ]
-      }, 
-      {
-        name: "Abdominal Hysterectomy", 
-        overview: "Abdominal hysterectomy is a surgical procedure to remove the uterus or womb, usually performed to treat conditions such as uterine fibroids, endometriosis, or uterine cancer. The surgery involves an incision in the lower abdomen, and the uterus is removed through the incision.",
-        why: ["Abdominal hysterectomy is performed to treat conditions such as uterine fibroids, endometriosis, or uterine cancer.", "The surgery may also be performed in cases of severe bleeding or pain that has not responded to other treatments.", "Abdominal hysterectomy is usually considered a last resort, after other treatment options have been exhausted."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing abdominal hysterectomy.", "This may include avoiding certain medications, fasting, and preparing for a hospital stay.", "Patients may also need to have some tests done before the surgery, such as blood tests or imaging studies."],
-        expectation: ["The surgery typically takes a few hours to complete.", "During the procedure, the surgeon will make an incision in the lower abdomen and remove the uterus through the incision.", "The patient will be under general anesthesia and will not feel any pain during the procedure."],
-        result: ["After the surgery, the patient will need to rest and recover for several days.", "Pain medication may be prescribed to manage any discomfort or pain.", "The patient will need to follow a specific recovery plan, including follow-up appointments with their healthcare provider."],
-        limitation: ["Abdominal hysterectomy is a major surgery and carries some risks and complications.", "These may include bleeding, infection, or injury to surrounding organs.", "The surgery may also affect sexual function and fertility."]
-      }, 
-      {
-        name: "Abdominal Ultrasound",
-        overview: "Abdominal ultrasound is a non-invasive imaging test that uses high-frequency sound waves to produce images of the organs in the abdominal cavity. It is used to evaluate the liver, gallbladder, pancreas, kidneys, and other organs in the abdomen.", 
-        why: ["Abdominal ultrasound is performed to evaluate the organs in the abdominal cavity.", "It is used to diagnose conditions such as gallstones, liver disease, and kidney stones.", "The test is also used to monitor the progression of certain conditions and to guide treatment."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing abdominal ultrasound.", "This may include fasting, avoiding certain medications, and wearing loose clothing."],
-        expectation: ["The test typically takes 30 minutes to an hour to complete.", "During the procedure, a probe called a transducer will be placed on the abdomen to produce images of the organs.", "The patient will need to lie still and hold their breath for short periods during the procedure."],
-        result: ["The images produced by the ultrasound will be examined by a radiologist.", "The results will be discussed with the patient's healthcare provider, who will explain the findings and recommend further testing or treatment as needed."],
-        limitation: ["Abdominal ultrasound is a non-invasive test and has no risks or complications.", "However, the test may not produce clear images if the patient has a lot of gas in the abdomen or if they are overweight.", "The test may also not detect certain conditions, such as small stones or tumors."]
-      }, 
-      {
-        name: "Abscess Drainage", 
-        overview: "Abscess drainage is a procedure to remove pus from an abscess, a pocket of infection that forms in the body. The procedure is usually performed by a surgeon or a radiologist.", 
-        why: ["Abscess drainage is performed to remove the infection and promote healing.", "The procedure is usually necessary when the abscess does not respond to antibiotic treatment.", "Abscess drainage can also be used to relieve symptoms such as pain and swelling."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing abscess drainage.", "This may include fasting, avoiding certain medications, and preparing for a hospital stay."],
-        expectation: ["The procedure typically takes 30 minutes to an hour to complete.", "During the procedure, the surgeon or radiologist will make an incision in the skin to drain the abscess.", "The patient may feel some discomfort or pain during the procedure."],
-        result: ["The abscess will be drained and the infection will be removed.", "The patient will need to rest and recover for several days after the procedure.", "The patient may need to take antibiotics to prevent further infection."],
-        limitation: ["Abscess drainage is a relatively safe procedure, but there are some risks and complications.", "These may include bleeding, infection, or injury to surrounding organs.", "The procedure may also not be effective in removing the entire infection."]
-      }, 
-      {
-        name: "AChR Antibody Test",
-        overview: "Acetylcholine Receptor antibody test is a blood test that measures the level of antibodies against the acetylcholine receptor in the blood. It is used to diagnose myasthenia gravis and other conditions that affect the nervous system.",
-        why: ["AChR antibody test is performed to diagnose myasthenia gravis and other conditions that affect the nervous system.", "It is also used to monitor the progression of the disease and the effectiveness of treatment.", "The test may also be used to diagnose other conditions that may cause similar symptoms, such as Lambert-Eaton syndrome."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing AChR antibody test.", "This may include fasting, avoiding certain medications, and preparing for a blood draw."],
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw." ],
-        result: ["The results of the test will be reported as positive or negative.", "A positive result indicates the presence of AChR antibodies in the blood.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."],
-        limitation: ["AChR antibody test is a highly specific test, but it may not detect all cases of myasthenia gravis.", "There may be false positive results in patients with other conditions, such as rheumatoid arthritis or lupus.", "The test may also not detect the presence of other antibodies that may be associated with myasthenia gravis."]
-      }, 
-      {
-        name: "Alanine Aminotransferase (ALT) Test",
-        overview: "The Alanine Aminotransferase (ALT) test is a blood test that measures the level of ALT enzyme in the blood. It is used to diagnose and monitor liver disease or damage.", 
-        why: ["The ALT test is performed to diagnose and monitor liver disease or damage.", "It is also used to monitor the effectiveness of treatment for liver disease.", "The test may also be used to screen for liver disease in people with risk factors such as alcohol abuse or viral hepatitis."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the ALT test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A high level of ALT in the blood indicates liver damage or disease.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The ALT test is not perfect and may not detect all cases of liver disease or damage.", "There may be false positive results in patients with other conditions such as muscle disease or heart disease.", "The test may also not detect the presence of other enzymes that may be associated with liver disease."]
-      }, 
-      {
-        name: "Albumin Test",
-        overview: "The albumin test is a blood test that measures the level of albumin in the blood. Albumin is a type of protein that helps to regulate fluid balance and transport vital nutrients and hormones throughout the body.", 
-        why: ["The albumin test is performed to diagnose and monitor liver disease or damage.", "It is also used to monitor the effectiveness of treatment for liver disease.", "The test may also be used to screen for liver disease in people with risk factors such as alcohol abuse or viral hepatitis."], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the albumin test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A low level of albumin in the blood indicates liver damage or disease.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The albumin test is not perfect and may not detect all cases of liver disease or damage.", "There may be false positive results in patients with other conditions such as kidney disease or heart disease.", "The test may also not detect the presence of other proteins that may be associated with liver disease."]
-      }, 
-      {
-        name: "Aldolase Test", 
-        overview: "The aldolase test is a blood test that measures the level of aldolase enzyme in the blood. Aldolase is an enzyme that helps to break down sugars in the body.",
-        why: ["The aldolase test is performed to diagnose and monitor muscle disease or damage.", "It is also used to monitor the effectiveness of treatment for muscle disease.", "The test may also be used to screen for muscle disease in people with risk factors such as muscle weakness or muscle cramps."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the aldolase test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."],
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."],
-        result: ["The results of the test will be reported as a numerical value.", "A high level of aldolase in the blood indicates muscle damage or disease.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."],
-        limitation: ["The aldolase test is not perfect and may not detect all cases of muscle disease or damage.", "There may be false positive results in patients with other conditions such as liver disease or heart disease.", "The test may also not detect the presence of other enzymes that may be associated with muscle disease."]
-      }, 
-      {
-        name: "Alkaline Phosphatase (ALP) Test", 
-        overview: "The alkaline phosphatase (ALP) test is a blood test that measures the level of ALP enzyme in the blood. ALP is an enzyme that helps to break down proteins and is found in many tissues throughout the body.", 
-        why: ["The ALP test is performed to diagnose and monitor liver disease or damage.", "It is also used to monitor the effectiveness of treatment for liver disease.", "The test may also be used to screen for liver disease in people with risk factors such as alcohol abuse or viral hepatitis."], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the ALP test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A high level of ALP in the blood indicates liver damage or disease.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The ALP test is not perfect and may not detect all cases of liver disease or damage.", "There may be false positive results in patients with other conditions such as bone disease or kidney disease.", "The test may also not detect the presence of other enzymes that may be associated with liver disease."]
-      }, 
-      {
-        name: "Alpha-Fetoprotein (AFP) Test", 
-        overview: "The alpha-fetoprotein (AFP) test is a blood test that measures the level of AFP in the blood. AFP is a protein produced by the liver and yolk sac of a fetus during pregnancy.", 
-        why: ["The AFP test is performed to screen for and diagnose liver cancer.", "It is also used to monitor the effectiveness of treatment for liver cancer.", "The test may also be used to screen for testicular cancer in men."], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the AFP test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A high level of AFP in the blood indicates liver cancer or testicular cancer.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The AFP test is not perfect and may not detect all cases of liver cancer or testicular cancer.", "There may be false positive results in patients with other conditions such as liver disease or kidney disease.", "The test may also not detect the presence of other proteins that may be associated with liver cancer or testicular cancer."]
-      }, 
-      {
-        name: "Amylase Test", 
-        overview: "The amylase test is a blood test that measures the level of amylase enzyme in the blood. Amylase is an enzyme that helps to break down carbohydrates into sugars.", 
-        why: ["The amylase test is performed to diagnose and monitor pancreatitis or pancreatic damage.", "It is also used to monitor the effectiveness of treatment for pancreatitis.", "The test may also be used to screen for pancreatic disease in people with risk factors such as alcohol abuse or gallstones."], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the amylase test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A high level of amylase in the blood indicates pancreatitis or pancreatic damage.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The amylase test is not perfect and may not detect all cases of pancreatitis or pancreatic damage.", "There may be false positive results in patients with other conditions such as salivary gland disease or bowel obstruction.", "The test may also not detect the presence of other enzymes that may be associated with pancreatic disease."]
-      }, 
-      {
-        name: "Androstenedione (Andro) Test", 
-        overview: "The androstenedione (Andro) test is a blood test that measures the level of androstenedione, a hormone produced by the adrenal glands and ovaries, in the blood.", 
-        why: ["The Andro test is performed to diagnose and monitor hormonal imbalances, such as congenital adrenal hyperplasia (CAH) or polycystic ovary syndrome (PCOS).", "It is also used to monitor the effectiveness of treatment for hormonal imbalances.", "The test may also be used to screen for adrenal gland disorders or ovarian cancer."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the Andro test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A high level of androstenedione in the blood indicates a hormonal imbalance or adrenal gland disorder.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The Andro test is not perfect and may not detect all cases of hormonal imbalances or adrenal gland disorders.", "There may be false positive results in patients with other conditions such as liver disease or kidney disease.", "The test may also not detect the presence of other hormones that may be associated with hormonal imbalances or adrenal gland disorders."]
-      }, 
-      {
-        name: "Antinuclear Antibody (ANA) Test", 
-        overview: "The antinuclear antibody (ANA) test is a blood test that measures the level of antinuclear antibodies in the blood. Antinuclear antibodies are autoantibodies that attack the body's own tissues, particularly the nucleus of cells.", 
-        why: ["The ANA test is performed to diagnose and monitor autoimmune disorders, such as systemic lupus erythematosus (SLE) or rheumatoid arthritis (RA).", "It is also used to monitor the effectiveness of treatment for autoimmune disorders.", "The test may also be used to screen for autoimmune disorders in people with risk factors such as family history or symptoms such as joint pain or fatigue."], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the ANA test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A high level of antinuclear antibodies in the blood indicates an autoimmune disorder.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The ANA test is not perfect and may not detect all cases of autoimmune disorders.", "There may be false positive results in patients with other conditions such as infection or cancer.", "The test may also not detect the presence of other autoantibodies that may be associated with autoimmune disorders."]
-      }, 
-      {
-        name: "Apolipoprotein A-1 (Apo A-1) Test", 
-        overview: "The apolipoprotein A-1 (Apo A-1) test is a blood test that measures the level of apolipoprotein A-1, a protein that helps remove excess cholesterol from the bloodstream, in the blood.", 
-        why: ["The Apo A-1 test is performed to assess cardiovascular risk and diagnose and monitor conditions such as high cholesterol or atherosclerosis.", "It is also used to monitor the effectiveness of treatment for high cholesterol or atherosclerosis.", "The test may also be used to screen for cardiovascular disease in people with risk factors such as family history or obesity."], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the Apo A-1 test.", "This may include fasting for 8-12 hours before the test.", "Patients should also avoid alcohol and certain medications that may interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete.", "During the test, a blood sample will be drawn from a vein in the arm.", "The patient may feel some discomfort or pain during the blood draw."], 
-        result: ["The results of the test will be reported as a numerical value.", "A high level of apolipoprotein A-1 in the blood indicates a lower risk of cardiovascular disease.", "The patient's healthcare provider will discuss the results and recommend further testing or treatment as needed."], 
-        limitation: ["The Apo A-1 test is not perfect and may not detect all cases of cardiovascular disease.", "There may be false positive results in patients with other conditions such as liver disease or kidney disease.", "The test may also not detect the presence of other proteins that may be associated with cardiovascular disease."]
-      }, 
-      {
-        name: "Aspartate Aminotransferase (AST) Test",
-        overview: ["The aspartate aminotransferase (AST) test is a blood test that measures the level of AST enzyme in the blood. AST is an enzyme that plays a crucial role in the metabolism of amino acids and is found in many tissues throughout the body, including the liver, heart, and muscles.", "The AST test is used to diagnose and monitor liver disease or damage, as well as to monitor the effectiveness of treatment for liver disease. It is also used to screen for liver disease in people with risk factors such as alcohol abuse or viral hepatitis.", "In addition to liver disease, the AST test may also be used to diagnose and monitor other conditions such as heart disease, muscle disease, and pancreatic disease. The test may also be used to monitor the effectiveness of treatment for these conditions." ],
-        why: ["The AST test is performed to diagnose and monitor liver disease or damage, as well as to monitor the effectiveness of treatment for liver disease. It is also used to screen for liver disease in people with risk factors such as alcohol abuse or viral hepatitis.", "The test may also be used to diagnose and monitor other conditions such as heart disease, muscle disease, and pancreatic disease. The AST test is often performed in conjunction with other tests, such as the alanine aminotransferase (ALT) test, to confirm the diagnosis of liver disease or damage.", "The AST test may also be used to monitor the effectiveness of treatment for liver disease or other conditions. In some cases, the test may be used to monitor the progression of disease or to detect relapse." ],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the AST test. This may include fasting for 8-12 hours before the test, as well as avoiding alcohol and certain medications that may interfere with the test results.", "Patients should also inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have. This information can help the healthcare provider interpret the test results accurately.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test, as these can interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm. The patient may feel some discomfort or pain during the blood draw.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the AST test. The patient should ask their healthcare provider any questions they have about the test results and what they mean."],
-        result: ["The results of the AST test will be reported as a numerical value. A high level of AST in the blood indicates liver damage or disease, while a low level indicates normal liver function.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean. In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the AST test.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean. It is important for the patient to understand the results of the test and any implications for their health."], 
-        limitation: ["The AST test is not perfect and may not detect all cases of liver disease or damage. There may be false positive results in patients with other conditions such as heart disease or muscle disease.", "The test may also not detect the presence of other enzymes that may be associated with liver disease or damage. In some cases, the test may not be able to distinguish between different types of liver disease or damage.", "The healthcare provider will take these limitations into account when interpreting the results of the AST test. The patient should ask their healthcare provider any questions they have about the limitations of the test and what they mean."]
-      }, 
-      {
-        name: "Basophil Count Test", 
-        overview: ["The basophil count test is a blood test that measures the number of basophils in the blood. Basophils are a type of white blood cell that plays a role in inflammation and allergic reactions.", "The test is used to diagnose and monitor conditions such as allergies, asthma, and inflammatory disorders. It may also be used to monitor the effectiveness of treatment for these conditions.", "In addition to allergies and asthma, the basophil count test may also be used to diagnose and monitor other conditions such as leukemia and inflammatory bowel disease."], 
-        why: ["The basophil count test is performed to diagnose and monitor allergies, asthma, and inflammatory disorders. It may also be used to monitor the effectiveness of treatment for these conditions.", "The test may also be used to diagnose and monitor other conditions such as leukemia and inflammatory bowel disease. The basophil count test is often performed in conjunction with other tests, such as the complete blood count (CBC) test, to confirm the diagnosis.", "The basophil count test may also be used to monitor the progression of disease or to detect relapse. In some cases, the test may be used to monitor the effectiveness of treatment for leukemia or other blood disorders." ], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the basophil count test. This may include fasting for 8-12 hours before the test, as well as avoiding alcohol and certain medications that may interfere with the test results.", "Patients should also inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have. This information can help the healthcare provider interpret the test results accurately.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test, as these can interfere with the test results."], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm. The patient may feel some discomfort or pain during the blood draw.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the basophil count test. The patient should ask their healthcare provider any questions they have about the test results and what they mean."], 
-        result: [ "The results of the basophil count test will be reported as a numerical value. A high level of basophils in the blood indicates an allergic reaction or inflammation, while a low level indicates normal basophil function.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean. In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the basophil count test.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean. It is important for the patient to understand the results of the test and any implications for their health." ],
-        limitation: [ "The basophil count test is not perfect and may not detect all cases of allergies or inflammation. There may be false positive results in patients with other conditions such as leukemia or inflammatory bowel disease.", "The test may also not detect the presence of other white blood cells that may be associated with allergies or inflammation. In some cases, the test may not be able to distinguish between different types of allergies or inflammation.", "The healthcare provider will take these limitations into account when interpreting the results of the basophil count test. The patient should ask their healthcare provider any questions they have about the limitations of the test and what they mean."]
-      }, 
-      {
-        name: "Bicarbonate Test",
-        overview: ["The bicarbonate test is a blood test that measures the level of bicarbonate in the blood. Bicarbonate is a electrolyte that helps regulate the body's acid-base balance.", "The test is used to diagnose and monitor conditions such as acidosis or alkalosis. It may also be used to monitor the effectiveness of treatment for these conditions.", "In addition to acid-base imbalance, the bicarbonate test may also be used to diagnose and monitor other conditions such as kidney disease or respiratory disorders." ],
-        why: ["The bicarbonate test is performed to diagnose and monitor acidosis or alkalosis. It may also be used to monitor the effectiveness of treatment for these conditions.", "The test may also be used to diagnose and monitor other conditions such as kidney disease or respiratory disorders. The bicarbonate test is often performed in conjunction with other tests, such as the electrolyte panel, to confirm the diagnosis.", "The bicarbonate test may also be used to monitor the progression of disease or to detect relapse. In some cases, the test may be used to monitor the effectiveness of treatment for kidney disease or other conditions." ],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the bicarbonate test. This may include fasting for 8-12 hours before the test, as well as avoiding alcohol and certain medications that may interfere with the test results.", "Patients should also inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test." ], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the bicarbonate test." ], 
-        result: ["The results of the bicarbonate test will be reported as a numerical value. A high level of bicarbonate in the blood indicates alkalosis, while a low level indicates acidosis.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean. In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the bicarbonate test.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean."],
-        limitation: ["The bicarbonate test is not perfect and may not detect all cases of acid-base imbalance. There may be false positive results in patients with other conditions such as kidney disease or respiratory disorders.", "The test may also not detect the presence of other electrolytes that may be associated with acid-base imbalance. In some cases, the test may not be able to distinguish between different types of acid-base imbalance.", "The healthcare provider will take these limitations into account when interpreting the results of the bicarbonate test."]
-      }, 
-      {
-        name: "Blood Culture Test", 
-        overview: ["The blood culture test is a laboratory test that detects the presence of bacteria or fungi in the blood.", "The test is used to diagnose bloodstream infections such as sepsis or meningitis. It may also be used to monitor the effectiveness of treatment for these conditions.", "In addition to bloodstream infections, the blood culture test may also be used to diagnose and monitor other conditions such as endocarditis or osteomyelitis."],
-        why: ["The blood culture test is performed to diagnose and monitor bloodstream infections such as sepsis or meningitis.", "The test may also be used to diagnose and monitor other conditions such as endocarditis or osteomyelitis. The blood culture test is often performed in conjunction with other tests, such as the complete blood count (CBC) test, to confirm the diagnosis.", "The blood culture test may also be used to monitor the progression of disease or to detect relapse. In some cases, the test may be used to monitor the effectiveness of treatment for bloodstream infections or other conditions."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the blood culture test.", "Patients should inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test."],
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the blood culture test." ], 
-        result: ["The results of the blood culture test will be reported as a numerical value. A positive result indicates the presence of bacteria or fungi in the blood.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean. In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the blood culture test.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean." ], 
-        limitation: ["The blood culture test is not perfect and may not detect all cases of bloodstream infections. There may be false positive results in patients with other conditions such as bacteremia or fungemia.", "The test may also not detect the presence of other microorganisms that may be associated with bloodstream infections. In some cases, the test may not be able to distinguish between different types of bloodstream infections.", "The healthcare provider will take these limitations into account when interpreting the results of the blood culture test." ]
-      }, 
-      {
-        name: "Blood Urea Nitrogen (BUN) Test",
-        overview: ["The blood urea nitrogen (BUN) test is a laboratory test that measures the level of urea nitrogen in the blood.", "The test is used to diagnose and monitor kidney function and disease. It may also be used to monitor the effectiveness of treatment for kidney disease.", "In addition to kidney disease, the BUN test may also be used to diagnose and monitor other conditions such as dehydration or heart failure." ], 
-        why: ["The BUN test is performed to diagnose and monitor kidney function and disease.", "The test may also be used to diagnose and monitor other conditions such as dehydration or heart failure. The BUN test is often performed in conjunction with other tests, such as the creatinine test, to confirm the diagnosis.", "The BUN test may also be used to monitor the progression of disease or to detect relapse. In some cases, the test may be used to monitor the effectiveness of treatment for kidney disease or other conditions." ],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the BUN test.", "Patients should inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test."], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the BUN test." ],
-        result: ["The results of the BUN test will be reported as a numerical value. A high level of urea nitrogen in the blood indicates kidney disease or dysfunction.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean. In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the BUN test.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean."],
-        limitation: ["The BUN test is not perfect and may not detect all cases of kidney disease or dysfunction. There may be false positive results in patients with other conditions such as dehydration or heart failure.", "The test may also not detect the presence of other kidney function markers that may be associated with kidney disease or dysfunction. In some cases, the test may not be able to distinguish between different types of kidney disease or dysfunction.", "The healthcare provider will take these limitations into account when interpreting the results of the BUN test." ]
-      }, 
-      {
-        name: "Bone Density Test", 
-        overview: ["The bone density test is a noninvasive test that measures the density of bones.", "The test is used to diagnose and monitor osteoporosis, a condition characterized by brittle and fragile bones.", "In addition to osteoporosis, the bone density test may also be used to diagnose and monitor other conditions such as osteopenia or bone cancer." ], 
-        why: ["The bone density test is performed to diagnose and monitor osteoporosis and other bone disorders.", "The test may also be used to assess the risk of fractures and monitor the effectiveness of treatment for osteoporosis.", "The bone density test is often performed in conjunction with other tests, such as blood tests and physical examinations, to confirm the diagnosis." ],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the bone density test.", "Patients should inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test."], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a machine will take X-ray images of the bones.", "After the test, the healthcare provider will discuss the results with the patient and explain what they mean.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the bone density test."], result: ["The results of the bone density test will be reported as a numerical value. A high value indicates strong bones, while a low value indicates weak bones.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean." ],
-        limitation: ["The bone density test is not perfect and may not detect all cases of osteoporosis or other bone disorders.", "There may be false positive results in patients with other conditions such as arthritis or bone cancer.", "The healthcare provider will take these limitations into account when interpreting the results of the bone density test."]
-      }, 
-      {
-        name: "Brain Natriuretic Peptide (BNP) Test", 
-        overview: ["The brain natriuretic peptide (BNP) test is a blood test that measures the level of BNP in the blood.", "BNP is a hormone produced by the heart in response to heart failure or other conditions that affect the heart.", "The test is used to diagnose and monitor heart failure, and to distinguish it from other conditions that may have similar symptoms." ], 
-        why: [ "The BNP test is performed to diagnose and monitor heart failure and other conditions that affect the heart.", "The test may also be used to assess the severity of heart failure and monitor the effectiveness of treatment.", "The BNP test is often performed in conjunction with other tests, such as echocardiography and electrocardiography, to confirm the diagnosis." ], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the BNP test.", "Patients should inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test."], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the BNP test." ], 
-        result: ["The results of the BNP test will be reported as a numerical value. A high level of BNP in the blood indicates heart failure or other conditions that affect the heart.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean."], 
-        limitation: ["The BNP test is not perfect and may not detect all cases of heart failure or other conditions that affect the heart.", "There may be false positive results in patients with other conditions such as kidney disease or pulmonary embolism.", "The healthcare provider will take these limitations into account when interpreting the results of the BNP test." ]
-      }, 
-      {
-        name: "C-Reactive Protein (CRP) Test", 
-        overview: ["The C-reactive protein (CRP) test is a blood test that measures the level of CRP in the blood.", "CRP is a protein produced by the liver in response to inflammation or infection.", "The test is used to diagnose and monitor conditions such as cardiovascular disease, rheumatoid arthritis, and lupus." ], 
-        why: ["The CRP test is performed to diagnose and monitor conditions that cause inflammation or infection.", "The test may also be used to assess the risk of cardiovascular disease and monitor the effectiveness of treatment.", "The CRP test is often performed in conjunction with other tests, such as the erythrocyte sedimentation rate (ESR) test, to confirm the diagnosis."],
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the CRP test.", "Patients should inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test." ],
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the CRP test."], 
-        result: ["The results of the CRP test will be reported as a numerical value. A high level of CRP in the blood indicates inflammation or infection.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean." ], 
-        limitation: ["The CRP test is not perfect and may not detect all cases of inflammation or infection.", "There may be false positive results in patients with other conditions such as pregnancy or cancer.", "The healthcare provider will take these limitations into account when interpreting the results of the CRP test." ]
-      }, 
-      {
-        name: "Calcium Test", 
-        overview: ["The calcium test is a blood test that measures the level of calcium in the blood.", "Calcium is an essential mineral that plays a crucial role in many bodily functions, including muscle function and bone health.", "The test is used to diagnose and monitor conditions such as hypercalcemia (high calcium levels) and hypocalcemia (low calcium levels)." ], 
-        why: ["The calcium test is performed to diagnose and monitor conditions that affect calcium levels in the blood.", "The test may also be used to assess the function of the parathyroid glands, which regulate calcium levels in the blood.", "The calcium test is often performed in conjunction with other tests, such as the parathyroid hormone (PTH) test, to confirm the diagnosis." ], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the calcium test.", "Patients should inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test." ], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the calcium test." ], 
-        result: ["The results of the calcium test will be reported as a numerical value. A high level of calcium in the blood indicates hypercalcemia, while a low level indicates hypocalcemia.", "The healthcare provider will discuss the results of the test with the patient and explain what they mean.", "The patient should ask their healthcare provider any questions they have about the test results and what they mean." ], 
-        limitation: ["The calcium test is not perfect and may not detect all cases of hypercalcemia or hypocalcemia.", "There may be false positive results in patients with other conditions such as kidney disease or certain medications.", "The healthcare provider will take these limitations into account when interpreting the results of the calcium test." ]
-      }, 
-      {
-        name: "Complete Blood Count (CBC) Test", 
-        overview: ["The complete blood count (CBC) test is a blood test that measures various components of your blood, including red blood cells, white blood cells, and platelets.", "The test is used to diagnose and monitor a wide range of conditions, including anemia, infection, inflammation, and bleeding disorders.", "The CBC test is often performed as part of a routine physical examination or to monitor the effectiveness of treatment for a particular condition." ], 
-        why: ["The CBC test is performed to diagnose and monitor conditions that affect the blood, such as anemia, infection, and bleeding disorders.", "The test may also be used to assess the overall health of the patient and to monitor the effectiveness of treatment for a particular condition.", "The CBC test is often performed in conjunction with other tests, such as the blood differential test, to confirm the diagnosis." ], 
-        preparation: ["Patients will need to follow a specific preparation plan before undergoing the CBC test.", "Patients should inform their healthcare provider of any medications they are taking, as well as any underlying medical conditions they have.", "In some cases, the healthcare provider may also recommend that patients avoid eating certain foods or taking certain supplements before the test."], 
-        expectation: ["The test typically takes 15-30 minutes to complete. During the test, a blood sample will be drawn from a vein in the arm.", "After the blood sample is drawn, it will be sent to a laboratory for analysis. The results of the test will be reported as a numerical value, and the healthcare provider will discuss the results with the patient.", "In some cases, the healthcare provider may also recommend additional testing or treatment based on the results of the CBC test." ], 
-      },
-      {
-        name: "Cardiac Catheterization",
-        overview: [
-          "Cardiac catheterization is a procedure used to diagnose and treat certain cardiovascular conditions.",
-          "During the procedure, a long, thin tube called a catheter is inserted in an artery or vein in the groin, neck, or arm and threaded through your blood vessels to your heart.",
-          "The procedure can help diagnose and treat conditions like coronary artery disease, heart valve disease, and other heart problems."
-        ],
-        why: [
-          "Cardiac catheterization is performed to diagnose and treat cardiovascular conditions.",
-          "It helps to determine the presence of heart disease, the severity of the disease, and the best treatment options.",
-          "The procedure is also used to evaluate the effectiveness of previous treatments."
-        ],
-        preparation: [
-          "Patients should inform their healthcare provider about any medications they are taking and any allergies they have.",
-          "Patients may be asked to stop eating and drinking for a few hours before the procedure.",
-          "In some cases, patients may need to stop taking certain medications before the procedure."
-        ],
-        expectation: [
-          "The procedure typically takes about an hour to complete.",
-          "Patients will be given a local anesthetic to numb the area where the catheter will be inserted.",
-          "After the procedure, patients will need to rest for several hours and may need to stay in the hospital overnight."
-        ],
-        result: [
-          "The results of the cardiac catheterization will provide detailed information about the heart and blood vessels.",
-          "The healthcare provider will discuss the results with the patient and explain what they mean.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "Cardiac catheterization is generally safe, but there are risks, including bleeding, infection, and damage to the blood vessels.",
-          "There may be limitations in detecting certain conditions, and additional tests may be needed.",
-          "The healthcare provider will take these limitations into account when interpreting the results."
-        ]
-      },
-      {
-        name: "Cholesterol Test",
-        overview: [
-          "A cholesterol test measures the amount of cholesterol and triglycerides in your blood.",
-          "Cholesterol is a type of fat found in your blood that is necessary for building cells, but high levels can increase the risk of heart disease.",
-          "The test is used to assess your risk of developing cardiovascular disease."
-        ],
-        why: [
-          "The cholesterol test is performed to assess the risk of heart disease.",
-          "It helps to identify individuals at high risk who may benefit from lifestyle changes or medication.",
-          "The test is also used to monitor the effectiveness of treatment for high cholesterol."
-        ],
-        preparation: [
-          "Patients may need to fast for 9-12 hours before the test.",
-          "They should inform their healthcare provider of any medications or supplements they are taking.",
-          "Patients should avoid alcohol and certain foods before the test."
-        ],
-        expectation: [
-          "The test typically takes about 5-10 minutes to complete.",
-          "A blood sample is drawn from a vein in the arm and sent to a laboratory for analysis.",
-          "The results are usually available within a few days."
-        ],
-        result: [
-          "The results will include levels of total cholesterol, LDL cholesterol, HDL cholesterol, and triglycerides.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend lifestyle changes or medication."
-        ],
-        limitation: [
-          "The cholesterol test may not accurately reflect cholesterol levels if the patient is ill or has recently undergone surgery.",
-          "Certain medications and conditions can affect the accuracy of the test.",
-          "The healthcare provider will consider these factors when interpreting the results."
-        ]
-      },
-      {
-        name: "CT Scan (Computed Tomography)",
-        overview: [
-          "A CT scan uses X-rays and computer technology to create detailed images of the inside of the body.",
-          "It is used to diagnose and monitor various conditions, including cancers, cardiovascular disease, and internal injuries.",
-          "The scan provides more detailed information than regular X-rays."
-        ],
-        why: [
-          "The CT scan is performed to diagnose and monitor various medical conditions.",
-          "It helps to detect abnormalities in the body that may not be visible on regular X-rays.",
-          "The scan is also used to guide certain medical procedures."
-        ],
-        preparation: [
-          "Patients may need to avoid eating or drinking for a few hours before the scan.",
-          "They should inform their healthcare provider of any allergies, especially to contrast material.",
-          "Patients may need to remove metal objects and wear a hospital gown during the scan."
-        ],
-        expectation: [
-          "The scan typically takes about 10-30 minutes to complete.",
-          "Patients will lie on a table that slides into the CT scanner.",
-          "The scanner takes a series of X-ray images, which are combined to create detailed images of the inside of the body."
-        ],
-        result: [
-          "The results of the CT scan will provide detailed images of the inside of the body.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The CT scan involves exposure to radiation, which may increase the risk of cancer over time.",
-          "Certain conditions, such as obesity, can affect the quality of the images.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Cystoscopy",
-        overview: [
-          "Cystoscopy is a procedure that allows the doctor to examine the inside of the bladder and urethra.",
-          "A thin, flexible tube called a cystoscope is inserted through the urethra into the bladder.",
-          "The procedure is used to diagnose and treat conditions affecting the bladder and urethra."
-        ],
-        why: [
-          "Cystoscopy is performed to diagnose and treat conditions affecting the bladder and urethra.",
-          "It helps to identify conditions such as bladder stones, tumors, and infections.",
-          "The procedure is also used to monitor the effectiveness of treatment."
-        ],
-        preparation: [
-          "Patients should inform their healthcare provider of any medications they are taking.",
-          "They may need to avoid eating and drinking for a few hours before the procedure.",
-          "Patients should empty their bladder before the procedure."
-        ],
-        expectation: [
-          "The procedure typically takes about 15-30 minutes to complete.",
-          "Patients will be given a local anesthetic to numb the area.",
-          "After the procedure, patients may experience some discomfort and may need to drink plenty of fluids to flush out the bladder."
-        ],
-        result: [
-          "The results of the cystoscopy will provide detailed information about the bladder and urethra.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "Cystoscopy is generally safe, but there are risks, including infection and bleeding.",
-          "There may be limitations in detecting certain conditions, and additional tests may be needed.",
-          "The healthcare provider will take these limitations into account when interpreting the results."
-        ]
-      },
-      {
-        name: "D-dimer Test",
-        overview: [
-          "The D-dimer test is a blood test that measures the presence of a substance released when a blood clot breaks up.",
-          "The test is used to help diagnose conditions related to abnormal blood clotting, such as deep vein thrombosis (DVT), pulmonary embolism (PE), and disseminated intravascular coagulation (DIC).",
-          "A negative D-dimer test result usually means that a blood clot is unlikely."
-        ],
-        why: [
-          "The D-dimer test is performed to help diagnose or rule out conditions related to abnormal blood clotting.",
-          "It is often used in emergency situations to quickly assess the likelihood of conditions like DVT or PE.",
-          "The test may also be used to monitor the effectiveness of treatment for blood clotting disorders."
-        ],
-        preparation: [
-          "There is usually no special preparation required for the D-dimer test.",
-          "Patients should inform their healthcare provider of any medications they are taking, especially blood thinners.",
-          "The healthcare provider may provide specific instructions if additional tests are being performed."
-        ],
-        expectation: [
-          "The test typically takes a few minutes to complete.",
-          "A blood sample is drawn from a vein in the arm and sent to a laboratory for analysis.",
-          "The results are usually available within a few hours to a day."
-        ],
-        result: [
-          "The results of the D-dimer test will indicate whether there is an elevated level of D-dimer in the blood.",
-          "A positive result suggests the presence of an abnormal blood clot, while a negative result makes a blood clot unlikely.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health."
-        ],
-        limitation: [
-          "The D-dimer test is not specific and can be elevated in conditions other than blood clots, such as inflammation or infection.",
-          "A positive result does not confirm the presence of a blood clot and may require additional testing.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Dialysis",
-        overview: [
-          "Dialysis is a treatment that performs the functions of the kidneys when they are no longer able to work properly.",
-          "The treatment removes waste products and excess fluids from the blood.",
-          "There are two main types of dialysis: hemodialysis and peritoneal dialysis."
-        ],
-        why: [
-          "Dialysis is performed to remove waste products and excess fluids from the blood in patients with kidney failure.",
-          "The treatment helps to maintain the balance of electrolytes and other substances in the blood.",
-          "Dialysis is used as a long-term treatment for chronic kidney disease or as a temporary measure for acute kidney injury."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on diet and fluid intake before dialysis.",
-          "Patients may need to avoid certain medications before the procedure.",
-          "In the case of hemodialysis, a vascular access will need to be created if it has not already been done."
-        ],
-        expectation: [
-          "Hemodialysis typically takes about 3-5 hours and is performed several times a week at a dialysis center or at home.",
-          "Peritoneal dialysis involves the use of a catheter placed in the abdomen and can be performed at home, usually daily.",
-          "Patients may experience some discomfort during the procedure and may feel tired afterwards."
-        ],
-        result: [
-          "The results of dialysis include the removal of waste products and excess fluids from the blood.",
-          "The healthcare provider will monitor the patient's blood pressure, weight, and blood tests to assess the effectiveness of the treatment.",
-          "Based on the results, the healthcare provider may adjust the dialysis schedule or other aspects of the patient's treatment."
-        ],
-        limitation: [
-          "Dialysis is not a cure for kidney disease and does not completely replace the function of the kidneys.",
-          "Patients may experience complications such as infection, low blood pressure, or muscle cramps.",
-          "The healthcare provider will take these limitations into account when managing the patient's treatment."
-        ]
-      },
-      {
-        name: "Diabetes Insipidus Test",
-        overview: [
-          "The diabetes insipidus test, also known as the water deprivation test, is used to diagnose diabetes insipidus, a condition that affects the body's ability to regulate fluid balance.",
-          "The test involves withholding fluids for a period of time and measuring changes in urine output and concentration.",
-          "The test helps to determine whether the condition is due to a lack of antidiuretic hormone (ADH) or the kidneys' response to ADH."
-        ],
-        why: [
-          "The diabetes insipidus test is performed to diagnose diabetes insipidus and determine the underlying cause.",
-          "It helps to distinguish between central diabetes insipidus (caused by a lack of ADH) and nephrogenic diabetes insipidus (caused by the kidneys' response to ADH).",
-          "The test may also be used to monitor the effectiveness of treatment for diabetes insipidus."
-        ],
-        preparation: [
-          "Patients should inform their healthcare provider of any medications they are taking, as some medications may affect the test results.",
-          "Patients may need to stop taking certain medications before the test.",
-          "The healthcare provider will provide specific instructions on fluid intake before the test."
-        ],
-        expectation: [
-          "The test typically takes several hours to complete and is usually performed in a hospital or specialized clinic.",
-          "Patients will be asked to withhold fluids for a period of time, and blood and urine samples will be collected at regular intervals.",
-          "The healthcare provider will monitor the patient's weight, blood pressure, and overall condition during the test."
-        ],
-        result: [
-          "The results of the diabetes insipidus test will indicate how the body responds to fluid deprivation.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The diabetes insipidus test can be uncomfortable and may cause dehydration.",
-          "There may be limitations in detecting mild cases of diabetes insipidus, and additional tests may be needed.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Dual-energy X-ray Absorptiometry (DEXA) Scan",
-        overview: [
-          "A DEXA scan is a type of imaging test that measures bone density.",
-          "The test is used to diagnose and monitor osteoporosis and other conditions that affect bone density.",
-          "The scan uses low levels of X-rays to create images of the bones."
-        ],
-        why: [
-          "The DEXA scan is performed to assess bone density and diagnose conditions like osteoporosis.",
-          "It helps to determine the risk of fractures and monitor the effectiveness of treatment for bone-related conditions.",
-          "The test may also be used to assess bone health in patients with certain medical conditions or undergoing certain treatments."
-        ],
-        preparation: [
-          "Patients should inform their healthcare provider of any medications or supplements they are taking.",
-          "They should avoid taking calcium supplements for at least 24 hours before the test.",
-          "Patients should wear loose, comfortable clothing and avoid wearing metal objects during the scan."
-        ],
-        expectation: [
-          "The scan typically takes about 10-20 minutes to complete.",
-          "Patients will lie on a table while a scanner passes over the body to measure bone density.",
-          "The procedure is painless and involves minimal exposure to radiation."
-        ],
-        result: [
-          "The results of the DEXA scan will provide information about bone density and the risk of fractures.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend lifestyle changes, medication, or other treatments."
-        ],
-        limitation: [
-          "The DEXA scan may not detect all cases of osteoporosis or other bone-related conditions.",
-          "There may be limitations in measuring bone density in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Electrocardiogram (ECG or EKG)",
-        overview: [
-          "An electrocardiogram (ECG or EKG) is a test that measures the electrical activity of the heart.",
-          "It is used to detect and monitor heart conditions such as arrhythmias, heart attacks, and other heart-related issues.",
-          "The test involves placing electrodes on the skin to record the heart's electrical signals."
-        ],
-        why: [
-          "The ECG is performed to detect and monitor heart conditions such as arrhythmias, heart attacks, and other heart-related issues.",
-          "It helps to assess the overall health of the heart and identify any abnormalities in the heart's electrical activity.",
-          "The test is often part of a routine physical examination or preoperative assessment."
-        ],
-        preparation: [
-          "There is usually no special preparation required for an ECG.",
-          "Patients should inform their healthcare provider of any medications they are taking, as some medications can affect the test results.",
-          "Patients should avoid using lotions or oils on their skin before the test, as these can interfere with the electrodes."
-        ],
-        expectation: [
-          "The test typically takes about 5-10 minutes to complete.",
-          "Electrodes will be placed on the patient's chest, arms, and legs to record the heart's electrical signals.",
-          "The procedure is painless and non-invasive."
-        ],
-        result: [
-          "The results of the ECG will provide information about the heart's electrical activity, including heart rate and rhythm.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The ECG may not detect all heart conditions, especially those that occur intermittently.",
-          "There may be limitations in interpreting the results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Echocardiogram",
-        overview: [
-          "An echocardiogram is an ultrasound test that uses sound waves to create images of the heart.",
-          "The test provides detailed information about the heart's structure and function.",
-          "It is used to diagnose and monitor heart conditions such as heart valve disease, heart failure, and congenital heart defects."
-        ],
-        why: [
-          "The echocardiogram is performed to diagnose and monitor heart conditions such as heart valve disease, heart failure, and congenital heart defects.",
-          "It helps to assess the overall health of the heart and identify any abnormalities in the heart's structure and function.",
-          "The test may be performed as part of a routine cardiac evaluation or to monitor the effectiveness of treatment for a particular condition."
-        ],
-        preparation: [
-          "There is usually no special preparation required for an echocardiogram.",
-          "Patients should inform their healthcare provider of any medications they are taking.",
-          "Patients should wear loose, comfortable clothing to the appointment."
-        ],
-        expectation: [
-          "The test typically takes about 30-60 minutes to complete.",
-          "Patients will lie on a table while a technician uses a handheld device called a transducer to create images of the heart.",
-          "The procedure is painless and non-invasive."
-        ],
-        result: [
-          "The results of the echocardiogram will provide detailed information about the heart's structure and function.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The echocardiogram may not detect all heart conditions, especially those that are not visible on ultrasound.",
-          "There may be limitations in obtaining clear images in patients with certain medical conditions or body types.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Electroencephalogram (EEG)",
-        overview: [
-          "An electroencephalogram (EEG) is a test that measures the electrical activity of the brain.",
-          "The test is used to diagnose and monitor conditions that affect brain function, such as epilepsy, sleep disorders, and brain injuries.",
-          "The EEG involves placing electrodes on the scalp to record the brain's electrical signals."
-        ],
-        why: [
-          "The EEG is performed to diagnose and monitor conditions that affect brain function, such as epilepsy, sleep disorders, and brain injuries.",
-          "It helps to assess the overall health of the brain and identify any abnormalities in the brain's electrical activity.",
-          "The test may be performed as part of a neurological evaluation or to monitor the effectiveness of treatment for a particular condition."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for the EEG.",
-          "Patients should inform their healthcare provider of any medications they are taking, as some medications can affect the test results.",
-          "Patients should avoid using hair products such as gel or spray on the day of the test, as these can interfere with the electrodes."
-        ],
-        expectation: [
-          "The test typically takes about 30-60 minutes to complete.",
-          "Electrodes will be placed on the patient's scalp to record the brain's electrical signals.",
-          "The procedure is painless and non-invasive."
-        ],
-        result: [
-          "The results of the EEG will provide information about the brain's electrical activity, including patterns that may indicate epilepsy or other conditions.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The EEG may not detect all brain conditions, especially those that occur intermittently.",
-          "There may be limitations in interpreting the results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Electromyography (EMG)",
-        overview: [
-          "Electromyography (EMG) is a test that measures the electrical activity of muscles and the nerves that control them.",
-          "The test is used to diagnose and evaluate conditions that affect muscle and nerve function, such as muscular dystrophy, carpal tunnel syndrome, and peripheral neuropathy.",
-          "The EMG involves inserting a small needle electrode into the muscle to record electrical activity."
-        ],
-        why: [
-          "The EMG is performed to diagnose and evaluate conditions that affect muscle and nerve function, such as muscular dystrophy, carpal tunnel syndrome, and peripheral neuropathy.",
-          "It helps to assess the overall health of the muscles and nerves and identify any abnormalities in their function.",
-          "The test may be performed as part of a neurological evaluation or to monitor the effectiveness of treatment for a particular condition."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for the EMG.",
-          "Patients should inform their healthcare provider of any medications they are taking, as some medications can affect the test results.",
-          "Patients should avoid using lotions or oils on their skin before the test, as these can interfere with the electrodes."
-        ],
-        expectation: [
-          "The test typically takes about 30-60 minutes to complete.",
-          "A small needle electrode will be inserted into the muscle to record electrical activity.",
-          "The procedure may cause some discomfort, but it is generally well-tolerated."
-        ],
-        result: [
-          "The results of the EMG will provide information about the electrical activity of the muscles and nerves.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The EMG may not detect all muscle and nerve conditions, especially those that are not causing symptoms at the time of the test.",
-          "There may be limitations in interpreting the results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Fasting Blood Sugar (FBS) Test",
-        overview: [
-          "The fasting blood sugar (FBS) test measures the level of glucose in the blood after an overnight fast.",
-          "It is used to diagnose and monitor diabetes and prediabetes.",
-          "The test involves taking a blood sample after the patient has fasted for at least 8 hours."
-        ],
-        why: [
-          "The FBS test is performed to diagnose and monitor diabetes and prediabetes.",
-          "It helps to assess the body's ability to regulate blood sugar levels.",
-          "The test may be part of a routine physical examination or diabetes management plan."
-        ],
-        preparation: [
-          "Patients should fast for at least 8 hours before the test.",
-          "Patients should inform their healthcare provider of any medications they are taking.",
-          "Patients should avoid consuming any food or drink, except water, during the fasting period."
-        ],
-        expectation: [
-          "The test typically takes about 5-10 minutes to complete.",
-          "A blood sample will be drawn from a vein in the arm.",
-          "The procedure is quick and relatively painless."
-        ],
-        result: [
-          "The results of the FBS test will provide information about the blood glucose level.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The FBS test may not detect all cases of diabetes or prediabetes.",
-          "There may be limitations in interpreting the results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      
-      {
-        name: "Fecal Occult Blood Test (FOBT)",
-        overview: [
-          "The fecal occult blood test (FOBT) detects hidden (occult) blood in the stool.",
-          "It is used to screen for colorectal cancer and other gastrointestinal disorders.",
-          "The test involves collecting stool samples and testing them for the presence of blood."
-        ],
-        why: [
-          "The FOBT is performed to screen for colorectal cancer and other gastrointestinal disorders.",
-          "It helps to detect bleeding in the digestive tract that may not be visible to the naked eye.",
-          "The test is often part of routine colorectal cancer screening."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for the FOBT.",
-          "Patients may need to avoid certain foods and medications that can affect the test results.",
-          "Patients should collect stool samples as directed by their healthcare provider."
-        ],
-        expectation: [
-          "The test typically involves collecting stool samples at home over several days.",
-          "Patients will use a test kit provided by their healthcare provider to collect the samples.",
-          "The samples will be sent to a laboratory for analysis."
-        ],
-        result: [
-          "The results of the FOBT will indicate whether blood was detected in the stool.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The FOBT may not detect all cases of colorectal cancer or gastrointestinal bleeding.",
-          "There may be limitations in interpreting the results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Fluorescein Angiography",
-        overview: [
-          "Fluorescein angiography is a test that uses a special dye and camera to examine the blood vessels in the retina.",
-          "It is used to diagnose and monitor eye conditions such as diabetic retinopathy and macular degeneration.",
-          "The test involves injecting fluorescein dye into a vein and taking photographs of the retina."
-        ],
-        why: [
-          "Fluorescein angiography is performed to diagnose and monitor eye conditions such as diabetic retinopathy and macular degeneration.",
-          "It helps to visualize the blood flow in the retina and identify any abnormalities.",
-          "The test is often part of a comprehensive eye examination for patients with diabetes or other risk factors for retinal disease."
-        ],
-        preparation: [
-          "Patients should inform their healthcare provider of any medications they are taking.",
-          "Patients may be asked to avoid certain medications or foods before the test.",
-          "Patients should arrange for someone to drive them home after the test, as their vision may be temporarily affected."
-        ],
-        expectation: [
-          "The test typically takes about 30 minutes to complete.",
-          "A fluorescein dye will be injected into a vein in the arm, and a special camera will take photographs of the retina.",
-          "Patients may experience temporary changes in vision or a yellow discoloration of the skin and urine after the test."
-        ],
-        result: [
-          "The results of fluorescein angiography will provide detailed images of the blood vessels in the retina.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s eye health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "Fluorescein angiography may not detect all retinal conditions or abnormalities.",
-          "There may be limitations in obtaining clear images in patients with certain eye conditions or other medical issues.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Fine Needle Aspiration (FNA) Biopsy",
-        overview: [
-          "Fine needle aspiration (FNA) biopsy is a procedure used to extract a small sample of tissue or fluid from a lump or mass.",
-          "It is used to diagnose various conditions, including cancers and benign tumors.",
-          "The test involves inserting a thin, hollow needle into the area of interest to collect cells for examination."
-        ],
-        why: [
-          "FNA biopsy is performed to diagnose conditions such as cancers, benign tumors, and infections.",
-          "It helps to determine the nature of a lump or mass and guide treatment decisions.",
-          "The test is often part of the diagnostic workup for suspicious lumps or masses."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for the FNA biopsy.",
-          "Patients should inform their healthcare provider of any medications they are taking, especially blood thinners.",
-          "Patients may need to avoid eating or drinking for a certain period before the procedure."
-        ],
-        expectation: [
-          "The test typically takes about 15-30 minutes to complete.",
-          "A thin, hollow needle will be inserted into the lump or mass to collect a sample of cells.",
-          "The procedure may cause some discomfort, but it is generally well-tolerated."
-        ],
-        result: [
-          "The results of the FNA biopsy will provide information about the nature of the lump or mass.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The FNA biopsy may not provide a definitive diagnosis in all cases, especially if the sample size is small or non-representative.",
-          "There may be limitations in interpreting the results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Glucose Tolerance Test (GTT)",
-        overview: [
-          "The glucose tolerance test (GTT) measures the body's response to sugar (glucose).",
-          "It is used to diagnose diabetes and gestational diabetes.",
-          "The test involves drinking a glucose solution and having blood sugar levels tested at regular intervals."
-        ],
-        why: [
-          "The GTT is performed to diagnose diabetes and gestational diabetes.",
-          "It helps to assess how well the body processes glucose.",
-          "The test is often recommended for pregnant women and individuals at risk of diabetes."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for the GTT.",
-          "Patients should fast for at least 8 hours before the test.",
-          "Patients should inform their healthcare provider of any medications they are taking."
-        ],
-        expectation: [
-          "The test typically takes 2-3 hours to complete.",
-          "Patients will drink a glucose solution and have blood samples taken at regular intervals.",
-          "Patients may experience temporary side effects, such as nausea or dizziness."
-        ],
-        result: [
-          "The results of the GTT will provide information about how the body processes glucose.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The GTT may not detect all cases of diabetes or gestational diabetes.",
-          "There may be limitations in interpreting the results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      
-      {
-        name: "Gastrointestinal Endoscopy",
-        overview: [
-          "Gastrointestinal endoscopy is a procedure used to examine the digestive tract using a flexible tube with a light and camera (endoscope).",
-          "It is used to diagnose and treat conditions affecting the esophagus, stomach, and intestines.",
-          "The test involves inserting the endoscope through the mouth or rectum to visualize the digestive tract."
-        ],
-        why: [
-          "Gastrointestinal endoscopy is performed to diagnose and treat conditions affecting the digestive tract, such as ulcers, tumors, and inflammatory bowel disease.",
-          "It helps to visualize the digestive tract and obtain tissue samples for biopsy.",
-          "The test is often recommended for individuals with symptoms such as abdominal pain, bleeding, or difficulty swallowing."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for the endoscopy.",
-          "Patients may need to avoid eating and drinking for a certain period before the procedure.",
-          "Patients should inform their healthcare provider of any medications they are taking."
-        ],
-        expectation: [
-          "The test typically takes 30-60 minutes to complete.",
-          "Patients will be sedated during the procedure to minimize discomfort.",
-          "The endoscope will be inserted through the mouth or rectum to visualize the digestive tract."
-        ],
-        result: [
-          "The results of the endoscopy will provide detailed images of the digestive tract.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "Gastrointestinal endoscopy may not detect all conditions affecting the digestive tract.",
-          "There may be limitations in obtaining clear images in patients with certain medical conditions or other medical issues.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      
-      {
-        name: "Genetic Testing",
-        overview: [
-          "Genetic testing involves analyzing DNA to identify changes or mutations that may be associated with certain diseases or conditions.",
-          "It is used to diagnose genetic disorders, assess the risk of developing certain conditions, and guide treatment decisions.",
-          "The test involves collecting a sample of blood, saliva, or other tissue for analysis."
-        ],
-        why: [
-          "Genetic testing is performed to diagnose genetic disorders, assess the risk of developing certain conditions, and guide treatment decisions.",
-          "It helps to identify individuals who may be at risk for inherited conditions or who may benefit from targeted therapies.",
-          "The test is often recommended for individuals with a family history of genetic disorders or who are at risk for certain conditions."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for genetic testing.",
-          "Patients should inform their healthcare provider of any medications they are taking and any family history of genetic disorders.",
-          "Patients may need to provide a detailed medical history and undergo genetic counseling before the test."
-        ],
-        expectation: [
-          "The test typically takes a few minutes to collect the sample, but the analysis may take several weeks.",
-          "Patients will provide a sample of blood, saliva, or other tissue for analysis.",
-          "The procedure is generally quick and painless."
-        ],
-        result: [
-          "The results of genetic testing will provide information about changes or mutations in the patient's DNA.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing, treatment, or genetic counseling."
-        ],
-        limitation: [
-          "Genetic testing may not detect all genetic disorders or mutations.",
-          "There may be limitations in interpreting the results due to variations in genetic expression and other factors.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      
-      {
-        name: "Gonorrhea Test",
-        overview: [
-          "The gonorrhea test detects the presence of the bacteria Neisseria gonorrhoeae, which causes gonorrhea.",
-          "It is used to diagnose and monitor gonorrhea infection.",
-          "The test involves collecting a sample of urine, or a swab from the affected area, such as the cervix, urethra, throat, or rectum."
-        ],
-        why: [
-          "The gonorrhea test is performed to diagnose and monitor gonorrhea infection.",
-          "It helps to identify individuals who have gonorrhea so that they can receive appropriate treatment and prevent complications.",
-          "The test is often recommended for individuals with symptoms of gonorrhea or who are at risk of sexually transmitted infections."
-        ],
-        preparation: [
-          "Patients should follow their healthcare provider's instructions on preparation for the gonorrhea test.",
-          "Patients should inform their healthcare provider of any medications they are taking.",
-          "Patients may be advised to avoid urinating for at least 1 hour before providing a urine sample."
-        ],
-        expectation: [
-          "The test typically takes a few minutes to collect the sample.",
-          "Patients will provide a urine sample or a swab from the affected area for analysis.",
-          "The procedure is generally quick and painless."
-        ],
-        result: [
-          "The results of the gonorrhea test will indicate whether the bacteria Neisseria gonorrhoeae is present.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend treatment and follow-up testing."
-        ],
-        limitation: [
-          "The gonorrhea test may not detect all cases of gonorrhea, especially in individuals with low bacterial load.",
-          "There may be limitations in obtaining accurate results in patients with certain medical conditions or undergoing certain treatments.",
-          "The healthcare provider will consider these limitations when interpreting the results."
-        ]
-      },
-      {
-        name: "Immunoglobulin (Ig) Test",
-        overview: [
-          "The immunoglobulin (Ig) test measures the levels of immunoglobulins, or antibodies, in the blood. Immunoglobulins are proteins produced by the immune system to help fight infections.",
-          "There are several types of immunoglobulins, including IgA, IgG, IgM, IgD, and IgE. Each type plays a specific role in the immune response.",
-          "The test is used to diagnose and monitor conditions related to immune system dysfunction, such as autoimmune diseases, infections, and immunodeficiencies."
-        ],
-        why: [
-          "The immunoglobulin test is performed to evaluate the immune system's function and diagnose conditions such as autoimmune diseases, infections, and immunodeficiencies.",
-          "It helps to identify abnormal levels of immunoglobulins, which can indicate an overactive or underactive immune system.",
-          "The test is also used to monitor the effectiveness of treatments for conditions affecting the immune system."
-        ],
-        preparation: [
-          "No special preparation is typically required for the immunoglobulin test.",
-          "Patients should inform their healthcare provider of any medications they are taking and any underlying medical conditions they have.",
-          "Patients should follow their healthcare provider's instructions regarding the procedure."
-        ],
-        expectation: [
-          "The test typically takes a few minutes to complete and involves drawing a blood sample from a vein in the arm.",
-          "The blood sample is sent to a laboratory for analysis, where the levels of various immunoglobulins are measured.",
-          "The healthcare provider will discuss the results with the patient and explain what they mean."
-        ],
-        result: [
-          "The results of the immunoglobulin test will provide information about the levels of different types of immunoglobulins in the blood.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The immunoglobulin test may not detect all cases of immune system dysfunction.",
-          "There may be false positive or false negative results due to factors such as recent infections or medications.",
-          "The healthcare provider will consider these limitations when interpreting the results and planning further evaluation or treatment."
-        ]
-      },
-      
-      {
-        name: "Insulin Test",
-        overview: [
-          "The insulin test measures the level of insulin in the blood. Insulin is a hormone produced by the pancreas that helps regulate blood sugar levels.",
-          "The test is used to diagnose and monitor conditions related to insulin production and blood sugar regulation, such as diabetes and insulin resistance.",
-          "The test is often performed alongside other tests, such as the fasting blood glucose test or the oral glucose tolerance test."
-        ],
-        why: [
-          "The insulin test is performed to evaluate insulin production and diagnose conditions such as diabetes and insulin resistance.",
-          "It helps to identify abnormal levels of insulin, which can indicate issues with blood sugar regulation.",
-          "The test is also used to monitor the effectiveness of treatments for conditions affecting insulin production and blood sugar levels."
-        ],
-        preparation: [
-          "Patients may be asked to fast for several hours before the test to ensure accurate results.",
-          "Patients should inform their healthcare provider of any medications they are taking and any underlying medical conditions they have.",
-          "Patients should follow their healthcare provider's instructions regarding the procedure."
-        ],
-        expectation: [
-          "The test typically takes a few minutes to complete and involves drawing a blood sample from a vein in the arm.",
-          "The blood sample is sent to a laboratory for analysis, where the level of insulin is measured.",
-          "The healthcare provider will discuss the results with the patient and explain what they mean."
-        ],
-        result: [
-          "The results of the insulin test will provide information about the level of insulin in the blood.",
-          "The healthcare provider will discuss the results and what they mean for the patient’s health.",
-          "Based on the results, the healthcare provider may recommend additional testing or treatment."
-        ],
-        limitation: [
-          "The insulin test may not detect all cases of insulin-related disorders.",
-          "There may be false positive or false negative results due to factors such as recent food intake or medications.",
-          "The healthcare provider will consider these limitations when interpreting the results and planning further evaluation or treatment."
-        ]
-      },
-      
-      {
-        name: "Intravenous (IV) Therapy",
-        overview: [
-          "Intravenous (IV) therapy involves administering fluids, medications, or nutrients directly into a vein through a needle or catheter.",
-          "IV therapy is commonly used for hydration, administering medications, and providing nutrition to patients who cannot take it orally.",
-          "It is a vital procedure in emergency care, surgery, and for patients with severe infections or chronic conditions."
-        ],
-        why: [
-          "IV therapy is used to quickly deliver fluids, medications, or nutrients to patients who need them urgently or cannot take them orally.",
-          "It is essential in treating dehydration, administering antibiotics, pain medications, and chemotherapy, and providing total parenteral nutrition (TPN).",
-          "IV therapy ensures precise control over the amount and rate of fluid or medication delivered."
-        ],
-        preparation: [
-          "Preparation for IV therapy depends on the specific treatment and the patient's condition.",
-          "Patients should inform their healthcare provider of any allergies, medications, and underlying health conditions.",
-          "The healthcare provider will provide specific instructions based on the type of IV therapy being administered."
-        ],
-        expectation: [
-          "The procedure involves inserting a needle or catheter into a vein, usually in the arm or hand.",
-          "Patients may feel a slight pinch during insertion, and the IV line will be secured to prevent movement.",
-          "The healthcare provider will monitor the IV site and the patient's response throughout the therapy."
-        ],
-        result: [
-          "The effects of IV therapy are often immediate, especially in emergency situations or when administering medications.",
-          "Patients will be monitored for any adverse reactions or complications during and after the therapy.",
-          "The healthcare provider will assess the patient's response and adjust the treatment plan as needed."
-        ],
-        limitation: [
-          "IV therapy carries risks such as infection, vein irritation, and allergic reactions.",
-          "There may be complications related to the IV line, such as infiltration or phlebitis.",
-          "The healthcare provider will take precautions to minimize risks and address any complications promptly."
-        ]
-      },
-      
-      {
-        name: "Iron Studies",
-        overview: [
-          "Iron studies are a group of blood tests that measure different aspects of iron in the body, including serum iron, ferritin, total iron-binding capacity (TIBC), and transferrin saturation.",
-          "These tests help assess the body's iron levels and diagnose conditions related to iron deficiency or overload.",
-          "Iron studies are often performed when anemia or other symptoms suggest an issue with iron metabolism."
-        ],
-        why: [
-          "Iron studies are performed to diagnose and monitor conditions related to iron deficiency, such as iron-deficiency anemia, and iron overload, such as hemochromatosis.",
-          "They help determine the underlying cause of anemia and guide treatment decisions.",
-          "The tests provide a comprehensive assessment of iron metabolism and storage in the body."
-        ],
-        preparation: [
-          "Patients may be asked to fast for several hours before the blood sample is drawn.",
-          "It is important to inform the healthcare provider of any medications or supplements being taken, as they can affect the test results.",
-          "Follow specific instructions provided by the healthcare provider for accurate results."
-        ],
-        expectation: [
-          "The test involves drawing a blood sample from a vein, typically in the arm.",
-          "The sample is sent to a laboratory for analysis, and the results are usually available within a few days.",
-          "The healthcare provider will discuss the results and their implications with the patient."
-        ],
-        result: [
-          "The results of iron studies include measurements of serum iron, ferritin, TIBC, and transferrin saturation.",
-          "These values help determine if the patient has normal, deficient, or excess iron levels.",
-          "The healthcare provider will interpret the results and recommend appropriate treatment or further testing if needed."
-        ],
-        limitation: [
-          "Iron studies may be affected by recent iron intake, medications, or other health conditions.",
-          "The tests may not provide a complete picture of iron metabolism if there are interfering factors.",
-          "The healthcare provider will consider these limitations and may order additional tests for a more accurate assessment."
-        ]
-      },
-      
-      {
-        name: "Intravenous Pyelogram (IVP)",
-        overview: [
-          "An intravenous pyelogram (IVP) is an imaging test that uses X-rays and a special dye to visualize the kidneys, ureters, and bladder.",
-          "The dye is injected into a vein, and X-rays are taken as the dye moves through the urinary tract, highlighting any abnormalities.",
-          "The test is used to diagnose conditions affecting the urinary system, such as kidney stones, tumors, or blockages."
-        ],
-        why: [
-          "IVP is performed to diagnose and evaluate conditions affecting the kidneys, ureters, and bladder.",
-          "It helps detect kidney stones, tumors, structural abnormalities, and blockages in the urinary tract.",
-          "The test provides detailed images that aid in planning treatment or further diagnostic procedures."
-        ],
-        preparation: [
-          "Patients may be instructed to avoid eating or drinking for several hours before the test.",
-          "A laxative or enema may be recommended to clear the bowels for better imaging results.",
-          "Inform the healthcare provider of any allergies, especially to iodine or contrast dyes, and any medications being taken."
-        ],
-        expectation: [
-          "The procedure involves injecting a contrast dye into a vein and taking X-rays at specific intervals.",
-          "Patients may experience a warm sensation or metallic taste during the injection.",
-          "The test typically takes about 30-60 minutes, and patients will be monitored for any adverse reactions to the dye."
-        ],
-        result: [
-          "The X-ray images will show the flow of the dye through the urinary tract, highlighting any abnormalities.",
-          "The healthcare provider will review the images and discuss the findings with the patient.",
-          "Based on the results, further tests or treatments may be recommended."
-        ],
-        limitation: [
-          "IVP carries a risk of allergic reactions to the contrast dye, especially in patients with iodine allergies.",
-          "The test may not provide clear images in patients with poor kidney function or certain medical conditions.",
-          "Alternative imaging tests, such as CT scans or ultrasounds, may be recommended if IVP is not suitable."
-        ]
-      },
-      {
-        name: "Intracranial Pressure (ICP) Monitoring",
-        overview: [
-          "Intracranial pressure (ICP) monitoring measures the pressure inside the skull, which can be affected by brain injury, infection, or other conditions.",
-          "The test involves inserting a sensor into the skull to continuously measure the pressure.",
-          "ICP monitoring is critical for managing patients with severe head injuries or conditions that can cause increased intracranial pressure."
-        ],
-        why: [
-          "ICP monitoring is used to diagnose and manage conditions that cause increased pressure inside the skull, such as traumatic brain injury, hydrocephalus, or brain tumors.",
-          "It helps guide treatment decisions and monitor the effectiveness of interventions aimed at reducing intracranial pressure.",
-          "The test provides real-time data on intracranial pressure, which is crucial for preventing brain damage and improving patient outcomes."
-        ],
-        preparation: [
-          "Preparation for ICP monitoring depends on the specific medical condition and the patient's overall health.",
-          "Patients may undergo imaging tests, such as a CT scan or MRI, to assess the brain before the procedure.",
-          "The healthcare provider will provide specific instructions regarding fasting, medications, and other preparations."
-        ],
-        expectation: [
-          "The procedure involves inserting a sensor through the skull, either through a small hole drilled in the skull or through a burr hole.",
-          "The sensor continuously measures intracranial pressure, and the data is monitored by healthcare professionals.",
-          "Patients are closely monitored in an intensive care unit (ICU) during the procedure."
-        ],
-        result: [
-          "The results of ICP monitoring provide real-time data on the pressure inside the skull.",
-          "The healthcare provider will use this data to guide treatment decisions and monitor the effectiveness of interventions.",
-          "Based on the results, further tests or treatments may be recommended to manage intracranial pressure."
-        ],
-        limitation: [
-          "ICP monitoring is an invasive procedure that carries risks such as infection, bleeding, and damage to brain tissue.",
-          "The test may not provide accurate results in certain medical conditions or if the sensor is not properly positioned.",
-          "The healthcare provider will consider these limitations and take precautions to minimize risks."
-        ]
-      },
-      
-      {
-        name: "Impedance Cardiography (ICG)",
-        overview: [
-          "Impedance cardiography (ICG) is a non-invasive test that measures the electrical conductivity of the thorax to assess cardiac function.",
-          "The test involves placing electrodes on the chest and measuring changes in electrical impedance as the heart beats.",
-          "ICG is used to evaluate cardiac output, fluid status, and other parameters related to heart function."
-        ],
-        why: [
-          "ICG is performed to assess cardiac function, including cardiac output, stroke volume, and fluid status.",
-          "It helps diagnose and monitor conditions such as heart failure, hypertension, and fluid overload.",
-          "The test provides valuable information for managing patients with cardiovascular conditions and guiding treatment decisions."
-        ],
-        preparation: [
-          "No special preparation is typically required for ICG.",
-          "Patients should inform their healthcare provider of any medications they are taking and any underlying medical conditions they have.",
-          "Follow specific instructions provided by the healthcare provider for accurate results."
-        ],
-        expectation: [
-          "The procedure involves placing electrodes on the chest and connecting them to an ICG device.",
-          "Patients may need to remain still during the test to ensure accurate measurements.",
-          "The test typically takes about 30 minutes to complete, and results are available immediately."
-        ],
-        result: [
-          "The results of ICG include measurements of cardiac output, stroke volume, and other parameters related to heart function.",
-          "The healthcare provider will interpret the results and discuss their implications with the patient.",
-          "Based on the results, further tests or treatments may be recommended to manage cardiovascular conditions."
-        ],
-        limitation: [
-          "ICG may not provide accurate results in patients with certain medical conditions, such as severe obesity or arrhythmias.",
-          "The test is not a substitute for other diagnostic tests, such as echocardiography or cardiac catheterization.",
-          "The healthcare provider will consider these limitations and may recommend additional tests for a more comprehensive assessment."
-        ]
-      },
-      
-    ]);
+  ];
 
-    const fetchHealthServices = async () => {
-      const healthUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/health';
-      const token = localStorage.getItem('bearer_token');
-  
-      try {
-          const response = await fetch(healthUrl, {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`,
-              }
-          });
-  
-          if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-  
-          const data = await response.json();
-  
-          if (data && data.data && Array.isArray(data.data.data)) {
-              const transformedHealthServices = data.data.data.map(service => ({
-                  id: service.id,
-                  dateCreated: service.created_at,
-                  name: service.name,
-                  servicesImage: service.servicesImage,
-                  highlights: service.highlights,
-                  texts: service.texts
-              }));
-              setHealthServices(transformedHealthServices);
-          } else {
-              console.error('Unexpected health services data format:', data);
-          }
+  const fetchHealthServices = async () => {
+    const healthUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/health';
+    const token = localStorage.getItem('bearer_token');
+    
+    try {
+      const response = await fetch(healthUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+    
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    
+      const data = await response.json();
+    
+      if (data && data.data && Array.isArray(data.data.data)) {
+        const transformedHealthServices = data.data.data.map(service => ({
+          id: service.id,
+          dateCreated: service.created_at,
+          name: service.name,
+          servicesImage: service.servicesImage,
+          highlights: service.highlights,
+          texts: service.texts
+        }));
+          setHealthServices(transformedHealthServices);
+      } else {
+        console.error('Unexpected health services data format:', data);
+      }
       } catch (error) {
-          console.error('Error fetching health services data:', error);
+        console.error('Error fetching health services data:', error);
       }
     };
-  
 
+    const fetchTestsData = async () => {
+      const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/tests';
+      const token = localStorage.getItem('bearer_token');
+    
+      try {
+        const response = await fetch(testsUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+    
+        // Corrected: Properly access the data array
+        if (data && data.data && Array.isArray(data.data)) {
+          const transformedTests = data.data.map(test => ({
+            id: test.id,
+            dateCreated: test.created_at,
+            name: test.name,
+            overview: test.overview,
+            why: test.why,
+            preparation: test.preparation,
+            expectation: test.expectation,
+            result: test.result,
+            limitation: test.limitation,
+          }));
+          setTestsData(transformedTests); // Corrected: set the correct state
+        } else {
+          console.error('Unexpected tests data format:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching tests data:', error);
+      }
+    };
+    
+
+    // UseEffect to fetch data on component mount
     useEffect(() => {
-        fetchHealthServices();
+      fetchHealthServices();
+      fetchTestsData();
     }, []);
 
     const contextValue = {
-        healthServices,
-        diseasesData,
-        testsData
+      healthServices,
+      diseasesData,
+      testsData
     };
 
     return (
-        <ServicesContext.Provider value={contextValue}>
-            {children}
-        </ServicesContext.Provider>
+      <ServicesContext.Provider value={contextValue}>
+        {children}
+      </ServicesContext.Provider>
     );
 };
 
+// Custom hooks to use context values
 export const useHealthServices = () => {
-    const context = useContext(ServicesContext);
-    if (!context) {
-        throw new Error("useHealthServices must be used within a ServiceProvider");
-    }
-    return context.healthServices;
+  const context = useContext(ServicesContext);
+  if (!context) {
+    throw new Error("useHealthServices must be used within a ServiceProvider");
+  }
+  return context.healthServices;
 };
 
 export const useDiseaseData = () => {
-    const context = useContext(ServicesContext);
-    if (!context) {
-        throw new Error("useDiseaseData must be used within a ServiceProvider");
-    }
-    return context.diseasesData;
+  const context = useContext(ServicesContext);
+  if (!context) {
+    throw new Error("useDiseaseData must be used within a ServiceProvider");
+  }
+  return context.diseasesData;
 };
 
 export const useTestsData = () => {
-    const context = useContext(ServicesContext);
-    if (!context) {
-        throw new Error("useTestsData must be used within a ServiceProvider");
-    }
-    return context.testsData;
+  const context = useContext(ServicesContext);
+  if (!context) {
+    throw new Error("useTestsData must be used within a ServiceProvider");
+  }
+  return context.testsData;
 };
