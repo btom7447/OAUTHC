@@ -1,5 +1,5 @@
 {
-  "homepage": ".",
+  "homepage": "",
   "name": "oauthc",
   "version": "0.1.0",
   "private": true,
@@ -71,16 +71,18 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@eslint/js": "^9.10.0",
     "buffer": "^6.0.3",
     "cross-env": "^7.0.3",
     "crypto-browserify": "^3.12.0",
-    "eslint": "^8.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react": "^7.35.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "gh-pages": "^6.1.1",
+    "globals": "^15.9.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
@@ -89,5 +91,4 @@
     "vm-browserify": "^1.1.2"
   },
   "proxy": "https://oauthc.iccflifeskills.com.ng"
-  
 }
