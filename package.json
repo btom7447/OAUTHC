@@ -47,7 +47,7 @@
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-app-rewired start",
     "predeploy": "react-app-rewired build",
     "deploy": "gh-pages -d build",
-    "build": "react-app-rewired build",
+    "build": "react-scripts build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
