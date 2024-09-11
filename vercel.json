@@ -1,36 +1,3 @@
 {
-    "rewrites": [
-      {
-        "source": "/department-details/:departmentName",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/doctor-profile/:doctorName",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/school-details/:schoolName",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/services-details/:name",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/diseases-symptoms/:name",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/test-procedures/:name",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/management/:name",
-        "destination": "/index.html"
-      },
-      {
-        "source": "/admin/:path*",
-        "destination": "/index.html"
-      }
-    ]
-}  
+    "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+}

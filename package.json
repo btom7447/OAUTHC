@@ -89,4 +89,5 @@
     "vm-browserify": "^1.1.2"
   },
   "proxy": "https://oauthc.iccflifeskills.com.ng"
+  
 }
