@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 
 const DepartmentContext = createContext();
 
@@ -7,6 +7,7 @@ export const DepartmentProvider = ({ children }) => {
     const [doctors, setDoctors] = useState([]);
     const [units, setUnits] = useState([]);
     const [schools, setSchools] = useState([]);
+    const cache = useRef({});  // Ref to store cached data
 
     const fetchData = async () => {
         const departmentUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/department';
@@ -15,6 +16,29 @@ export const DepartmentProvider = ({ children }) => {
         const schoolsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/schools'; 
 
         const token = localStorage.getItem('bearer_token');
+
+        // Check localStorage first
+        const cachedDepartments = JSON.parse(localStorage.getItem('departments'));
+        const cachedDoctors = JSON.parse(localStorage.getItem('doctors'));
+        const cachedUnits = JSON.parse(localStorage.getItem('units'));
+        const cachedSchools = JSON.parse(localStorage.getItem('schools'));
+
+        if (cachedDepartments) {
+            setDepartments(cachedDepartments);
+        }
+        if (cachedDoctors) {
+            setDoctors(cachedDoctors);
+        }
+        if (cachedUnits) {
+            setUnits(cachedUnits);
+        }
+        if (cachedSchools) {
+            setSchools(cachedSchools);
+        }
+
+        if (cachedDepartments && cachedDoctors && cachedUnits && cachedSchools) {
+            return; // Data already cached, no need to fetch
+        }
 
         try {
             const [departmentResponse, doctorResponse, unitResponse, schoolsResponse] = await Promise.all([
@@ -42,7 +66,7 @@ export const DepartmentProvider = ({ children }) => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`, // Add Authorization header if needed
+                        'Authorization': `Bearer ${token}`,
                     }
                 }),
             ]);
@@ -71,6 +95,7 @@ export const DepartmentProvider = ({ children }) => {
                     phone: department.phone
                 }));
                 setDepartments(transformedDepartments);
+                localStorage.setItem('departments', JSON.stringify(transformedDepartments));  // Cache the data
             }
 
             if (doctorData && doctorData.data) {
@@ -94,6 +119,7 @@ export const DepartmentProvider = ({ children }) => {
                     twitter: doctor.social_links[3]
                 }));
                 setDoctors(transformedDoctors);
+                localStorage.setItem('doctors', JSON.stringify(transformedDoctors));  // Cache the data
             }
 
             if (unitData && unitData.data) {
@@ -105,6 +131,7 @@ export const DepartmentProvider = ({ children }) => {
                     unitImage: unit.unitImage,
                 }));
                 setUnits(transformedUnits);
+                localStorage.setItem('units', JSON.stringify(transformedUnits));  // Cache the data
             }
 
             if (schoolsData && schoolsData.data) {
@@ -124,6 +151,7 @@ export const DepartmentProvider = ({ children }) => {
                     specialTraining: school.specialTraining,
                 }));
                 setSchools(transformedSchools);
+                localStorage.setItem('schools', JSON.stringify(transformedSchools));  // Cache the data
             }
 
         } catch (error) {

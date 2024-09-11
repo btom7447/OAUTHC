@@ -35,6 +35,7 @@ import AdminDiseasesUpdate from "./AdminDiseasesUpdate";
 import AdminDiseasesCreate from "./AdminDiseasesCreate";
 import AdminTestimonials from "./AdminTestimonials";
 import AdminTestimonialsCreate from "./AdminTestimonialsCreate";
+import AdminTestimonialsUpdate from "./AdminTestimonialsUpdate";
 
 const UserAdmin = () => {
     return (
@@ -52,6 +53,7 @@ const UserAdmin = () => {
                         <Route path="/add-admin" element={<AddAdmin />} />
                         <Route path="/testimonials" element={<AdminTestimonials />} />
                         <Route path="/testimonials/new" element={<AdminTestimonialsCreate />} />
+                        <Route path="/testimonials/:id" element={<AdminTestimonialsUpdate />} />
                         <Route path="/departments" element={<AdminDepartments />} />
                         <Route path="/departments/:id" element={<AdminDepartmentUpdate />} />
                         <Route path="/departments/new" element={<AdminDepartmentCreate />} />

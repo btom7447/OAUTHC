@@ -12,6 +12,13 @@ export const ServiceProvider = ({ children }) => {
     const token = localStorage.getItem('bearer_token');
     
     try {
+      // Check cache first
+      const cachedHealthServices = sessionStorage.getItem('healthServices');
+      if (cachedHealthServices) {
+        setHealthServices(JSON.parse(cachedHealthServices));
+        return;
+      }
+
       const response = await fetch(healthUrl, {
         method: 'GET',
         headers: {
@@ -35,114 +42,131 @@ export const ServiceProvider = ({ children }) => {
           highlights: service.highlights,
           texts: service.texts
         }));
-          setHealthServices(transformedHealthServices);
+        
+        setHealthServices(transformedHealthServices);
+        sessionStorage.setItem('healthServices', JSON.stringify(transformedHealthServices));  // Cache the data
       } else {
         console.error('Unexpected health services data format:', data);
       }
-      } catch (error) {
-        console.error('Error fetching health services data:', error);
+    } catch (error) {
+      console.error('Error fetching health services data:', error);
+    }
+  };
+
+  const fetchTestsData = async () => {
+    const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/tests';
+    const token = localStorage.getItem('bearer_token');
+    
+    try {
+      // Check cache first
+      const cachedTestsData = sessionStorage.getItem('testsData');
+      if (cachedTestsData) {
+        setTestsData(JSON.parse(cachedTestsData));
+        return;
       }
-    };
 
-    const fetchTestsData = async () => {
-      const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/tests';
-      const token = localStorage.getItem('bearer_token');
-    
-      try {
-        const response = await fetch(testsUrl, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          }
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+      const response = await fetch(testsUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         }
+      });
     
-        const data = await response.json();
-    
-        // Corrected: Properly access the data array
-        if (data && data.data && Array.isArray(data.data)) {
-          const transformedTests = data.data.map(test => ({
-            id: test.id,
-            dateCreated: test.created_at,
-            name: test.name,
-            overview: test.overview,
-            why: test.why,
-            preparation: test.preparation,
-            expectation: test.expectation,
-            result: test.result,
-            limitation: test.limitation,
-          }));
-          setTestsData(transformedTests); // Corrected: set the correct state
-        } else {
-          console.error('Unexpected tests data format:', data);
-        }
-      } catch (error) {
-        console.error('Error fetching tests data:', error);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    };
     
-    const fetchDiseasesData = async () => {
-      const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/disease';
-      const token = localStorage.getItem('bearer_token');
+      const data = await response.json();
     
-      try {
-        const response = await fetch(diseasesUrl, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          }
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-    
-        const data = await response.json();
-    
-        if (data && data.data && Array.isArray(data.data)) {
-          const transformedDiseases = data.data.map(disease => ({
-            id: disease.id,
-            dateCreated: disease.created_at,
-            name: disease.name,
-            overviewText: disease.overviewText,
-            description: disease.description,
-            symptoms: disease.symptoms,
-            treatment: disease.treatment,
-            images: disease.images, 
-          }));
-          setDiseasesData(transformedDiseases); // Corrected state update
-        } else {
-          console.error('Unexpected diseases data format:', data);
-        }
-      } catch (error) {
-        console.error('Error fetching diseases data:', error);
+      if (data && data.data && Array.isArray(data.data)) {
+        const transformedTests = data.data.map(test => ({
+          id: test.id,
+          dateCreated: test.created_at,
+          name: test.name,
+          overview: test.overview,
+          why: test.why,
+          preparation: test.preparation,
+          expectation: test.expectation,
+          result: test.result,
+          limitation: test.limitation,
+        }));
+        
+        setTestsData(transformedTests);
+        sessionStorage.setItem('testsData', JSON.stringify(transformedTests));  // Cache the data
+      } else {
+        console.error('Unexpected tests data format:', data);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching tests data:', error);
+    }
+  };
+
+  const fetchDiseasesData = async () => {
+    const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/disease';
+    const token = localStorage.getItem('bearer_token');
     
+    try {
+      // Check cache first
+      const cachedDiseasesData = sessionStorage.getItem('diseasesData');
+      if (cachedDiseasesData) {
+        setDiseasesData(JSON.parse(cachedDiseasesData));
+        return;
+      }
 
-    // UseEffect to fetch data on component mount
-    useEffect(() => {
-      fetchHealthServices();
-      fetchTestsData();
-      fetchDiseasesData();
-    }, []);
+      const response = await fetch(diseasesUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+    
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    
+      const data = await response.json();
+    
+      if (data && data.data && Array.isArray(data.data)) {
+        const transformedDiseases = data.data.map(disease => ({
+          id: disease.id,
+          dateCreated: disease.created_at,
+          name: disease.name,
+          overviewText: disease.overviewText,
+          description: disease.description,
+          symptoms: disease.symptoms,
+          treatment: disease.treatment,
+          images: disease.images,
+        }));
+        
+        setDiseasesData(transformedDiseases);
+        sessionStorage.setItem('diseasesData', JSON.stringify(transformedDiseases));  // Cache the data
+      } else {
+        console.error('Unexpected diseases data format:', data);
+      }
+    } catch (error) {
+      console.error('Error fetching diseases data:', error);
+    }
+  };
 
-    const contextValue = {
-      healthServices,
-      diseasesData,
-      testsData
-    };
+  useEffect(() => {
+    fetchHealthServices();
+    fetchTestsData();
+    fetchDiseasesData();
+  }, []);
 
-    return (
-      <ServicesContext.Provider value={contextValue}>
-        {children}
-      </ServicesContext.Provider>
-    );
+  const contextValue = {
+    healthServices,
+    diseasesData,
+    testsData
+  };
+
+  return (
+    <ServicesContext.Provider value={contextValue}>
+      {children}
+    </ServicesContext.Provider>
+  );
 };
 
 // Custom hooks to use context values

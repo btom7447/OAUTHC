@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useUser } from "../Components/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from 'react-spinners';
 
-const AdminTestimonialsCreate = () => {
+const AdminTestimonialsUpdate = () => {
+    const { id } = useParams();
+    const { testimonialsData } = useUser();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -12,13 +19,29 @@ const AdminTestimonialsCreate = () => {
         starRatings: '',
     });
 
-    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        if (testimonialsData.length > 0 && id) {
+            const testimonyId = parseInt(id, 10);
+            const testimony = testimonialsData.find(testimony => testimony.id === testimonyId);
+    
+            if (testimony) {
+                setFormData({
+                    name: testimony.name || '',
+                    message: testimony.message || '',
+                    starRatings: testimony.starRatings || '',
+                });
+    
+            } else {
+                console.log('No testimony found with the given ID.');
+            }
+        }
+    }, [id, testimonialsData]);
 
     const handleSave = async (e) => {
         e.preventDefault();
     
         setLoading(true);
-        const loadingToastId = toast.loading("Creating Testimonials ...", {
+        const loadingToastId = toast.loading("Updating Testimonial ...", {
             autoClose: false,
             toastId: 'loading-toast'
         });
@@ -34,8 +57,8 @@ const AdminTestimonialsCreate = () => {
             formDataToSend.append('message', formData.message);
             formDataToSend.append('star_ratings', Number(formData.starRatings)); // Ensure it's a number
     
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/testimonial`, {
-                method: 'POST',
+            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/testimonial/${id}`, {
+                method: 'PUT', // Use PUT for updates
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -46,17 +69,16 @@ const AdminTestimonialsCreate = () => {
     
             if (response.ok) {
                 toast.update(loadingToastId, {
-                    render: 'Testimonial created successfully!',
+                    render: 'Testimonial updated successfully!',
                     type: 'success',
                     autoClose: 2500,
                     isLoading: false
                 });
                 setTimeout(() => {
                     navigate('/admin/testimonials', { replace: true });
-                    window.location.reload();
                 }, 2500);
             } else {
-                throw new Error(result.message || 'Creation failed');
+                throw new Error(result.message || 'Update failed');
             }
         } catch (err) {
             toast.update(loadingToastId, {
@@ -80,6 +102,14 @@ const AdminTestimonialsCreate = () => {
         }));
     };
 
+    if (!testimonialsData || testimonialsData.length === 0) {
+        return (
+            <div className="loading-spinner loading">
+                <ClipLoader color="#005046" size={100} />
+            </div>
+        );
+    }
+
     return (
         <>
             <ToastContainer />
@@ -87,8 +117,14 @@ const AdminTestimonialsCreate = () => {
                 <div className="pages-caption">
                     <h1>Pages</h1>
                 </div>
+                <div className="back">
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                    <Link to="/admin/testimonials">
+                        Back
+                    </Link>
+                </div>
                 <div className="admin-pages-caption">
-                    <h2>Create New Testimonial</h2>
+                    <h2>Update Testimonial</h2>
                 </div>
             </div>
             <form onSubmit={handleSave} className='test-image-form details-page-form'>
@@ -126,12 +162,12 @@ const AdminTestimonialsCreate = () => {
                     </label>
 
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Creating ...' : 'Create Testimonial'}
+                        {loading ? 'Updating ...' : 'Update Testimonial'}
                     </button>
                 </div>
             </form>
         </>
-    );
+    )
 };
 
-export default AdminTestimonialsCreate;
+export default AdminTestimonialsUpdate;

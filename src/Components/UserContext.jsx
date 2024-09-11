@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
         const healthServicesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/health';
         const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/tests';
         const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/disease';
-        const testimonialsUrl = 'http://test.oauthec.test/v0.1/api/admin/testimonials';
+        const testimonialsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/testimonials';
     
         const token = localStorage.getItem('bearer_token');
     
@@ -246,7 +246,7 @@ export const UserProvider = ({ children }) => {
                 console.error('Failed to retrieve Diseases:', diseasesData?.message || 'Unexpected response structure:', diseasesData);
             }
             if (testimonialsData && testimonialsData.data) {
-                const transformedTestimonials = diseasesData.data.map(testimony => ({
+                const transformedTestimonials = testimonialsData.data.map(testimony => ({
                     id: testimony.id,
                     dateCreated: testimony.created_at,
                     name: testimony.name,
