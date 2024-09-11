@@ -33,6 +33,8 @@ import AdminTestsCreate from "./AdminTestsCreate";
 import AdminDiseases from "./AdminDiseases";
 import AdminDiseasesUpdate from "./AdminDiseasesUpdate";
 import AdminDiseasesCreate from "./AdminDiseasesCreate";
+import AdminTestimonials from "./AdminTestimonials";
+import AdminTestimonialsCreate from "./AdminTestimonialsCreate";
 
 const UserAdmin = () => {
     return (
@@ -43,11 +45,13 @@ const UserAdmin = () => {
                 <AdminSidebar />
                 <div className="admin-content">
                     <Routes>
-                        <Route path="/" element={<Navigate to="/dashboard" />} />
+                        <Route path="/" element={<Navigate to="/admin/dashboard" />} />
+                        <Route path="/admin" element={<AdminDashboard />} />
                         <Route path="/dashboard" element={<AdminDashboard />} />
                         <Route path="/all-admins" element={<AllAdmins />} />
                         <Route path="/add-admin" element={<AddAdmin />} />
-                        <Route path="/sections" element={<AdminSections />} />
+                        <Route path="/testimonials" element={<AdminTestimonials />} />
+                        <Route path="/testimonials/new" element={<AdminTestimonialsCreate />} />
                         <Route path="/departments" element={<AdminDepartments />} />
                         <Route path="/departments/:id" element={<AdminDepartmentUpdate />} />
                         <Route path="/departments/new" element={<AdminDepartmentCreate />} />

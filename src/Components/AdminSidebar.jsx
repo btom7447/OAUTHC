@@ -98,10 +98,10 @@ const AdminSidebar = () => {
                         <ul className="accordion-content">
                             <li>
                                 <NavLink
-                                    to="/admin/sections/section1"
+                                    to="/admin/testimonials"
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                 >
-                                    Section 1
+                                    Testimonials
                                 </NavLink>
                             </li>
                             <li>

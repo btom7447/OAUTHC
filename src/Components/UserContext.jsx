@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
     const [healthServicesData, setHealthServicesData] = useState([]);
     const [testsData, setTestsData] = useState([]);
     const [diseasesData, setDiseasesData] = useState([]);
+    const [testimonialsData, setTestimonialsData] = useState([]);
 
     // Fetch Data Function
     const fetchData = async () => {
@@ -19,7 +20,8 @@ export const UserProvider = ({ children }) => {
         const schoolsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/schools';
         const healthServicesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/health';
         const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/tests';
-        const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/disease'
+        const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/disease';
+        const testimonialsUrl = 'http://test.oauthec.test/v0.1/api/admin/testimonials';
     
         const token = localStorage.getItem('bearer_token');
     
@@ -29,7 +31,17 @@ export const UserProvider = ({ children }) => {
         }
     
         try {
-            const [departmentsResponse, doctorsResponse, unitsResponse, schoolsResponse, healthServicesResponse, testsResponse, diseasesResponse] = await Promise.all([
+            const [
+                departmentsResponse, 
+                doctorsResponse, 
+                unitsResponse, 
+                schoolsResponse, 
+                healthServicesResponse, 
+                testsResponse, 
+                diseasesResponse, 
+                testimonialsResponse,
+            ] = await Promise.all([
+
                 fetch(departmentsUrl, {
                     method: 'GET',
                     headers: {
@@ -78,14 +90,30 @@ export const UserProvider = ({ children }) => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
                     }
+                }),
+                fetch(testimonialsUrl, {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json', 
+                        'Authorization': `Bearer ${token}`,
+                    }
                 })
             ]);
     
-            if (!departmentsResponse.ok || !doctorsResponse.ok || !unitsResponse.ok || !schoolsResponse.ok || !healthServicesResponse.ok || !testsResponse.ok || !diseasesResponse.ok) { 
-                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status} or ${unitsResponse.status} or ${schoolsResponse.status} or ${healthServicesResponse.status} or ${testsResponse.status} or ${diseasesResponse.status}`);
+            if (!departmentsResponse.ok || !doctorsResponse.ok || !unitsResponse.ok || !schoolsResponse.ok || !healthServicesResponse.ok || !testsResponse.ok || !diseasesResponse.ok || !testimonialsResponse.ok) { 
+                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status} or ${unitsResponse.status} or ${schoolsResponse.status} or ${healthServicesResponse.status} or ${testsResponse.status} or ${diseasesResponse.status} or ${testimonialsResponse.status}`);
             }
             
-            const [departmentsData, doctorsData, unitsData, schoolsData, healthServicesData, testsData, diseasesData] = await Promise.all([
+            const [
+                departmentsData, 
+                doctorsData, 
+                unitsData, 
+                schoolsData, 
+                healthServicesData, 
+                testsData, 
+                diseasesData, 
+                testimonialsData,
+            ] = await Promise.all([
                 departmentsResponse.json(),
                 doctorsResponse.json(),
                 unitsResponse.json(),
@@ -93,6 +121,7 @@ export const UserProvider = ({ children }) => {
                 healthServicesResponse.json(),
                 testsResponse.json(),
                 diseasesResponse.json(),
+                testimonialsResponse.json(),
             ]);
     
             if (departmentsData && departmentsData.data) {
@@ -215,6 +244,18 @@ export const UserProvider = ({ children }) => {
                 setDiseasesData(transformedDiseases);
             } else {
                 console.error('Failed to retrieve Diseases:', diseasesData?.message || 'Unexpected response structure:', diseasesData);
+            }
+            if (testimonialsData && testimonialsData.data) {
+                const transformedTestimonials = diseasesData.data.map(testimony => ({
+                    id: testimony.id,
+                    dateCreated: testimony.created_at,
+                    name: testimony.name,
+                    message: testimony.message, 
+                    starRatings: testimony.star_ratings,
+                }));
+                setTestimonialsData(transformedTestimonials);
+            } else {
+                console.error('Failed to retrieve Testimonials:', testimonialsData?.message || 'Unexpected response structure:', testimonialsData);
             }
             
         } catch (error) {
@@ -373,7 +414,8 @@ export const UserProvider = ({ children }) => {
         schoolsData,
         healthServicesData, 
         testsData, 
-        diseasesData
+        diseasesData, 
+        testimonialsData,
 
         // Add more user data here if needed
     };
