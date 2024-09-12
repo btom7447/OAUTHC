@@ -832,6 +832,7 @@ a {
     line-height: normal;
     text-transform: capitalize;
     color: var(--black);
+    color: var(--grascale);
 }
 .data-table td {
     padding: 5px 10px;
@@ -842,11 +843,45 @@ a {
     line-height: normal;
     text-transform: capitalize;
 }
+.data-table .admin-table-email {
+    padding: 5px 10px;
+    font-family: "Work Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: lowercase;
+}
+.data-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 .data-table button {
     border: none;
     background-color: transparent;
     margin: auto 10px;
     cursor: pointer;
+}
+.data-table .patient-profile {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.data-table .patient-gender {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--ash);
+    border-radius: 4px;
+}
+.data-table .patient-gender img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* DETAILS PAGE */
@@ -890,6 +925,14 @@ a {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    color: var(--black);
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; 
+}
+.details-page-form .details-inputs h6 {
     color: var(--black);
     font-family: "Work Sans";
     font-size: 16px;
@@ -948,6 +991,68 @@ a {
     align-items: center;
     gap: 10px;
 }
+.details-inputs .password-wrapper {
+    width: 100%;
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 1em; 
+}
+.details-inputs .password-wrapper input[type="password"],
+.details-inputs .password-wrapper input[type="text"] {
+    width: 100%;
+    padding-right: 5em;
+    padding: 0.5em; 
+    font-size: 1em; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    position: relative;
+}
+.details-inputs .switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+}
+.details-inputs .switch .publish-toggle {
+  opacity: 0;
+  height: 0;
+}
+.details-inputs .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--white);
+  border: 1px solid var(--gray);
+  transition: .4s;
+  border-radius: 30px;
+  width: 55px !important;
+}
+.details-inputs .slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  border-radius: 20px;
+  left: 0.27em;
+  bottom: 0.25em;
+  background-color: var(--gray);
+  transition: .4s;
+}
+.details-inputs .publish-toggle:checked + .slider {
+  background-color: var(--primary-green);
+  border: 1px solid var(--primary-green);
+}
+.details-inputs .publish-toggle:checked + .slider:before {
+  transform: translateX(1.4em);
+  background-color: var(--white);
+}
+
 /* REACT SELECT  */
 .admin-select {
     width: 100%;
@@ -1131,6 +1236,7 @@ a {
 .test-image-form button:hover {
     background-color: var(--secondary-green);
 }
+
 
 /* * {
     outline: red solid 1px;

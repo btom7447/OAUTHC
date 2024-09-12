@@ -13,6 +13,8 @@ const AdminDoctorsCreate = () => {
     const { doctorsData, departmentsData, unitsData } = useUser();
     const token = localStorage.getItem('bearer_token');
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [departments, setDepartments] = useState([]);
     const [units, setUnits] = useState([]);
     const [specialties, setSpecialties] = useState([]);
@@ -126,7 +128,7 @@ const AdminDoctorsCreate = () => {
         const toastId = toast.loading("Creating Doctor Profile...");
     
         // Make a POST request to create a new doctor profile
-        fetch('https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/create/doctor', {
+        fetch(`${BASE_URL}/create/doctor`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`

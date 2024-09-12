@@ -13,6 +13,8 @@ const AdminUnitsUpdate = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         state: '',
@@ -93,7 +95,7 @@ const AdminUnitsUpdate = () => {
             formDataToSend.append('state', formData.state);
             formDataToSend.append('address', formData.address);
     
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-unit/${id}`, {
+            const response = await fetch(`${BASE_URL}/update-unit/${id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

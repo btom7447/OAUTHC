@@ -12,7 +12,7 @@ const AdminPatientData = () => {
                     <tr>
                         <th>Patient Name</th>
                         <th>Date In</th>
-                        <th>Department</th>
+                        <th>Patient Type</th>
                         <th>Status</th>
                     </tr>
                 </thead>

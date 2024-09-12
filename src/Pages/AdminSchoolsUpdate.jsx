@@ -14,6 +14,8 @@ const AdminSchoolsUpdate = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         overviewText: '',
@@ -21,7 +23,7 @@ const AdminSchoolsUpdate = () => {
         mission: '',
         location: '', 
         function: '', 
-        services: '',
+        service: '',
         ruralPosting: [], 
         clinicalPosting: [],
         specialTraining: [],
@@ -70,7 +72,7 @@ const AdminSchoolsUpdate = () => {
                     mission: school.mission || '',
                     location: school.location || '',
                     function: normalizeArray(school.function).join('\n'),
-                    services: normalizeArray(school.services).join('\n'),
+                    service: normalizeArray(school.service).join('\n'),
                     ruralPosting: normalizeArray(school.ruralPosting).join('\n'),
                     clinicalPosting: normalizeArray(school.clinicalPosting).join('\n'),
                     specialTraining: normalizeArray(school.specialTraining).join('\n'),
@@ -116,22 +118,6 @@ const AdminSchoolsUpdate = () => {
             setImagePreview(previewUrl);
         } else {
             setImagePreview('');
-        }
-    };
-
-    const handleSelectChange = (selectedOption, actionMeta) => {
-        switch (actionMeta.name) {
-          case 'ruralPosting':
-            setSelectedRuralPosting(selectedOption);
-            break;
-          case 'clinicalPosting':
-            setSelectedClinicalPosting(selectedOption);
-            break;
-          case 'specialTraining':
-            setSelectedSpecialTraining(selectedOption);
-            break;
-          default:
-            break;
         }
     };
 
@@ -188,9 +174,10 @@ const AdminSchoolsUpdate = () => {
                     formDataToSend.append(`${fieldName}[${index}]`, item);
                 });
             };
-    
+
+            appendArrayField('services', formData.service);
             appendArrayField('function', formData.function);
-            appendArrayField('services', formData.services);
+            
     
             // Append selected options for Creatable components
             selectedRuralPosting.forEach((posting, index) => {
@@ -206,7 +193,7 @@ const AdminSchoolsUpdate = () => {
             });
     
             // Make the API request
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-school/${id}`, {
+            const response = await fetch(`${BASE_URL}/update-school/${id}`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formDataToSend
@@ -316,8 +303,8 @@ const AdminSchoolsUpdate = () => {
                     <label>
                         Services Rendered
                         <textarea
-                            name="services"
-                            value={formData.services}
+                            name="service"
+                            value={formData.service}
                             onChange={handleInputChange}
                             placeholder="Services Rendered by School ..."
                         />

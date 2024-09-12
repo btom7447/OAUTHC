@@ -16,6 +16,8 @@ const AdminDoctorsUpdate = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         gender: '',
@@ -239,7 +241,7 @@ const AdminDoctorsUpdate = () => {
             formDataToSend.append('twitter', formData.twitter);
             formDataToSend.append('facebook', formData.facebook);
     
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-doctor/${id}`, {
+            const response = await fetch(`${BASE_URL}/update-doctor/${id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -11,17 +11,26 @@ export const UserProvider = ({ children }) => {
     const [testsData, setTestsData] = useState([]);
     const [diseasesData, setDiseasesData] = useState([]);
     const [testimonialsData, setTestimonialsData] = useState([]);
+    const [announcementsData, setAnnouncementsData] = useState([]);
+    const [adminsData, setAdminsData] = useState([]);
+    const [appointmentsData, setAppointmentsData] = useState([]);
+
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
     // Fetch Data Function
     const fetchData = async () => {
-        const departmentsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department';
-        const doctorsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/doctors';
-        const unitsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/unit';
-        const schoolsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/schools';
-        const healthServicesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/health';
-        const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/tests';
-        const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/disease';
-        const testimonialsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/testimonials';
+        const departmentsUrl = `${BASE_URL}/department`;
+        const doctorsUrl = `${BASE_URL}/doctors`;
+        const unitsUrl = `${BASE_URL}/unit`;
+        const schoolsUrl = `${BASE_URL}/schools`;
+        const healthServicesUrl = `${BASE_URL}/health`;
+        const testsUrl = `${BASE_URL}/tests`;
+        const diseasesUrl = `${BASE_URL}/disease`;
+        const testimonialsUrl = `${BASE_URL}/testimonials`;
+        const announcementsUrl = `${BASE_URL}/announcement`;
+        const adminsUrl = `${BASE_URL}/all-admin`;
+        const appointmentsUrl = `${BASE_URL}/appointments`;
+
     
         const token = localStorage.getItem('bearer_token');
     
@@ -40,6 +49,9 @@ export const UserProvider = ({ children }) => {
                 testsResponse, 
                 diseasesResponse, 
                 testimonialsResponse,
+                announcementsResponse,
+                adminsResponse, 
+                appointmentsResponse,
             ] = await Promise.all([
 
                 fetch(departmentsUrl, {
@@ -97,11 +109,32 @@ export const UserProvider = ({ children }) => {
                         'Content-Type': 'application/json', 
                         'Authorization': `Bearer ${token}`,
                     }
-                })
+                }), 
+                fetch(announcementsUrl, {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }),
+                fetch(adminsUrl, {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }),
+                fetch(appointmentsUrl, {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }),
             ]);
     
-            if (!departmentsResponse.ok || !doctorsResponse.ok || !unitsResponse.ok || !schoolsResponse.ok || !healthServicesResponse.ok || !testsResponse.ok || !diseasesResponse.ok || !testimonialsResponse.ok) { 
-                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status} or ${unitsResponse.status} or ${schoolsResponse.status} or ${healthServicesResponse.status} or ${testsResponse.status} or ${diseasesResponse.status} or ${testimonialsResponse.status}`);
+            if (!departmentsResponse.ok || !doctorsResponse.ok || !unitsResponse.ok || !schoolsResponse.ok || !healthServicesResponse.ok || !testsResponse.ok || !diseasesResponse.ok || !testimonialsResponse.ok || !adminsResponse.ok || !adminsResponse.ok || !appointmentsResponse.ok) { 
+                throw new Error(`HTTP error! Status: ${departmentsResponse.status} or ${doctorsResponse.status} or ${unitsResponse.status} or ${schoolsResponse.status} or ${healthServicesResponse.status} or ${testsResponse.status} or ${diseasesResponse.status} or ${testimonialsResponse.status} or ${adminsResponse.status} or ${announcementsResponse.status} or ${appointmentsResponse.status}`);
             }
             
             const [
@@ -113,6 +146,9 @@ export const UserProvider = ({ children }) => {
                 testsData, 
                 diseasesData, 
                 testimonialsData,
+                announcementsData,
+                adminsData,
+                appointmentsData,
             ] = await Promise.all([
                 departmentsResponse.json(),
                 doctorsResponse.json(),
@@ -122,6 +158,9 @@ export const UserProvider = ({ children }) => {
                 testsResponse.json(),
                 diseasesResponse.json(),
                 testimonialsResponse.json(),
+                announcementsResponse.json(),
+                adminsResponse.json(),
+                appointmentsResponse.json(),
             ]);
     
             if (departmentsData && departmentsData.data) {
@@ -192,7 +231,7 @@ export const UserProvider = ({ children }) => {
                     mission: school.mission,
                     location: school.location,
                     function: school.function,
-                    services: school.services,
+                    service: school.services,
                     ruralPosting: school.ruralPosting, 
                     clinicalPosting: school.clinicalPosting, 
                     specialTraining: school.specialTraining,
@@ -257,7 +296,44 @@ export const UserProvider = ({ children }) => {
             } else {
                 console.error('Failed to retrieve Testimonials:', testimonialsData?.message || 'Unexpected response structure:', testimonialsData);
             }
-            
+            if (announcementsData && announcementsData.data) {
+                const transforedAnnouncements = announcementsData.data.map(announce => ({
+                    id: announce.id, 
+                    dateCreated: announce.created_at,
+                    name: announce.name, 
+                    content: announce.content,
+                    published: announce.published,
+                }));
+                setAnnouncementsData(transforedAnnouncements);
+            } else {
+                console.error('Failed to retrieve announcements:', announcementsData?.message || 'Unexpected response structure:', announcementsData);
+            }
+            if (adminsData && adminsData.data) {
+                const transformedAdmins = adminsData.data.map(admin => ({
+                    id: admin.user_id,
+                    dateCreated: admin.created_at,
+                    name: admin.name,
+                    email: admin.email,
+                    role: admin.role, 
+                    image: admin.profile_image,
+                }));
+                setAdminsData(transformedAdmins);
+            } else {
+                console.error('Failed to retrieve Admin:', adminsData?.message || 'Unexpected response structure:', adminsData);
+            }
+            if (appointmentsData && appointmentsData.data) {
+                const transformedAppointments = appointmentsData.data.map(patientData => ({
+                    id: patientData.user.id,
+                    name: patientData.user.name,
+                    email: patientData.user.email,
+                    phone: patientData.user.phone,
+                    patientType: patientData.user.patient_type,
+                    // status: patientData.user.status,
+                }));
+                setAppointmentsData(transformedAppointments);
+            } else {
+                console.error('Failed to retrieve Appointments:', appointmentsData?.message || 'Unexpected response structure:', appointmentsData);
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -406,8 +482,6 @@ export const UserProvider = ({ children }) => {
             },
         ],
 
-        adminData: [],
-
         departmentsData,
         doctorsData,
         unitsData,
@@ -416,6 +490,9 @@ export const UserProvider = ({ children }) => {
         testsData, 
         diseasesData, 
         testimonialsData,
+        announcementsData,
+        adminsData,
+        appointmentsData,
 
         // Add more user data here if needed
     };

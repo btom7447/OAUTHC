@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const ServicesContext = createContext();
+const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/home';
 
 export const ServiceProvider = ({ children }) => {
   const [healthServices, setHealthServices] = useState([]);
@@ -8,12 +9,13 @@ export const ServiceProvider = ({ children }) => {
   const [diseasesData, setDiseasesData] = useState([]);
 
   const fetchHealthServices = async () => {
-    const healthUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/health';
+    const healthUrl =  `${BASE_URL}/health`;
+
     const token = localStorage.getItem('bearer_token');
     
     try {
       // Check cache first
-      const cachedHealthServices = sessionStorage.getItem('healthServices');
+      const cachedHealthServices = localStorage.getItem('healthServices');
       if (cachedHealthServices) {
         setHealthServices(JSON.parse(cachedHealthServices));
         return;
@@ -44,7 +46,7 @@ export const ServiceProvider = ({ children }) => {
         }));
         
         setHealthServices(transformedHealthServices);
-        sessionStorage.setItem('healthServices', JSON.stringify(transformedHealthServices));  // Cache the data
+        localStorage.setItem('healthServices', JSON.stringify(transformedHealthServices));  // Cache the data
       } else {
         console.error('Unexpected health services data format:', data);
       }
@@ -54,12 +56,12 @@ export const ServiceProvider = ({ children }) => {
   };
 
   const fetchTestsData = async () => {
-    const testsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/tests';
+    const testsUrl =  `${BASE_URL}/tests`;
     const token = localStorage.getItem('bearer_token');
     
     try {
       // Check cache first
-      const cachedTestsData = sessionStorage.getItem('testsData');
+      const cachedTestsData = localStorage.getItem('testsData');
       if (cachedTestsData) {
         setTestsData(JSON.parse(cachedTestsData));
         return;
@@ -93,7 +95,7 @@ export const ServiceProvider = ({ children }) => {
         }));
         
         setTestsData(transformedTests);
-        sessionStorage.setItem('testsData', JSON.stringify(transformedTests));  // Cache the data
+        localStorage.setItem('testsData', JSON.stringify(transformedTests));  // Cache the data
       } else {
         console.error('Unexpected tests data format:', data);
       }
@@ -103,12 +105,12 @@ export const ServiceProvider = ({ children }) => {
   };
 
   const fetchDiseasesData = async () => {
-    const diseasesUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/disease';
+    const diseasesUrl =  `${BASE_URL}/disease`;
     const token = localStorage.getItem('bearer_token');
     
     try {
       // Check cache first
-      const cachedDiseasesData = sessionStorage.getItem('diseasesData');
+      const cachedDiseasesData = localStorage.getItem('diseasesData');
       if (cachedDiseasesData) {
         setDiseasesData(JSON.parse(cachedDiseasesData));
         return;
@@ -141,7 +143,7 @@ export const ServiceProvider = ({ children }) => {
         }));
         
         setDiseasesData(transformedDiseases);
-        sessionStorage.setItem('diseasesData', JSON.stringify(transformedDiseases));  // Cache the data
+        localStorage.setItem('diseasesData', JSON.stringify(transformedDiseases));  // Cache the data
       } else {
         console.error('Unexpected diseases data format:', data);
       }

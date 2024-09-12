@@ -3,13 +3,13 @@ import { useUser } from "../Components/UserContext";
 import AdminDataDisplay from "../Components/AdminDataDisplay";
 import AdminDataTable from "../Components/AdminDataTable"; 
 
-const AdminTestimonials = () => {
-    const { testimonialsData } = useUser();
-    const [data, setData] = useState(testimonialsData);
-
+const AdminAnnouncements = () => {
+    const { announcementsData } = useUser();
+    const [data, setData] = useState(announcementsData);
+    
     useEffect(() => {
-        setData(testimonialsData);
-    }, [testimonialsData]);
+        setData(announcementsData);
+    }, [announcementsData]);
 
     const handleDeleteSuccess = (id) => {
         setData((prevData) => prevData.filter((item) => item.id !== id));
@@ -21,19 +21,19 @@ const AdminTestimonials = () => {
                 <h1>Sections</h1>
             </div>
             <div className="admin-pages-caption">
-                <h2>Testimonial Section</h2>
+                <h2>Announcement Section</h2>
             </div>
             <AdminDataDisplay
-                data={testimonialsData}
+                data={announcementsData}
                 TableComponent={AdminDataTable} 
                 itemName="tests"
-                basePath="/admin/testimonials" 
+                basePath="/admin/announcements" 
                 newItemPath="new"
-                entityType="test"
+                entityType="testimonial"
                 setData={handleDeleteSuccess}
             />
         </div>
     );
 };
 
-export default AdminTestimonials;
+export default AdminAnnouncements;

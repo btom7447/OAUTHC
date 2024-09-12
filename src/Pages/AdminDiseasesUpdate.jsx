@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useUser } from "../Components/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import Creatable from 'react-select/creatable';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from "react-spinners";
@@ -13,6 +12,8 @@ const AdminDiseasesUpdate = () => {
     const { diseasesData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
     const [formData, setFormData] = useState({
         name: '',
@@ -121,7 +122,7 @@ const AdminDiseasesUpdate = () => {
             appendArrayField('treatments', formData.treatment);
 
             // Make the API request
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-disease/${id}`, {
+            const response = await fetch(`${BASE_URL}/update-disease/${id}`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formDataToSend

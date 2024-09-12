@@ -1,18 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from "react-spinners";
 
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString(undefined, options);
-};
+const AdminAppTable = ({ data,  entityType, currentPage, itemsPerPage, setData }) => {
 
-const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
-const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage, setData }) => {
     if (!data || data.length === 0) {
         return (
             <div className="loading-spinner loading">
@@ -21,22 +15,21 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
         );
     }
 
-    // Sort data alphabetically by name
     const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
 
     const handleDelete = async (id) => {
         const token = localStorage.getItem('bearer_token');
-        
+
         if (!token) {
             console.error('No token found. Please log in.');
             return;
         }
-    
+
         if (!entityType) {
             console.error('Entity type is not defined.');
-            return; 
+            return;
         }
-    
+
         // Show loading toast
         const toastId = toast.loading('Deleting item...', { autoClose: false });
 
@@ -48,30 +41,24 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                     "Authorization": `Bearer ${token}`
                 }
             });
-    
+
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(`Failed to delete the item: ${errorText}`);
             }
-    
-            setData(id); // This should be a function to update the state in the parent component
+
+            // Remove the deleted item from the state
+            setData((prevData) => prevData.filter((item) => item.id !== id));
 
             // Show success toast
             toast.update(toastId, { render: 'Item deleted successfully', type: 'success', isLoading: false, autoClose: 3000 });
-    
-            // Refresh the page after toast
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000); 
-    
+
         } catch (error) {
             console.error("Error deleting the item:", error);
-            
             // Show error toast
             toast.update(toastId, { render: `Error deleting item: ${error.message}`, type: 'error', isLoading: false, autoClose: 5000 });
         }
     };
-    
 
     return (
         <>
@@ -79,8 +66,10 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Date Created</th>
+                        <th>Patient Name</th>
+                        <th>Date in</th>
+                        <th>Patient Type</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -89,13 +78,23 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                         <tr key={item.id}>
                             <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                             <td>
-                                <Link to={`${basePath}/${item.id}`}>
+                                <div className="patient-profile">
+                                    <div className="patient-gender">
+                                        <img 
+                                            src={item.gender === 'Male' 
+                                                ? "https://img.icons8.com/?size=100&id=7822&format=png&color=000000" 
+                                                : "https://img.icons8.com/?size=100&id=7818&format=png&color=000000"} 
+                                            alt={item.gender} 
+                                        />
+                                    </div>
                                     {item.name}
-                                </Link>
+                                </div>
                             </td>
-                            <td>{formatDate(item.dateCreated)}</td>
+                            <td>{item.dateIn}</td>
+                            <td>{item.patientType}</td>
+                            <td>{item.status}</td>
                             <td>
-                                <Link to={`${basePath}/${item.id}`}>
+                                {/* <Link to={`/admin/edit-admin/${item.id}`}> */}
                                     <button>
                                         {/* Edit button */}
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -104,7 +103,7 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
                                             <path d="M15.75 17.0625H2.25C1.9425 17.0625 1.6875 16.8075 1.6875 16.5C1.6875 16.1925 1.9425 15.9375 2.25 15.9375H15.75C16.0575 15.9375 16.3125 16.1925 16.3125 16.5C16.3125 16.8075 16.0575 17.0625 15.75 17.0625Z" fill="black"/>
                                         </svg>
                                     </button>
-                                </Link>
+                                {/* </Link> */}
                                 <button onClick={() => handleDelete(item.id)}>
                                     {/* Delete button */}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -123,4 +122,4 @@ const AdminDataTable = ({ data, basePath, entityType, currentPage, itemsPerPage,
     );
 };
 
-export default AdminDataTable;
+export default AdminAppTable;

@@ -14,7 +14,8 @@ const AdminDepartmentUpdate = () => {
     const { departmentsData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
     const [formData, setFormData] = useState({
         name: '',
@@ -30,28 +31,14 @@ const AdminDepartmentUpdate = () => {
     const [selectedFacilities, setSelectedFacilities] = useState([]);
     const [selectedServices, setSelectedServices] = useState([]);
 
-    const transformedDepartments = departmentsData.map(department => ({
-        id: department.id,
-        name: department.name,
-        status: department.status,
-        dateCreated: department.dateCreated,
-        overviewText: department.overviewText,
-        departmentImage: department.departmentImage,
-        departmentName: department.departmentName,
-        text: department.text,
-        facilities: department.facilities,
-        services: department.services,
-        phone: department.phone
-    }));
-    
     const facilitiesFromDepartmentsData = [...new Set(
-        transformedDepartments.flatMap(department =>
+        departmentsData.flatMap(department =>
             Array.isArray(department.facilities) ? department.facilities : []
         )
     )].sort((a, b) => a.localeCompare(b));
     
     const servicesFromDepartmentsData = [...new Set(
-        transformedDepartments.flatMap(department =>
+        departmentsData.flatMap(department =>
             Array.isArray(department.services) ? department.services : []
         )
     )].sort((a, b) => a.localeCompare(b));
@@ -107,12 +94,19 @@ const AdminDepartmentUpdate = () => {
         }
     };
     
-
     const handleSelectChange = (newValue, category) => {
         if (category === 'facility') {
             setSelectedFacilities(newValue);
+            setFormData(prevData => ({ 
+                ...prevData, 
+                facilities: newValue.map(option => option.value) 
+            }));
         } else if (category === 'service') {
             setSelectedServices(newValue);
+            setFormData(prevData => ({ 
+                ...prevData, 
+                services: newValue.map(option => option.value) 
+            }));
         }
     };
 
@@ -153,12 +147,14 @@ const AdminDepartmentUpdate = () => {
             selectedServices.forEach((service, index) => {
                 formDataToSend.append(`services[${index}]`, service.value);
             });
-            
+    
             selectedFacilities.forEach((facility, index) => {
                 formDataToSend.append(`facilities[${index}]`, facility.value);
             });
+            console.log('Selected Facilities:', selectedFacilities);
+            console.log('Selected Services: ', selectedServices)
     
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-department/${id}`, {
+            const response = await fetch(`${BASE_URL}/update-department/${id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -222,7 +218,6 @@ const AdminDepartmentUpdate = () => {
                 </div>
             </div>
             <form onSubmit={handleSave} className='details-page-form'>
-                {error && <div className="error">{error}</div>}
                 <div className="details-inputs">
                     <label>
                         Name: 

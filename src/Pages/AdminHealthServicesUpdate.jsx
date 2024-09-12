@@ -13,7 +13,7 @@ const AdminHealthServicesUpdate = () => {
     const { healthServicesData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState('');
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
     const [formData, setFormData] = useState({
         name: '',
@@ -115,7 +115,7 @@ const AdminHealthServicesUpdate = () => {
                 formDataToSend.append(`text[${index}]`, text.value);
             });
     
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-health/${id}`, {
+            const response = await fetch(`${BASE_URL}/update-health/${id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -196,7 +196,7 @@ const AdminHealthServicesUpdate = () => {
                             isMulti
                             value={selectedServices}
                             onChange={(options) => handleSelectChange(options, 'highlights')}
-                            placeholder="Create or Add Highlights"
+                            placeholder="Create Highlights"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -215,7 +215,7 @@ const AdminHealthServicesUpdate = () => {
                             isMulti
                             value={selectedTexts}
                             onChange={(options) => handleSelectChange(options, 'texts')}
-                            placeholder="Create or Add Service Texts"
+                            placeholder="Create Service Texts"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',

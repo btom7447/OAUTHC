@@ -3,60 +3,58 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-const AdminTestimonialsCreate = () => {
+const AdminAnnouncementsCreate = () => {
     const navigate = useNavigate();
-
-    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
     
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
-        message: '', 
-        starRatings: '',
+        content: '', 
+        publish: false,
     });
 
     const [loading, setLoading] = useState(false);
 
     const handleSave = async (e) => {
         e.preventDefault();
-    
+
         setLoading(true);
-        const loadingToastId = toast.loading("Creating Testimonials ...", {
+        const loadingToastId = toast.loading("Creating Announcement ...", {
             autoClose: false,
             toastId: 'loading-toast'
         });
-    
+
         try {
             const token = localStorage.getItem('bearer_token');
             if (!token) {
                 throw new Error('No token found. Please log in.');
             }
-    
-            const formDataToSend = new FormData();
-            formDataToSend.append('name', formData.name);
-            formDataToSend.append('message', formData.message);
-            formDataToSend.append('star_ratings', Number(formData.starRatings)); // Ensure it's a number
-    
-            const response = await fetch(`${BASE_URL}/testimonial`, {
+
+            const response = await fetch(`${BASE_URL}/announcement`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json', // Set the content type to JSON
                 },
-                body: formDataToSend
+                body: JSON.stringify({
+                    name: formData.name,
+                    content: formData.content,
+                    published: formData.publish, // Send as boolean
+                }),
             });
-    
+
             const result = await response.json();
-    
+
             if (response.ok) {
                 toast.update(loadingToastId, {
-                    render: 'Testimonial created successfully!',
+                    render: 'Announcement created successfully!',
                     type: 'success',
                     autoClose: 2500,
                     isLoading: false
                 });
                 setTimeout(() => {
-                    navigate('/admin/testimonials', { replace: true });
+                    navigate('/admin/announcements', { replace: true });
                     window.location.reload();
                 }, 2500);
             } else {
@@ -74,13 +72,13 @@ const AdminTestimonialsCreate = () => {
             toast.dismiss('loading-toast');
         }
     };
-     
+
     const handleInputChange = (e) => {
-        const { name, value, type, files } = e.target;
-    
+        const { name, value, type, checked } = e.target;
+
         setFormData(prevData => ({
             ...prevData,
-            [name]: type === 'file' ? files[0] : value 
+            [name]: type === 'checkbox' ? checked : value 
         }));
     };
 
@@ -89,10 +87,10 @@ const AdminTestimonialsCreate = () => {
             <ToastContainer />
             <div>
                 <div className="pages-caption">
-                    <h1>Pages</h1>
+                    <h1>Sections</h1>
                 </div>
                 <div className="admin-pages-caption">
-                    <h2>Create New Testimonial</h2>
+                    <h2>Create New Announcement</h2>
                 </div>
             </div>
             <form onSubmit={handleSave} className='test-image-form details-page-form'>
@@ -108,29 +106,30 @@ const AdminTestimonialsCreate = () => {
                         />
                     </label>
                     <label>
-                        Testimonial Message:
+                        Announcement Message:
                         <textarea
-                            name="message"
-                            value={formData.message}
+                            name="content"
+                            value={formData.content}
                             onChange={handleInputChange}
-                            placeholder="testimonial message ..."
+                            placeholder="Announcement message ..."
                         />
                     </label>
-                    <label>
-                        Star Ratings (1 - 5) :
-                        <input
-                            type="number"
-                            name="starRatings"
-                            value={formData.starRatings}
-                            onChange={handleInputChange}
-                            placeholder="5"
-                            min="1"
-                            max="5"
+                    <h6>Publish:</h6>
+                    <label className="switch">
+                        <input 
+                            className="publish-toggle"
+                            type="checkbox" 
+                            name="publish" 
+                            checked={formData.publish} 
+                            onChange={handleInputChange} 
                         />
+                        <span className="slider"></span>
                     </label>
+                    <br />
+                    <br />
 
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Creating ...' : 'Create Testimonial'}
+                        {loading ? 'Creating ...' : 'Create Announcement'}
                     </button>
                 </div>
             </form>
@@ -138,4 +137,4 @@ const AdminTestimonialsCreate = () => {
     );
 };
 
-export default AdminTestimonialsCreate;
+export default AdminAnnouncementsCreate;

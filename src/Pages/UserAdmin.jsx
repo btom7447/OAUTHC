@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminSidebar from "../Components/AdminSidebar";
 import AdminDashboard from "./AdminDashboard";
-import AdminSections from "./AdminSections";
 import AdminAppointments from "./AdminAppointments";
 import AdminServices from "./AdminServices";
 import AdminPatients from "./AdminPatients";
@@ -36,6 +35,10 @@ import AdminDiseasesCreate from "./AdminDiseasesCreate";
 import AdminTestimonials from "./AdminTestimonials";
 import AdminTestimonialsCreate from "./AdminTestimonialsCreate";
 import AdminTestimonialsUpdate from "./AdminTestimonialsUpdate";
+import AdminRoleUpdate from "./AdminRoleUpdate";
+import AdminAnnouncements from "./AdminAnnouncements";
+import AdminAnnouncementsCreate from "./AdminAnnouncementsCreate";
+import AdminAnnouncementsUpdate from "./AdminAnnouncementsUpdate";
 
 const UserAdmin = () => {
     return (
@@ -51,7 +54,11 @@ const UserAdmin = () => {
                         <Route path="/dashboard" element={<AdminDashboard />} />
                         <Route path="/all-admins" element={<AllAdmins />} />
                         <Route path="/add-admin" element={<AddAdmin />} />
+                        <Route path="/edit-admin/:id" element={<AdminRoleUpdate />} />                        
                         <Route path="/testimonials" element={<AdminTestimonials />} />
+                        <Route path="/announcements" element={<AdminAnnouncements />} />
+                        <Route path="/announcements/new" element={<AdminAnnouncementsCreate />} />
+                        <Route path="/announcements/:id" element={<AdminAnnouncementsUpdate />} />
                         <Route path="/testimonials/new" element={<AdminTestimonialsCreate />} />
                         <Route path="/testimonials/:id" element={<AdminTestimonialsUpdate />} />
                         <Route path="/departments" element={<AdminDepartments />} />

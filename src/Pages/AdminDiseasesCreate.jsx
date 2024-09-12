@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useUser } from "../Components/UserContext";
-import Creatable from 'react-select/creatable';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AdminDiseasesCreate = () => {
     const navigate = useNavigate();
-    const { diseasesData } = useUser();
+
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
     const [formData, setFormData] = useState({
         name: '',
@@ -21,17 +20,6 @@ const AdminDiseasesCreate = () => {
 
     const [imagePreview, setImagePreview] = useState('');
     const [loading, setLoading] = useState(false);
-
-    const transformedDiseases = diseasesData.map(disease => ({
-        id: disease.id,
-        dateCreated: disease.created_at,
-        name: disease.name,
-        overviewText: disease.overviewText, 
-        description: disease.description,
-        symptoms: disease.symptoms, 
-        treatment: disease.treatment,
-        images: disease.images,
-    }));
 
     const handleSave = async (e) => {
         e.preventDefault();
@@ -64,7 +52,7 @@ const AdminDiseasesCreate = () => {
             appendArrayField('treatments', formData.treatment);
     
             // Proceed with form submission
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/create/disease`, {
+            const response = await fetch(`${BASE_URL}/create/disease`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formDataToSend

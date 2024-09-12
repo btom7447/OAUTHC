@@ -9,6 +9,8 @@ const AdminSchoolsCreate = () => {
     const navigate = useNavigate();
     const { schoolsData } = useUser();
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         overviewText: '',
@@ -129,7 +131,7 @@ const AdminSchoolsCreate = () => {
             });
     
             // Proceed with form submission
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/create/school`, {
+            const response = await fetch(`${BASE_URL}/create/school`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formDataToSend
@@ -165,22 +167,6 @@ const AdminSchoolsCreate = () => {
             setImagePreview(previewUrl);
         } else {
             setImagePreview('');
-        }
-    };
-
-    const handleSelectChange = (selectedOption, actionMeta) => {
-        switch (actionMeta.name) {
-          case 'ruralPosting':
-            setSelectedRuralPosting(selectedOption);
-            break;
-          case 'clinicalPosting':
-            setSelectedClinicalPosting(selectedOption);
-            break;
-          case 'specialTraining':
-            setSelectedSpecialTraining(selectedOption);
-            break;
-          default:
-            break;
         }
     };
 

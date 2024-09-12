@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const AdminUnitsCreate = () => {
     const navigate = useNavigate();
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         state: '',
@@ -65,7 +67,7 @@ const AdminUnitsCreate = () => {
             formDataToSend.append('state', formData.state);
             formDataToSend.append('address', formData.address);
     
-            const response = await fetch("https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/unit", {
+            const response = await fetch(`${BASE_URL}/unit`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

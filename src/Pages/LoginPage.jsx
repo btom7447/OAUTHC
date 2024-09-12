@@ -13,6 +13,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
+  const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
@@ -20,10 +22,10 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Show a loading toast notification
     const toastId = toast.loading('Logging in...');
-
+  
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -31,24 +33,26 @@ const LoginPage = () => {
       },
       body: JSON.stringify(credentials),
     };
-
+  
     try {
-      const response = await fetch("https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/login", requestOptions);
-
+      const response = await fetch(`${BASE_URL}/login`, requestOptions);
+  
       if (!response.ok) {
         throw new Error('Login failed!');
       }
-
+  
       const result = await response.json();
       const token = result?.access_token;
-
+      const userData = result?.data; // Extract user data from the response
+  
       if (token) {
         localStorage.setItem('bearer_token', token);
+        localStorage.setItem('userData', JSON.stringify(userData)); // Save user data to local storage
         login(token);
-
+  
         // Dismiss the loading toast and show a success message
         toast.update(toastId, { render: 'Logged in successfully!', type: 'success', isLoading: false, autoClose: 3000 });
-
+  
         // Delay navigation until the toast is closed
         setTimeout(() => navigate('/admin/dashboard'), 3000);
       } else {
@@ -62,6 +66,7 @@ const LoginPage = () => {
       toast.update(toastId, { render: 'Login failed. Please check your credentials.', type: 'error', isLoading: false, autoClose: 3000 });
     }
   };
+  
 
   return (
     <div className='login-container'>

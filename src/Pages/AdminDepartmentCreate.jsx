@@ -9,6 +9,8 @@ const AdminDepartmentCreate = () => {
     const navigate = useNavigate();
     const { departmentsData } = useUser();
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         overviewText: '',
@@ -93,7 +95,7 @@ const AdminDepartmentCreate = () => {
                 formDataToSend.append(`facilities[${index}]`, facility.value);
             });
     
-            const response = await fetch("https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/department", {
+            const response = await fetch(`${BASE_URL}/department`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

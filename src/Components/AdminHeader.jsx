@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useUser } from "./UserContext";
 
 const AdminHeader = () => {
-    const { name, role, image } = useUser();
+    // Retrieve user data from localStorage
+    const userData = JSON.parse(localStorage.getItem('userData')) || {};
+    const { name = '', role = '', profile_image: image = '' } = userData;
+
+    const imageUrl = image ? `https://live-api.oauthc.gov.ng/storage/${image}` : '';
 
     return (
         <div className="admin-header">
@@ -26,10 +29,10 @@ const AdminHeader = () => {
                     </svg>
                 </div>
                 <div className="admin-profile">
-                    <img src={image} alt={name} />
+                    <img src={imageUrl} alt={name || 'User'} />
                     <div>
-                        <h6>{name}</h6>
-                        <p>{role}</p>
+                        <h6>{name || 'User Name'}</h6>
+                        <p>{role || 'User Role'}</p>
                     </div>
                 </div>
             </div>

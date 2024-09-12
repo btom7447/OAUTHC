@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const AdminTestsCreate = () => {
     const navigate = useNavigate();
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         overview: '', 
@@ -52,7 +54,7 @@ const AdminTestsCreate = () => {
             appendArrayField('result', formData.result);
             appendArrayField('limitation', formData.limitation);
     
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/create/test`, {
+            const response = await fetch(`${BASE_URL}/create/test`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

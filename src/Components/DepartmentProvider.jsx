@@ -1,19 +1,19 @@
-import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const DepartmentContext = createContext();
+const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/home';
 
 export const DepartmentProvider = ({ children }) => {
     const [departments, setDepartments] = useState([]);
     const [doctors, setDoctors] = useState([]);
     const [units, setUnits] = useState([]);
     const [schools, setSchools] = useState([]);
-    const cache = useRef({});  // Ref to store cached data
 
     const fetchData = async () => {
-        const departmentUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/department';
-        const doctorUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/doctors';
-        const unitUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/unit';
-        const schoolsUrl = 'https://oauthc.iccflifeskills.com.ng/v0.1/api/home/schools'; 
+        const departmentUrl = `${BASE_URL}/department`;
+        const doctorUrl = `${BASE_URL}/doctors`;
+        const unitUrl = `${BASE_URL}/unit`;
+        const schoolsUrl = `${BASE_URL}/schools`;
 
         const token = localStorage.getItem('bearer_token');
 

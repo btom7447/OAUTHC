@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const AdminHealthServicesCreate = () => {
     const navigate = useNavigate();
 
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
+
     const [formData, setFormData] = useState({
         name: '',
         services: [],
@@ -51,7 +53,7 @@ const AdminHealthServicesCreate = () => {
                 formDataToSend.append(`text[${index}]`, text.value);
             });
     
-            const response = await fetch("https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/create/health", {
+            const response = await fetch(`${BASE_URL}/create/health`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -149,7 +151,7 @@ const AdminHealthServicesCreate = () => {
                             isMulti
                             value={selectedServices}
                             onChange={(options) => handleSelectChange(options, 'service')}
-                            placeholder="Create or Add Services"
+                            placeholder="Create Services"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',
@@ -170,7 +172,7 @@ const AdminHealthServicesCreate = () => {
                             isMulti
                             value={selectedTexts}
                             onChange={(options) => handleSelectChange(options, 'text')}
-                            placeholder="Create or Add Service Texts"
+                            placeholder="Create Service Texts"
                             className="admin-select"
                             classNames={{
                                 control: () => 'react-select__control',

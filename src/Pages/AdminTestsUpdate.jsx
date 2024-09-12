@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useUser } from "../Components/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import Creatable from 'react-select/creatable';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from "react-spinners";
@@ -14,6 +13,8 @@ const AdminTestsUpdate = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     // const [error, setError] = useState('');
+
+    const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
     const [formData, setFormData] = useState({
         name: '',
@@ -90,7 +91,7 @@ const AdminTestsUpdate = () => {
             appendArrayField('result', formData.result);
             appendArrayField('limitation', formData.limitation);
     
-            const response = await fetch(`https://oauthc.iccflifeskills.com.ng/v0.1/api/admin/update-test/${id}`, {
+            const response = await fetch(`${BASE_URL}/update-test/${id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -9,79 +9,78 @@ import { ClipLoader } from 'react-spinners';
 
 const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/admin';
 
-const AdminTestimonialsUpdate = () => {
+const AdminAnnouncementsUpdate = () => {
     const { id } = useParams();
-    const { testimonialsData } = useUser();
+    const { announcementsData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
-        message: '', 
-        starRatings: '',
+        content: '', 
+        publish: false,
     });
 
     useEffect(() => {
-        if (testimonialsData.length > 0 && id) {
-            const testimonyId = parseInt(id, 10);
-            const testimony = testimonialsData.find(testimony => testimony.id === testimonyId);
-    
-            if (testimony) {
+        if (announcementsData.length > 0 && id) {
+            const announceId = parseInt(id, 10);
+            const announce = announcementsData.find(announce => announce.id === announceId);
+
+            if (announce) {
                 setFormData({
-                    name: testimony.name || '',
-                    message: testimony.message || '',
-                    starRatings: testimony.starRatings || '',
+                    name: announce.name || '',
+                    content: announce.content || '',
+                    publish: announce.published || false, 
                 });
-    
             } else {
-                console.log('No testimony found with the given ID.');
+                console.log('No announcement found with the given ID.');
             }
         }
-    }, [id, testimonialsData]);
+    }, [id, announcementsData]);
 
     const handleSave = async (e) => {
         e.preventDefault();
-    
+
         setLoading(true);
-        const loadingToastId = toast.loading("Updating Testimonial ...", {
+        const loadingToastId = toast.loading("Creating Announcement ...", {
             autoClose: false,
             toastId: 'loading-toast'
         });
-    
+
         try {
             const token = localStorage.getItem('bearer_token');
             if (!token) {
                 throw new Error('No token found. Please log in.');
             }
-    
-            const formDataToSend = new FormData();
-            formDataToSend.append('name', formData.name);
-            formDataToSend.append('message', formData.message);
-            formDataToSend.append('star_ratings', Number(formData.starRatings)); // Ensure it's a number
-    
-            const response = await fetch(`${BASE_URL}/update-testimonial/${id}`, {
-                method: 'PUT', 
+
+            const response = await fetch(`${BASE_URL}/update-announcement/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json', 
                 },
-                body: formDataToSend
+                body: JSON.stringify({
+                    name: formData.name,
+                    content: formData.content,
+                    published: formData.publish, 
+                }),
             });
-    
+
             const result = await response.json();
-    
+
             if (response.ok) {
                 toast.update(loadingToastId, {
-                    render: 'Testimonial updated successfully!',
+                    render: 'Announcement created successfully!',
                     type: 'success',
                     autoClose: 2500,
                     isLoading: false
                 });
                 setTimeout(() => {
-                    navigate('/admin/testimonials', { replace: true });
+                    navigate('/admin/announcements', { replace: true });
                     window.location.reload();
                 }, 2500);
             } else {
-                throw new Error(result.message || 'Update failed');
+                throw new Error(result.message || 'Creation failed');
             }
         } catch (err) {
             toast.update(loadingToastId, {
@@ -95,17 +94,17 @@ const AdminTestimonialsUpdate = () => {
             toast.dismiss('loading-toast');
         }
     };
-     
+
     const handleInputChange = (e) => {
-        const { name, value, type, files } = e.target;
-    
+        const { name, value, type, checked } = e.target;
+
         setFormData(prevData => ({
             ...prevData,
-            [name]: type === 'file' ? files[0] : value 
+            [name]: type === 'checkbox' ? checked : value 
         }));
     };
 
-    if (!testimonialsData || testimonialsData.length === 0) {
+    if (!announcementsData || announcementsData.length === 0) {
         return (
             <div className="loading-spinner loading">
                 <ClipLoader color="#005046" size={100} />
@@ -122,12 +121,12 @@ const AdminTestimonialsUpdate = () => {
                 </div>
                 <div className="back">
                     <FontAwesomeIcon icon={faChevronLeft} />
-                    <Link to="/admin/testimonials">
+                    <Link to="/admin/announcements">
                         Back
                     </Link>
                 </div>
                 <div className="admin-pages-caption">
-                    <h2>Update Testimonial</h2>
+                    <h2>Update Announcement</h2>
                 </div>
             </div>
             <form onSubmit={handleSave} className='test-image-form details-page-form'>
@@ -143,29 +142,30 @@ const AdminTestimonialsUpdate = () => {
                         />
                     </label>
                     <label>
-                        Testimonial Message:
+                        Announcement Message:
                         <textarea
-                            name="message"
-                            value={formData.message}
+                            name="content"
+                            value={formData.content}
                             onChange={handleInputChange}
-                            placeholder="testimonial message ..."
+                            placeholder="Announcement message ..."
                         />
                     </label>
-                    <label>
-                        Star Ratings (1 - 5) :
-                        <input
-                            type="number"
-                            name="starRatings"
-                            value={formData.starRatings}
-                            onChange={handleInputChange}
-                            placeholder="5"
-                            min="1"
-                            max="5"
+                    <h6>Publish Status: </h6>
+                    <label className="switch">
+                        <input 
+                            className="publish-toggle"
+                            type="checkbox" 
+                            name="publish" 
+                            checked={formData.publish} 
+                            onChange={handleInputChange} 
                         />
+                        <span className="slider"></span>
                     </label>
+                    <br />
+                    <br />
 
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Updating ...' : 'Update Testimonial'}
+                        {loading ? 'Creating ...' : 'Create Announcement'}
                     </button>
                 </div>
             </form>
@@ -173,4 +173,4 @@ const AdminTestimonialsUpdate = () => {
     )
 };
 
-export default AdminTestimonialsUpdate;
+export default AdminAnnouncementsUpdate;
