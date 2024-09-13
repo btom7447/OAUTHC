@@ -39,6 +39,7 @@ import AdminRoleUpdate from "./AdminRoleUpdate";
 import AdminAnnouncements from "./AdminAnnouncements";
 import AdminAnnouncementsCreate from "./AdminAnnouncementsCreate";
 import AdminAnnouncementsUpdate from "./AdminAnnouncementsUpdate";
+import AdminPassword from "./AdminPassword";
 
 const UserAdmin = () => {
     return (
@@ -54,6 +55,7 @@ const UserAdmin = () => {
                         <Route path="/dashboard" element={<AdminDashboard />} />
                         <Route path="/all-admins" element={<AllAdmins />} />
                         <Route path="/add-admin" element={<AddAdmin />} />
+                        <Route path="/change-password/" element={<AdminPassword />} />
                         <Route path="/edit-admin/:id" element={<AdminRoleUpdate />} />                        
                         <Route path="/testimonials" element={<AdminTestimonials />} />
                         <Route path="/announcements" element={<AdminAnnouncements />} />

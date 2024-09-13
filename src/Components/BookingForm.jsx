@@ -75,16 +75,10 @@ function BookingForm({ fileIcon }) {
             });
 
             try {
-                const token = localStorage.getItem('bearer_token');
-                if (!token) {
-                    throw new Error('No token found. Please log in.');
-                }
-
                 const response = await fetch(`${BASE_URL}/register`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
-                        // No 'Content-Type' header needed for FormData
+                        
                     },
                     body: formToSubmit,
                 });

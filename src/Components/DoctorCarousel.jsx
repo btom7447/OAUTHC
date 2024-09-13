@@ -11,7 +11,7 @@ const DoctorsCarousel = () => {
   if (!doctors || doctors.length === 0) {
     return (
       <div className="loading-spinner loading">
-          <ClipLoader color="#005046" size={100} />
+        <ClipLoader color="#005046" size={100} />
       </div>
     );
   }
@@ -37,14 +37,20 @@ const DoctorsCarousel = () => {
       >
         {doctors.map((doctor, index) => (
           <SplideSlide key={doctor.id || index}>
-            <Link to={`/about/find-doctor/${encodeURIComponent(doctor.doctorName)}`}>
+            <Link
+              to={`/about/find-doctor/${doctor.doctorName.replace(/\s+/g, '-')}`}
+            >
               <div className="professionals-box">
                 <div className="professionals-image">
                   <img src={doctor.doctorImage} alt={doctor.doctorName} />
                 </div>
                 <div className="professionals-caption">
                   <h6>{doctor.doctorName}</h6>
-                  <h5>{Array.isArray(doctor.specialty) ? doctor.specialty.join(', ') : ''}</h5>
+                  <h5>
+                    {Array.isArray(doctor.specialty)
+                      ? doctor.specialty.join(', ')
+                      : ''}
+                  </h5>
                 </div>
               </div>
             </Link>

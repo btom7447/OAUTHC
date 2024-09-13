@@ -81,7 +81,7 @@ const AdminAppTable = ({ data,  entityType, currentPage, itemsPerPage, setData }
                                 <div className="patient-profile">
                                     <div className="patient-gender">
                                         <img 
-                                            src={item.gender === 'Male' 
+                                            src={item.gender === 'male' 
                                                 ? "https://img.icons8.com/?size=100&id=7822&format=png&color=000000" 
                                                 : "https://img.icons8.com/?size=100&id=7818&format=png&color=000000"} 
                                             alt={item.gender} 
@@ -90,9 +90,15 @@ const AdminAppTable = ({ data,  entityType, currentPage, itemsPerPage, setData }
                                     {item.name}
                                 </div>
                             </td>
-                            <td>{item.dateIn}</td>
+                            <td>{item.patientDate}</td>
                             <td>{item.patientType}</td>
-                            <td>{item.status}</td>
+                            <td className={
+                                item.status === 'pending' ? 'pending' :
+                                item.status === 'cancelled' ? 'cancelled' :
+                                item.status === 'confirmed' ? 'confirmed' : ''
+                                }>
+                                {item.status}
+                            </td>   
                             <td>
                                 {/* <Link to={`/admin/edit-admin/${item.id}`}> */}
                                     <button>

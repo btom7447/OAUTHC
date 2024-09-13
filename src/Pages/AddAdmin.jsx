@@ -168,6 +168,15 @@ const AddAdmin = () => {
                             onChange={(options) => handleSelectChange(options, 'role')}
                             placeholder="Add Admin Role"
                             className="admin-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                singleValue: () => 'react-select__single-value',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
                         />
                     </label>
                     <label>

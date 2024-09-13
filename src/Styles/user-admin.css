@@ -832,7 +832,6 @@ a {
     line-height: normal;
     text-transform: capitalize;
     color: var(--black);
-    color: var(--grascale);
 }
 .data-table td {
     padding: 5px 10px;
@@ -842,6 +841,16 @@ a {
     font-weight: 400;
     line-height: normal;
     text-transform: capitalize;
+    color: var(--black);
+}
+.data-table td.cancelled {
+    color: var(--primary-red);
+}
+.data-table td.confirmed {
+    color: var(--primary-green);
+}
+.data-table td.pending {
+    color: var(--grascale);
 }
 .data-table .admin-table-email {
     padding: 5px 10px;
@@ -1236,7 +1245,91 @@ a {
 .test-image-form button:hover {
     background-color: var(--secondary-green);
 }
-
+/* PASSWOR FORM */
+.admin-password {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* padding: 0 50px; */
+}
+.admin-password .password-form {
+    width: 100%;
+    height: calc(100vh - 300px);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--white);
+    border-radius: 4px;
+    border: solid 1px var(--gray);
+}
+.admin-password .details-inputs {
+    max-width: 400px;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.admin-password .password-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.admin-password .details-inputs label {
+    width: 100%;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+.admin-password .password-input input {
+    width: 100%;
+    padding-right: 30px;
+    padding: 10px;
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+    margin: 10px auto;
+}
+.admin-password .password-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: var(--grascale);
+}
+.admin-password .details-publish {
+    text-align: center;
+    margin-top: 20px;
+}
+.admin-password button {
+    padding: 10px;
+    font-size: 16px;
+    color: var(--white);
+    background-color: var(--primary-green);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.admin-password button:disabled {
+    background-color: var(--gray);
+    cursor: not-allowed;
+}
+.admin-password button:hover:not(:disabled) {
+    background-color: var(--primary-green);
+}
 
 /* * {
     outline: red solid 1px;

@@ -327,7 +327,10 @@ export const UserProvider = ({ children }) => {
                     name: patientData.user.name,
                     email: patientData.user.email,
                     phone: patientData.user.phone,
-                    patientType: patientData.user.patient_type,
+                    gender: patientData.user.gender,
+                    patientType: patientData.patient_type,
+                    patientDate: patientData.patient_preferred_appointment_date,
+                    status: patientData.appointment_status,
                     // status: patientData.user.status,
                 }));
                 setAppointmentsData(transformedAppointments);

@@ -43,11 +43,22 @@ const LoginPage = () => {
   
       const result = await response.json();
       const token = result?.access_token;
-      const userData = result?.data; // Extract user data from the response
+      let userData = result?.data; // Extract user data from the response
   
-      if (token) {
+      if (userData) {
+
+        userData = {
+          id: userData.id,
+          name: userData.name,
+          role: userData.role,
+          email: userData.email,
+          image: userData.profile_image,
+          // Add other transformations if needed
+        };
+  
+        // Save the transformed userData to localStorage
         localStorage.setItem('bearer_token', token);
-        localStorage.setItem('userData', JSON.stringify(userData)); // Save user data to local storage
+        localStorage.setItem('userData', JSON.stringify(userData));
         login(token);
   
         // Dismiss the loading toast and show a success message
@@ -61,11 +72,12 @@ const LoginPage = () => {
     } catch (error) {
       console.error('Error during login:', error);
       setError('Invalid email or password. Please try again.');
-      
+  
       // Update the loading toast to an error message
       toast.update(toastId, { render: 'Login failed. Please check your credentials.', type: 'error', isLoading: false, autoClose: 3000 });
     }
   };
+  
   
 
   return (

@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useUser } from "../Components/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import Select from 'react-select';import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from "react-spinners";
 
@@ -25,14 +25,6 @@ const AdminRoleUpdate = () => {
     });
 
     const [imagePreview, setImagePreview] = useState('');
-    const [selectedRoles, setSelectedRoles] = useState([]);
-
-
-    // Default role options
-    const defaultRoleOptions = [
-        { value: 'super admin', label: 'Super Admin' },
-        { value: 'admin', label: 'Admin' },
-    ];
 
     useEffect(() => {
         if (adminsData && adminsData.length > 0 && id) {
@@ -43,23 +35,18 @@ const AdminRoleUpdate = () => {
                 setFormData({
                     name: admin.name || '',
                     email: admin.email || '',
+                    role: admin.role || '',
                     image: admin.image ? [admin.image] : [],
                 });
     
-                // Set the initial image preview
                 setImagePreview(admin.image || '');
     
-                // Ensure `admin.role` is an array before calling `.map`
-                const roles = Array.isArray(admin.role) ? admin.role : [];
-                const initialRoles = roles.map(role => ({ value: role, label: role }));
-                setSelectedRoles(initialRoles);
             } else {
                 console.log('No admin found with the given ID.');
             }
         }
     }, [id, adminsData]);
     
-
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -75,12 +62,6 @@ const AdminRoleUpdate = () => {
         }
     };
 
-    const handleSelectChange = (newValue, category) => {
-        if (category === 'role') {
-            setSelectedRoles(newValue);
-        } 
-    };
-
     const handleInputChange = (e) => {
         const { name, value, type, files } = e.target;
     
@@ -92,41 +73,35 @@ const AdminRoleUpdate = () => {
 
     const handleSave = async (e) => {
         e.preventDefault();
-
+    
         setLoading(true);
         const loadingToastId = toast.loading("Updating admin ...", {
             autoClose: false,
             toastId: 'loading-toast'
         });
-
+    
         try {
             const token = localStorage.getItem('bearer_token');
             if (!token) {
                 throw new Error('No token found. Please log in.');
             }
-
+    
             const formDataToSend = new FormData();
             formDataToSend.append('name', formData.name);
-            formDataToSend.append('email', formData.email);
-
             if (formData.image && formData.image instanceof File) {
                 formDataToSend.append('image', formData.image);
             }
-
-            selectedRoles.forEach((role, index) => {
-                formDataToSend.append(`role[${index}]`, role.value);
-            });
-
-            const response = await fetch(`${BASE_URL}/update-department/${id}`, {
+    
+            const response = await fetch(`${BASE_URL}/update-profile`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
                 body: formDataToSend
             });
-
+    
             const result = await response.json();
-
+    
             if (response.ok) {
                 toast.update(loadingToastId, {
                     render: 'Admin updated successfully!',
@@ -134,7 +109,7 @@ const AdminRoleUpdate = () => {
                     autoClose: 2500,
                     isLoading: false
                 });
-
+    
                 setTimeout(() => {
                     navigate('/admin/all-admins', { replace: true });
                     window.location.reload();
@@ -258,27 +233,17 @@ const AdminRoleUpdate = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            placeholder="Admin email"
+                            readOnly
                         />
                     </label>
                     <label>
-                        Role:
-                        <Select
-                            isMulti
-                            options={defaultRoleOptions}
-                            value={selectedRoles}
-                            onChange={(options) => handleSelectChange(options, 'role')}
-                            placeholder="Add Admin Role"
-                            className="admin-select"
-                            classNames={{
-                                control: () => 'react-select__control',
-                                option: () => 'react-select__option',
-                                menu: () => 'react-select__menu',
-                                menuList: () => 'react-select__menu-list',
-                                singleValue: () => 'react-select__single-value',
-                                placeholder: () => 'react-select__placeholder',
-                                dropdownIndicator: () => 'react-select__dropdown-indicator',
-                            }}
+                        Role: 
+                        <input
+                            type="text"
+                            name="role"
+                            value={formData.role}
+                            onChange={handleInputChange}
+                            readOnly
                         />
                     </label>
                 </div>
