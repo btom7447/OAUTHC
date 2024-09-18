@@ -89,7 +89,7 @@ const AdminRoleUpdate = () => {
             const formDataToSend = new FormData();
             formDataToSend.append('name', formData.name);
             if (formData.image && formData.image instanceof File) {
-                formDataToSend.append('image', formData.image);
+                formDataToSend.append('profile_image', formData.image);
             }
     
             const response = await fetch(`${BASE_URL}/update-profile`, {
@@ -130,65 +130,6 @@ const AdminRoleUpdate = () => {
         }
     };
 
-    const handlePasswordSave = async (e) => {
-        e.preventDefault();
-        
-        setLoading(true);
-        const loadingToastId = toast.loading("Updating password...", {
-            autoClose: false,
-            toastId: 'loading-toast-password'
-        });
-        
-        try {
-            const token = localStorage.getItem('bearer_token');
-            if (!token) {
-                throw new Error('No token found. Please log in.');
-            }
-        
-            const passwordData = {
-                current_password: formData.currentPassword,
-                new_password: formData.newPassword
-            };
-        
-            const response = await fetch(`${BASE_URL}/update-password/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(passwordData)
-            });
-        
-            const result = await response.json();
-        
-            if (response.ok) {
-                toast.update(loadingToastId, {
-                    render: 'Password updated successfully!',
-                    type: 'success',
-                    autoClose: 2500,
-                    isLoading: false
-                });
-        
-                setTimeout(() => {
-                    navigate('/admin/all-admins', { replace: true });
-                    window.location.reload();
-                }, 2500);
-            } else {
-                throw new Error(result.message || 'Update failed');
-            }
-        } catch (err) {
-            toast.update(loadingToastId, {
-                render: `Error: ${err.message}`,
-                type: 'error',
-                autoClose: 5000,
-                isLoading: false
-            });
-        } finally {
-            setLoading(false);
-            toast.dismiss('loading-toast-password');
-        }
-    };
-
     if (!adminsData || adminsData.length === 0) {
         return (
             <div className="loading-spinner loading">
@@ -206,8 +147,8 @@ const AdminRoleUpdate = () => {
                 </div>
                 <div className="back">
                     <FontAwesomeIcon icon={faChevronLeft} />
-                    <Link to="/admin/all-admins">
-                        Back
+                    <Link to="/admin/dashboard">
+                        Dashboard
                     </Link>
                 </div>
                 <div className="admin-pages-caption">
@@ -216,6 +157,8 @@ const AdminRoleUpdate = () => {
             </div>
             <form onSubmit={handleSave} className='details-page-form'>
                 <div className="details-inputs">
+                    <p>Changes will reflect on login</p>
+                    <br />
                     <label>
                         Name: 
                         <input
@@ -268,33 +211,6 @@ const AdminRoleUpdate = () => {
                     <button type="submit" disabled={loading}>
                         {loading ? 'Updating ...' : 'Update Profile'}
                     </button>
-                </div>
-            </form>
-            <form onSubmit={handlePasswordSave} className='details-page-form'>
-                <div className="details-inputs">
-                    <label>
-                        Current Password: 
-                            <input
-                                type="password"
-                                name="currentPassword"
-                                value={formData.password}
-                                onChange={handleInputChange}
-                                placeholder="Current password"
-                            />
-                    </label>
-                    <label>
-                            New Password: 
-                        <input
-                            type="password"
-                            name="newPassword"
-                            placeholder="New Password"
-                        />
-                    </label>
-                    <div className="details-publish">
-                        <button type="submit" disabled={loading}>
-                            {loading ? 'Updating ...' : 'Update Password'}
-                        </button>
-                    </div>
                 </div>
             </form>
         </>

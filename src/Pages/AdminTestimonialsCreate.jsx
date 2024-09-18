@@ -123,7 +123,7 @@ const AdminTestimonialsCreate = () => {
                             name="starRatings"
                             value={formData.starRatings}
                             onChange={handleInputChange}
-                            placeholder="5"
+                            placeholder="-"
                             min="1"
                             max="5"
                         />

@@ -29,7 +29,8 @@ const AdminDashboardStats = () => {
                     <h6>{rate}</h6>
                 </div>
             </div>
-            <UpcomingAppointments />
+            <br /><br /> 
+            {/* <UpcomingAppointments /> */}
             <AdminReviewChart />
         </div>
     )

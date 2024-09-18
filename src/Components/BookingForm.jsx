@@ -9,6 +9,7 @@ function BookingForm({ fileIcon }) {
         phone: '',
         firstName: '',
         lastName: '',
+        gender: '',
         email: '',
         date: '',
         time: '',
@@ -36,12 +37,12 @@ function BookingForm({ fileIcon }) {
         }));
     };
     
-    const handleSelectChange = (selectedOption) => {
+    const handleSelectChange = (selectedOption, action) => {
         setFormData((prevData) => ({
             ...prevData,
-            patientType: selectedOption ? selectedOption.value : '',
+            [action.name]: selectedOption ? selectedOption.value : '',
         }));
-    };
+    };    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,7 +53,13 @@ function BookingForm({ fileIcon }) {
         if (!formData.phone) newErrors.phone = true;
         if (!formData.firstName) newErrors.firstName = true;
         if (!formData.lastName) newErrors.lastName = true;
+        if (!formData.gender) newErrors.gender = true;
         if (!formData.date) newErrors.date = true;
+        if (formData.patientType === 'referred patient' && !formData.file) {
+            newErrors.file = 'Referral document is required for referred patients.';
+        } else if (formData.file && formData.file.type !== 'application/pdf') {
+            newErrors.file = 'Only PDF files are allowed.';
+        }
 
         setErrors(newErrors);
 
@@ -63,6 +70,7 @@ function BookingForm({ fileIcon }) {
             formToSubmit.append('phone', formData.phone);
             formToSubmit.append('first_name', formData.firstName);
             formToSubmit.append('last_name', formData.lastName);
+            formToSubmit.append('gender', formData.gender);
             formToSubmit.append('email', formData.email);
             formToSubmit.append('date', formData.date);
             formToSubmit.append('time', formData.time);
@@ -78,7 +86,7 @@ function BookingForm({ fileIcon }) {
                 const response = await fetch(`${BASE_URL}/register`, {
                     method: 'POST',
                     headers: {
-                        
+
                     },
                     body: formToSubmit,
                 });
@@ -116,12 +124,17 @@ function BookingForm({ fileIcon }) {
         { value: 'returning patient', label: 'Returning Patient' },
     ];
 
+    const genderOptions = [
+        { value: 'male', label: 'Male' },
+        { value: 'female', label: 'Female' },
+    ];
+
     return (
         <>
             <ToastContainer />
             <form onSubmit={handleSubmit} className="booking-form" id="bookAppointmentSection">
                 {/* PATIENT TYPE */}
-                <div className="form-group patient-type-group">
+                <div className="form-group phone-number-group">
                     <label htmlFor="patientTypeInput" className={errors.patientType ? 'error' : ''}>Patient type</label>
                     <div className="select-container">
                         <Select
@@ -132,6 +145,33 @@ function BookingForm({ fileIcon }) {
                             onChange={handleSelectChange}
                             value={patientTypeOptions.find(option => option.value === formData.patientType)}
                             placeholder="Select Patient Type"
+                            className="doctor-select"
+                            classNames={{
+                                control: () => 'react-select__control',
+                                option: () => 'react-select__option',
+                                menu: () => 'react-select__menu',
+                                menuList: () => 'react-select__menu-list',
+                                multiValue: () => 'react-select__multi-value',
+                                multiValueLabel: () => 'react-select__multi-value__label',
+                                multiValueRemove: () => 'react-select__multi-value__remove',
+                                placeholder: () => 'react-select__placeholder',
+                                dropdownIndicator: () => 'react-select__dropdown-indicator',
+                            }}
+                        />
+                    </div>
+                </div>
+                {/* GENDER */}
+                <div className="form-group phone-number-group">
+                    <label htmlFor="genderInput" className={errors.gender ? 'error' : ''}>Gender</label>
+                    <div className="select-container">
+                        <Select
+                            name="gender"
+                            id="genderInput"
+                            classNamePrefix="react-select"
+                            options={genderOptions}
+                            onChange={(selectedOption) => handleSelectChange(selectedOption, { name: 'gender' })} 
+                            value={genderOptions.find(option => option.value === formData.gender)}
+                            placeholder="Select Gender"
                             className="doctor-select"
                             classNames={{
                                 control: () => 'react-select__control',

@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useUser } from "../Components/UserContext";
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const AdminPassword = () => {
-    const { id } = useParams();
-    const { adminsData } = useUser();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -21,19 +17,19 @@ const AdminPassword = () => {
         currentPassword: '', 
         newPassword: ''
     });
+
+    const [adminId, setAdminId] = useState(null);
+
     useEffect(() => {
-        if (adminsData && adminsData.length > 0 && id) {
-            const adminId = parseInt(id, 10);
-            const admin = adminsData.find(dep => dep.id === adminId);
-    
-            if (!admin) {
-                // Handle the case where the admin is not found
-                console.error("Admin not found");
-                navigate('/admin/all-admins'); // Redirect if admin is not found
-            }
+        // Get user data from localStorage
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        if (userData && userData.id) {
+            setAdminId(userData.id);
+        } else {
+            console.error("Admin ID not found in localStorage.");
+            navigate('/admin/all-admins'); 
         }
-    }, [id, adminsData, navigate]);
-    
+    }, [navigate]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -56,23 +52,24 @@ const AdminPassword = () => {
             if (!token) {
                 throw new Error('No token found. Please log in.');
             }
-        
-            const passwordData = {
+
+            // Prepare raw JSON body as required by the API
+            const raw = JSON.stringify({
                 current_password: formData.currentPassword,
                 new_password: formData.newPassword
-            };
-        
-            const response = await fetch(`${BASE_URL}/update-password/${id}`, {
+            });
+
+            const response = await fetch(`${BASE_URL}/update-password/${adminId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(passwordData)
+                body: raw
             });
-        
+
             const result = await response.json();
-        
+
             if (response.ok) {
                 toast.update(loadingToastId, {
                     render: 'Password updated successfully!',
@@ -80,7 +77,7 @@ const AdminPassword = () => {
                     autoClose: 2500,
                     isLoading: false
                 });
-        
+
                 setTimeout(() => {
                     navigate('/admin/all-admins', { replace: true });
                     window.location.reload();
@@ -112,13 +109,16 @@ const AdminPassword = () => {
     return (
         <>
             <div className="pages-caption">
-                <h1>Change Password</h1>
+                <h1>Password</h1>
             </div>
             <div className="back">
                 <FontAwesomeIcon icon={faChevronLeft} />
                 <Link to="/admin/announcements">
                     Back
                 </Link>
+            </div>
+            <div className="admin-pages-caption">
+                <h2>Change Password</h2>
             </div>
             <div className="admin-password">
                 <form onSubmit={handlePasswordSave} className='password-form'>

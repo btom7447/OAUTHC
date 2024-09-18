@@ -40,6 +40,13 @@ import AdminAnnouncements from "./AdminAnnouncements";
 import AdminAnnouncementsCreate from "./AdminAnnouncementsCreate";
 import AdminAnnouncementsUpdate from "./AdminAnnouncementsUpdate";
 import AdminPassword from "./AdminPassword";
+import AdminHistoryOauthc from "./AdminHistoryOauthc";
+import AdminLearnMore from "./AdminLearnMore";
+import AdminOurCulture from "./AdminOurCulture";
+import AdminOurValues from "./AdminOurValues";
+import AdminWelcomeSection from "./AdminWelcomeSection";
+import AdminWhoWeAre from "./AdminWhoWeAre";
+import AdminVisionMissionGoal from "./AdminVisionMissionGoal";
 
 const UserAdmin = () => {
     return (
@@ -56,7 +63,7 @@ const UserAdmin = () => {
                         <Route path="/all-admins" element={<AllAdmins />} />
                         <Route path="/add-admin" element={<AddAdmin />} />
                         <Route path="/change-password/" element={<AdminPassword />} />
-                        <Route path="/edit-admin/:id" element={<AdminRoleUpdate />} />                        
+                        <Route path="/edit-profile/:id" element={<AdminRoleUpdate />} />                        
                         <Route path="/testimonials" element={<AdminTestimonials />} />
                         <Route path="/announcements" element={<AdminAnnouncements />} />
                         <Route path="/announcements/new" element={<AdminAnnouncementsCreate />} />
@@ -87,8 +94,15 @@ const UserAdmin = () => {
                         <Route path="/appointments" element={<AdminAppointments />} />
                         <Route path="/services" element={<AdminServices />} />
                         <Route path="/patients" element={<AdminPatients />} />
-                        <Route path="/settings" element={<AdminSettings />} />
-                        
+                        <Route path="/settings" element={<AdminSettings />} />4                        <Route path="/settings" element={<AdminSettings />} />
+                        <Route path="/history-oauthc" element={<AdminHistoryOauthc />} />
+                        <Route path="/learn-more" element={<AdminLearnMore />} />
+                        <Route path="/our-culture" element={<AdminOurCulture />} />
+                        <Route path="/our-values" element={<AdminOurValues />} />
+                        <Route path="/welcome-section" element={<AdminWelcomeSection />} />
+                        <Route path="/who-we-are" element={<AdminWhoWeAre />} />
+                        <Route path="/vision-mission-goal" element={<AdminVisionMissionGoal />} />
+
                     </Routes>
                 </div>
             </div>

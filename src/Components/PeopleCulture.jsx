@@ -1,16 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { toast, ToastContainer } from 'react-toastify';
+import { ClipLoader } from "react-spinners";
+
+const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/home/culture';
 
 const PeopleCulture = () => {
-    return(
+    const [cultureData, setCultureData] = useState({
+        title: "",
+        subtitle: "",
+        text: ""
+    });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchCultureData = async () => {
+            try {
+                const response = await fetch(BASE_URL);
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    setCultureData({
+                        title: result.data.title || "",
+                        subtitle: result.data.subtitle || "",
+                        text: result.data.text || ""
+                    });
+                } else {
+                    throw new Error(result.message || 'Failed to retrieve data');
+                }
+            } catch (error) {
+                console.error("Error fetching culture data:", error);
+                toast.error("Failed to load culture section");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCultureData();
+    }, []);
+
+    if (loading) {
+        return <div className="loading-spinner loading">
+              <ClipLoader color="#005046" size={100} />
+            </div>; 
+    }
+
+    return (
         <div className="people-culture">
-          <div className="people-culture-text">
-            <h5>A Thriving Community for Service</h5>
-            <h4>Our Culture</h4>
-            <p>
-              We have an ecosystem of a diverse array of professionals who are working and thriving together in community that enables them to use their skills and competence to make real-world differences in realtime. With a focus on people and their mental and pyschological well being.
-            </p>
-          </div>
-          <div className="people-culture-poster"></div>
+          <ToastContainer />
+            <div className="people-culture-text">
+              <h5>{cultureData.subtitle}</h5>
+              <h4>{cultureData.title}</h4>
+              <p>{cultureData.text}</p>
+            </div>
+            <div className="people-culture-poster"></div>
         </div>
     );
 };

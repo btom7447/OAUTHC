@@ -28,7 +28,7 @@ const AdminHeader = () => {
                         <path d="M20.02 30.81C19.03 30.81 18.07 30.41 17.37 29.71C16.67 29.01 16.27 28.05 16.27 27.06H17.77C17.77 27.65 18.01 28.23 18.43 28.65C18.85 29.07 19.43 29.31 20.02 29.31C21.26 29.31 22.27 28.3 22.27 27.06H23.77C23.77 29.13 22.09 30.81 20.02 30.81Z" fill="#A9A9A9"/>
                     </svg>
                 </div>
-                <Link to={`/admin/edit-admin/${id}`}>
+                <Link to={`/admin/edit-profile/${id}`}>
                     <div className="admin-profile">
                         <img src={imageUrl} alt={name || 'User'} />
                         <div>

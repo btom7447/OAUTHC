@@ -96,7 +96,7 @@ const AdminAnnouncementsCreate = () => {
             <form onSubmit={handleSave} className='test-image-form details-page-form'>
                 <div className="details-inputs">
                     <label>
-                        Name: 
+                        Title: 
                         <input
                             type="text"
                             name="name"

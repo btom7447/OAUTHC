@@ -17,8 +17,8 @@ export const toggleData = [
       "Thus, the Obafemi Awolowo University Teaching Hospitals Complex in 1975, was premised on a robust and elaborate vision of enlarging and harnessing all the needed resources, which aimed to focus on the totality of healthcare delivery using not only tertiary but also secondary and primary health care facilities. Various health professionals are to be trained; doctors, nurses, medical scientists, paramedical staff, auxiliary dental staff and dental hygienists were designated to achieve the long-term goal of having a well-coordinated hospital."
     ],
     images: [
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%201.png?raw=true", 
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%202.png?raw=true",
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(1).jpg?raw=true", 
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(2).jpg?raw=true",
     ],
     svg: <HistoryIcons />
   }, 
@@ -34,8 +34,8 @@ export const toggleData = [
       "Our Management team is a triad of vastly experienced leaders in the medical fields and administration with an excellent history of managing and leading groups, units, and organizations to success."
     ],
     images: [
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%201.png?raw=true", 
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%202.png?raw=true",
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(1).jpg?raw=true", 
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(2).jpg?raw=true",
     ],
     svg: <ManagementIcon />
   }, 
@@ -54,8 +54,8 @@ export const toggleData = [
       "At Obafemi Awolowo University Teaching Hospitals Complex (OAUTHC), we offer a wide range of specialized services across various departments, each dedicated to providing comprehensive and advanced medical care. (Learn more)."
     ],
     images: [
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%201.png?raw=true", 
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%202.png?raw=true",
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(1).jpg?raw=true", 
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(2).jpg?raw=true",
     ],
     svg: <DepartmentIcon />
   }, 
@@ -73,8 +73,8 @@ export const toggleData = [
       "Obafemi Awolowo University Teaching Hospitals Complex (OAUTHC) delivers comprehensive and excellent healthcare through five specialized units, each designed to meet diverse medical needs with professionalism and expertise."
     ],
     images: [
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%201.png?raw=true", 
-      "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/aboutus-toggle-image%202.png?raw=true",
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(1).jpg?raw=true", 
+      "https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/oauthc%20(2).jpg?raw=true",
     ],
     svg: <HospitalUnitIcon />
   }

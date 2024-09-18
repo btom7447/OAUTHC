@@ -6,7 +6,7 @@ const Announcement = () => {
     return (
         <div className="announcement-container">
             <div className="announcement-caption">
-                <h3>Annoucement</h3>
+                <h3>Announcement</h3>
                 <CaptionUnderline />
             </div>
             <AnnouncementCarousel />

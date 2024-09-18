@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useUser } from "../Components/UserContext";
 
 const AdminPatientData = () => {
@@ -16,46 +17,48 @@ const AdminPatientData = () => {
     return (
         <div className="admin-patient-data">
             <h4>Upcoming Appointments</h4>
-            {filteredAppointments.length > 0 ? (
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Patient Name</th>
-                            <th>Date in</th>
-                            <th>Patient Type</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredAppointments.map((appointment) => (
-                            <tr key={appointment.id}>
-                                <td>
-                                    <div className="patient-profile">
-                                        <div className="patient-gender">
-                                            <img
-                                                src={
-                                                    appointment.gender === "male"
-                                                        ? "https://img.icons8.com/?size=100&id=7822&format=png&color=000000"
-                                                        : "https://img.icons8.com/?size=100&id=7818&format=png&color=000000"
-                                                }
-                                                alt={appointment.gender}
-                                            />
-                                        </div>
-                                        {appointment.name}
-                                    </div>
-                                </td>
-                                <td>{appointment.patientDate}</td>
-                                <td>{appointment.patientType}</td>
-                                <td className="pending">
-                                    {appointment.status}
-                                </td>
+            <Link to={`/admin/appointments/`} className="appointment-link">
+                {filteredAppointments.length > 0 ? (
+                    <table className="data-table">
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Date in</th>
+                                <th>Patient Type</th>
+                                <th>Status</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : (
-                <div className="loading">No Upcoming Appointments.</div>
-            )}
+                        </thead>
+                        <tbody>
+                            {filteredAppointments.map((appointment) => (
+                                <tr key={appointment.id}>
+                                    <td>
+                                        <div className="patient-profile">
+                                            <div className="patient-gender">
+                                                <img
+                                                    src={
+                                                        appointment.gender === "male"
+                                                            ? "https://img.icons8.com/?size=100&id=7822&format=png&color=000000"
+                                                            : "https://img.icons8.com/?size=100&id=7818&format=png&color=000000"
+                                                    }
+                                                    alt={appointment.gender}
+                                                />
+                                            </div>
+                                            {appointment.name}
+                                        </div>
+                                    </td>
+                                    <td>{appointment.patientDate}</td>
+                                    <td>{appointment.patientType}</td>
+                                    <td className="pending">
+                                        {appointment.status}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className="loading">No Upcoming Appointments.</div>
+                )}
+            </Link>
         </div>
     );
 };

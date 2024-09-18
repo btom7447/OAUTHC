@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import { CurrentSectionProvider } from '../Components/CurrentSectionContent';
 import PageCaption from '../Components/PageCaption';
 import PeopleCulture from '../Components/PeopleCulture';
@@ -8,28 +9,74 @@ import GetInTouch from '../Components/GetInTouch';
 import OurValues from '../Components/OurValues';
 import TeamMembersContainer from '../Components/TeamMembersContainer';
 import OAUTHCHistory from '../Components/OAUTHCHistory';
+import { ClipLoader } from 'react-spinners';
+
+const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api/home/who-we-are';
 
 const AboutOAUTHC = () => {
+    const [whoWeAreData, setWhoWeAreData] = useState({
+        title: "",
+        subtitle: "",
+        text: "",
+        image: ""
+    });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchWhoWeAreData = async () => {
+            try {
+                const response = await fetch(BASE_URL);
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    setWhoWeAreData({
+                        title: result.data.title || "",
+                        subtitle: result.data.subtitle || "",
+                        text: result.data.text || "",
+                        image: result.data.image || ""
+                    });
+                } else {
+                    throw new Error(result.message || 'Failed to retrieve data');
+                }
+            } catch (error) {
+                console.error("Error fetching Who We Are data:", error);
+                toast.error("Failed to load Who We Are section");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchWhoWeAreData();
+    }, []);
+
+    if (loading) {
+        return <div className="loading-spinner loading">
+                    <ClipLoader color="#005046" size={100} />
+                </div>
+    }
+
     return (
         <CurrentSectionProvider>
+            <ToastContainer />
             <PageCaption />
             <SectionWrapper sectionName="About OAUTHC">
                 <div className="about-oauthc">
                     <OAUTHCHistory />
                     <div className="about-poster-text">
-                        <div className="about-oauthc-poster"></div>
+                        <div className="about-oauthc-poster">
+                            {whoWeAreData.image && (
+                                <img 
+                                    src={whoWeAreData.image} 
+                                    alt={whoWeAreData.title} 
+                                />
+                            )}
+                        </div>
                         <div className="about-oauthc-text">
-                            <h5>Who We Are</h5>
-                            <h4>Leading Excellent Healthcare Delivery</h4> 
-                            <p>
-                                Obafemi Awolowo University Teaching Hospitals Complex is a healthcare institution committed to leading the delivery of quality healthcare to its diverse patients,training excellent healthcare professionals capable of delivering standard care, and working to build a world that is immediately healthier for all. 
-                            </p>
-                            <p>
-                                We have a patient-focused ecosystem that deploys the best of conditions to ensure excellent healthcare delivery. We achieve this by using state-of-the-art facilities to administer the best care to our patients and committing our healthcare operations to world class professionals.
-                            </p>
-                            <p>
-                                Our institution boasts of being a pioneer and leader in the adoption, training, and practice of several high-level medical procedures. This is a testament to our mission to fully focus and deliver excellent medical care to our patients.
-                            </p>
+                            <h5>{whoWeAreData.title}</h5>
+                            <h4>{whoWeAreData.subtitle}</h4> 
+                            {whoWeAreData.text.split('\r\n').map((paragraph, index) => (
+                                <p key={index}>{paragraph}</p>
+                            ))}
                         </div>
                     </div>
                     <VisionMissionGoal />

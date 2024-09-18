@@ -8,12 +8,17 @@ export const DepartmentProvider = ({ children }) => {
     const [doctors, setDoctors] = useState([]);
     const [units, setUnits] = useState([]);
     const [schools, setSchools] = useState([]);
+    const [testimonials, setTestimonials] = useState([]);
+    const [announcements, setAnnouncements] = useState([]);
 
     const fetchData = async () => {
         const departmentUrl = `${BASE_URL}/department`;
         const doctorUrl = `${BASE_URL}/doctors`;
         const unitUrl = `${BASE_URL}/unit`;
         const schoolsUrl = `${BASE_URL}/schools`;
+        const testimonialsUrl = `${BASE_URL}/testimonials`;
+        const announcementsUrl = `${BASE_URL}/announcement`;
+
 
         const token = localStorage.getItem('bearer_token');
 
@@ -22,6 +27,8 @@ export const DepartmentProvider = ({ children }) => {
         const cachedDoctors = JSON.parse(localStorage.getItem('doctors'));
         const cachedUnits = JSON.parse(localStorage.getItem('units'));
         const cachedSchools = JSON.parse(localStorage.getItem('schools'));
+        const cachedTestimonials = JSON.parse(localStorage.getItem('testimonials'));
+        const cachedAnnouncements = JSON.parse(localStorage.getItem('announcements'));
 
         if (cachedDepartments) {
             setDepartments(cachedDepartments);
@@ -35,13 +42,19 @@ export const DepartmentProvider = ({ children }) => {
         if (cachedSchools) {
             setSchools(cachedSchools);
         }
+        if (cachedTestimonials) {
+            setTestimonials(cachedTestimonials);  
+        }
+        if (cachedAnnouncements) {
+            setAnnouncements(cachedAnnouncements)
+        }
 
-        if (cachedDepartments && cachedDoctors && cachedUnits && cachedSchools) {
+        if (cachedDepartments && cachedDoctors && cachedUnits && cachedSchools && cachedTestimonials && cachedAnnouncements) {
             return; // Data already cached, no need to fetch
         }
 
         try {
-            const [departmentResponse, doctorResponse, unitResponse, schoolsResponse] = await Promise.all([
+            const [departmentResponse, doctorResponse, unitResponse, schoolsResponse, testimonialsResponse, announcementsResponse] = await Promise.all([
                 fetch(departmentUrl, {
                     method: 'GET',
                     headers: {
@@ -69,16 +82,32 @@ export const DepartmentProvider = ({ children }) => {
                         'Authorization': `Bearer ${token}`,
                     }
                 }),
+                fetch(testimonialsUrl, {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }),
+                fetch(announcementsUrl, {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json', 
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }),
             ]);
 
-            if (!departmentResponse.ok || !doctorResponse.ok || !unitResponse.ok || !schoolsResponse.ok) {
-                throw new Error(`HTTP error! Department status: ${departmentResponse.status}, Doctor status: ${doctorResponse.status}, Unit status: ${unitResponse.status}, Schools status: ${schoolsResponse.status}`);
+            if (!departmentResponse.ok || !doctorResponse.ok || !unitResponse.ok || !schoolsResponse.ok || !testimonialsResponse || !announcementsResponse) {
+                throw new Error(`HTTP error! Department status: ${departmentResponse.status}, Doctor status: ${doctorResponse.status}, Unit status: ${unitResponse.status}, Schools status: ${schoolsResponse.status}, Testimonials status: ${testimonialsResponse.status}, Announcement status: ${announcementsResponse.status}`);
             }
 
             const departmentData = await departmentResponse.json();
             const doctorData = await doctorResponse.json();
             const unitData = await unitResponse.json();
             const schoolsData = await schoolsResponse.json(); 
+            const testimonialsData = await testimonialsResponse.json();
+            const announcementsData = await announcementsResponse.json();
 
             if (departmentData && departmentData.data) {
                 const transformedDepartments = departmentData.data.map(department => ({
@@ -154,6 +183,28 @@ export const DepartmentProvider = ({ children }) => {
                 localStorage.setItem('schools', JSON.stringify(transformedSchools));  // Cache the data
             }
 
+            if (testimonialsData && testimonialsData.data) {
+                const transformedTestimonials = testimonialsData.data.map(testimony => ({
+                    id: testimony.id,
+                    name: testimony.name,
+                    message: testimony.message, 
+                    starRatings: testimony.star_ratings,
+                }));
+                setTestimonials(transformedTestimonials); 
+                localStorage.setItem('testimonials', JSON.stringify(transformedTestimonials));  // Cache the data
+            }
+
+            if (announcementsData && announcementsData.data) {
+                const transformedAnnouncements = announcementsData.data.map(announce => ({
+                    id: announce.id, 
+                    name: announce.name, 
+                    content: announce.content,
+                    published: announce.published,
+                }));
+                setAnnouncements(transformedAnnouncements); 
+                localStorage.setItem('announcements', JSON.stringify(transformedAnnouncements));  // Cache the data
+            }
+            
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -168,6 +219,8 @@ export const DepartmentProvider = ({ children }) => {
         schools,
         doctors,
         units,
+        testimonials,
+        announcements,
     };
 
     return (
@@ -182,5 +235,7 @@ export const useDepartments = () => useContext(DepartmentContext).departments;
 export const useSchools = () => useContext(DepartmentContext).schools;
 export const useDoctors = () => useContext(DepartmentContext).doctors;
 export const useUnits = () => useContext(DepartmentContext).units;
+export const useTestimonials = () => useContext(DepartmentContext).testimonials;
+export const useAnnouncements = () => useContext(DepartmentContext).announcements;
 
 export { DepartmentContext };

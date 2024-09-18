@@ -331,6 +331,7 @@ export const UserProvider = ({ children }) => {
                     patientType: patientData.patient_type,
                     patientDate: patientData.patient_preferred_appointment_date,
                     status: patientData.appointment_status,
+                    appointmentId: patientData.id,
                     // status: patientData.user.status,
                 }));
                 setAppointmentsData(transformedAppointments);

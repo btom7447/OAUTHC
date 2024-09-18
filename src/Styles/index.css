@@ -539,7 +539,7 @@ footer .footer-bottom .footer-links {
   height: 300px;
   display: flex;
   flex-direction: column;
-  background-image: url('../Assets/Images/about-us-poster.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
@@ -554,7 +554,7 @@ footer .footer-bottom .footer-links {
   background-size: cover;
   background-position: top center;
   position: relative;
-  background-image: url('../Assets/Images/departments-caption.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
 }
 .schools-caption {
   width: 100%;
@@ -565,7 +565,7 @@ footer .footer-bottom .footer-links {
   background-size: cover;
   background-position: top center;
   position: relative;
-  background-image: url('../Assets/Images/school-caption.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
 }
 .doctors-caption {
   width: 100%;
@@ -576,7 +576,7 @@ footer .footer-bottom .footer-links {
   background-size: cover;
   background-position: top center;
   position: relative;
-  background-image: url('../Assets/Images/school-caption.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
 }
 .services-caption {
   width: 100%;
@@ -587,7 +587,7 @@ footer .footer-bottom .footer-links {
   background-size: cover;
   background-position: top center;
   position: relative;
-  background-image: url('../Assets/Images/services-caption.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
 }
 .diseases-caption {
   width: 100%;
@@ -598,7 +598,7 @@ footer .footer-bottom .footer-links {
   background-size: cover;
   background-position: top center;
   position: relative;
-  background-image: url('../Assets/Images/departments-caption.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
 }
 .health-services-caption {
   width: 100%;
@@ -609,7 +609,7 @@ footer .footer-bottom .footer-links {
   background-size: cover;
   background-position: top center;
   position: relative;
-  background-image: url('../Assets/Images/departments-caption.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
 }
 
 .contact-caption {
@@ -621,7 +621,7 @@ footer .footer-bottom .footer-links {
   background-size: cover;
   background-position: top center;
   position: relative;
-  background-image: url('../Assets/Images/contact-us-caption.png');
+  background-image: url('https://github.com/btom7447/Abkon-Portfolio/blob/master/src/assets/image/breadcrumb.png?raw=true');
 }
 
 .page-caption .page-caption-text, 
@@ -995,7 +995,7 @@ footer .footer-bottom .footer-links {
   width: 100%;
   height: fit-content;
   padding: 50px 20px;
-  padding-top: 100px;
+  padding-top: 200px;
   display: flex;
   gap: 30px;
   flex-direction: column;
@@ -1042,6 +1042,7 @@ footer .footer-bottom .footer-links {
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
+  text-align: center;
 }
 .landing-page .announcement-carousel .splide__arrow {
   font-size: 18px;
@@ -1119,11 +1120,14 @@ footer .footer-bottom .footer-links {
 .landing-page .welcome-section .welcome-section-poster {
   width: 80%;
   height: 300px;
-  background-image: url('../Assets/Images/welcome-section-poster.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;
   position: relative;
+  overflow: hidden; 
+}
+.landing-page .welcome-section .welcome-section-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block; 
 }
 .landing-page .welcome-section .welcome-section-poster .caption-underline {
   position: absolute;
@@ -1319,9 +1323,9 @@ footer .footer-bottom .footer-links {
 }
 .landing-page .about-us-display .about-right img {
   width: 100%;
-  height: 45%;
+  height: 50%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
   margin-bottom: 10px;
 }
 /* DEPARTMENTS AND FOCUS AREA */
@@ -1369,6 +1373,7 @@ footer .footer-bottom .footer-links {
   display: grid;
   gap: 0px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  align-items: stretch;
 }
 .landing-page .departments-container .departments {
   display: flex;
@@ -1388,7 +1393,7 @@ footer .footer-bottom .footer-links {
   background-color: var(--white); 
   border-radius: 5px;
   cursor: pointer;
-  min-height: 200px;
+  height: 100%;
 }
 .landing-page .departments-container .departments:hover {
   background-color: var(--primary-green);
@@ -1894,10 +1899,12 @@ footer .footer-bottom .footer-links {
 .about-oauthc .about-poster-text .about-oauthc-poster {
   width: 500px;
   height: 500px;
-  background-image: url('../Assets/Images/about-oauthc-poster.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: left center;
+}
+.about-oauthc .about-poster-text .about-oauthc-poster img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
 }
 .about-oauthc .about-poster-text .about-oauthc-text {
   width: 100%;
@@ -1933,7 +1940,6 @@ footer .footer-bottom .footer-links {
   font-weight: 400;
   line-height: 140%;
   color: var(--black);
-  margin-bottom: 10px;
 }
 .about-oauthc .about-poster-text .about-oauthc-text p span {
   text-decoration: underline;
@@ -1986,12 +1992,12 @@ footer .footer-bottom .footer-links {
 .about-oauthc .people-culture {
   width: 100%;
   height: fit-content;
-  padding: 0px 0px 50px 50px;
+  padding: 0px 0px 50px 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 20px;
-  justify-content: space-between;
+  gap: 40px;
+  justify-content: flex-start;
   align-items: flex-start;
   background-color: var(--ash);
   position: relative;
@@ -2269,14 +2275,14 @@ footer .footer-bottom .footer-links {
 }
 .appointment-poster .appointment-poster-pic {
   width: 400px;
-  height: calc(100% + 200px);
-  background-image: url('../Assets/Images/appointment-poster.png');
+  height: calc(100% + 300px);
+  background-image: url('../Assets/Images/Group\ 1.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top left;
   position: absolute;
-  top: -200px;
-  left: 50px;
+  top: -299px;
+  left: 0px;
   z-index: 2; 
 }
 .appointment-poster .appointment-poster-caption {

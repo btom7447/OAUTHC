@@ -99,10 +99,66 @@ const AdminSidebar = () => {
                             </li>
                             <li>
                                 <NavLink
+                                    to="/admin/history-oauthc"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    History of oauthc
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/learn-more"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Learn More
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/our-culture"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Our Culture
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/our-values"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Our Values
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
                                     to="/admin/testimonials"
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                 >
                                     Testimonials
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/welcome-section"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Welcome Section
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/who-we-are"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Who We Are
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/admin/vision-mission-goal"
+                                    className={({ isActive }) => (isActive ? "active-link" : "")}
+                                >
+                                    Vision Mission Goal
                                 </NavLink>
                             </li>
                             
@@ -135,15 +191,7 @@ const AdminSidebar = () => {
                                     to="/admin/"
                                     className={({ isActive }) => (isActive ? "active-link" : "")}
                                 >
-                                    Tests & Imaging
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/admin/units"
-                                    className={({ isActive }) => (isActive ? "active-link" : "")}
-                                >
-                                    Units
+                                    Research & Ethics
                                 </NavLink>
                             </li>
                         </ul>

@@ -29,7 +29,7 @@ const AdminTestimonials = () => {
                 itemName="tests"
                 basePath="/admin/testimonials" 
                 newItemPath="new"
-                entityType="test"
+                entityType="testimonial"
                 setData={handleDeleteSuccess}
             />
         </div>

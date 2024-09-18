@@ -1,39 +1,81 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Values from "./Values";
+import { toast, ToastContainer } from 'react-toastify';
+import { ClipLoader } from "react-spinners";
+
+const BASE_URL = 'https://live-api.oauthc.gov.ng/v0.1/api';
 
 const OurValues = () => {
+    const [values, setValues] = useState([]);
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState(null); 
 
-    const values = [
-        {
-            title: "Excellence",
-            text: "We will not trade excellence in healthcare delivery for anything. This is the fundamental principles that defines everything we do at OAUTHC. Every part of our operations is driven this solemn commitment.",
-            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/safe-icon.png?raw=true",
-        },
-        {
-            title: "Professionalism",
-            text: "We are a patient-oriented health institution and this is why utmost professionalism is crucial to us. We are devoted to serving people and we do that in the most civil and professional way in order to create a memorable healthcare experience.",
-            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/simple-icon.png?raw=true",
-        },
-        {
-            title: "Growth",
-            text: "We are committed to advancing the frontiers of healthcare delivery to create a healthier world for us all. Our healthcare professionals are constantly advancing in knowledge and our mastery of top medical procedurs is constantly growing. We are a growth-focused organization.",
-            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/clean-icon.png?raw=true",
-        },
-        {
-            title: "Integrity",
-            text: "You can trust us. We hold ourselves to the highest standards in keeping our promises to all our stakeholders, especially our patients. We are transparent with our policies,ethical with our practices, and secure with our data management.",
-            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/people-icon.png?raw=true",
-        },
-    ];
-    
+    useEffect(() => {
+        const fetchValues = async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/home/mission-goals`);
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    const { excellence, professionalism, growth, integrity } = result.data;
+
+                    // Prepare the values array dynamically
+                    const dynamicValues = [
+                        {
+                            title: "Excellence",
+                            text: excellence,
+                            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/safe-icon.png?raw=true",
+                        },
+                        {
+                            title: "Professionalism",
+                            text: professionalism,
+                            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/simple-icon.png?raw=true",
+                        },
+                        {
+                            title: "Growth",
+                            text: growth,
+                            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/clean-icon.png?raw=true",
+                        },
+                        {
+                            title: "Integrity",
+                            text: integrity,
+                            icon: "https://github.com/btom7447/OAUTHC-WEBSITE/blob/master/public/people-icon.png?raw=true",
+                        },
+                    ];
+
+                    setValues(dynamicValues);
+                    setLoading(false);
+                } else {
+                    throw new Error(result.message || 'Failed to retrieve data');
+                }
+            } catch (error) {
+                console.error("Error fetching our values data:", error);
+                setError("Failed to load Our Values data.");
+                setLoading(false);
+                toast.error("Failed to load Our Values data.");
+            }
+        };
+
+        fetchValues();
+    }, []);
+
     return (
         <div className="our-values-container">
+            <ToastContainer />
             <div className="our-values-caption">
                 <h6>Our Values</h6>
             </div>
-            <Values values={values} />
+            {loading ? (
+                <div className="loading-spinner loading">
+                    <ClipLoader color="#005046" size={100} />
+                </div>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <Values values={values} />
+            )}
         </div>
-    )
+    );
 };
 
 export default OurValues;
